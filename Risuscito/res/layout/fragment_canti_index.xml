@@ -17,7 +17,6 @@
     <ExpandableListView
         android:id="@+id/argomentiList"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:groupIndicator="@drawable/explist_selector" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
