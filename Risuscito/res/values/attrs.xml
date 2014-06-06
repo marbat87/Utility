@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<declare-styleable name="customAttrs">
+	    <attr name="customAbout" format="reference" />
+	    <attr name="customChord" format="reference" />
+	    <attr name="customEdit" format="reference" />
+	    <attr name="customNew" format="reference" />
+	    <attr name="customFavorite" format="reference" />
+	    <attr name="customHelp" format="reference" />
+	    <attr name="customDelete" format="reference" />
+	    <attr name="customSettings" format="reference" />
+	    <attr name="customShare" format="reference" />
+	    <attr name="customReset" format="reference" />
+	    <attr name="customSave" format="reference" />
+	    <attr name="customStar" format="reference" />
+	    <attr name="customSaveFile" format="reference" />
+	    <attr name="customDeleteFile" format="reference" />
+	    <attr name="customRewind" format="reference" />
+	    <attr name="customPlay" format="reference" />
+	    <attr name="customFF" format="reference" />
+	    <attr name="customStop" format="reference" />
+	    <attr name="customNoSong" format="reference" />
+	    <attr name="customBottomBarColor" format="reference" />
+	    <attr name="customSlidePlay" format="reference" />
+	    <attr name="customSlideStop" format="reference" />
+	</declare-styleable>
+</resources>

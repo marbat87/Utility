@@ -1,0 +1,34 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+   	android:layout_height="wrap_content"
+   	android:id="@+id/full_row"
+   	android:gravity="center_vertical"
+	android:orientation="horizontal">
+    	
+	<TextView
+    	android:id="@+id/text_page"
+    	android:layout_width="50dip"
+    	android:layout_height="fill_parent"
+    	android:gravity="center_vertical|center_horizontal"
+    	android:textColor="@android:color/black"
+    	android:textAppearance="?android:attr/textAppearanceLarge"
+    	android:background="@drawable/list_selector_holo_light"
+    	android:paddingLeft="@dimen/myListPreferredItemPaddingStart"
+    	android:paddingRight="@dimen/myListPreferredItemPaddingStart"
+    	android:minHeight="@dimen/myListPreferredItemHeightSmall" />
+
+	<TextView
+    	android:id="@+id/text_title"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:textAppearance="?android:attr/textAppearanceMedium"
+    	android:gravity="center_vertical|left"
+    	android:background="@drawable/list_selector_holo_light"
+    	android:paddingLeft="@dimen/myListPreferredItemPaddingStart"
+    	android:paddingRight="@dimen/myListPreferredItemPaddingStart"
+    	android:textColor="#000000"
+    	android:minHeight="@dimen/myListPreferredItemHeightSmall" />
+	
+</LinearLayout>

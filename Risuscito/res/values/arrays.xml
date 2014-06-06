@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_default_index_entries">        
+        <item>Indice alfabetico</item>
+        <item>Indice per pagina</item>
+        <item>Indice per argomento</item>
+    </string-array>
+    <string-array name="pref_default_index_values">        
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="save_location_sd_entries">        
+        <item>Memoria interna</item>
+        <item>Micro SD</item>
+    </string-array>
+    <string-array name="save_location_sd_values">        
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="save_location_nosd_entries">        
+        <item>Memoria interna</item>
+    </string-array>
+    <string-array name="save_location_nosd_values">        
+        <item>0</item>
+    </string-array>
+    <string-array name="pref_default_theme_entries">        
+        <item>Tema Misto (default)</item>
+        <item>Tema Chiaro</item>
+        <item>Tema Scuro</item>
+    </string-array>
+    <string-array name="pref_default_theme_values">        
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>
