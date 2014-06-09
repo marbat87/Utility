@@ -17,7 +17,7 @@
             android:layout_gravity="top"
             android:layout_weight="0.5"
             android:contentDescription="@string/copertina"
-            android:src="@drawable/copertina" />
+            android:src="@drawable/copertina_border" />
         
         <LinearLayout 
     		android:layout_width="fill_parent"

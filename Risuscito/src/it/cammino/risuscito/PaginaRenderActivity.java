@@ -32,7 +32,6 @@ import org.holoeverywhere.widget.SeekBar.OnSeekBarChangeListener;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -74,7 +73,6 @@ import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
 
-@SuppressLint("NewApi")
 public class PaginaRenderActivity extends Activity implements GenericDialogListener {
     
 	private DatabaseCanti listaCanti;
@@ -142,7 +140,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	private final String DELETE_DIALOG_TAG = "2";
 	private final String SALVA_ACCORDO_TAG = "3";
 	
-	@SuppressLint("InlinedApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		Utility.updateTheme(PaginaRenderActivity.this);
@@ -517,13 +514,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
         
-//        scroll_speed_bar.setProgress(speedValue);
-        
-//        speedValue = scroll_speed_bar.getProgress();
-//        double tempValue = speedValue / MAX_SPEED;
-//        int textValue = (int) (tempValue * 100);
-//        speed_text.setText(textValue + "%");
-        
         stop_scroll.setVisibility(View.GONE);
 
         play_scroll.setOnClickListener(new OnClickListener() {
@@ -602,20 +592,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
       	   	  || barreCambio == null || barreSalvato == null
       	   	  || (notaCambio.equals(notaSalvata)
       	   	  && barreCambio.equals(barreSalvato))) {
-//				if (mediaPlayer != null) {
-//					mediaPlayer.release();
-//					mediaPlayer = null;
-//					mediaPlayerState = MP_State.Idle;
-//				}
-//				TelephonyManager mgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-//				if(mgr != null)
-//				    mgr.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
-//				if (am != null)
-//					am.abandonAudioFocus(afChangeListener);
-//				notaCambio = null;
-//				barreCambio = null;
-//				SaveSpeed();
-//				speedValue = null;
         		pulisciVars();
 				finish();
 	            return true;
@@ -673,8 +649,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			return true;
 		case R.id.action_reset_tab:
 			notaCambio = primaNota;
-//			SaveZoom();
-//			paginaView.loadUrl("file:///android_asset/" + pagina + ".htm");
 			HashMap<String, String> convMap = CambioAccordi.diffSemiToni(primaNota, notaCambio);
 			SaveZoom();
 			if (convMap != null) {
@@ -710,8 +684,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			return true;
 		case R.id.action_reset_barre:
 			barreCambio = primoBarre;
-//			SaveZoom();
-//			paginaView.loadUrl("file:///android_asset/" + pagina + ".htm");
 			HashMap<String, String> convMap1 = CambioAccordi.diffSemiToni(primaNota, notaCambio);
 			SaveZoom();
 			if (convMap1 != null) {
@@ -772,20 +744,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
         	  || barreCambio == null || barreSalvato == null
         	  || (notaCambio.equals(notaSalvata)
         	  && barreCambio.equals(barreSalvato))) {
-//				if (mediaPlayer != null) {
-//					mediaPlayer.release();
-//					mediaPlayer = null;
-//					mediaPlayerState = MP_State.Idle;
-//				}
-//				TelephonyManager mgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-//				if(mgr != null)
-//				    mgr.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
-//				if (am != null)
-//					am.abandonAudioFocus(afChangeListener);
-//				notaCambio = null;
-//				barreCambio = null;
-//				SaveSpeed();
-//				speedValue = null;
         		pulisciVars();
 				finish();
 	            return true;
@@ -814,7 +772,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
                 return true;
         	}
         }
-//        return super.onKeyDown(keyCode, event);
         return super.onKeyUp(keyCode, event);
     }
     
@@ -864,33 +821,12 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
         }
 	        
-//        if (notaCambio == null)
-//        	Log.i("NOTACAMBIO:", "NULL");
-//        else
-//        	Log.i("NOTACAMBIO:", notaCambio);
-//        
-//        if (notaSalvata == null)
-//        	Log.i("NOTASALVATA:", "NULL");
-//        else
-//        	Log.i("NOTASALVATA:", notaSalvata);
-        
 	    if (notaSalvata == null) {
-//	    	notaCambio = notaSalvata = primaNota;
-//	    	notaCambio = primaNota;
 	    	if (notaCambio == null) {
 	    		notaSalvata = notaCambio = primaNota;
-//	    		paginaView.loadUrl("file:///android_asset/" + pagina + ".htm");
 	    	}
 	    	else {
 	    		notaSalvata = primaNota;
-//				HashMap<String, String> convMap = CambioAccordi.diffSemiToni(primaNota, notaCambio);
-//				if (convMap != null) {
-//					String nuovoFile = cambiaAccordi(convMap);
-//					if (nuovoFile != null)
-//						paginaView.loadUrl("file://" + nuovoFile);
-//				}
-//				else
-//					paginaView.loadUrl("file:///android_asset/" + pagina + ".htm");
 	    	}
 	    }
 	    else {
@@ -899,15 +835,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    	if (notaCambio == null) {
 	    		notaCambio = notaSalvata;
 	    	}
-//			Log.i("NOTA CAMBIO", notaCambio);
-//			HashMap<String, String> convMap = CambioAccordi.diffSemiToni(primaNota, notaCambio);
-//			if (convMap != null) {
-//				String nuovoFile = cambiaAccordi(convMap);
-//				if (nuovoFile != null)
-//					paginaView.loadUrl("file://" + nuovoFile);
-//			}
-//			else
-//				paginaView.loadUrl("file:///android_asset/" + pagina + ".htm");
 	    }    
 	    
 	    if (barreSalvato == null) {
@@ -919,9 +846,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    	}
 	    }
 	    else {
-	    	
 //	    	Log.i("BARRESALVATO", barreSalvato);
-	    	
 	    	if (barreCambio == null) {
 	    		barreCambio = barreSalvato;
 	    	}
@@ -1104,15 +1029,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     
     private void cmdPrepare(){
     	blockOrientation();
-        //setta il tema Holo Light solo per versioni > HONEYCOMB
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB)
-//        	loadingMp3 = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
-//        
-//        else
         loadingMp3 = new ProgressDialog(PaginaRenderActivity.this);
-
         loadingMp3.setMessage(getString(R.string.wait));
-  
         loadingMp3.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
@@ -1120,10 +1038,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			}
 		});
     	loadingMp3.show();
-//        loadingMp3 = ProgressDialogFragment.createBuilder(PaginaRenderActivity.this, getSupportFragmentManager())
-//				.setMessage(R.string.wait)
-//				.setRequestCode(LOADING_RC)
-//				.show();
     	mediaPlayer.setOnPreparedListener(mediaPlayerOnPreparedListener);
     	mediaPlayer.setOnCompletionListener(mediaPlayerOnCompletedListener);
     	
@@ -1201,12 +1115,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     }
     
     private void cmdStop(){
-		
-//		if(mediaPlayerState == MP_State.Prepared
-//				||mediaPlayerState == MP_State.Started
-//				||mediaPlayerState == MP_State.Stopped
-//        		||mediaPlayerState == MP_State.Paused
-//        		||mediaPlayerState == MP_State.PlaybackCompleted){
 		if(mediaPlayerState == MP_State.Started
 		||mediaPlayerState == MP_State.Paused) {
 			mediaPlayer.stop();
@@ -1224,7 +1132,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 					"Invalid State@cmdStop() - skip", 
 					Toast.LENGTH_SHORT).show();
     	}
-//		showMediaPlayerState();
     }
     
     private void showMediaPlayerState(){
@@ -1279,7 +1186,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			
 			mediaPlayerState = MP_State.Error;
 			if (loadingMp3.isShowing())
-//			if (loadingMp3.isVisible())
 				loadingMp3.dismiss();
 			showMediaPlayerState();
 			
@@ -1293,7 +1199,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		@Override
 		public void onPrepared(MediaPlayer mp) {
 			if (loadingMp3.isShowing())
-//			if (loadingMp3.isVisible())
 				loadingMp3.dismiss();
 			mediaPlayerState = MP_State.Prepared;
 			cmdStart();
@@ -1397,21 +1302,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     		setRequestedOrientation(prevOrientation);
     	}
     }
-
-//	
-//	@Override
-//	public void onCancelled(int requestCode) {}
-//	
-//	@Override
-//	public void onDismissed(int requestCode) {
-//		switch (requestCode) {
-//			case LOADING_RC:
-//				setRequestedOrientation(prevOrientation);
-//				break;
-//	    	default:
-//				break;
-//		}
-//	}
 
     private void SaveZoom(){
     		defaultZoomLevel = (int) (paginaView.getScale() *100);
@@ -1720,7 +1610,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		        		, R.string.showcase_seekbar_desc
 		        		, co);
 		        showCase.setButtonText(getString(R.string.showcase_button_next));
-//		        showCase.setScaleMultiplier(0.3f);
 		        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 					
 					@Override
@@ -1728,19 +1617,12 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 					
 					@Override
 					public void onShowcaseViewHide(ShowcaseView showcaseView) {
-//						ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
-//						co.buttonLayoutParams = lps;
 				        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
 				        		new ViewTarget(R.id.speed_seekbar, PaginaRenderActivity.this)
 				        		, PaginaRenderActivity.this
 				        		, R.string.showcase_end_title
 				        		, R.string.showcase_help_general);
-//				   		showcaseView = ShowcaseView.insertShowcaseView(
-//								new ViewTarget(findViewById(R.id.cantoView)),
-//								PaginaRenderActivity.this);
 				        showCase.setShowcase(ShowcaseView.NONE);
-//						showcaseView.setText(R.string.showcase_end_title
-//								, R.string.showcase_help_general);
 				        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 							
 							@Override

@@ -91,8 +91,7 @@
 		<item name="customSlidePlay">@drawable/ic_ic_action_slideshow_dark</item>
 		<item name="customSlideStop">@drawable/ic_ic_action_slideshow_stop_dark</item>
     </style> 
-
-    
+  
     <style name="MyActionButton" parent="">
         <item name="android:background">?attr/actionBarItemBackground</item>
         <item name="android:paddingLeft">12dip</item>
@@ -101,15 +100,6 @@
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">2</item>
-<!--         <item name="textAllCaps">@bool/abc_config_actionMenuItemAllCaps</item> -->
     </style>
     
-    <style name="myTextMediumDark" parent="@style/Holo.TextAppearance.Medium">
-	    <item name="android:textColor">@android:color/black</item>
-   	</style>
-   	
-    <style name="myTextMediumLight" parent="@style/Holo.TextAppearance.Medium">
-	    <item name="android:textColor">@android:color/white</item>
-   	</style>
-
 </resources>
