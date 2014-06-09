@@ -46,7 +46,6 @@ public class AboutActivity extends Activity {
     	
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 		boolean screenOn = pref.getBoolean("screenOn", false);
-//		WebView about = (WebView) findViewById(R.id.aboutText);
 		View about = (View) findViewById(R.id.aboutText);
 		if (screenOn)
 			about.setKeepScreenOn(true);
