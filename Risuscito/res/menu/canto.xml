@@ -109,7 +109,7 @@
         android:id="@+id/action_exp_pdf"
         android:orderInCategory="97"
         android:icon="?attr/customExpPDF"
-        android:showAsAction="never"
+        android:showAsAction="ifRoom"
         android:title="@string/action_exp_pdf" />
 	
     <item

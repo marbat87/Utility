@@ -1815,7 +1815,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 				urlHtml = "file:///android_asset/" + pagina + ".htm";
 			}
 			// step 1
-			Float margin = 5f;
+			Float margin = 15f;
 	        Document document = new Document(PageSize.A4, margin, margin, margin, margin);
 	        // step 2
 			try {
