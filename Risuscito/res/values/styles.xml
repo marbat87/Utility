@@ -40,6 +40,7 @@
 		<item name="customBottomBarColor">@color/bottomBarLight</item>
 		<item name="customSlidePlay">@drawable/ic_ic_action_slideshow_dark</item>
 		<item name="customSlideStop">@drawable/ic_ic_action_slideshow_stop_dark</item>
+		<item name="customExpPDF">@drawable/ic_action_pdf_dark</item>
     </style>
     
     <style name="AppThemeDark" parent="@style/Holo.Theme">
@@ -65,6 +66,7 @@
 		<item name="customBottomBarColor">@color/bottomBarDark</item>
 		<item name="customSlidePlay">@drawable/ic_action_slideshow</item>
 		<item name="customSlideStop">@drawable/ic_action_slideshow_stop</item>
+		<item name="customExpPDF">@drawable/ic_action_pdf</item>
     </style>
 
     <style name="AppThemeMixed" parent="@style/Holo.Theme.Light.DarkActionBar">
@@ -90,6 +92,7 @@
 		<item name="customBottomBarColor">@color/bottomBarLight</item>
 		<item name="customSlidePlay">@drawable/ic_ic_action_slideshow_dark</item>
 		<item name="customSlideStop">@drawable/ic_ic_action_slideshow_stop_dark</item>
+		<item name="customExpPDF">@drawable/ic_action_pdf</item>
     </style> 
   
     <style name="MyActionButton" parent="">

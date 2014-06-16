@@ -131,7 +131,7 @@
 		        android:layout_weight="1"
 		        android:layout_height="wrap_content"
 		        android:layout_gravity="center_vertical"
-		        android:max="20"
+		        android:max="50"
 		        android:soundEffectsEnabled="true" />
 		
 		    <ImageButton

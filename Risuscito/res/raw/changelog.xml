@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-   	<changelogversion versionName="2.4.2" changeDate="06 Giugno 2014">
-		<changelogtext>Inserita la parte mancante del ritornello di "Benedici anima mia, Jahvè"</changelogtext>
-		<changelogtext>Corretto un crash che occorreva quando non si sceglieva nessun tema</changelogtext>
+    <changelogversion versionName="2.4.5" changeDate="XX Giugno 2014">
+		<changelogtext>Corretto il testo dell'acclamazione al vangelo del tempo di Quaresima</changelogtext>
+		<changelogtext>Sostituita l'immagine della home del programma (Thanks to: Stefano Cavanna)</changelogtext>
+		<changelogtext>Aumentato l'intervallo della velocità di scroll automatico dei canti</changelogtext>
+		<changelogtext>Aggiunto l'export in PDF dei canti con gli accordi modificati (all'interno di un canto: opzioni-->esporta PDF)</changelogtext>
+		<changelogtext>Bugfix vari</changelogtext>
 	</changelogversion>
 
 </changelog>

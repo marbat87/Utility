@@ -128,13 +128,15 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 		ricerca.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-	            mProgressDialog = new ProgressDialog(getActivity());
-	            mProgressDialog.setMessage(getString(R.string.search_running));
-	            mProgressDialog.setIndeterminate(true);
-	            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-	            mProgressDialog.setCancelable(true);
-	            mProgressDialog.setCanceledOnTouchOutside(false);
-	            mProgressDialog.show();
+				if (mProgressDialog == null) {
+					mProgressDialog = new ProgressDialog(getActivity());
+					mProgressDialog.setMessage(getString(R.string.search_running));
+					mProgressDialog.setIndeterminate(true);
+					mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+					mProgressDialog.setCancelable(true);
+					mProgressDialog.setCanceledOnTouchOutside(false);
+				}
+				mProgressDialog.show();
 				final SearchTask downloadTask = new SearchTask();
 				downloadTask.execute(searchPar.getText().toString());
 			}

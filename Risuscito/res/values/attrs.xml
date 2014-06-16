@@ -23,5 +23,6 @@
 	    <attr name="customBottomBarColor" format="reference" />
 	    <attr name="customSlidePlay" format="reference" />
 	    <attr name="customSlideStop" format="reference" />
+	    <attr name="customExpPDF" format="reference" />
 	</declare-styleable>
 </resources>

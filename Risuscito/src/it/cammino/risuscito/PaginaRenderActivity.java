@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +33,7 @@ import org.holoeverywhere.widget.SeekBar.OnSeekBarChangeListener;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -46,6 +48,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +57,7 @@ import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,6 +76,15 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class PaginaRenderActivity extends Activity implements GenericDialogListener {
     
@@ -127,18 +140,21 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    		paginaView.scrollBy(0, 0);
 	    	}
 	    	
-	        mHandler.postDelayed(this, 300);
+	        mHandler.postDelayed(this, SCROLL_SLEEP);
 	    }
 	};
 	public static String speedValue;
 	private int savedSpeed;
 	public static boolean scrollPlaying;
 	private RelativeLayout.LayoutParams lps;
-	private final double MAX_SPEED = 20.0;
 	
+	private final double MAX_SPEED = 50.0;
+	private final long SCROLL_SLEEP = 700;
 	private final String SAVE_DIALOG_TAG = "1";
 	private final String DELETE_DIALOG_TAG = "2";
 	private final String SALVA_ACCORDO_TAG = "3";
+	
+	private ProgressDialog mExportDialog;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -287,7 +303,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     				//controlla la presenza di una connessione internet
     				if (!Utility.isOnline(PaginaRenderActivity.this) 
     						&& !localFile)  {
-    					Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+    					Toast toast = Toast.makeText(PaginaRenderActivity.this
     							, getString(R.string.no_connection), Toast.LENGTH_SHORT);
     					toast.show();
     					return;
@@ -488,7 +504,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
         }
         else {
         	// nasconde i pulsanti
-			Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+			Toast toast = Toast.makeText(PaginaRenderActivity.this
 					, getString(R.string.no_record), Toast.LENGTH_SHORT);
 			toast.show();
         	play_button.setVisibility(View.GONE);
@@ -619,6 +635,9 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
                 dialog.setCancelable(false);
                 break;
 			}
+		case R.id.action_exp_pdf:
+			(new PdfExportTask()).execute();
+			return true;
 		case R.id.action_settings:
 			startActivity(new Intent(this, Settings.class));
 			return true;
@@ -637,12 +656,12 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    				"  WHERE _id =  " + idCanto;
 	    		db.execSQL(sql);
 	    		db.close();
-				Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+				Toast toast = Toast.makeText(PaginaRenderActivity.this
 						, getString(R.string.tab_saved), Toast.LENGTH_SHORT);
 				toast.show();
 			}
 			else {
-				Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+				Toast toast = Toast.makeText(PaginaRenderActivity.this
 						, getString(R.string.tab_not_saved), Toast.LENGTH_SHORT);
 				toast.show();
 			}
@@ -672,12 +691,12 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    				"  WHERE _id =  " + idCanto;
 	    		db.execSQL(sql);
 	    		db.close();
-				Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+				Toast toast = Toast.makeText(PaginaRenderActivity.this
 						, getString(R.string.barre_saved), Toast.LENGTH_SHORT);
 				toast.show();
 			}
 			else {
-				Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+				Toast toast = Toast.makeText(PaginaRenderActivity.this
 						, getString(R.string.barre_not_saved), Toast.LENGTH_SHORT);
 				toast.show();
 			}
@@ -796,12 +815,12 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 				int favouriteFlag = 0;
 				if (isChecked) {
 					favouriteFlag = 1;
-					Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+					Toast toast = Toast.makeText(PaginaRenderActivity.this
 							, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
 					toast.show();
 				}
 				else {
-					Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+					Toast toast = Toast.makeText(PaginaRenderActivity.this
 							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT);
 					toast.show();
 				}
@@ -1173,7 +1192,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     		state = "Unknown!";
     	}
     	
-		Toast toast = Toast.makeText(PaginaRenderActivity.this.getApplicationContext()
+		Toast toast = Toast.makeText(PaginaRenderActivity.this
 				, "Stato del lettore: " + state, Toast.LENGTH_SHORT);
 		toast.show();
     }
@@ -1526,7 +1545,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 																	
 																	@Override
 																	public void onShowcaseViewHide(ShowcaseView showcaseView) {
-//																		setRequestedOrientation(prevOrientation);
 																		showScrollHelp();
 																	}
 																	
@@ -1572,8 +1590,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
    	}
     
    	public void showScrollHelp() {
-//   		blockOrientation();
-	 	
    		lps = new RelativeLayout.LayoutParams(
 	 			ViewGroup.LayoutParams.WRAP_CONTENT,
 	 			ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -1647,8 +1663,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			public void onShowcaseViewDidHide(ShowcaseView showcaseView) { }
 		});
    	}
-   	
-   	
+   	  	
     private class DownloadTask extends AsyncTask<String, Integer, String> {
 
         private Context context;
@@ -1724,13 +1739,15 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
         
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();   
-            mProgressDialog = new ProgressDialog(PaginaRenderActivity.this);
-            mProgressDialog.setMessage(getString(R.string.download_running));
+            super.onPreExecute();
+            if (mProgressDialog == null) {
+	            mProgressDialog = new ProgressDialog(PaginaRenderActivity.this);
+	            mProgressDialog.setMessage(getString(R.string.download_running));
+	            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+	            mProgressDialog.setCancelable(true);
+	            mProgressDialog.setCanceledOnTouchOutside(false);
+            }
             mProgressDialog.setIndeterminate(true);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setCancelable(true);
-            mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.show();
         }
 
@@ -1778,6 +1795,131 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    			delete_file.setVisibility(View.VISIBLE);
 	    		}
             }
+        }
+    }
+    
+    private class PdfExportTask extends AsyncTask<String, Integer, String> {
+
+        public PdfExportTask() {}
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+        	HashMap<String, String> testConv = CambioAccordi.diffSemiToni(primaNota, notaCambio);
+			String urlHtml = "";
+			if (testConv != null) {
+				String nuovoFile = cambiaAccordi(testConv, barreCambio);
+				if (nuovoFile != null)
+					urlHtml = nuovoFile;
+			}
+			else {		
+				urlHtml = "file:///android_asset/" + pagina + ".htm";
+			}
+			// step 1
+			Float margin = 5f;
+	        Document document = new Document(PageSize.A4, margin, margin, margin, margin);
+	        // step 2
+			try {
+				PdfWriter.getInstance(document, new FileOutputStream(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0]
+						.getAbsolutePath() + "/output.pdf"));
+				// step 3
+				document.open();
+				Font myFonColor = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+				// step 4
+	 	       	try {
+	 				String line = null;
+		            BufferedReader br = new BufferedReader(
+		            		new InputStreamReader(  
+		                    new FileInputStream(urlHtml), "UTF-8")); 
+
+		            line = br.readLine();
+		            while (line != null) {
+		            	if ((line.contains("000000")
+		            	  || line.contains("FF0000"))
+		            	  && !line.contains("BGCOLOR")) {
+			            	if (line.contains("000000")) {
+			            		myFonColor = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+			            	}
+			            	
+			            	if (line.contains("FF0000")) {
+			            		myFonColor = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.RED);
+			            	}
+		            		line = line.replaceAll("<H4>", "");
+		            		line = line.replaceAll("</H4>", "");
+		            		line = line.replaceAll("<FONT COLOR=\"#000000\">", "");
+		            		line = line.replaceAll("<FONT COLOR=\"#FF0000\">", "");
+		            		line = line.replaceAll("</FONT>", "");
+		            		line = line.replaceAll("<H5>", "");
+		            		line = line.replaceAll("<H3>", "");
+		            		line = line.replaceAll("<H2>", "");
+		            		line = line.replaceAll("</H5>", "");
+		            		line = line.replaceAll("</H3>", "");
+		            		line = line.replaceAll("</H2>", "");
+		            		line = line.replaceAll("<I>", "");
+		            		line = line.replaceAll("</I>", "");
+		            		line = line.replaceAll("<B>", "");
+		            		line = line.replaceAll("</B>", "");
+			            	
+		            		Log.i("LINE", line);
+		            	    Paragraph paragraph = new Paragraph(line, myFonColor);
+		            		document.add(paragraph); 
+		            	}
+		            	else {
+		            		if (line.equals("")) {
+		            			document.add(Chunk.NEWLINE);
+		            		}
+		            	}
+		            		
+		            	line = br.readLine();
+		            }
+		            br.close();
+		            
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	 	       	//step 5
+		        document.close();    
+		        
+		        Log.i("DONE", "PDF Created!");
+			} 
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			catch (DocumentException e) {
+				e.printStackTrace();
+			}
+            return null;
+        }
+        
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+			if (mExportDialog == null) {
+				mExportDialog = new ProgressDialog(PaginaRenderActivity.this);
+				mExportDialog.setMessage(getString(R.string.export_running));
+				mExportDialog.setIndeterminate(true);
+				mExportDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				mExportDialog.setCancelable(true);
+				mExportDialog.setCanceledOnTouchOutside(false);
+			}
+			mExportDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+        	if (mExportDialog.isShowing())
+        		mExportDialog.dismiss();
+        	File file = new File(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0].getAbsolutePath() + "/output.pdf");
+	        Intent target = new Intent(Intent.ACTION_VIEW);
+	        target.setDataAndType(Uri.fromFile(file),"application/pdf");
+	        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+	        Intent intent = Intent.createChooser(target, getString(R.string.open_pdf));
+	        try {
+	            startActivity(intent);
+	        } catch (ActivityNotFoundException e) {
+				Toast toast = Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.no_pdf_reader), Toast.LENGTH_SHORT);
+				toast.show();
+	        }  
         }
     }
 

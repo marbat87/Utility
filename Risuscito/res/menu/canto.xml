@@ -2,7 +2,7 @@
        
 	<item
 	    android:id="@+id/tonalita"
-		android:orderInCategory="90"
+		android:orderInCategory="89"
 	    android:showAsAction="always"
       	android:title="@string/action_tonalita" >
 
@@ -10,7 +10,7 @@
         	<item
 				android:id="@+id/action_trasporta"
 				android:title="@string/action_trasporta"
-				android:orderInCategory="91"
+				android:orderInCategory="90"
 				android:icon="?attr/customChord">
 		
 				<menu>
@@ -34,13 +34,13 @@
 			<item
         		android:id="@+id/action_save_tab"
         		android:icon="?attr/customSave"
-        		android:orderInCategory="92"
+        		android:orderInCategory="91"
         		android:title="@string/action_salva_tonalita" />
 	
 			<item
         		android:id="@+id/action_reset_tab"
        			android:icon="?attr/customReset"
-        		android:orderInCategory="93"
+        		android:orderInCategory="92"
         		android:title="@string/action_reset_tonalita" />
         
         </menu>
@@ -49,7 +49,7 @@
     
 	<item
 	    android:id="@+id/barre"
-		android:orderInCategory="94"
+		android:orderInCategory="93"
 	    android:showAsAction="always"
       	android:title="@string/action_barre" >
 
@@ -58,7 +58,7 @@
         	<item
 				android:id="@+id/action_trasporta_barre"
 				android:title="@string/action_trasporta"
-				android:orderInCategory="95"
+				android:orderInCategory="94"
 				android:icon="?attr/customChord">
 		
 				<menu>
@@ -78,13 +78,13 @@
 			<item
         		android:id="@+id/action_save_barre"
         		android:icon="?attr/customSave"
-        		android:orderInCategory="96"
+        		android:orderInCategory="95"
         		android:title="@string/action_salva_tonalita" />
 	
 			<item
         		android:id="@+id/action_reset_barre"
        			android:icon="?attr/customReset"
-        		android:orderInCategory="97"
+        		android:orderInCategory="96"
         		android:title="@string/action_reset_barre" />
         
         </menu>
@@ -104,6 +104,13 @@
 <!--         android:icon="@drawable/ic_action_tab_reset" -->
 <!--         android:showAsAction="always" -->
 <!--         android:title="@string/action_reset_tonalita" /> -->
+	
+	<item
+        android:id="@+id/action_exp_pdf"
+        android:orderInCategory="97"
+        android:icon="?attr/customExpPDF"
+        android:showAsAction="never"
+        android:title="@string/action_exp_pdf" />
 	
     <item
         android:id="@+id/action_settings"

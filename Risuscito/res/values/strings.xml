@@ -177,5 +177,9 @@
     <string name="applicatgion_theme_title">Tema</string>
     <string name="applicatgion_theme_summary">Cambia il tema dell\'applicazione. Attenzione: L\'applicazione sar&#224; riavviata.</string>
     <string name="favorite_remove">Rimuovere dai preferiti?</string>
+    <string name="action_exp_pdf">Esporta PDF</string>
+    <string name="no_pdf_reader">Nessun PDF Reader trovato!</string>
+    <string name="export_running">Esportazione in corso&#8230;</string>
+    <string name="open_pdf">Apri PDF</string>
     
 </resources>
