@@ -49,7 +49,22 @@ public class NewTagRemover {
 	            	if (line.contains("000000") 
 	            	 && !line.contains("FF0000")
 	            	 && !line.contains("BGCOLOR")) {
-	            		line = line.replaceAll("</FONT><FONT COLOR=\"#000000\">", "");
+	            		line = line.replaceAll("<H4>", "");
+	            		line = line.replaceAll("</H4>", "");
+	            		line = line.replaceAll("<FONT COLOR=\"#000000\">", "");
+	            		line = line.replaceAll("<FONT COLOR=\"#FF0000\">", "");
+	            		line = line.replaceAll("</FONT>", "");
+	            		line = line.replaceAll("<H5>", "");
+	            		line = line.replaceAll("<H3>", "");
+	            		line = line.replaceAll("<H2>", "");
+	            		line = line.replaceAll("</H5>", "");
+	            		line = line.replaceAll("</H3>", "");
+	            		line = line.replaceAll("</H2>", "");
+	            		line = line.replaceAll("<I>", "");
+	            		line = line.replaceAll("</I>", "");
+	            		line = line.replaceAll("<B>", "");
+	            		line = line.replaceAll("</B>", "");
+	            		line = line.replaceAll("<br>", "");
 	            		line = line.replaceAll("C\\+A\\.", "");
 	            		line = line.replaceAll("C\\.", "");
 	            		line = line.replaceAll("A\\.", "");
@@ -66,8 +81,22 @@ public class NewTagRemover {
 	            	
 	            	if (line.contains("FF0000")
 	            	 && line.contains("<H2>")) {
-	            		line = line.replaceAll("<H2><FONT COLOR=\"#FF0000\"><B>", "");
-	            		line = line.replaceAll("</B></FONT></H2>", "");
+	            		line = line.replaceAll("<H4>", "");
+	            		line = line.replaceAll("</H4>", "");
+	            		line = line.replaceAll("<FONT COLOR=\"#000000\">", "");
+	            		line = line.replaceAll("<FONT COLOR=\"#FF0000\">", "");
+	            		line = line.replaceAll("</FONT>", "");
+	            		line = line.replaceAll("<H5>", "");
+	            		line = line.replaceAll("<H3>", "");
+	            		line = line.replaceAll("<H2>", "");
+	            		line = line.replaceAll("</H5>", "");
+	            		line = line.replaceAll("</H3>", "");
+	            		line = line.replaceAll("</H2>", "");
+	            		line = line.replaceAll("<I>", "");
+	            		line = line.replaceAll("</I>", "");
+	            		line = line.replaceAll("<B>", "");
+	            		line = line.replaceAll("</B>", "");
+	            		line = line.replaceAll("<br>", "");
 	            		System.out.println(line);
 	            		line = line.replaceAll("[^\\p{L}\\p{Z}\\p{Digit}]"," ");
 //	            		line = line.replaceAll("[^\\p{L}\\p{Z}]","");
