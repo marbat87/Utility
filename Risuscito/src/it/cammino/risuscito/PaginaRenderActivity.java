@@ -1858,6 +1858,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		            		line = line.replaceAll("</I>", "");
 		            		line = line.replaceAll("<B>", "");
 		            		line = line.replaceAll("</B>", "");
+		            		line = line.replaceAll("<br>", "");
 			            	
 		            		Log.i("LINE", line);
 		            	    Paragraph paragraph = new Paragraph(line, myFonColor);
