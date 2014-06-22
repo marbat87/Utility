@@ -57,7 +57,6 @@ import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -1201,13 +1200,14 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     = new OnErrorListener(){
 
 		@Override
-		public boolean onError(MediaPlayer mp, int what, int extra) {
-			
+		public boolean onError(MediaPlayer mp, int what, int extra) {			
+			try {
+				if (loadingMp3.isShowing())
+					loadingMp3.dismiss();
+			}
+			catch (IllegalArgumentException e) {}
 			mediaPlayerState = MP_State.Error;
-			if (loadingMp3.isShowing())
-				loadingMp3.dismiss();
-			showMediaPlayerState();
-			
+			showMediaPlayerState();			
 			return false;
 		}
 	};
@@ -1217,8 +1217,11 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		
 		@Override
 		public void onPrepared(MediaPlayer mp) {
-			if (loadingMp3.isShowing())
-				loadingMp3.dismiss();
+			try {
+				if (loadingMp3.isShowing())
+					loadingMp3.dismiss();
+			}
+			catch (IllegalArgumentException e) {}			
 			mediaPlayerState = MP_State.Prepared;
 			cmdStart();
 		}
@@ -1860,7 +1863,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		            		line = line.replaceAll("</B>", "");
 		            		line = line.replaceAll("<br>", "");
 			            	
-		            		Log.i("LINE", line);
+//		            		Log.i("LINE", line);
 		            	    Paragraph paragraph = new Paragraph(line, myFonColor);
 		            		document.add(paragraph); 
 		            	}
@@ -1880,7 +1883,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	 	       	//step 5
 		        document.close();    
 		        
-		        Log.i("DONE", "PDF Created!");
+//		        Log.i("DONE", "PDF Created!");
 			} 
 			catch (FileNotFoundException e) {
 				e.printStackTrace();

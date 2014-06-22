@@ -20,6 +20,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -34,6 +35,8 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.andraskindler.quickscroll.QuickScroll;
+import com.andraskindler.quickscroll.Scrollable;
 
 public class AlphabeticSectionFragment extends Fragment implements GenericDialogListener {
 	/**
@@ -64,11 +67,9 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(
-				R.layout.fragment_canti_index, container, false);
+				R.layout.fragment_alphanum_index, container, false);
 		
-		rootView.findViewById(R.id.argomentiList).setVisibility(View.GONE);
 		ListView lv = (ListView) rootView.findViewById(R.id.cantiList);
-		lv.setVisibility(View.VISIBLE);
 		
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
@@ -76,7 +77,7 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 		SQLiteDatabase db = listaCanti.getReadableDatabase();
 		
 		// lancia la ricerca di tutti i titoli presenti in DB e li dispone in ordine alfabetico
-		String query = "SELECT titolo, color" +
+		String query = "SELECT titolo, color, pagina" +
 				"		FROM ELENCO" +
 				"		ORDER BY TITOLO ASC";
 		Cursor lista = db.rawQuery(query, null);
@@ -87,9 +88,8 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 		// crea un array e ci memorizza i titoli estratti
 		titoli = new String[lista.getCount()];		                      
 		lista.moveToFirst();    		    		
-		for (int i = 0; i < total; i++) {
-			
-			titoli[i] = lista.getString(1) + lista.getString(0);
+		for (int i = 0; i < total; i++) {	
+			titoli[i] = Utility.intToString(lista.getInt(2), 3) + lista.getString(1) + lista.getString(0);
 			lista.moveToNext();
 		}
 		
@@ -97,7 +97,8 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 		lista.close();
 		
 		// crea un list adapter per l'oggetto di tipo ListView
-		lv.setAdapter(new SongRowAdapter());
+		SongRowAdapter adapter = new SongRowAdapter();
+		lv.setAdapter(adapter);
 		
 		// setta l'azione al click su ogni voce dell'elenco
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -111,7 +112,6 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 			    
 				// crea un manipolatore per il DB in modalità READ
 				SQLiteDatabase db = listaCanti.getReadableDatabase();
-//				db = listaCanti.getReadableDatabase();
 			    
 				// esegue la query per il recupero del nome del file della pagina da visualizzare
 			    String query = "SELECT source, _id" +
@@ -138,7 +138,12 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 			          			      
 			}
 
-		});	
+		});
+		
+		final QuickScroll quickscroll = (QuickScroll) rootView.findViewById(R.id.quickscroll);
+		quickscroll.init(QuickScroll.TYPE_INDICATOR_WITH_HANDLE, lv, adapter, QuickScroll.STYLE_HOLO);
+		quickscroll.setFixedSize(1);
+		quickscroll.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35);
 		
 		query = "SELECT _id, lista" +
 				"		FROM LISTE_PERS" +
@@ -177,7 +182,7 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
     	startActivity(intent);
    	}
     
-    private class SongRowAdapter extends ArrayAdapter<String> {
+    private class SongRowAdapter extends ArrayAdapter<String> implements Scrollable {
     	
     	SongRowAdapter() {
     		super(getActivity(), R.layout.row_item, R.id.text_title, titoli);
@@ -187,20 +192,31 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
     	public View getView(int position, View convertView, ViewGroup parent) {
     		
     		View row=super.getView(position, convertView, parent);
-    		
     		TextView canto = (TextView) row.findViewById(R.id.text_title);
-    		String cantoCliccato = canto.getText().toString();
-    		String colore = cantoCliccato.substring(0, 7);
     		
-    		((TextView) row.findViewById(R.id.text_title))
-    			.setText(cantoCliccato.substring(7));
-		        		
+    		String totalString = canto.getText().toString();
+    		int tempPagina = Integer.valueOf(totalString.substring(0,3));
+    		String pagina = String.valueOf(tempPagina);
+    		String colore = totalString.substring(3, 10);
+    		
+    		canto.setText(totalString.substring(10));
+	        		
     		TextView textPage = (TextView) row.findViewById(R.id.text_page);
-    		textPage.setVisibility(View.GONE);
+    		textPage.setText(pagina);
     		View fullRow = (View) row.findViewById(R.id.full_row);
     		fullRow.setBackgroundColor(Color.parseColor(colore));
     		
     		return(row);
+    	}
+    	
+    	@Override
+    	public String getIndicatorForPosition(int childposition, int groupposition) {
+    		return titoli[childposition].substring(10,11);
+    	}
+
+    	@Override
+    	public int getScrollPosition(int childposition, int groupposition) {
+    		return childposition;
     	}
     }
     
@@ -297,15 +313,6 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 		    		    	}
 		    		    	else {
 			    		    	blockOrientation();
-//			    		    	GenericDialogFragment.show(getActivity(),
-//			    		    			LISTA_PERSONALIZZATA_TAG,
-//			    		    			"",
-//			    		    			getString(R.string.dialog_present_yet) + " " 
-//			    						+ listePers[idListaClick].getCantoPosizione(idPosizioneClick)
-//			    						.substring(10)
-//			    						+ getString(R.string.dialog_wonna_replace),
-//			    						AlphabeticSectionFragment.this
-//			    						);
 			    				GenericDialogFragment dialog = new GenericDialogFragment();
 			    				dialog.setListener(AlphabeticSectionFragment.this);
 			    				dialog.setCustomMessage(getString(R.string.dialog_present_yet) + " " 

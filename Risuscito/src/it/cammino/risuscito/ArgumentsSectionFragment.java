@@ -48,7 +48,6 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 	private DatabaseCanti listaCanti;
 	private List<Map<String, String>> groupData;
     private List<List<Map<String, String>>> childData;
-	private SQLiteDatabase db;
   	private static final String NAME = "NAME";
   	private SongRowAdapter mAdapter;
     private ExpandableListView expList;
@@ -74,17 +73,15 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(
-		R.layout.fragment_canti_index, container, false);
+		R.layout.fragment_argomenti_index, container, false);
 		    		    
-		rootView.findViewById(R.id.cantiList).setVisibility(View.GONE);
         expList = (ExpandableListView) rootView.findViewById(R.id.argomentiList);
-        expList.setVisibility(View.VISIBLE);
         
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
         
 		// crea un manipolatore per il Database in modalità READ
-		db = listaCanti.getReadableDatabase();
+		SQLiteDatabase db = listaCanti.getReadableDatabase();
 		
 		// lancia la ricerca di tutti i gli argomenti in DB e li dispone in ordine alfabetico
 		String query = "SELECT _id, nome" +
@@ -108,7 +105,7 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
             int argId =  arguments.getInt(0);
             arguments.moveToNext();
             
-            query = "SELECT B.titolo, color" +
+            query = "SELECT B.titolo, color, pagina" +
     				"		FROM ARGOMENTI A, ELENCO B " +
     				"       WHERE A._id = " + argId + 
     				"       AND A.id_canto = B._id " + 
@@ -124,7 +121,8 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
             for (int j = 0; j < totCanti; j++) {
                 Map<String, String> curChildMap = new HashMap<String, String>();
                 children.add(curChildMap);
-                curChildMap.put(NAME, argCanti.getString(1) + argCanti.getString(0));
+                curChildMap.put(NAME, Utility.intToString(argCanti.getInt(2),3)
+                		+ argCanti.getString(1) + argCanti.getString(0));
                 argCanti.moveToNext();
             }
             childData.add(children);
@@ -182,7 +180,7 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 	    		cantoCliccato = Utility.duplicaApostrofi(cantoCliccato);
 	    			    		
 	    		// crea un manipolatore per il Database in modalità READ
-	    		db = listaCanti.getReadableDatabase();
+	    		SQLiteDatabase db = listaCanti.getReadableDatabase();
 	    		
 	    		// esegue la query per il recupero del nome del file della pagina da visualizzare
 			    String query = "SELECT source, _id" +
@@ -267,23 +265,24 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
     	@Override
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
-    		    		
+
     		View row = super.getChildView(groupPosition, childPosition,
     				isLastChild, convertView, parent);
-    		    		
     		TextView canto = (TextView) row.findViewById(R.id.text_title);
-    		String cantoCliccato = canto.getText().toString();
-    		String colore = cantoCliccato.substring(0, 7);
     		
-    		((TextView) row.findViewById(R.id.text_title))
-    			.setText(cantoCliccato.substring(7));
-		        				    
-    		TextView textPage = (TextView) row.findViewById(R.id.text_page);  
-    		textPage.setVisibility(View.GONE);
+    		String totalString = canto.getText().toString();
+    		int tempPagina = Integer.valueOf(totalString.substring(0,3));
+    		String pagina = String.valueOf(tempPagina);
+    		String colore = totalString.substring(3, 10);
+    		
+    		canto.setText(totalString.substring(10));
+	        		
+    		TextView textPage = (TextView) row.findViewById(R.id.text_page);
+    		textPage.setText(pagina);
     		View fullRow = (View) row.findViewById(R.id.full_row);
     		fullRow.setBackgroundColor(Color.parseColor(colore));
-       		
-			return row;
+    		
+    		return row;
 		}
     	
     }

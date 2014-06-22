@@ -11,7 +11,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	private static final String DB_NAME = "DBCanti";	
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
-	private static final int DB_VERSION = 21;
+	private static final int DB_VERSION = 22;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -245,14 +245,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (27, 22, 'segue Preghiera Eucaristica II (2): Consacrazione e acclamazione', " +
+		sql += "VALUES (27, 22, 'Segue Preghiera Eucaristica II (2): Consacrazione e acclamazione', " +
 				"'preghiera_eucaristica_II_2_consacrazione', 0, '"
 				+ GIALLO + "', 'http://www.resuscicanti.com/18PreghieraeucaristicaII(Consagrazi0ne)4,58.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (28, 23, 'segue Preghiera Eucaristica II (2): Offerta, intercessioni dossologia', " +
+		sql += "VALUES (28, 23, 'Segue Preghiera Eucaristica II (2): Offerta, intercessioni dossologia', " +
 				"'preghiera_eucaristica_II_2_offerta', 0, '"
 				+ GIALLO + "', 'http://www.resuscicanti.com/17PreghieraeucaristicaII(offerta)4,13.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -2703,8 +2703,8 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		
 		Backup[] backup = new Backup[300];
-		if(oldVersion == 19) {
-			String sql = "SELECT _id, zoom, scroll_x, scroll_y, favourite, saved_tab FROM ELENCO";
+		if(oldVersion >= 21) {
+			String sql = "SELECT _id, zoom, scroll_x, scroll_y, favourite, saved_tab, saved_barre, saved_speed FROM ELENCO";
 			Cursor cursor = db.rawQuery(sql, null);
 			cursor.moveToFirst();
 			for (int i = 0; i < cursor.getCount(); i++) {
@@ -2715,13 +2715,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 				cantoBackup.setScroll_y(cursor.getInt(3));
 				cantoBackup.setFavourite(cursor.getInt(4));
 				cantoBackup.setNota(cursor.getString(5));
+				cantoBackup.setBarre(cursor.getString(6));
+				cantoBackup.setSpeed(cursor.getInt(7));
 				backup[i] = cantoBackup;
 				cursor.moveToNext();
 			}
 			cursor.close();
 		}
-		
-		if(oldVersion >= 20) {
+		else if(oldVersion >= 20) {
 			String sql = "SELECT _id, zoom, scroll_x, scroll_y, favourite, saved_tab, saved_barre FROM ELENCO";
 			Cursor cursor = db.rawQuery(sql, null);
 			cursor.moveToFirst();
@@ -2739,9 +2740,8 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 			}
 			cursor.close();
 		}
-		
-		if(oldVersion >= 21) {
-			String sql = "SELECT _id, zoom, scroll_x, scroll_y, favourite, saved_tab, saved_barre, saved_speed FROM ELENCO";
+		else if(oldVersion == 19) {
+			String sql = "SELECT _id, zoom, scroll_x, scroll_y, favourite, saved_tab FROM ELENCO";
 			Cursor cursor = db.rawQuery(sql, null);
 			cursor.moveToFirst();
 			for (int i = 0; i < cursor.getCount(); i++) {
@@ -2752,8 +2752,6 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 				cantoBackup.setScroll_y(cursor.getInt(3));
 				cantoBackup.setFavourite(cursor.getInt(4));
 				cantoBackup.setNota(cursor.getString(5));
-				cantoBackup.setBarre(cursor.getString(6));
-				cantoBackup.setSpeed(cursor.getInt(7));
 				backup[i] = cantoBackup;
 				cursor.moveToNext();
 			}

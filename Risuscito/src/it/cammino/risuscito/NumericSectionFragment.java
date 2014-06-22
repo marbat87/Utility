@@ -10,6 +10,9 @@ import org.holoeverywhere.widget.ArrayAdapter;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
 
+import com.andraskindler.quickscroll.QuickScroll;
+import com.andraskindler.quickscroll.Scrollable;
+
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +23,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -64,11 +68,9 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(
-		R.layout.fragment_canti_index, container, false);
+		R.layout.fragment_alphanum_index, container, false);
 		    		    		
-		rootView.findViewById(R.id.argomentiList).setVisibility(View.GONE);
 		ListView lv = (ListView) rootView.findViewById(R.id.cantiList);
-		lv.setVisibility(View.VISIBLE);
 		
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
@@ -98,7 +100,8 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
 //		db.close();
 		 
 		// crea un list adapter per l'oggetto di tipo ListView
-		lv.setAdapter(new SongRowAdapter());
+		SongRowAdapter adapter = new SongRowAdapter();
+		lv.setAdapter(adapter);
 		
 		
 		// setta l'azione al click su ogni voce dell'elenco
@@ -139,6 +142,11 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
 			}
 		});
 		
+		final QuickScroll quickscroll = (QuickScroll) rootView.findViewById(R.id.quickscroll);
+		quickscroll.init(QuickScroll.TYPE_INDICATOR_WITH_HANDLE, lv, adapter, QuickScroll.STYLE_HOLO);
+		quickscroll.setFixedSize(2);
+		quickscroll.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35);
+		
 		query = "SELECT _id, lista" +
 				"		FROM LISTE_PERS" +
 				"		ORDER BY _id ASC";
@@ -176,7 +184,7 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
     	startActivity(intent);
    	}
     
-    private class SongRowAdapter extends ArrayAdapter<String> {
+    private class SongRowAdapter extends ArrayAdapter<String> implements Scrollable{
     	
     	SongRowAdapter() {
     		super(getActivity(), R.layout.row_item, R.id.text_title, titoli);
@@ -186,7 +194,6 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
     	public View getView(int position, View convertView, ViewGroup parent) {
     		
     		View row=super.getView(position, convertView, parent);
-    		
     		TextView canto = (TextView) row.findViewById(R.id.text_title);
     		
     		String totalString = canto.getText().toString();
@@ -194,8 +201,7 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
     		String pagina = String.valueOf(tempPagina);
     		String colore = totalString.substring(3, 10);
 
-    		((TextView) row.findViewById(R.id.text_title))
-    			.setText(totalString.substring(10));
+    		canto.setText(totalString.substring(10));
 		        		
     		TextView textPage = (TextView) row.findViewById(R.id.text_page);
     		textPage.setText(pagina);
@@ -203,6 +209,17 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
     		fullRow.setBackgroundColor(Color.parseColor(colore));
     		
     		return(row);
+    	}
+    	
+    	@Override
+    	public String getIndicatorForPosition(int childposition, int groupposition) {
+    		int pagina = Integer.valueOf(titoli[childposition].substring(0,3));
+    		return String.valueOf(pagina);
+    	}
+
+    	@Override
+    	public int getScrollPosition(int childposition, int groupposition) {
+    		return childposition;
     	}
     }
     
