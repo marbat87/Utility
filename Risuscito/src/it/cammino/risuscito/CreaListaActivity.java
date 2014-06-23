@@ -226,8 +226,6 @@ public class CreaListaActivity extends Activity
         if(PreferenceManager
                 .getDefaultSharedPreferences(this)
                 .getBoolean(PREF_FIRST_OPEN, true)) { 
-        	showHelp();
-        	
             SharedPreferences.Editor editor = PreferenceManager
                     .getDefaultSharedPreferences(CreaListaActivity.this)
                     .edit();
@@ -237,6 +235,7 @@ public class CreaListaActivity extends Activity
             } else {
             	editor.apply();
             }
+        	showHelp();
         }
        	
 		checkScreenAwake();
@@ -636,7 +635,6 @@ public class CreaListaActivity extends Activity
 								        		, R.string.showcase_delete_desc
 								        		, co);
 										showcaseView.setButtonText(getString(R.string.showcase_button_next));
-//										showcaseView.setScaleMultiplier(0.5f);
 										int[] coords = new int[2];
 										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getLocationOnScreen(coords);
 										showcaseView.animateGesture(coords[0], coords[1], coords[0] + (screenWidth - coords[0])/2, coords[1], true);

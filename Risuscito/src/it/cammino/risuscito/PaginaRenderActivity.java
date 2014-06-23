@@ -562,8 +562,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
                 .getDefaultSharedPreferences(this)
                 .getBoolean(PREF_FIRST_OPEN_SCROLL, true);
         
-        if(showHelp1) {        
-        	showHelp(); 
+        if(showHelp1) {     
             SharedPreferences.Editor editor = PreferenceManager
                     .getDefaultSharedPreferences(PaginaRenderActivity.this)
                     .edit();
@@ -574,12 +573,11 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
             } else {
             	editor.apply();
             }
+        	showHelp(); 
         }
         else {
         	if (showHelp2){
-        		blockOrientation();
-	        	showScrollHelp(); 
-	            SharedPreferences.Editor editor = PreferenceManager
+        		SharedPreferences.Editor editor = PreferenceManager
 	                    .getDefaultSharedPreferences(PaginaRenderActivity.this)
 	                    .edit();
 	            editor.putBoolean(PREF_FIRST_OPEN_SCROLL, false);
@@ -588,6 +586,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	            } else {
 	            	editor.apply();
 	            }
+        		blockOrientation();
+        		showScrollHelp(); 
         	}
         }
     }

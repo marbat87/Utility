@@ -8,7 +8,8 @@
 		<changelogtext>Aggiunto l'export in PDF dei canti con gli accordi modificati (all'interno di un canto: opzioni-->esporta PDF)</changelogtext>
 		<changelogtext>Aggiunta la strofa mancante nel canto "Fino a quando"</changelogtext>
 		<changelogtext>Aggiunto lo scroller veloce nell'indice alfabetico e per pagina</changelogtext>
-		<changelogtext>>Aggiunto il numero di pagina in tutti gli indici</changelogtext>
+		<changelogtext>Aggiunto il numero di pagina in tutti gli indici</changelogtext>
+		<changelogtext>Corretto un possibile crash nella guida della creazione lista personalizzata</changelogtext>
 		<changelogtext>Bugfix vari</changelogtext>
 	</changelogversion>
     
