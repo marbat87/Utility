@@ -30,7 +30,8 @@ public class NewTagRemover {
 		}
 		
 //		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
-		final File folder = new File("C:/android/workspace/Utility/new_files");
+//		final File folder = new File("C:/android/workspace/Utility/new_files");
+		final File folder = new File("C:/android/workspace/Utility/new_songs");
 		for (final File input : folder.listFiles()) {
 		
 			String sFileName = input.getName().trim().replaceAll(".htm", "");
