@@ -2766,8 +2766,12 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 					break;
 		    	ContentValues  values = new  ContentValues( );
 		    	values.put("zoom" , backup[i].getZoom());
-		    	values.put("scroll_x", backup[i].getScroll_x());
-		    	values.put("scroll_y", backup[i].getScroll_y());
+		    	//Nella versione 22 sono stati completati i ritornelli di tutti i canti,
+		    	//quindi meglio resettare lo scroll salvato
+		    	if (newVersion != 22) {
+		    		values.put("scroll_x", backup[i].getScroll_x());
+		    		values.put("scroll_y", backup[i].getScroll_y());
+				}
 		    	values.put("favourite", backup[i].getFavourite());
 		    	values.put("saved_tab", backup[i].getNota());
 		    	if (oldVersion >= 20)
