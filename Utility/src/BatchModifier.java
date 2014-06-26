@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -13,8 +11,9 @@ import java.util.ArrayList;
 public class BatchModifier {
 
 	public static void main(String[] args) {
-				
-		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
+			
+		final File folder = new File("C:/android/workspace/Utility/new_songs");
+//		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
 //		final File folder = new File("C:/Java/workspace/Utility/files");
 		System.out.println("INIZIO!");
 		for (final File input : folder.listFiles()) {
@@ -30,9 +29,7 @@ public class BatchModifier {
 	            line = br.readLine();
 	            while (line != null)
 	            {
-	            	line = line.replaceAll("Chè", "Ché");
-	            	line = line.replaceAll("chè", "ché");
-	            	line = line.replaceAll("CHÈ", "CHÉ");
+	            	line = line.replaceAll("#FF0000", "#A13F3C");
 	                lines.add(line);
 	                line = br.readLine();
 	            }
