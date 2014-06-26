@@ -1392,7 +1392,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	        
             Pattern pattern = Pattern.compile("Do#|Do|Re|Mib|Mi|Fa#|Fa|Sol#|Sol|La|Sib|Si");
 	        while (line != null) {
-	        	if (line.contains("FF0000") && !line.contains("<H2>") && !line.contains("<H4>")) {
+	        	if (line.contains("A13F3C") && !line.contains("<H2>") && !line.contains("<H4>")) {
 //	        		Log.i("RIGA", line);
 		        	Matcher matcher = pattern.matcher(line);
 		        	StringBuffer sb = new StringBuffer();
@@ -1406,7 +1406,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	        	else {
 	        		if (line.contains("<H3>")) {
 	        			if (barre != null && !barre.equals("0")) {
-	        				String oldLine = "<H4><FONT COLOR=\"#FF0000\"><I>Barrè al " + barre +  " tasto</I></FONT></H4>";
+	        				String oldLine = "<H4><FONT COLOR=\"#A13F3C\"><I>Barrè al " + barre +  " tasto</I></FONT></H4>";
 	        				out.write(oldLine);
 	        				out.newLine();
 	        			}
@@ -1837,19 +1837,19 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		            line = br.readLine();
 		            while (line != null) {
 		            	if ((line.contains("000000")
-		            	  || line.contains("FF0000"))
+		            	  || line.contains("A13F3C"))
 		            	  && !line.contains("BGCOLOR")) {
 			            	if (line.contains("000000")) {
 			            		myFonColor = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 			            	}
 			            	
-			            	if (line.contains("FF0000")) {
+			            	if (line.contains("A13F3C")) {
 			            		myFonColor = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.RED);
 			            	}
 		            		line = line.replaceAll("<H4>", "");
 		            		line = line.replaceAll("</H4>", "");
 		            		line = line.replaceAll("<FONT COLOR=\"#000000\">", "");
-		            		line = line.replaceAll("<FONT COLOR=\"#FF0000\">", "");
+		            		line = line.replaceAll("<FONT COLOR=\"#A13F3C\">", "");
 		            		line = line.replaceAll("</FONT>", "");
 		            		line = line.replaceAll("<H5>", "");
 		            		line = line.replaceAll("<H3>", "");

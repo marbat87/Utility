@@ -28,9 +28,9 @@ public class CambioAccordi {
 	        boolean found = false;
 	        
 	        while (line != null && !found) {
-	        	if (line.contains("FF0000") && !line.contains("<H2>") && !line.contains("<H4>")) {      		
+	        	if (line.contains("A13F3C") && !line.contains("<H2>") && !line.contains("<H4>")) {      		
 //	        		Log.i("RIGA", line);	        		
-	        		int inizioRiga = line.indexOf("FF0000") + 8;
+	        		int inizioRiga = line.indexOf("A13F3C") + 8;
 	        		
 	        		if (inizioRiga < line.length()) {
 //		        		Log.i("inizioRiga", inizioRiga + "");
