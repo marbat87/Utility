@@ -154,6 +154,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	private final String SALVA_ACCORDO_TAG = "3";
 	
 	private ProgressDialog mExportDialog;
+	private String localPDFPath;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -573,7 +574,16 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
             } else {
             	editor.apply();
             }
-        	showHelp(); 
+            
+            final Runnable mMyRunnable = new Runnable() {
+            	@Override
+            	public void run() {
+            		showHelp(); 
+                }
+            };
+            Handler myHandler = new Handler();
+            myHandler.postDelayed(mMyRunnable, 2000);
+//     		showHelp(); 
         }
         else {
         	if (showHelp2){
@@ -1822,8 +1832,21 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	        Document document = new Document(PageSize.A4, margin, margin, margin, margin);
 	        // step 2
 			try {
-				PdfWriter.getInstance(document, new FileOutputStream(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0]
-						.getAbsolutePath() + "/output.pdf"));
+		    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
+				int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
+				localPDFPath = "";
+				if (saveLocation == 1) {
+					File[] fileArray = ContextCompat.getExternalFilesDirs(PaginaRenderActivity.this, null);
+					localPDFPath = fileArray[0].getAbsolutePath();
+				}
+				else {
+					localPDFPath = PaginaRenderActivity.this.getFilesDir().toString();
+				}
+				localPDFPath += "/output.pdf";
+//				Log.i("localPath", localPDFPath);
+//				PdfWriter.getInstance(document, new FileOutputStream(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0]
+//						.getAbsolutePath() + "/output.pdf"));
+				PdfWriter.getInstance(document, new FileOutputStream(localPDFPath));
 				// step 3
 				document.open();
 				Font myFonColor = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
@@ -1912,7 +1935,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
         protected void onPostExecute(String result) {
         	if (mExportDialog.isShowing())
         		mExportDialog.dismiss();
-        	File file = new File(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0].getAbsolutePath() + "/output.pdf");
+//        	File file = new File(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0].getAbsolutePath() + "/output.pdf");
+        	File file = new File(localPDFPath);
 	        Intent target = new Intent(Intent.ACTION_VIEW);
 	        target.setDataAndType(Uri.fromFile(file),"application/pdf");
 	        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

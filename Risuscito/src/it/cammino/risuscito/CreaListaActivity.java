@@ -414,7 +414,7 @@ public class CreaListaActivity extends Activity
 	  if (modifica) {
 		  dataFragment2 = new RetainedFragment();
 		  getSupportFragmentManager().beginTransaction().add(dataFragment2, "nomiCanti").commit();
-		  dataFragment.setData(nomiCanti);
+		  dataFragment2.setData(nomiCanti);
 	  }
 	  super.onSaveInstanceState(savedInstanceState);
 	}
