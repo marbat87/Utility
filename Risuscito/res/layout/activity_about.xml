@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_min_margin"
     android:paddingTop="@dimen/activity_min_margin"
     android:orientation="vertical"
-    tools:context=".AboutActivity" >
+    tools:context=".DonateActivity" >
 
     <ImageView
     	android:id="@+id/imageView1"
@@ -15,7 +15,7 @@
     	android:layout_width="fill_parent"
     	android:layout_gravity="top"
     	android:contentDescription="@string/app_name"
-    	android:src="@drawable/about_risuscito" />
+    	android:src="@drawable/copertina_about" />
     
 	<TextView
     	android:text="@string/about_subtitle"

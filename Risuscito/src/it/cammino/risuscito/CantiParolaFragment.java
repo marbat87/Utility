@@ -366,25 +366,6 @@ public class CantiParolaFragment extends Fragment implements GenericDialogListen
 	    mShareActionProvider.setShareIntent(getDefaultIntent());
 	    super.onCreateOptionsMenu(menu, inflater);
 	}
-	
-//    @Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case android.R.id.home:
-//			NavUtils.navigateUpFromSameTask(getActivity());
-//            return true;
-//		case R.id.action_settings:
-//			startActivity(new Intent(getActivity(), Settings.class));
-//			return true;
-//		case R.id.action_favourites:
-//			startActivity(new Intent(getActivity(), FavouritesActivity.class));
-//			return true;
-//		case R.id.action_about:
-//			startActivity(new Intent(getActivity(), AboutActivity.class));
-//			return true;
-//		}
-//		return false;
-//	}
 
     /** Defines a default (dummy) share intent to initialize the action provider.
      * However, as soon as the actual content to be used in the intent

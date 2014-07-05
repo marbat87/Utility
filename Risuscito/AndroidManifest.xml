@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.cammino.risuscito"
     android:installLocation="auto"
-    android:versionCode="27"
-    android:versionName="2.4.8" >
+    android:versionCode="28"
+    android:versionName="2.4.9" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -78,6 +78,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.cammino.risuscito.CustomLists" />
+        </activity>
+        <activity
+            android:name="it.cammino.risuscito.DonateActivity"
+            android:label="@string/title_activity_donate" >
         </activity>
     </application>
     

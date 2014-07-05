@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-    <changelogversion versionName="2.4.8" changeDate="30 Giugno 2014">
-		<changelogtext>Corretto il testo dell'acclamazione al vangelo del tempo di Quaresima</changelogtext>
-		<changelogtext>Sostituita l'immagine della home del programma (Thanks to: Stefano Cavanna)</changelogtext>
-		<changelogtext>Aumentato l'intervallo della velocità di scroll automatico dei canti</changelogtext>
-		<changelogtext>Aggiunto l'export in PDF dei canti con gli accordi modificati (all'interno di un canto: opzioni-->esporta PDF)</changelogtext>
-		<changelogtext>Aggiunta la strofa mancante nel canto "Fino a quando"</changelogtext>
-		<changelogtext>Aggiunto lo scroller veloce nell'indice alfabetico e per pagina</changelogtext>
-		<changelogtext>Aggiunto il numero di pagina in tutti gli indici</changelogtext>
-		<changelogtext>Corretto un possibile crash nella guida della creazione lista personalizzata</changelogtext>
-		<changelogtext>Completati i ritornelli abbreviati nei canti</changelogtext>
-		<changelogtext>Bugfix vari</changelogtext>
-		<changelogtext>Cambiato il colore degli accordi</changelogtext>
-		<changelogtext>Da questa versione sarà aperto anche il canale BETA. Per farne parte, occorre avere un profilo Google Plus e richiedere l'accesso scrivendo un'email allo sviluppatore.</changelogtext>
+    <changelogversion versionName="2.4.9" changeDate="XX Luglio 2014">
+		<changelogtext>Corretti gli accordi di "Acclamate al Signore"</changelogtext>
+		<changelogtext>Ritardata la prima apertura della guida nei canti, per impedire un errore nei dispositivi con caricamento lento</changelogtext>
+		<changelogtext>Aggiunta la possibilità di rigraziare con una donazione</changelogtext>
 	</changelogversion>
 
 </changelog>

@@ -128,6 +128,9 @@ public class GeneralInsertSearch extends Activity {
 		case R.id.action_settings:
 			startActivity(new Intent(this, Settings.class));
 			return true;
+		case R.id.action_donate:
+			startActivity(new Intent(this, DonateActivity.class));
+			return true;
 		case R.id.action_about:
 			startActivity(new Intent(this, AboutActivity.class));
 			return true;
