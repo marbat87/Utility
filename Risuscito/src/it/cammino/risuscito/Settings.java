@@ -1,26 +1,27 @@
 package it.cammino.risuscito;
 
+import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.preference.ListPreference;
 import org.holoeverywhere.preference.Preference;
 import org.holoeverywhere.preference.Preference.OnPreferenceChangeListener;
-import org.holoeverywhere.preference.PreferenceActivity;
+import org.holoeverywhere.preference.PreferenceFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class Settings extends PreferenceActivity {
+public class Settings extends PreferenceFragment {
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(Settings.this);
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		
+		getSupportActionBar().setSubtitle(R.string.title_activity_settings);
 		addPreferencesFromResource(R.xml.xml_settings);
 		
-		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+//		final ActionBar actionBar = getSupportActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		ListPreference saveLocation = (ListPreference) findPreference("saveLocation");
         if (Utility.isExternalStorageReadable()) {
@@ -41,24 +42,26 @@ public class Settings extends PreferenceActivity {
 			
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-		        Intent i = getBaseContext().getPackageManager()
-		                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+		        Intent i = getActivity().getPackageManager()
+		                .getLaunchIntentForPackage(getActivity().getPackageName() );
 		        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		        startActivity(i);
 				return true;
 			}
 		});
         
+        return super.onCreateView(inflater, container, savedInstanceState);
+        
 	}
 	
-    @Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-            return true;	
-		}
-		return false;
-	}
+//    @Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//			finish();
+//            return true;	
+//		}
+//		return false;
+//	}
 		
 }

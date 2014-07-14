@@ -1,7 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <item
-        android:id="@+id/remove_favorite"
-        android:title="@string/favourite_remove" />
-
-</menu>

@@ -38,6 +38,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+@SuppressWarnings("deprecation")
 public class NumericSectionFragment extends Fragment implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this
@@ -62,8 +63,6 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
 	private final String LISTA_PERSONALIZZATA_TAG = "1";
 	private final String LISTA_PREDEFINITA_TAG = "2";
 	
-	public NumericSectionFragment() {}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -97,7 +96,6 @@ public class NumericSectionFragment extends Fragment implements GenericDialogLis
 		
 		// chiude il cursore
 		lista.close();
-//		db.close();
 		 
 		// crea un list adapter per l'oggetto di tipo ListView
 		SongRowAdapter adapter = new SongRowAdapter();

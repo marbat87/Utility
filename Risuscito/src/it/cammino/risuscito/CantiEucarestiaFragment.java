@@ -12,7 +12,6 @@ import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.LinearLayout;
 import org.holoeverywhere.widget.TextView;
-import org.holoeverywhere.widget.ViewPager;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,7 +33,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
- 
+@SuppressWarnings("deprecation")
 public class CantiEucarestiaFragment extends Fragment implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this
@@ -52,9 +51,6 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	
 	private final String RIMUOVI_CANTO_TAG = "1";
 	private final String RESETTA_LISTA_TAG = "2";
-	
-	//constructor
-	public CantiEucarestiaFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,20 +87,22 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 			}
 		});
 			
+		updateLista();
+		
 		setHasOptionsMenu(true);
 		
 		return rootView;
 	}
 		   
-    @Override
-    public void onResume() {
-    	super.onResume();
-		updateLista();
-		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
-		if (mShareActionProvider != null && tempPager.getCurrentItem() == 1)
-			//aggiorna lo share intent usato per condividere la lista
-			mShareActionProvider.setShareIntent(getDefaultIntent());
-    }
+//    @Override
+//    public void onResume() {
+//    	super.onResume();
+//		updateLista();
+//		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
+//		if (mShareActionProvider != null && tempPager.getCurrentItem() == 1)
+//			//aggiorna lo share intent usato per condividere la lista
+//			mShareActionProvider.setShareIntent(getDefaultIntent());
+//    }
     
 	@Override
 	public void onDestroy() {
@@ -115,8 +113,7 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
-		
+//		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
 	    // Locate MenuItem with ShareActionProvider
 	    MenuItem shareItem = menu.findItem(R.id.action_share);
 
@@ -125,18 +122,13 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	    mShareActionProvider.setShareIntent(getDefaultIntent());
 	    super.onCreateOptionsMenu(menu, inflater);
 	}
-
-    /** Defines a default (dummy) share intent to initialize the action provider.
-     * However, as soon as the actual content to be used in the intent
-     * is known or changes, you must update the share intent by again calling
-     * mShareActionProvider.setShareIntent()
-     */
-   private Intent getDefaultIntent() {
-       Intent intent = new Intent(Intent.ACTION_SEND);
-       intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
-       intent.setType("text/plain");
-       return intent;
-   }
+	
+	private Intent getDefaultIntent() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
+		intent.setType("text/plain");
+		return intent;
+	}
 	
     private void startSubActivity(Bundle bundle) {
     	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
@@ -390,7 +382,8 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		for (int current = 0; current < titoliCanti.length; current++) {
-			View view = inflater.inflate(R.layout.canto_added, null, false);
+//			View view = inflater.inflate(R.layout.canto_added, null, false);
+			View view = inflater.inflate(R.layout.canto_added, lv, false);
 
 		   //initialize the view
 	   		((TextView) view.findViewById(R.id.canto))
@@ -449,7 +442,8 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		for (int current = 0; current < titoliCanti.length; current++) {
-			View view = inflater.inflate(R.layout.canto_added, null, false);
+//			View view = inflater.inflate(R.layout.canto_added, null, false);
+			View view = inflater.inflate(R.layout.canto_added, lv, false);
 
 			//initialize the view	   		
 	   		((TextView) view.findViewById(R.id.canto))

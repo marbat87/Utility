@@ -32,7 +32,9 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
-public class ListaPersonalizzataFragment extends Fragment implements GenericDialogListener {
+@SuppressWarnings("deprecation")
+public class ListaPersonalizzataFragment extends Fragment
+			implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -52,9 +54,6 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 	private final String RESET_LIST_TAG = "1";
 	private final String RIMUOVI_CANTO_TAG = "2";
 	
-	//constructor
-	public ListaPersonalizzataFragment() {}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 			}
 		});
 		
-		setHasOptionsMenu(true);		
+		setHasOptionsMenu(true);	
 		
 		return rootView;
 	}
@@ -100,6 +99,8 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
     	super.onResume();
 		fragmentIndex = getArguments().getInt("position");
 		idLista = getArguments().getInt("idLista");
+//		Log.i("fragmentIndex", fragmentIndex+"");
+//		Log.i("idLista", idLista+"");
 		
 		db = listaCanti.getReadableDatabase();
 		
@@ -130,8 +131,8 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 	
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getActivity().getMenuInflater().inflate(R.menu.list_with_delete, menu);
-		
+//		getActivity().getMenuInflater().inflate(R.menu.list_with_delete, menu);
+		inflater.inflate(R.menu.list_with_delete, menu);
 	    // Locate MenuItem with ShareActionProvider
 	    MenuItem shareItem = menu.findItem(R.id.action_share);
 
@@ -140,26 +141,15 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 	    if (listaPersonalizzata != null)
 	    	mShareActionProvider.setShareIntent(getDefaultIntent());
 	    super.onCreateOptionsMenu(menu, inflater);
+	    
 	}
 
-    /** Defines a default (dummy) share intent to initialize the action provider.
-     * However, as soon as the actual content to be used in the intent
-     * is known or changes, you must update the share intent by again calling
-     * mShareActionProvider.setShareIntent()
-     */
-   private Intent getDefaultIntent() {
-       Intent intent = new Intent(Intent.ACTION_SEND);
-       intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
-       intent.setType("text/plain");
-       return intent;
-   }
-	
-    private void startSubActivity(Bundle bundle) {
-//    	Intent intent = new Intent(getActivity(), InserisciTitoloActivity.class);
-    	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
-    	intent.putExtras(bundle);
-    	startActivity(intent);
-   	}
+	private Intent getDefaultIntent() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
+		intent.setType("text/plain");
+		return intent;
+	}
     
     private void openPagina(View v) {
     	// recupera il titolo della voce cliccata
@@ -204,7 +194,8 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 		linLayout.removeAllViews();
 
 		for (cantoIndex = 0; cantoIndex < listaPersonalizzata.getNumPosizioni(); cantoIndex++) {
-			View view = getActivity().getLayoutInflater().inflate(R.layout.oggetto_lista_generico, null, false);
+//			View view = getActivity().getLayoutInflater().inflate(R.layout.oggetto_lista_generico, null, false);
+			View view = getActivity().getLayoutInflater().inflate(R.layout.oggetto_lista_generico, linLayout, false);
 			
 	   		((TextView) view.findViewById(R.id.titoloPosizioneGenerica))
 	   			.setText(listaPersonalizzata.getNomePosizione(cantoIndex));
@@ -229,7 +220,10 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 					    bundle.putInt("position", (Integer.valueOf(
 					    		((TextView) v.findViewById(R.id.id_posizione))
 					    		.getText().toString())));
-					    startSubActivity(bundle);
+//					    startSubActivity(bundle);
+				    	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
+				    	intent.putExtras(bundle);
+				    	startActivity(intent);
 					}
 				}); 
 				
@@ -342,7 +336,6 @@ public class ListaPersonalizzataFragment extends Fragment implements GenericDial
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        // User touched the dialog's negative button
         dialog.dismiss();
         getActivity().setRequestedOrientation(prevOrientation);
     }

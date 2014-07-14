@@ -38,6 +38,7 @@ import android.widget.ListView;
 import com.andraskindler.quickscroll.QuickScroll;
 import com.andraskindler.quickscroll.Scrollable;
 
+@SuppressWarnings("deprecation")
 public class AlphabeticSectionFragment extends Fragment implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this
@@ -61,8 +62,6 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 	private final String LISTA_PERSONALIZZATA_TAG = "1";
 	private final String LISTA_PREDEFINITA_TAG = "2";
 	
-	public AlphabeticSectionFragment() {}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

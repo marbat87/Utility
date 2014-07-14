@@ -1,40 +1,40 @@
 package it.cammino.risuscito;
 
-import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.Button;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-public class DonateActivity extends Activity {
+public class DonateActivity extends Fragment {
 
 	private final int TEXTZOOM = 90;
 	
 	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(DonateActivity.this);
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		getSupportActionBar().setSubtitle(R.string.title_activity_donate);
+		View rootView = inflater.inflate(R.layout.activity_donate, container, false);
 		
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		setContentView(R.layout.activity_donate);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//		setContentView(R.layout.activity_donate);
 		
-		WebView donateView = (WebView) findViewById(R.id.donate_text);
+		WebView donateView = (WebView) rootView.findViewById(R.id.donate_text);
 		donateView.setBackgroundColor(0);
 		String text = "";
 		
-        if (Utility.getChoosedTheme(DonateActivity.this) == 2) {
+        if (Utility.getChoosedTheme(getActivity()) == 2) {
         	text = "<html><head>"
 		          + "<style type=\"text/css\">body{color: #FFFFFF;}"
 		          + "</style></head>"
@@ -59,7 +59,7 @@ public class DonateActivity extends Activity {
 		else
 			wSettings.setTextSize(WebSettings.TextSize.SMALLER);
 		
-		((Button) findViewById(R.id.donateButton)).setOnClickListener(new OnClickListener() {
+		((Button) rootView.findViewById(R.id.donateButton)).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -75,40 +75,42 @@ public class DonateActivity extends Activity {
 			}
 		});
 		
-		checkScreenAwake();
-	}
-
-    @Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-            return true;	
-		}
-		return false;
-	}
-	
-    @Override
-    public void onResume() {
-    	super.onResume();
-    }
-    	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-	}
-
-    //controlla se l'app deve mantenere lo schermo acceso
-    private void checkScreenAwake() {
-    	
-    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-		boolean screenOn = pref.getBoolean("screenOn", false);
-		View about = (View) findViewById(R.id.donateButton);
-		if (screenOn)
-			about.setKeepScreenOn(true);
-		else
-			about.setKeepScreenOn(false);
+//		checkScreenAwake();
 		
-    }
+		return rootView;
+	}
+
+//    @Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//			finish();
+//            return true;	
+//		}
+//		return false;
+//	}
+	
+//    @Override
+//    public void onResume() {
+//    	super.onResume();
+//    }
+    	
+//	@Override
+//	public void onDestroy() {
+//		super.onDestroy();
+//	}
+
+//    //controlla se l'app deve mantenere lo schermo acceso
+//    private void checkScreenAwake() {
+//    	
+//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
+//		boolean screenOn = pref.getBoolean("screenOn", false);
+//		View about = (View) findViewById(R.id.donateButton);
+//		if (screenOn)
+//			about.setKeepScreenOn(true);
+//		else
+//			about.setKeepScreenOn(false);
+//		
+//    }
 	    
 }

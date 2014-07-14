@@ -50,7 +50,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-
+@SuppressWarnings("deprecation")
 public class RicercaAvanzataFragment extends Fragment implements GenericDialogListener {
 
 	private DatabaseCanti listaCanti;
@@ -76,9 +76,6 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 		
 	private final String LISTA_PERSONALIZZATA_TAG = "1";
 	private final String LISTA_PREDEFINITA_TAG = "2";
-	
-	//constructor
-	public RicercaAvanzataFragment() {}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

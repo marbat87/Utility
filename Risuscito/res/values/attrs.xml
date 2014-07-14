@@ -24,6 +24,11 @@
 	    <attr name="customSlidePlay" format="reference" />
 	    <attr name="customSlideStop" format="reference" />
 	    <attr name="customExpPDF" format="reference" />
+	    <attr name="tabText" format="color" />
+	    <attr name="tabBackground" format="color" />
+	    <attr name="tabDivider" format="color" />
+	    <attr name="customSearch" format="reference" />
+	    <attr name="customThanks" format="reference" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />

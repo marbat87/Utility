@@ -52,7 +52,9 @@ public class Utility {
     }
     
     public static String intToString(int num, int digits) {
-        assert digits > 0 : "Invalid number of digits";
+//        assert digits > 0 : "Invalid number of digits";
+        if (BuildConfig.DEBUG && !(digits > 0))
+        		throw new AssertionError("Campo digits non valido");
 
         // create variable length array of zeros
         char[] zeros = new char[digits];
@@ -128,6 +130,27 @@ public class Utility {
 		        		break;
 		        	case 2:
 		        		activity.setTheme(R.style.AppThemeDark);
+		        		break;
+		        	default:
+		        		break;
+		        }
+			}
+	}
+	
+	public static void updateThemeWithSlider(Activity activity) {
+	       SharedPreferences sp = PreferenceManager
+	                .getDefaultSharedPreferences(activity);
+//	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
+	       if (!sp.getString("applicationTheme", "0").equals("")) {
+		       switch (Integer.valueOf(sp.getString("applicationTheme", "0"))) {
+		        	case 0:
+		        		activity.setTheme(R.style.AppThemeSliderMixed);
+		        		break;
+		        	case 1:
+		        		activity.setTheme(R.style.AppThemeSliderLight);
+		        		break;
+		        	case 2:
+		        		activity.setTheme(R.style.AppThemeSliderDark);
 		        		break;
 		        	default:
 		        		break;

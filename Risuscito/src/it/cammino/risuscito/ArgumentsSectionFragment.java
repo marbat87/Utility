@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleExpandableListAdapter;
 
+@SuppressWarnings("deprecation")
 public class ArgumentsSectionFragment extends Fragment implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this
@@ -67,8 +68,6 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 	private final String LISTA_PERSONALIZZATA_TAG = "1";
 	private final String LISTA_PREDEFINITA_TAG = "2";
 	
-	public ArgumentsSectionFragment() {}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

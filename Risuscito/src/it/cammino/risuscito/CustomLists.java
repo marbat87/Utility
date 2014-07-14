@@ -5,12 +5,10 @@ import it.cammino.risuscito.TextDialogFragment.TextDialogListener;
 
 import java.util.Locale;
 
-import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.DialogFragment;
 import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.Toast;
 import org.holoeverywhere.widget.ViewPager;
 
@@ -22,93 +20,55 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
-import android.support.v7.app.ActionBar;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class CustomLists extends Activity
+import com.astuetz.PagerSlidingTabStrip;
+
+public class CustomLists extends Fragment
 						implements GenericDialogListener, TextDialogListener {
 
-	protected SectionsPagerAdapter mSectionsPagerAdapter;
+	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private String[] titoliListe;
 	private int[] idListe;
 	private DatabaseCanti listaCanti;
-	private ActionBar actionBar;
 	private int listaDaCanc;
 	private int prevOrientation;
-		
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	protected ViewPager mViewPager;
+	private PagerSlidingTabStrip tabs;
+	private ViewPager mViewPager;
   	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(CustomLists.this);
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_custom_lists);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		
-		actionBar = getSupportActionBar();
-		
-		// Specify that tabs should be displayed in the action bar.
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
+		getSupportActionBar().setSubtitle(R.string.title_activity_custom_lists);
+		View rootView = inflater.inflate(R.layout.activity_custom_lists, container, false);
+
 		//crea un istanza dell'oggetto DatabaseCanti
-		listaCanti = new DatabaseCanti(getApplicationContext());
+		listaCanti = new DatabaseCanti(getActivity());
 		
 		updateLista();
 		
 		// Create the adapter that will return a fragment for each of the three
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-	    mViewPager = (ViewPager) findViewById(R.id.pager);
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 	    mViewPager.setAdapter(mSectionsPagerAdapter);
 	    mViewPager.setCurrentItem(0);
-	    mViewPager.setOnPageChangeListener(
-	    		new ViewPager.SimpleOnPageChangeListener() {
-	    			@Override
-	                public void onPageSelected(int position) {
-	                    // When swiping between pages, select the
-	                    // corresponding tab.
-	    				actionBar.setSelectedNavigationItem(position);
-	    			}
-	    		}
-	    );
-    	
-	    // Create a tab listener that is called when the user changes tabs.
-	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-	        	// When the tab is selected, switch to the
-	            // corresponding page in the ViewPager.
-	            mViewPager.setCurrentItem(tab.getPosition());
-	        }
-
-	        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // hide the given tab
-	        }
-
-	        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // probably ignore this event
-	        }
-	    };
 	    
-	    actionBar.removeAllTabs();
-        // For each of the sections in the app, add a tab to the action bar.
-        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-            // Create a tab with text corresponding to the page title defined by the adapter.
-            // Also specify this Activity object, which implements the TabListener interface, as the
-            // listener for when this tab is selected.
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(tabListener));
-        }
-
+	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
+	    tabs.setViewPager(mViewPager);
+	   	    
+	    setHasOptionsMenu(true);
+	    
+        return rootView;
 	}
 
     @Override
@@ -116,32 +76,8 @@ public class CustomLists extends Activity
     	super.onResume();
     	updateLista();
     	mSectionsPagerAdapter.notifyDataSetChanged();
-	    if (mSectionsPagerAdapter.getCount() > actionBar.getTabCount()) {
-		    // Create a tab listener that is called when the user changes tabs.
-		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-		        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-		        	// When the tab is selected, switch to the
-		            // corresponding page in the ViewPager.
-		            mViewPager.setCurrentItem(tab.getPosition());
-		        }
-
-		        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-		            // hide the given tab
-		        }
-
-		        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-		            // probably ignore this event
-		        }
-		    };
-	    	
-	    	actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(
-                            		mSectionsPagerAdapter.getCount() - 1))
-                            .setTabListener(tabListener));
-	    }
-
-    	checkScreenAwake();
+    	tabs.notifyDataSetChanged();
+//    	checkScreenAwake();
     }
     
 	@Override
@@ -151,22 +87,31 @@ public class CustomLists extends Activity
 		super.onDestroy();
 	}
     
-    //controlla se l'app deve mantenere lo schermo acceso
-    public void checkScreenAwake() {
-    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-		boolean screenOn = pref.getBoolean("screenOn", false);
-		if (screenOn)
-			mViewPager.setKeepScreenOn(true);
-		else
-			mViewPager.setKeepScreenOn(false);
-    }
-	
+//    //controlla se l'app deve mantenere lo schermo acceso
+//    public void checkScreenAwake() {
+//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
+//		boolean screenOn = pref.getBoolean("screenOn", false);
+//		if (screenOn)
+//			mViewPager.setKeepScreenOn(true);
+//		else
+//			mViewPager.setKeepScreenOn(false);
+//    }
+    
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
+		
+		if (mViewPager.getCurrentItem() == 0) {
+			MenuItem shareItem = menu.findItem(R.id.action_share);
+			ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+			mShareActionProvider.setShareIntent(getDefaultIntent());
+		}
+		
+	    super.onCreateOptionsMenu(menu, inflater);
+	}
+    
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			NavUtils.navigateUpFromSameTask(this);
-            return true;
 		case R.id.action_add_list:
 			blockOrientation();
 			TextDialogFragment dialog = new TextDialogFragment();
@@ -180,20 +125,20 @@ public class CustomLists extends Activity
 	                if (keyCode == KeyEvent.KEYCODE_BACK
 	                		&& event.getAction() == KeyEvent.ACTION_UP) {
 	                    arg0.dismiss();
-						setRequestedOrientation(prevOrientation);
+	                    getActivity().setRequestedOrientation(prevOrientation);
 						return true;
 	                }
 	                return false;
 	            }
 	        });
-			dialog.show(getSupportFragmentManager());
+			dialog.show(getChildFragmentManager());
 			dialog.setCancelable(false);
 			return true;
 		case R.id.action_edit_list:
 			Bundle bundle = new Bundle();
 			bundle.putInt("idDaModif", idListe[mViewPager.getCurrentItem() - 2]);
 			bundle.putBoolean("modifica", true);
-			startActivity(new Intent(this, CreaListaActivity.class).putExtras(bundle));
+			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
 			return true;
 		case R.id.action_remove_list:
 			blockOrientation();
@@ -209,30 +154,140 @@ public class CustomLists extends Activity
 	                if (keyCode == KeyEvent.KEYCODE_BACK
 	                		&& event.getAction() == KeyEvent.ACTION_UP) {
 	                    arg0.dismiss();
-						setRequestedOrientation(prevOrientation);
+	                    getActivity().setRequestedOrientation(prevOrientation);
 						return true;
 	                }
 	                return false;
 	            }
 	        });
-			dialogR.show(getSupportFragmentManager());
+			dialogR.show(getChildFragmentManager());
 			dialogR.setCancelable(false);
 			return true;
-		case R.id.action_settings:
-			startActivity(new Intent(this, Settings.class));
-			return true;
-		case R.id.action_favourites:
-			startActivity(new Intent(this, FavouritesActivity.class));
-			return true;
-		case R.id.action_donate:
-			startActivity(new Intent(this, DonateActivity.class));
-			return true;
-		case R.id.action_about:
-			startActivity(new Intent(this, AboutActivity.class));
-			return true;
+//		case R.id.action_settings:
+//			startActivity(new Intent(getActivity(), Settings.class));
+//			return true;
+//		case R.id.action_favourites:
+//			startActivity(new Intent(getActivity(), FavouritesActivity.class));
+//			return true;
+//		case R.id.action_donate:
+//			startActivity(new Intent(getActivity(), DonateActivity.class));
+//			return true;
+//		case R.id.action_about:
+//			startActivity(new Intent(getActivity(), AboutActivity.class));
+//			return true;
 		}
 		return false;
 	}
+    
+	private Intent getDefaultIntent() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
+		intent.setType("text/plain");
+		return intent;
+	}
+	
+	private String getTitlesList() {
+    	
+    	Locale l = Locale.getDefault();
+    	String result = "";
+    	String temp = "";
+    	
+    	//titolo
+    	result +=  "-- CELEBRAZIONE DELLA PAROLA --\n";
+    	
+    	//canto iniziale
+    	temp = getTitoloToSendFromPosition(1);
+    	
+    	result += getResources().getString(R.string.canto_iniziale).toUpperCase(l);
+    	result += "\n";
+    	
+    	if (temp.equalsIgnoreCase(""))
+    		result += ">> da scegliere <<";
+    	else
+    		result += temp;
+    	
+    	result += "\n";
+    	
+    	//prima lettura
+    	temp = getTitoloToSendFromPosition(2);
+    	
+    	result += getResources().getString(R.string.prima_lettura).toUpperCase(l);
+    	result += "\n";
+    	
+    	if (temp.equalsIgnoreCase(""))
+    		result += ">> da scegliere <<";
+    	else
+    		result += temp;
+    	
+    	result += "\n";
+    	
+    	//seconda lettura
+    	temp = getTitoloToSendFromPosition(3);
+    	
+    	result += getResources().getString(R.string.seconda_lettura).toUpperCase(l);
+    	result += "\n";
+    	
+    	if (temp.equalsIgnoreCase(""))
+    		result += ">> da scegliere <<";
+    	else
+    		result += temp;
+    	
+    	result += "\n";
+    	
+    	//terza lettura
+    	temp = getTitoloToSendFromPosition(4);
+    	
+    	result += getResources().getString(R.string.terza_lettura).toUpperCase(l);
+    	result += "\n";
+    	
+    	if (temp.equalsIgnoreCase(""))
+    		result += ">> da scegliere <<";
+    	else
+    		result += temp;
+    	
+    	result += "\n";
+    	
+    	//canto finale
+    	temp = getTitoloToSendFromPosition(5);
+    	
+    	result += getResources().getString(R.string.canto_fine).toUpperCase(l);
+    	result += "\n";
+    	
+    	if (temp.equalsIgnoreCase(""))
+    		result += ">> da scegliere <<";
+    	else
+    		result += temp;	    	
+    	    	
+    	return result;
+    	
+    }
+    
+    //recupera il titolo del canto in posizione "position" nella lista "list"
+    private String getTitoloToSendFromPosition(int position) {
+		    	
+    	SQLiteDatabase db = listaCanti.getReadableDatabase();
+    	
+	    String query = "SELECT B.titolo, B.pagina" +
+	      		"  FROM CUST_LISTS A" +
+	      		"  	   , ELENCO B" +
+	      		"  WHERE A._id = 1" +
+	      		"  AND   A.position = " + position + 
+	      		"  AND   A.id_canto = B._id";
+	    Cursor cursor = db.rawQuery(query, null);
+	     
+	    int total = cursor.getCount();
+	    String result = "";
+	    
+	    if (total == 1) {
+	    	cursor.moveToFirst();
+	    	result =  cursor.getString(0) + " - PAG." + cursor.getInt(1);
+	    }
+	    
+	    cursor.close();
+	    db.close();
+    
+	    return result;
+    }
     
     private void updateLista() {
 		
@@ -262,11 +317,6 @@ public class CustomLists extends Activity
     
     }
     
-    
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
 	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -300,14 +350,17 @@ public class CustomLists extends Activity
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
+//			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_activity_canti_parola).toUpperCase(l);
+//				return getString(R.string.title_activity_canti_parola).toUpperCase(l);
+				return getString(R.string.title_activity_canti_parola);
 			case 1:
-				return getString(R.string.title_activity_canti_eucarestia).toUpperCase(l);
+//				return getString(R.string.title_activity_canti_eucarestia).toUpperCase(l);
+				return getString(R.string.title_activity_canti_eucarestia);
 			default:
-				return titoliListe[position - 2].toUpperCase(l);
+//				return titoliListe[position - 2].toUpperCase(l);
+				return titoliListe[position - 2];
 			}
 		}
 		
@@ -322,19 +375,19 @@ public class CustomLists extends Activity
     public void onDialogPositiveClick(DialogFragment dialog, String titolo) {
         // User touched the dialog's positive button
     	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
-    		Toast toast = Toast.makeText(getApplicationContext()
+    		Toast toast = Toast.makeText(getActivity()
     				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
     		toast.show();
     		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
+    		getActivity().setRequestedOrientation(prevOrientation);
     	}
     	else {
     		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
+    		getActivity().setRequestedOrientation(prevOrientation);
 			Bundle bundle = new Bundle();
 			bundle.putString("titolo", titolo);
 			bundle.putBoolean("modifica", false);
-			startActivity(new Intent(this, CreaListaActivity.class).putExtras(bundle));			
+			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));			
     	}
 		
     }
@@ -353,25 +406,24 @@ public class CustomLists extends Activity
 		
 		updateLista();
 		mSectionsPagerAdapter.notifyDataSetChanged();
-		actionBar.removeTabAt(listaDaCanc + 2);
-		setRequestedOrientation(prevOrientation);
+		tabs.notifyDataSetChanged();
+		getActivity().setRequestedOrientation(prevOrientation);
     }
     
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        // User touched the dialog's negative button
         dialog.dismiss();
-        setRequestedOrientation(prevOrientation);
+        getActivity().setRequestedOrientation(prevOrientation);
     }
     
     public void blockOrientation() {
-        prevOrientation = getRequestedOrientation();
+        prevOrientation = getActivity().getRequestedOrientation();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
 	

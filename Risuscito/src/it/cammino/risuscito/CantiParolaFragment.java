@@ -9,7 +9,6 @@ import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.DialogFragment;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.TextView;
-import org.holoeverywhere.widget.ViewPager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +29,9 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
-public class CantiParolaFragment extends Fragment implements GenericDialogListener {
+@SuppressWarnings("deprecation")
+public class CantiParolaFragment extends Fragment 
+			implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -46,9 +47,6 @@ public class CantiParolaFragment extends Fragment implements GenericDialogListen
 	
 	private final String RIMUOVI_CANTO_TAG = "1";
 	private final String RESETTA_LISTA_TAG = "2";
-	
-	//constructor
-	public CantiParolaFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -333,19 +331,20 @@ public class CantiParolaFragment extends Fragment implements GenericDialogListen
 		});
 		
 		setHasOptionsMenu(true);
-			
+		
 		return rootView;
 	}
 	
-    @Override
-    public void onResume() {
-    	super.onResume();
-		updateLista();
-		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
-		if (mShareActionProvider != null && tempPager.getCurrentItem() == 0)
-			//aggiorna lo share intent usato per condividere la lista
-			mShareActionProvider.setShareIntent(getDefaultIntent());
-    }
+//    @Override
+//    public void onResume() {
+//    	Log.i("CANTI PAROLA", "ON RESUME");
+//    	super.onResume();
+//		updateLista();
+//		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
+//		if (mShareActionProvider != null && tempPager.getCurrentItem() == 0)
+//			//aggiorna lo share intent usato per condividere la lista
+//			mShareActionProvider.setShareIntent(getDefaultIntent());
+//    }
 	
     @Override
 	public void onDestroy() {
@@ -353,30 +352,25 @@ public class CantiParolaFragment extends Fragment implements GenericDialogListen
 			listaCanti.close();
 		super.onDestroy();
 	}
-	
+    
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
-		
+//		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
 	    // Locate MenuItem with ShareActionProvider
+		
 	    MenuItem shareItem = menu.findItem(R.id.action_share);
 
 	    // Fetch and store ShareActionProvider
 	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-	    mShareActionProvider.setShareIntent(getDefaultIntent());
+//	    mShareActionProvider.setShareIntent(getDefaultIntent());
 	    super.onCreateOptionsMenu(menu, inflater);
 	}
 
-    /** Defines a default (dummy) share intent to initialize the action provider.
-     * However, as soon as the actual content to be used in the intent
-     * is known or changes, you must update the share intent by again calling
-     * mShareActionProvider.setShareIntent()
-     */
-   private Intent getDefaultIntent() {
-       Intent intent = new Intent(Intent.ACTION_SEND);
-       intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
-       intent.setType("text/plain");
-       return intent;
+	private Intent getDefaultIntent() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
+		intent.setType("text/plain");
+		return intent;
    }
 	
     private void updateLista() {
@@ -459,7 +453,6 @@ public class CantiParolaFragment extends Fragment implements GenericDialogListen
 	}
 		    
     private void startSubActivity(Bundle bundle) {
-//    	Intent intent = new Intent(getActivity(), InserisciTitoloActivity.class);
     	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
@@ -655,7 +648,6 @@ public class CantiParolaFragment extends Fragment implements GenericDialogListen
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        // User touched the dialog's negative button
         dialog.dismiss();
         getActivity().setRequestedOrientation(prevOrientation);
     }

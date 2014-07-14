@@ -10,5 +10,6 @@
     <dimen name="myListPreferredItemHeightSmall">48dip</dimen>
     <dimen name="about_image_width">100dip</dimen>
     <dimen name="percent_padding">15dip</dimen>
+    <dimen name="menu_width">250dp</dimen>
 	
 </resources>

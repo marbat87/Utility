@@ -8,15 +8,11 @@ import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class GeneralInsertSearch extends Activity {
 
@@ -111,32 +107,32 @@ public class GeneralInsertSearch extends Activity {
     	checkScreenAwake();
     }
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.insert_search, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.insert_search, menu);
+//		return true;
+//	}
 	
-    @Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-            // app icon in action bar clicked; go home
-			NavUtils.navigateUpFromSameTask(this);
-            return true;
-		case R.id.action_settings:
-			startActivity(new Intent(this, Settings.class));
-			return true;
-		case R.id.action_donate:
-			startActivity(new Intent(this, DonateActivity.class));
-			return true;
-		case R.id.action_about:
-			startActivity(new Intent(this, AboutActivity.class));
-			return true;
-		}
-		return false;
-	}
+//    @Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//            // app icon in action bar clicked; go home
+//			NavUtils.navigateUpFromSameTask(this);
+//            return true;
+//		case R.id.action_settings:
+//			startActivity(new Intent(this, Settings.class));
+//			return true;
+//		case R.id.action_donate:
+//			startActivity(new Intent(this, DonateActivity.class));
+//			return true;
+//		case R.id.action_about:
+//			startActivity(new Intent(this, AboutActivity.class));
+//			return true;
+//		}
+//		return false;
+//	}
 
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {

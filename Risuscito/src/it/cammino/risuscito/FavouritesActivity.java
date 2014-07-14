@@ -2,11 +2,10 @@ package it.cammino.risuscito;
 
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
 
-import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
+import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.ArrayAdapter;
 import org.holoeverywhere.widget.TextView;
 
@@ -18,9 +17,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
-public class FavouritesActivity extends Activity implements GenericDialogListener {
+public class FavouritesActivity extends Fragment implements GenericDialogListener {
 
   	private DatabaseCanti listaCanti;
   	private String[] titoli;
@@ -36,62 +33,65 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
   	private SongRowAdapter listAdapter;
   	private ListView lv;
   	private int prevOrientation;
+  	private View rootView;
 	  	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(FavouritesActivity.this);
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		getSupportActionBar().setSubtitle(R.string.title_activity_favourites);
+		rootView = inflater.inflate(R.layout.activity_favourites, container, false);
 		
-		setContentView(R.layout.activity_favourites);
-		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+//		final ActionBar actionBar = getSupportActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		//crea un istanza dell'oggetto DatabaseCanti
-		listaCanti = new DatabaseCanti(this);
+		listaCanti = new DatabaseCanti(getActivity());
 		    		    		
-		updateFavouritesList();
+//		updateFavouritesList();
 		
-		checkScreenAwake();
+//		checkScreenAwake();
+		
+		return rootView;
 	}
 
     @Override
     public void onResume() {
     	updateFavouritesList();
-    	checkScreenAwake();
+//    	checkScreenAwake();
     	super.onResume();
     }
     
-    @Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-            return true;	
-		}
-		return false;
-	}
+//    @Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//			finish();
+//            return true;	
+//		}
+//		return false;
+//	}
     
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		listaCanti.close();
+		super.onDestroy();
 	}
 
-    //controlla se l'app deve mantenere lo schermo acceso
-    private void checkScreenAwake() {
-    	
-    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-		boolean screenOn = pref.getBoolean("screenOn", false);
-		lv = (ListView) findViewById(R.id.favouritesList);
-		if (screenOn)
-			lv.setKeepScreenOn(true);
-		else
-			lv.setKeepScreenOn(false);
-		
-    }
+//    //controlla se l'app deve mantenere lo schermo acceso
+//    private void checkScreenAwake() {
+//    	
+//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
+//		boolean screenOn = pref.getBoolean("screenOn", false);
+//		lv = (ListView) findViewById(R.id.favouritesList);
+//		if (screenOn)
+//			lv.setKeepScreenOn(true);
+//		else
+//			lv.setKeepScreenOn(false);
+//		
+//    }
 	
     private void startSubActivity(Bundle bundle) {
-    	Intent intent = new Intent(this.getApplicationContext(), PaginaRenderActivity.class);
+    	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
    	}
@@ -112,8 +112,8 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
 		int total = lista.getCount();
 		
 		//nel caso sia presente almeno un preferito, viene nascosto il testo di nessun canto presente
-		TextView noResults = (TextView) findViewById(R.id.no_favourites);
-		TextView hintRemove = (TextView) findViewById(R.id.hint_remove);
+		TextView noResults = (TextView) rootView.findViewById(R.id.no_favourites);
+		TextView hintRemove = (TextView) rootView.findViewById(R.id.hint_remove);
 		if (total > 0) {
 			noResults.setVisibility(View.GONE);
 			hintRemove.setVisibility(View.VISIBLE);
@@ -136,7 +136,7 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
 		lista.close();
 
 		// crea un oggetto di tipo ListView
-		lv = (ListView) findViewById(R.id.favouritesList);
+		lv = (ListView) rootView.findViewById(R.id.favouritesList);
 		listAdapter = new SongRowAdapter();
 		lv.setAdapter(listAdapter);
 		
@@ -195,13 +195,13 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
 		                if (keyCode == KeyEvent.KEYCODE_BACK
 		                		&& event.getAction() == KeyEvent.ACTION_UP) {
 		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
+							getActivity().setRequestedOrientation(prevOrientation);
 							return true;
 		                }
 		                return false;
 		            }
 		        });
-                dialog.show(getSupportFragmentManager());
+                dialog.show(getChildFragmentManager());
 				return true;
 			}
 		});	
@@ -212,7 +212,7 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
     private class SongRowAdapter extends ArrayAdapter<String> {
     	
     	SongRowAdapter() {
-    		super(getApplicationContext(), R.layout.row_item, R.id.text_title, titoli);
+    		super(getActivity(), R.layout.row_item, R.id.text_title, titoli);
     	}
     	
     	@Override
@@ -246,14 +246,14 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
 		db.close();
 		updateFavouritesList();
 		dialog.dismiss();
-		setRequestedOrientation(prevOrientation);
+		getActivity().setRequestedOrientation(prevOrientation);
 		
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         dialog.dismiss();
-        setRequestedOrientation(prevOrientation);
+        getActivity().setRequestedOrientation(prevOrientation);
     }
     
 //    @Override
@@ -285,13 +285,13 @@ public class FavouritesActivity extends Activity implements GenericDialogListene
 //    }
     
     public void blockOrientation() {
-        prevOrientation = getRequestedOrientation();
+        prevOrientation = getActivity().getRequestedOrientation();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else {
-        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
     

@@ -38,7 +38,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-
+@SuppressWarnings("deprecation")
 public class RicercaVeloceFragment extends Fragment implements GenericDialogListener {
 
 	private DatabaseCanti listaCanti;
@@ -61,9 +61,6 @@ public class RicercaVeloceFragment extends Fragment implements GenericDialogList
 		
 	private final String LISTA_PERSONALIZZATA_TAG = "1";
 	private final String LISTA_PREDEFINITA_TAG = "2";
-	
-	//constructor
-	public RicercaVeloceFragment() {}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

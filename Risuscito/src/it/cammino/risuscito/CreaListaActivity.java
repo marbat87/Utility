@@ -41,6 +41,7 @@ import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.mobeta.android.dslv.DragSortListView;
 
+@SuppressWarnings("deprecation")
 @SuppressLint("NewApi")
 public class CreaListaActivity extends Activity
 								implements TextDialogListener, ThreeButtonsDialogListener {
@@ -70,7 +71,6 @@ public class CreaListaActivity extends Activity
 	private final String RINOMINA_POSIZIONE_TAG = "2";
 	private final String SALVA_LISTA_TAG = "3";
 			
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Utility.updateTheme(CreaListaActivity.this);
