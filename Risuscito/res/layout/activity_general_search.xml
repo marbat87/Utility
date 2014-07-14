@@ -14,7 +14,7 @@
 		app:pstsShouldExpand="true"
 	    android:layout_width="match_parent"
 	    android:textColor="?attr/tabText"
-	    android:layout_height="48dip"/>
+	    android:layout_height="48dip" />
 	
 	<org.holoeverywhere.widget.ViewPager
 	    android:id="@+id/pager"

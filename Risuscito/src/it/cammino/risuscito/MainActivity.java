@@ -19,28 +19,41 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	Utility.updateThemeWithSlider(MainActivity.this);
         super.onCreate(savedInstanceState);
+        
         getSupportActionBar().setTitle(R.string.app_name);
         setContentView(R.layout.activity_pagina_render);
         
         final SliderMenu sliderMenu = addonSlider().obtainDefaultSliderMenu(R.layout.main_menu);
         addonSlider().setOverlayActionBar(false);
-        sliderMenu.add(R.string.activity_homepage, Risuscito.class, SliderMenu.BLUE);
-        sliderMenu.add(R.string.title_activity_search, GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch);
-        sliderMenu.add(R.string.title_activity_general_index, GeneralIndex.class, SliderMenu.BLUE);
-        sliderMenu.add(R.string.title_activity_custom_lists, CustomLists.class, SliderMenu.BLUE);
-        sliderMenu.add(R.string.title_activity_favourites, FavouritesActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customFavorite);
-        sliderMenu.add(R.string.title_activity_settings, Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings);
-        sliderMenu.add(R.string.title_activity_about, AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customAbout);
-        sliderMenu.add(R.string.title_activity_donate, DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks);
+        sliderMenu.add(R.string.activity_homepage,
+        		Risuscito.class, SliderMenu.BLUE);
+        sliderMenu.add(R.string.title_activity_search,
+        		GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch);
+        sliderMenu.add(R.string.title_activity_general_index,
+        		GeneralIndex.class, SliderMenu.BLUE).setIconAttr(R.attr.customIndexes);
+        sliderMenu.add(R.string.title_activity_custom_lists,
+        		CustomLists.class, SliderMenu.BLUE).setIconAttr(R.attr.customLists);
+        sliderMenu.add(R.string.title_activity_favourites,
+        		FavouritesActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customFavorite);
+        sliderMenu.add(R.string.title_activity_settings,
+        		Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings);
+        sliderMenu.add(R.string.title_activity_about,
+        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customAbout);
+        sliderMenu.add(R.string.title_activity_donate,
+        		DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks);
         
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         checkScreenAwake();
         
         // We are should provide activity to ThemePicker
 //        ((DemoThemePicker) findViewById(R.id.themePicker)).setActivity(this);
         
     }
+    
+    @Override
+    public void onResume() {
+    	checkScreenAwake();
+    	super.onResume();
+    }    
     
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {

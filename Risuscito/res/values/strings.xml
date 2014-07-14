@@ -25,7 +25,8 @@
     <string name="favourite_remove">Rimuovi dai preferiti</string>
     <string name="list_remove">Rimuovere dalla lista?</string>
     <string name="hint_remove">Tieni premuto su un elemento per rimuoverlo dalla lista</string>
-    <string name="title_activity_general_index">Indice dei canti</string>
+<!--     <string name="title_activity_general_index">Indice dei canti</string> -->
+    <string name="title_activity_general_index">Indici dei canti</string>
     <string name="default_index_title">Indice predefinito</string>
     <string name="default_index_summary">Indica quale indice deve aprirsi per default alla selezione della pagina degli indici.</string>
     <string name="title_activity_canti_parola">Celebrazione della parola</string>
@@ -40,7 +41,8 @@
     <string name="canto_pace">Alla pace</string>
     <string name="canto_pane">Alla frazione del pane</string>
     <string name="canto_vino">Al vino</string>
-    <string name="title_activity_custom_lists">Liste predefinite</string>
+<!--     <string name="title_activity_custom_lists">Liste predefinite</string> -->
+    <string name="title_activity_custom_lists">Liste personalizzate</string>
     <string name="copertina">copertina</string>
     <string name="add_inizio">Aggiungi canto iniziale</string>
     <string name="add_prima">Aggiungi canto alla prima lettura</string>

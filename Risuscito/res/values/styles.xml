@@ -46,6 +46,8 @@
 		<item name="tabDivider">@color/dividerHoloLight</item>
 		<item name="customSearch">@drawable/ic_action_search_dark</item>
 		<item name="customThanks">@drawable/ic_action_good_dark</item>
+		<item name="customIndexes">@drawable/ic_action_view_as_list_dark</item>
+		<item name="customLists">@drawable/ic_action_add_to_queue_dark</item>
     </style>
     
     <style name="AppThemeDark" parent="@style/Holo.Theme">
@@ -77,6 +79,8 @@
 		<item name="tabDivider">@color/dividerHoloDark</item>
 		<item name="customSearch">@drawable/ic_action_search</item>
 		<item name="customThanks">@drawable/ic_action_good</item>
+		<item name="customIndexes">@drawable/ic_action_view_as_list</item>
+		<item name="customLists">@drawable/ic_action_add_to_queue</item>
     </style>
 
     <style name="AppThemeMixed" parent="@style/Holo.Theme.Light.DarkActionBar">
@@ -108,6 +112,8 @@
 		<item name="tabDivider">@color/dividerHoloLight</item>
 		<item name="customSearch">@drawable/ic_action_search</item>
 		<item name="customThanks">@drawable/ic_action_good</item>
+		<item name="customIndexes">@drawable/ic_action_view_as_list</item>
+		<item name="customLists">@drawable/ic_action_add_to_queue</item>
     </style> 
     
     <style name="AppThemeSliderLight" parent="@style/Holo.Theme.Slider.Light">
@@ -139,6 +145,8 @@
 		<item name="tabDivider">@color/dividerHoloLight</item>
 		<item name="customSearch">@drawable/ic_action_search_dark</item>
 		<item name="customThanks">@drawable/ic_action_good_dark</item>
+		<item name="customIndexes">@drawable/ic_action_view_as_list_dark</item>
+		<item name="customLists">@drawable/ic_action_add_to_queue_dark</item>
     </style>
     
     <style name="AppThemeSliderDark" parent="@style/Holo.Theme.Slider">
@@ -170,6 +178,8 @@
 		<item name="tabDivider">@color/dividerHoloDark</item>
 		<item name="customSearch">@drawable/ic_action_search</item>
 		<item name="customThanks">@drawable/ic_action_good</item>
+		<item name="customIndexes">@drawable/ic_action_view_as_list</item>
+		<item name="customLists">@drawable/ic_action_add_to_queue</item>
     </style>
 
     <style name="AppThemeSliderMixed" parent="@style/Holo.Theme.Slider.Light.DarkActionBar">
@@ -201,6 +211,8 @@
 		<item name="tabDivider">@color/dividerHoloLight</item>
 		<item name="customSearch">@drawable/ic_action_search</item>
 		<item name="customThanks">@drawable/ic_action_good</item>
+		<item name="customIndexes">@drawable/ic_action_view_as_list</item>
+		<item name="customLists">@drawable/ic_action_add_to_queue</item>
     </style> 
   
     <style name="MyActionButton" parent="">
