@@ -7,7 +7,10 @@ import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.slider.SliderMenu;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
 @Addons(AddonSlider.class)
 public class MainActivity extends Activity {
@@ -20,11 +23,10 @@ public class MainActivity extends Activity {
     	Utility.updateThemeWithSlider(MainActivity.this);
         super.onCreate(savedInstanceState);
         
-        getSupportActionBar().setTitle(R.string.app_name);
         setContentView(R.layout.activity_risuscito);
         
         final SliderMenu sliderMenu = addonSlider().obtainDefaultSliderMenu(R.layout.main_menu);
-        addonSlider().setOverlayActionBar(false);
+//        addonSlider().setOverlayActionBar(false);
         sliderMenu.add(R.string.activity_homepage,
         		Risuscito.class, SliderMenu.BLUE).setIconAttr(R.attr.customHome);
         sliderMenu.add(R.string.title_activity_search,
