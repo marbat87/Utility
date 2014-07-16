@@ -53,7 +53,8 @@
     <string name="add_pane">Aggiungi canto alla frazione del pane</string>
     <string name="add_vino">Aggiungi canto al vino</string>
     <string name="title_activity_inserisci_titolo">Ricerca per inserimento</string>
-    <string name="title_activity_about">Lista cambiamenti</string>
+<!--     <string name="title_activity_about">Lista cambiamenti</string> -->
+	<string name="title_activity_about">Changelog</string>
     <string name="play_song">riproduci</string>
     <string name="fast_forward">avanti veloce</string>
     <string name="rewind">indietro veloce</string>

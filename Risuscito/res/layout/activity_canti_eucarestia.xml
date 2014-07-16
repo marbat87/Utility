@@ -44,7 +44,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_centerVertical="true"
 		            android:contentDescription="@string/add_inizio"
-		            android:src="@android:drawable/ic_input_add" />
+		            android:src="?customInsertItem" />
 		
 		        <TextView
 		            android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
 			            android:layout_height="wrap_content"
 			            android:layout_centerVertical="true"
 			            android:contentDescription="@string/add_seconda"
-			            android:src="@android:drawable/ic_input_add" />
+			            android:src="?customInsertItem" />
 			
 			        <TextView
 			            android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_centerVertical="true"
 		            android:contentDescription="@string/add_pace"
-		            android:src="@android:drawable/ic_input_add" />
+		            android:src="?customInsertItem" />
 		
 		        <TextView
 		            android:layout_width="wrap_content"
@@ -251,7 +251,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_centerVertical="true"
 		            android:contentDescription="@string/add_pane"
-		            android:src="@android:drawable/ic_input_add" />
+		            android:src="?customInsertItem" />
 		
 		        <TextView
 		            android:layout_width="wrap_content"
@@ -299,7 +299,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_centerVertical="true"
 		            android:contentDescription="@string/add_vino"
-		            android:src="@android:drawable/ic_input_add" />
+		            android:src="?customInsertItem" />
 		
 		        <TextView
 		            android:layout_width="wrap_content"
@@ -341,7 +341,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_centerVertical="true"
 		            android:contentDescription="@string/add_fine"
-		            android:src="@android:drawable/ic_input_add" />
+		            android:src="?customInsertItem" />
 		
 		        <TextView
 		            android:layout_width="wrap_content"

@@ -123,7 +123,7 @@
         android:id="@+id/action_help_canto"
         android:orderInCategory="98"
         android:icon="?attr/customHelp"
-        android:showAsAction="never"
+        android:showAsAction="ifRoom"
         android:title="@string/action_help" />
     
 <!--     <item -->

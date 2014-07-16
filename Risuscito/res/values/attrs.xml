@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<declare-styleable name="customAttrs">
-	    <attr name="customAbout" format="reference" />
 	    <attr name="customChord" format="reference" />
 	    <attr name="customEdit" format="reference" />
 	    <attr name="customNew" format="reference" />
@@ -31,6 +30,11 @@
 	    <attr name="customThanks" format="reference" />
 	    <attr name="customIndexes" format="reference" />
 	    <attr name="customLists" format="reference" />
+	    <attr name="customHome" format="reference" />
+	    <attr name="customInsertItem" format="reference" />
+	    <attr name="customChangelog" format="reference" />
+	    <attr name="customDrawer" format="reference" />
+	    <attr name="customSliderBackground" format="color" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />

@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
 
 public class GeneralInsertSearch extends Activity {
 
@@ -114,13 +115,14 @@ public class GeneralInsertSearch extends Activity {
 //		return true;
 //	}
 	
-//    @Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case android.R.id.home:
-//            // app icon in action bar clicked; go home
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+            // app icon in action bar clicked; go home
 //			NavUtils.navigateUpFromSameTask(this);
-//            return true;
+			finish();
+            return true;
 //		case R.id.action_settings:
 //			startActivity(new Intent(this, Settings.class));
 //			return true;
@@ -130,9 +132,9 @@ public class GeneralInsertSearch extends Activity {
 //		case R.id.action_about:
 //			startActivity(new Intent(this, AboutActivity.class));
 //			return true;
-//		}
-//		return false;
-//	}
+		}
+		return false;
+	}
 
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {

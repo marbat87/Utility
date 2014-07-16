@@ -8,5 +8,7 @@
     <color name="tabHoloDark">#202122</color>
     <color name="dividerHoloLight">#B8B8B8</color>
     <color name="dividerHoloDark">#414243</color>
+    <color name="custom_slider_backgound_light">#222222</color>
+ 	<color name="custom_slider_backgound_dark">#DDDDDD</color>
  
 </resources> 

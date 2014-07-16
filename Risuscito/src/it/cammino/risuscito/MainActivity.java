@@ -21,12 +21,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         getSupportActionBar().setTitle(R.string.app_name);
-        setContentView(R.layout.activity_pagina_render);
+        setContentView(R.layout.activity_risuscito);
         
         final SliderMenu sliderMenu = addonSlider().obtainDefaultSliderMenu(R.layout.main_menu);
         addonSlider().setOverlayActionBar(false);
         sliderMenu.add(R.string.activity_homepage,
-        		Risuscito.class, SliderMenu.BLUE);
+        		Risuscito.class, SliderMenu.BLUE).setIconAttr(R.attr.customHome);
         sliderMenu.add(R.string.title_activity_search,
         		GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch);
         sliderMenu.add(R.string.title_activity_general_index,
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         sliderMenu.add(R.string.title_activity_settings,
         		Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings);
         sliderMenu.add(R.string.title_activity_about,
-        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customAbout);
+        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customChangelog);
         sliderMenu.add(R.string.title_activity_donate,
         		DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks);
         
