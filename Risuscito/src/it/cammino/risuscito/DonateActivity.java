@@ -24,7 +24,8 @@ public class DonateActivity extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		getSupportActionBar().setSubtitle(R.string.title_activity_donate);
+		
+		getSupportActionBar().setTitle(R.string.title_activity_donate);
 		View rootView = inflater.inflate(R.layout.activity_donate, container, false);
 		
 //		getSupportActionBar().setDisplayHomeAsUpEnabled(true);

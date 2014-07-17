@@ -29,7 +29,8 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		getSupportActionBar().setSubtitle(R.string.activity_homepage);
+		
+		getSupportActionBar().setTitle(R.string.activity_homepage);
 		rootView = inflater.inflate(R.layout.activity_risuscito, container, false);
 		
         // recupera il pulsante che lancia l'elenco dei canti in ordine alfabetico
