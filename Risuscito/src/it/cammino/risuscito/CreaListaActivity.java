@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -76,8 +77,12 @@ public class CreaListaActivity extends Activity
 		Utility.updateTheme(CreaListaActivity.this);
 		super.onCreate(savedInstanceState);
 		
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setDisplayHomeAsUpEnabled(true);
+		actionbar.setLogo(R.drawable.transparent);
+		
 		setContentView(R.layout.activity_crea_lista);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);	
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);	
 	
 		listaCanti = new DatabaseCanti(this);
 		

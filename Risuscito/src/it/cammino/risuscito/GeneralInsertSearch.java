@@ -1,7 +1,5 @@
 package it.cammino.risuscito;
 
-import java.util.Locale;
-
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.preference.PreferenceManager;
@@ -11,20 +9,13 @@ import org.holoeverywhere.widget.ViewPager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
+
 public class GeneralInsertSearch extends Activity {
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	
 	private int fromAdd;
@@ -40,10 +31,12 @@ public class GeneralInsertSearch extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		Utility.updateTheme(GeneralInsertSearch.this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_general_search);
 		
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the app.
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setDisplayHomeAsUpEnabled(true);
+		actionbar.setLogo(R.drawable.transparent);
+		
+		setContentView(R.layout.activity_general_search);
 		
 		Bundle bundle = GeneralInsertSearch.this.getIntent().getExtras();
 		fromAdd = bundle.getInt("fromAdd");
@@ -51,53 +44,59 @@ public class GeneralInsertSearch extends Activity {
         listPosition = bundle.getInt("position");
 		
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		
-		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-	    
-	    mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager = (ViewPager) findViewById(R.id.pager);
 	    mViewPager.setAdapter(mSectionsPagerAdapter);
-	    mViewPager.setOnPageChangeListener(
-	    		new ViewPager.SimpleOnPageChangeListener() {
-	    			@Override
-	                public void onPageSelected(int position) {
-	                    // When swiping between pages, select the
-	                    // corresponding tab.
-	    				actionBar.setSelectedNavigationItem(position);
-	    			}
-	    		}
-	    );
+	    mViewPager.setCurrentItem(0);
 	    
-	    // Create a tab listener that is called when the user changes tabs.
-	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-	        	// When the tab is selected, switch to the
-	            // corresponding page in the ViewPager.
-	            mViewPager.setCurrentItem(tab.getPosition());
-	        }
-
-	        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // hide the given tab
-	        }
-
-	        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // probably ignore this event
-	        }
-	    };
+	    PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+	    tabs.setViewPager(mViewPager);
+		
+//		final ActionBar actionBar = getSupportActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(true);
 	    
-        // For each of the sections in the app, add a tab to the action bar.
-        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-            // Create a tab with text corresponding to the page title defined by the adapter.
-            // Also specify this Activity object, which implements the TabListener interface, as the
-            // listener for when this tab is selected.
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(tabListener));
-        }
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//	    mViewPager = (ViewPager) findViewById(R.id.pager);
+//	    mViewPager.setAdapter(mSectionsPagerAdapter);
+//	    mViewPager.setOnPageChangeListener(
+//	    		new ViewPager.SimpleOnPageChangeListener() {
+//	    			@Override
+//	                public void onPageSelected(int position) {
+//	                    // When swiping between pages, select the
+//	                    // corresponding tab.
+//	    				actionBar.setSelectedNavigationItem(position);
+//	    			}
+//	    		}
+//	    );
+//	    
+//	    // Create a tab listener that is called when the user changes tabs.
+//	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+//	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+//	        	// When the tab is selected, switch to the
+//	            // corresponding page in the ViewPager.
+//	            mViewPager.setCurrentItem(tab.getPosition());
+//	        }
+//
+//	        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//	            // hide the given tab
+//	        }
+//
+//	        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//	            // probably ignore this event
+//	        }
+//	    };
+//	    
+//        // For each of the sections in the app, add a tab to the action bar.
+//        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+//            // Create a tab with text corresponding to the page title defined by the adapter.
+//            // Also specify this Activity object, which implements the TabListener interface, as the
+//            // listener for when this tab is selected.
+//            actionBar.addTab(
+//                    actionBar.newTab()
+//                            .setText(mSectionsPagerAdapter.getPageTitle(i))
+//                            .setTabListener(tabListener));
+//        }
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		mViewPager.setCurrentItem(0);
+//		mViewPager.setCurrentItem(0);
 		checkScreenAwake();
 
 	}
@@ -146,10 +145,6 @@ public class GeneralInsertSearch extends Activity {
 			mViewPager.setKeepScreenOn(false);
     }
     
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -188,18 +183,19 @@ public class GeneralInsertSearch extends Activity {
 
 		@Override
 		public int getCount() {
-			// Show 2 total pages.
 			return 2;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
+//			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.fast_search_title).toUpperCase(l);
+//				return getString(R.string.fast_search_title).toUpperCase(l);
+				return getString(R.string.fast_search_title);
 			case 1:
-				return getString(R.string.advanced_search_title).toUpperCase(l);
+//				return getString(R.string.advanced_search_title).toUpperCase(l);
+				return getString(R.string.advanced_search_title);
 			}
 			return null;
 		}

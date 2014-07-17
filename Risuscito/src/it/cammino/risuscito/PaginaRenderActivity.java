@@ -55,6 +55,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
@@ -161,8 +162,12 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		Utility.updateTheme(PaginaRenderActivity.this);
         super.onCreate(savedInstanceState);
         
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setDisplayHomeAsUpEnabled(true);
+		actionbar.setLogo(R.drawable.transparent);
+        
         setContentView(R.layout.activity_pagina_render);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         
         listaCanti = new DatabaseCanti(this);
 
