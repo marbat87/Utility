@@ -58,6 +58,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,6 +77,7 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -156,6 +158,9 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	
 	private ProgressDialog mExportDialog;
 	private String localPDFPath;
+	
+    private static final String FILE_CHOOSER_TAG = "FileChooserExampleActivity";
+    private static final int REQUEST_CODE = 6384;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -1283,6 +1288,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    	        setRequestedOrientation(prevOrientation);
 	    	    }
 	    	});
+    		
+//    		startActivityForResult(new Intent(this, FileChooserActivity .class), REQUEST_CODE);
     	
     	}
     	else if (dialog.getTag().equals(DELETE_DIALOG_TAG))  {         
@@ -1378,7 +1385,32 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
-       
+     
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE:
+                // If the file selection was successful
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        // Get the URI of the selected file
+                        final Uri uri = data.getData();
+                        Log.i(FILE_CHOOSER_TAG, "Uri = " + uri.toString());
+                        try {
+                            // Get the file path from the URI
+                            final String path = FileUtils.getPath(this, uri);
+                            Toast.makeText(PaginaRenderActivity.this,
+                                    "File Selected: " + path, Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Log.e("FileSelectorTestActivity", "File select error", e);
+                        }
+                    }
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    
    	private class MyWebViewClient extends WebViewClient {
 	    @Override
 	    public void onPageFinished(WebView view, String url) {

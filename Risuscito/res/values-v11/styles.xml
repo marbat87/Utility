@@ -18,6 +18,7 @@
     </style>
     
     <style name="AppThemeLight" parent="@style/Holo.Theme.Light">
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left_dark</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left_dark</item>
 	    <item name="customChord">@drawable/ic_action_content_chord_dark</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit_dark</item>
@@ -54,6 +55,7 @@
     </style>
     
     <style name="AppThemeDark" parent="@style/Holo.Theme">
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -90,6 +92,7 @@
     </style>
 
     <style name="AppThemeMixed" parent="@style/Holo.Theme.Light.DarkActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
