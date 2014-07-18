@@ -19,7 +19,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppThemeMixed" >
+        android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
             android:name="it.cammino.risuscito.MainActivity"
             android:configChanges="orientation|screenSize"
@@ -91,7 +91,7 @@
         <activity
             android:name="com.ipaulpro.afilechooser.FileChooserActivity"
             android:exported="true"
-            android:icon="@color/transparent"
+            android:icon="@drawable/transparent"
             android:theme="@style/AppThemeMixed" >
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
