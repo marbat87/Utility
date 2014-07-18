@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-    <changelogversion versionName="2.4.9" changeDate="XX Luglio 2014">
+    <changelogversion versionName="2.5.0" changeDate="XX Luglio 2014">
+        <changelogtext>Rivoluzionata completamente la struttura e la grafica: nuovo menù laterale apribile anche con swype da sx e nuove icone!</changelogtext>
 		<changelogtext>Corretti gli accordi di "Acclamate al Signore"</changelogtext>
 		<changelogtext>Ritardata la prima apertura della guida nei canti, per impedire un errore nei dispositivi con caricamento lento</changelogtext>
 		<changelogtext>Aggiunta la possibilità di rigraziare con una donazione</changelogtext>
