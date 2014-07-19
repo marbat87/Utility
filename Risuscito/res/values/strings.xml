@@ -73,7 +73,7 @@
     <string name="dismiss">NO</string>
     <string name="cancel">ANNULLA</string>
     <string name="save_location_title">Memoria predefinita</string>
-    <string name="save_location_summary">Indica dove vuoi salvare i brani scaricati.</string>
+    <string name="save_location_summary">Indica se vuoi rendere i file scaricati visibili alle altre applicazioni (per es. lettore musicale).</string>
     <string name="favorite_added">Aggiunto ai preferiti!</string>
     <string name="favorite_removed">Rimosso dai preferiti!</string>
     <string name="file_delete">File cancellato!</string>
@@ -189,5 +189,6 @@
     <string name="title_activity_donate">Ringrazia</string>
     <string name="activity_homepage">Home page</string>
     <string name="button_note_cantore">Note per il cantore</string>
+    <string name="no_memory_writable">Memoria non disponibile o in modalità sola lettura!</string>
     
 </resources>

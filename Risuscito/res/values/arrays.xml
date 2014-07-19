@@ -11,8 +11,8 @@
         <item>2</item>
     </string-array>
     <string-array name="save_location_sd_entries">        
-        <item>Memoria interna</item>
-        <item>Micro SD</item>
+        <item>Memoria privata</item>
+        <item>Memoria pubblica</item>
     </string-array>
     <string-array name="save_location_sd_values">        
         <item>0</item>

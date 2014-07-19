@@ -1395,7 +1395,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
                     if (data != null) {
                         // Get the URI of the selected file
                         final Uri uri = data.getData();
-                        Log.i(FILE_CHOOSER_TAG, "Uri = " + uri.toString());
+//                        Log.i(FILE_CHOOSER_TAG, "Uri = " + uri.toString());
                         try {
                             // Get the file path from the URI
                             final String path = FileUtils.getPath(this, uri);
@@ -1872,15 +1872,20 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	        Document document = new Document(PageSize.A4, margin, margin, margin, margin);
 	        // step 2
 			try {
-		    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
-				int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
+//		    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
+//				int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
 				localPDFPath = "";
-				if (saveLocation == 1) {
+//				if (saveLocation == 1) {
+				if (Utility.isExternalStorageReadable()) {
 					File[] fileArray = ContextCompat.getExternalFilesDirs(PaginaRenderActivity.this, null);
 					localPDFPath = fileArray[0].getAbsolutePath();
 				}
 				else {
-					localPDFPath = PaginaRenderActivity.this.getFilesDir().toString();
+					Toast toast = Toast.makeText(PaginaRenderActivity.this
+							, getString(R.string.no_memory_writable), Toast.LENGTH_SHORT);
+					toast.show();
+					this.cancel(true);
+//					localPDFPath = PaginaRenderActivity.this.getCacheDir().toString();
 				}
 				localPDFPath += "/output.pdf";
 //				Log.i("localPath", localPDFPath);
