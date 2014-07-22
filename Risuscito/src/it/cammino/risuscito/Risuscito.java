@@ -9,22 +9,39 @@ import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Display;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.espian.showcaseview.OnShowcaseEventListener;
+import com.espian.showcaseview.ShowcaseView;
+import com.espian.showcaseview.targets.ViewTarget;
+
+@SuppressLint("NewApi")
+@SuppressWarnings("deprecation")
 public class Risuscito extends Fragment implements ChangelogDialogListener {
 
 	private static final String VERSION_KEY = "PREFS_VERSION_KEY";
 	private static final String NO_VERSION = "";
+	private static final String FIRST_OPEN_MENU = "FIRST_OPEN_MENU4";
 	private int prevOrientation;
 	private View rootView;
+	private int screenWidth;
+	private int screenHeight;
 		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +49,14 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 		
 		getSupportActionBar().setTitle(R.string.activity_homepage);
 		rootView = inflater.inflate(R.layout.activity_risuscito, container, false);
+		
+		rootView.findViewById(R.id.imageView1)
+		.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				((MainActivity) getActivity()).addonSlider().toggle();	
+			}
+		});
 		
         // recupera il pulsante che lancia l'elenco dei canti in ordine alfabetico
 //        Button buttonAlpha = (Button) rootView.findViewById(R.id.generalIndex);       
@@ -62,6 +87,18 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         
 //        checkScreenAwake();
         
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
+			screenWidth = display.getWidth();
+			screenHeight = display.getHeight();
+		}
+		else {
+			Point size = new Point();
+			display.getSize(size);
+			screenWidth = size.x;
+			screenHeight = size.y;
+		}
+		
         SharedPreferences sp = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
         
@@ -92,6 +129,20 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 	                		&& event.getAction() == KeyEvent.ACTION_UP) {
 	                    arg0.dismiss();
 						getActivity().setRequestedOrientation(prevOrientation);
+				        if(PreferenceManager
+				                .getDefaultSharedPreferences(getActivity())
+				                .getBoolean(FIRST_OPEN_MENU, true)) { 
+				            SharedPreferences.Editor editor = PreferenceManager
+				                    .getDefaultSharedPreferences(getActivity())
+				                    .edit();
+				            editor.putBoolean(FIRST_OPEN_MENU, false);
+				            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+				            	editor.commit();
+				            } else {
+				            	editor.apply();
+				            }
+				        	showHelp();
+				        }
 						return true;
 	                }
 	                return false;
@@ -107,12 +158,35 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 	        	editor.apply();
 	        }
         }
+        else {
+        	if(PreferenceManager
+	                .getDefaultSharedPreferences(getActivity())
+	                .getBoolean(FIRST_OPEN_MENU, true)) { 
+	            SharedPreferences.Editor editor = PreferenceManager
+	                    .getDefaultSharedPreferences(getActivity())
+	                    .edit();
+	            editor.putBoolean(FIRST_OPEN_MENU, false);
+	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+	            	editor.commit();
+	            } else {
+	            	editor.apply();
+	            }
+	            final Runnable mMyRunnable = new Runnable() {
+	            	@Override
+	            	public void run() {
+	            		showHelp(); 
+	                }
+	            };
+	            Handler myHandler = new Handler();
+	            myHandler.postDelayed(mMyRunnable, 1000);
+	        }
+        }
         
         PaginaRenderActivity.notaCambio = null;
         PaginaRenderActivity.speedValue = null;
         PaginaRenderActivity.scrollPlaying = false;
         
-//        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
         
         return rootView;
 	}
@@ -134,18 +208,18 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 //			imageView.setKeepScreenOn(false);
 //    }
     
-//	@Override
-//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-////		super.onCreateOptionsMenu(menu);
-//		getActivity().getMenuInflater().inflate(R.menu.risuscito, menu);
-//		super.onCreateOptionsMenu(menu, inflater);
-////		return true;
-//	}
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		getActivity().getMenuInflater().inflate(R.menu.help_menu, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
 	
-//    @Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_help:
+			showHelp();
+			return true;
 //		case R.id.action_settings:
 //			startActivity(new Intent(getActivity(), Settings.class));
 //			return true;
@@ -158,9 +232,9 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 //		case R.id.action_about:
 //			startActivity(new Intent(getActivity(), AboutActivity.class));
 //			return true;
-//		}
-//		return false;
-//	}
+		}
+		return false;
+	}
     
 //    //metodo che lancia l'indice
 //    private void startSubActivityPage() {
@@ -181,6 +255,20 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
     public void onDialogPositiveClick(DialogFragment dialog) {
     	dialog.dismiss();
     	getActivity().setRequestedOrientation(prevOrientation);
+        if(PreferenceManager
+                .getDefaultSharedPreferences(getActivity())
+                .getBoolean(FIRST_OPEN_MENU, true)) { 
+            SharedPreferences.Editor editor = PreferenceManager
+                    .getDefaultSharedPreferences(getActivity())
+                    .edit();
+            editor.putBoolean(FIRST_OPEN_MENU, false);
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+            	editor.commit();
+            } else {
+            	editor.apply();
+            }
+        	showHelp();
+        }
     }
     
     public void blockOrientation() {
@@ -193,5 +281,29 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
+    
+   	private void showHelp() {
+   		blockOrientation();
+		
+		//nuovo menu
+   		ShowcaseView showcaseView = ShowcaseView.insertShowcaseView(
+        		new ViewTarget(R.id.imageView1, getActivity())
+        		, getActivity()
+        		, R.string.help_new_menu_title
+        		, R.string.help_new_menu_desc);
+		showcaseView.setShowcase(ShowcaseView.NONE);
+		showcaseView.animateGesture(0, screenHeight/2, screenWidth/2, screenHeight/2, true);
+		showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {				
+				@Override
+				public void onShowcaseViewShow(ShowcaseView showcaseView) { }
+				
+				@Override
+				public void onShowcaseViewHide(ShowcaseView showcaseView) {
+					getActivity().setRequestedOrientation(prevOrientation);
+				}		
+				@Override
+				public void onShowcaseViewDidHide(ShowcaseView showcaseView) { }
+		});
+   	}
 
 }

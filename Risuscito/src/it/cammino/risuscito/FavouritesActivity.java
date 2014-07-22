@@ -249,6 +249,9 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
 		dialog.dismiss();
 		getActivity().setRequestedOrientation(prevOrientation);
 		
+		//permette di aggiornare il numero dei preferiti nel menu laterale
+		((MainActivity) getActivity()).onResume();
+		
     }
 
     @Override

@@ -363,6 +363,9 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 				, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
 		toast.show();
 		
+		//permette di aggiornare il numero dei preferiti nel menu laterale
+		((MainActivity) getActivity()).onResume();
+		
     }
     
     //aggiunge il canto premuto ad una lista e in una posizione che ammetta duplicati

@@ -323,7 +323,8 @@ public class CreaListaActivity extends Activity
 				return true;
 			}
         }
-        return super.onKeyDown(keyCode, event);
+//        return super.onKeyDown(keyCode, event);
+        return super.onKeyUp(keyCode, event);
     }
 	
     private DragSortListView.DropListener onDrop =

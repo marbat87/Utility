@@ -190,5 +190,8 @@
     <string name="activity_homepage">Home page</string>
     <string name="button_note_cantore">Note per il cantore</string>
     <string name="no_memory_writable">Memoria non disponibile o in modalità sola lettura!</string>
+    <string name="help_new_menu_title">Nuovo men&#249;!</string>
+    <string name="help_new_menu_desc">&#200; stato introdotto il nuovo men&#249; di navigazione, apribile cliccando sul simbolo in alto a sinistra, sulla copertina o facendo
+        swype da sinistra col dito. Prova!</string>
     
 </resources>

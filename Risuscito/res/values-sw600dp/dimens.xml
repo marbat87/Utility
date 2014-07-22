@@ -12,5 +12,6 @@
     <dimen name="button_text_size">30sp</dimen>
     <dimen name="button_text_size_h">40sp</dimen>
     <dimen name="about_image_width">200dip</dimen>
+    <dimen name="menu_width">400dp</dimen>
 
 </resources>
