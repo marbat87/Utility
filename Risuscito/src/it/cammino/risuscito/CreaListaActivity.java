@@ -217,7 +217,7 @@ public class CreaListaActivity extends Activity
 		});
 		
 		Display display = getWindowManager().getDefaultDisplay();
-		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
 			screenWidth = display.getWidth();
 			screenHeight = display.getHeight();
 		}
