@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-    <changelogversion versionName="2.5.4" changeDate="XX Luglio 2014">
-        <changelogtext>Corretto crash nella guida (pagina iniziale e creazione lista) su Android 3.1</changelogtext>
+    <changelogversion versionName="2.5.4" changeDate="24 Luglio 2014">
+        <changelogtext>Rivoluzionata completamente la struttura e la grafica: nuovo menù laterale apribile anche con swype da sx e nuove icone!</changelogtext>
+		<changelogtext>Corretti gli accordi di "Acclamate al Signore"</changelogtext>
+		<changelogtext>Ritardata la prima apertura della guida nei canti, per impedire un errore nei dispositivi con caricamento lento</changelogtext>
+		<changelogtext>Aggiunta la possibilità di ringraziare con una donazione</changelogtext>
+		<changelogtext>Modificata la descrizione dell'impostazione "Memoria predefinita"</changelogtext>
+		<changelogtext>Inserito il numero di canti salvati come preferiti, nel menù laterale</changelogtext>
+		<changelogtext>Settato di default il font Roboto Condensed</changelogtext>
+		<changelogtext>Corretto il testo di "Maria madre della Chiesa"</changelogtext>
+		<changelogtext>Corretto crash nella guida (pagina iniziale e creazione lista) su Android 3.1</changelogtext>
 	</changelogversion>
 
 </changelog>
