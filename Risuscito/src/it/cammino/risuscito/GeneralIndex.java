@@ -111,6 +111,8 @@ public class GeneralIndex extends Fragment {
                 return new NumericSectionFragment();
             case 2:
                 return new ArgumentsSectionFragment();
+            case 3:
+                return new SalmiSectionFragment();
             default:
                 return new AlphabeticSectionFragment();
             }
@@ -118,7 +120,7 @@ public class GeneralIndex extends Fragment {
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 4;
 		}
 
 		@Override
@@ -134,6 +136,8 @@ public class GeneralIndex extends Fragment {
 			case 2:
 //				return getString(R.string.arg_search_text).toUpperCase(l);
 				return getString(R.string.arg_search_text);
+			case 3:
+				return getString(R.string.salmi_musica_index);
 			}
 			return null;
 		}

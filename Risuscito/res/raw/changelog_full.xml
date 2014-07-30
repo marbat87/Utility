@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     
+    <changelogversion versionName="2.5.5" changeDate="XX Luglio 2014">
+        <changelogtext>Possibile correzione per un crash all'avvio su alcuni dispositivi</changelogtext>
+        <changelogtext>Aggiunto l'indice dei salmi musicati (quarta scheda nella sezione degli indici)</changelogtext>
+	</changelogversion>
+    
     <changelogversion versionName="2.5.4" changeDate="24 Luglio 2014">
         <changelogtext>Rivoluzionata completamente la struttura e la grafica: nuovo menù laterale apribile anche con swype da sx e nuove icone!</changelogtext>
 		<changelogtext>Corretti gli accordi di "Acclamate al Signore"</changelogtext>

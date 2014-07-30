@@ -11,7 +11,8 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	private static final String DB_NAME = "DBCanti";	
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
-	private static final int DB_VERSION = 22;
+//	private static final int DB_VERSION = 22;
+	private static final int DB_VERSION = 23;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -70,6 +71,13 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		sql += "_id INTEGER PRIMARY KEY AUTOINCREMENT,";
 		sql += "titolo_lista TEXT NOT NULL,";
 		sql += "lista BLOB NOT NULL";
+		sql += ");";
+		db.execSQL(sql);
+		
+		sql = "CREATE TABLE IF NOT EXISTS SALMI_MUSICA (";
+		sql += "_id INTEGER PRIMARY KEY,";
+		sql += "num_salmo TEXT NOT NULL,";
+		sql += "titolo_salmo TEXT NOT NULL";
 		sql += ");";
 		db.execSQL(sql);
 
@@ -319,7 +327,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (38, 33, 'Dal profondo a Te grido - Salmo 129 (130)', 'dal_profondo_a_te_grido', 0, '"
+		sql += "VALUES (38, 33, 'Dal profondo a Te grido - Salmo 129(130)', 'dal_profondo_a_te_grido', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/dalprofondoategridosig.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -333,14 +341,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (40, 34, 'Benedici anima mia, Jahvè - Salmo 102 (103)', 'benedici_anima_mia_jahve', 0, '"
+		sql += "VALUES (40, 34, 'Benedici anima mia, Jahvè - Salmo 102(103)', 'benedici_anima_mia_jahve', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/benedicianimamiajahve.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (41, 35, 'Fino a quando - Salmo 12 (13)', 'fino_a_quando', 0, '"
+		sql += "VALUES (41, 35, 'Fino a quando - Salmo 12(13)', 'fino_a_quando', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/finoaquando.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -361,7 +369,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (44, 36, 'Giunga la mia preghiera fino a Te - Salmo 118 (119)', 'giunga_la_mia_preghiera', 0, '"
+		sql += "VALUES (44, 36, 'Giunga la mia preghiera fino a Te - Salmo 118(119)', 'giunga_la_mia_preghiera', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/giungalamiapreghiera.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -2697,6 +2705,280 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		// FINE LEGAMI ARGOMENTI-CANTI
 
+		//SALMI CANTATI
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (38, '129', 'Salmo 129(130) - Dal profondo a Te grido')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (40, '102', 'Salmo 102(103) - Benedici anima mia, Jahvè')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (41, '012', 'Salmo 12(13) - Fino a quando')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (44, '118', 'Salmo 118(119) - Giunga la mia preghiera fino a Te')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (45, '132', 'Salmo 132(133) - Guardate come è bello')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (46, '132', 'Salmo 132(133) - Come è bello, come dà gioia')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (47, '132', 'Salmo 132(133) - Guardate com''è bello, gustate quant''è')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (48, '135', 'Salmo 135(136) - Grazie a Jahvè')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (51, '148', 'Salmo 148 - Lodate il Signore dai cieli')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (52, '150', 'Salmo 150 - Lodate Iddio')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (53, '026', 'Salmo 26(27) - Il Signore è mia luce e mia salvezza')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (59, '114-115', 'Salmo 114-115(116) - Innalzerò la coppa di salvezza')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (60, '125', 'Salmo 125(126) - Quando il Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (69, '116', 'Salmo 116(117) - Lodate il Signore tutti i popoli della terra')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (70, '113A', 'Salmo 113A(114) - Quando Israele uscì dall''Egitto')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (71, '023', 'Salmo 23(24) - Alzate o porte')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (72, '022', 'Salmo 22(23) - Il Signore è il mio pastore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (73, '136', 'Salmo 136(137) - Giunti sui fiumi di Babilonia')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (74, '050', 'Salmo 50(51) - Pietà di me o Dio')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (75, '050', 'Salmo 50(51) - Misericordia Dio, misericordia')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (80, '120', 'Salmo 120(121) - Alzo gli occhi verso i monti')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (82, '094', 'Salmo 94(95) - Se oggi ascoltate la sua voce')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (83, '094', 'Salmo 94(95) - Venite applaudiamo al Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (91, '126', 'Salmo 126(127) - Se il Signore non costruisce la casa')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (92, '033', 'Salmo 33(34) - Gustate e vedete')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (93, '121', 'Salmo 121(122) - Per amore dei miei fratelli')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (94, '039', 'Salmo 39(40) - Ho sperato, ho sperato nel Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (95, '056', 'Salmo 56(57) - Voglio cantare')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (96, '002', 'Salmo 2 - Perchè le genti congiurano?')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (97, '041-042', 'Salmo 41-42(42-43) - Come una cerva anela')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (98, '099', 'Salmo 99(100) - Acclamate al Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (100, '016', 'Salmo 16(17) - Al risveglio mi sazierò del tuo volto, Signor')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (102, '117', 'Salmo 117(118) - Non morirò')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (105, '062', 'Salmo 62(63) - O Dio tu sei il mio Dio')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (106, '046', 'Salmo 46(47) - Sale Dio tra acclamazioni')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (108, '145', 'Salmo 145(146) - Da'' lode al Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (110, '137', 'Salmo 137(138) - Davanti agli angeli')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (115, '083', 'Salmo 83(84) - Quanto sono amabili le tue dimore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (120, '114', 'Salmo 114(115) - Amo il Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (122, '064', 'Salmo 64(65) - A te Signore se deve lode in Sion')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (123, '010', 'Salmo 10(11) - Se nel Signore mi sono rifugiato')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (124, '067', 'Salmo 67(68) - Il Signore annuncia una notizia (vv. 12-16.33.34)')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (125, '133', 'Salmo 133(134) - Benedite il Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (127, '031', 'Salmo 31(32) - Ti ho manifestato il mio peccato')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (131, '008', 'Salmo 8 - O Signore nostro Dio')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (136, '033', 'Salmo 33(34) - Benedirò il Signore in ogni tempo (1986)')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (138, '109', 'Salmo 109(110) - Dice il Signore al mio Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (139, '001', 'Salmo 1 - Felice l''uomo')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (141, '044', 'Salmo 44(45) - Tu sei il più bello')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (142, '127', 'Salmo 127(128) - Felicità per l''uomo (1990)')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (143, '067', 'Salmo 67(68) - Sorga Dio (vv 2-4-5-6-7)')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (146, '141', 'Salmo 141(142) - A te, Signore, con la mia voce')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (148, '024', 'Salmo 24(25) - A te Signore innalzo la mia anima')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (149, '140', 'Salmo 140(141) - Ti sto chiamando (Contro le seduzioni del peccato)')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (150, '122', 'Salmo 122(123) - A te levo i miei occhi')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (151, '006', 'Salmo 6 - Signore, non punirmi nel tuo sdegno')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (153, '032', 'Salmo 32(33) - Esultate, giusti, nel Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (154, '128', 'Salmo 128(129) - Molto mi hanno perseguitato')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (155, '017', 'Salmo 17(18) - Ti amo Signore')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (159, '015', 'Salmo 15(16) - Mi indicherai il sentiero della vita')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (160, '053', 'Salmo 53(54) - O Dio, per il tuo nome')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (161, '013', 'Salmo 13(14) - Lo stolto pensa che non c''è Dio')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (162, '142', 'Salmo 142(143) - Signore, ascolta la mia preghiera')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (182, '138', 'Salmo 138(139) - Signore tu mi scruti e mi conosci')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (183, '021', 'Salmo 21(22) - Eli, Eli, lammà sabactani?')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (186, '130', 'Salmo 130(131) - Signore, il mio cuore non ha più pretese')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (191, '086', 'Salmo 86(87) - Le sue fondamenta')";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO SALMI_MUSICA ";
+		sql += "VALUES (193, '036', 'Salmo 36(37) - Non ti adirare')";
+		db.execSQL(sql);
+		//FINE SALMI CANTATI
+		
 	}
 
 	@Override
@@ -2832,6 +3114,8 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 //		sql = "DROP TABLE IF EXISTS LISTE_PERS";
 //		db.execSQL(sql);
+		sql = "DROP TABLE IF EXISTS SALMI_MUSICA";
+		db.execSQL(sql);
 		
 		onCreate(db);
 	}

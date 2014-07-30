@@ -4,11 +4,13 @@
         <item>Indice alfabetico</item>
         <item>Indice per pagina</item>
         <item>Indice per argomento</item>
+        <item>Indice salmi musicati</item>
     </string-array>
     <string-array name="pref_default_index_values">        
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
     <string-array name="save_location_sd_entries">        
         <item>Memoria privata</item>

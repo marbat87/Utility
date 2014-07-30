@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 public class Utility {
 	
@@ -132,18 +133,23 @@ public class Utility {
 		        		activity.setTheme(R.style.AppThemeDark);
 		        		break;
 		        	default:
+		        		activity.setTheme(R.style.AppThemeMixed);
 		        		break;
 		        }
 			}
+	       else {
+	    	   activity.setTheme(R.style.AppThemeMixed); 
+	       }
 	}
 	
 	public static void updateThemeWithSlider(Activity activity) {
 	       SharedPreferences sp = PreferenceManager
 	                .getDefaultSharedPreferences(activity);
-//	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
+	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
 	       if (!sp.getString("applicationTheme", "0").equals("")) {
 		       switch (Integer.valueOf(sp.getString("applicationTheme", "0"))) {
 		        	case 0:
+		        		Log.i("VADO", "1");
 		        		activity.setTheme(R.style.AppThemeSliderMixed);
 		        		break;
 		        	case 1:
@@ -153,9 +159,15 @@ public class Utility {
 		        		activity.setTheme(R.style.AppThemeSliderDark);
 		        		break;
 		        	default:
+		        		Log.i("VADO", "2");
+		        		activity.setTheme(R.style.AppThemeSliderMixed);
 		        		break;
 		        }
 			}
+	       else {
+	    	   Log.i("VADO", "3");
+	    	   activity.setTheme(R.style.AppThemeSliderMixed);
+	       }
 	}
 	
 	public static int getChoosedTheme(Activity activity) {
