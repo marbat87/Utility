@@ -12,7 +12,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
 //	private static final int DB_VERSION = 22;
-	private static final int DB_VERSION = 23;
+	private static final int DB_VERSION = 24;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -1048,7 +1048,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (143, 119, 'Sorga Dio (vv 2-4-5-6-7) - Salmo 67(68)', 'sorga_dio', 0, '"
+		sql += "VALUES (143, 119, 'Sorga Dio (vv. 2-4-5-6-7) - Salmo 67(68)', 'sorga_dio', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/sorgadio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -2871,7 +2871,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (124, '067', 'Salmo 67(68) - Il Signore annuncia una notizia (vv. 12-16.33.34)')";
+		sql += "VALUES (124, '067-v12', 'Salmo 67(68) - Il Signore annuncia una notizia (vv. 12-16.33.34)')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2907,7 +2907,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (143, '067', 'Salmo 67(68) - Sorga Dio (vv 2-4-5-6-7)')";
+		sql += "VALUES (143, '067-v02', 'Salmo 67(68) - Sorga Dio (vv. 2-4-5-6-7)')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
