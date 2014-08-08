@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+
+    <changelogversion versionName="2.5.5" changeDate="XX Luglio 2014">
+        <changelogtext>Possibile correzione per un crash all'avvio su alcuni dispositivi</changelogtext>
+        <changelogtext>Aggiunto l'indice dei salmi musicati (quarta scheda nella sezione degli indici)</changelogtext>
+	</changelogversion>
+
+</changelog>
