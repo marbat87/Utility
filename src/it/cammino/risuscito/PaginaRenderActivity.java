@@ -1,5 +1,6 @@
 package it.cammino.risuscito;
 
+import it.cammino.risuscito.DownloadOrLinkDialogFragment.DownloadOrLinkDialogListener;
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
 
 import java.io.BufferedReader;
@@ -77,6 +78,7 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -88,7 +90,8 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PaginaRenderActivity extends Activity implements GenericDialogListener {
+public class PaginaRenderActivity extends Activity
+			implements GenericDialogListener, DownloadOrLinkDialogListener {
     
 	private DatabaseCanti listaCanti;
 	private String pagina;
@@ -155,6 +158,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	private final String SAVE_DIALOG_TAG = "1";
 	private final String DELETE_DIALOG_TAG = "2";
 	private final String SALVA_ACCORDO_TAG = "3";
+	private final String DOWN_CHOOSE_DIALOG_TAG = "4";
 	
 	private ProgressDialog mExportDialog;
 	private String localPDFPath;
@@ -463,8 +467,26 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 				@Override
 				public void onClick(View v) {
 					blockOrientation();
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.dialog_download_mp3));
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.dialog_download_mp3));
+//					dialog.setListener(PaginaRenderActivity.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
+//	                dialog.setCancelable(false);
+					DownloadOrLinkDialogFragment dialog = new DownloadOrLinkDialogFragment();
 					dialog.setListener(PaginaRenderActivity.this);
 					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
@@ -480,7 +502,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			                return false;
 			            }
 			        });
-	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
+	                dialog.show(getSupportFragmentManager(), DOWN_CHOOSE_DIALOG_TAG);
 	                dialog.setCancelable(false);
 				}
 			});
@@ -657,15 +679,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		case R.id.action_exp_pdf:
 			(new PdfExportTask()).execute();
 			return true;
-//		case R.id.action_settings:
-//			startActivity(new Intent(this, Settings.class));
-//			return true;
-//		case R.id.action_donate:
-//			startActivity(new Intent(this, DonateActivity.class));
-//			return true;
-//		case R.id.action_about:
-//			startActivity(new Intent(this, AboutActivity.class));
-//			return true;
 		case R.id.action_help_canto:
 			showHelp();
 			return true;
@@ -1263,7 +1276,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-    	if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {  		
+//    	if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {  	
+    	if (dialog.getTag().equals(DOWN_CHOOSE_DIALOG_TAG))  {  
 	    	final DownloadTask downloadTask = new DownloadTask(this);
 	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 			int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
@@ -1287,10 +1301,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    	        downloadTask.cancel(true);
 	    	        setRequestedOrientation(prevOrientation);
 	    	    }
-	    	});
-    		
-//    		startActivityForResult(new Intent(this, FileChooserActivity .class), REQUEST_CODE);
-    	
+	    	});    	
     	}
     	else if (dialog.getTag().equals(DELETE_DIALOG_TAG))  {         
     		File fileToDelete = new File(localUrl);
@@ -1336,6 +1347,35 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     		pulisciVars();
 			finish();
     	}
+//    	else if (dialog.getTag().equals(DOWN_CHOOSE_DIALOG_TAG))  {
+//    		dialog.dismiss();
+//			GenericDialogFragment dialog1 = new GenericDialogFragment();
+//			dialog1.setCustomMessage(getString(R.string.dialog_download_mp3));
+//			dialog1.setListener(PaginaRenderActivity.this);
+//			dialog1.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//	            @Override
+//	            public boolean onKey(DialogInterface arg0, int keyCode,
+//	                    KeyEvent event) {
+//	                if (keyCode == KeyEvent.KEYCODE_BACK
+//	                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//	                    arg0.dismiss();
+//						setRequestedOrientation(prevOrientation);
+//						return true;
+//	                }
+//	                return false;
+//	            }
+//	        });
+//            dialog1.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
+//            dialog1.setCancelable(false);
+//    	}
+    }
+    
+    @Override
+    public void onDialogNeutralClick(DialogFragment dialog) {
+		dialog.dismiss();
+		setRequestedOrientation(prevOrientation);
+		startActivityForResult(new Intent(this, FileChooserActivity.class), REQUEST_CODE);
     }
 
     @Override
