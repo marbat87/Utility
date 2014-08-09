@@ -24,27 +24,7 @@
 		    android:layout_centerHorizontal="true"
 		    android:button="?attr/customStar"
 		    android:soundEffectsEnabled="true" />    
-			
-    	<ImageButton
-		    android:id="@+id/save_file"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_above="@+id/delete_file"
-		    android:background="?attr/customSaveFile"
-		    android:contentDescription="@string/save_file"
-		    android:soundEffectsEnabled="true" />
-    	
-    	 <ImageButton
-		    android:id="@+id/delete_file"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_above="@+id/rewind_song"
-		    android:background="?attr/customDeleteFile"
-		    android:contentDescription="@string/delete"
-		    android:soundEffectsEnabled="true" />
-    	
+				
 		<ImageButton
 		    android:id="@+id/rewind_song"
 		    android:layout_width="wrap_content"
@@ -79,22 +59,43 @@
 		    android:id="@+id/stop_song"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_alignParentBottom="true"
 		    android:layout_alignParentLeft="true"
+		    android:layout_above="@+id/delete_file"
 		    android:background="?attr/customStop"
 		    android:contentDescription="@string/stop_song"
 		    android:soundEffectsEnabled="true" />
 		
-		<ImageView
-            android:id="@+id/no_record_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-		    android:layout_alignParentBottom="true"
+		<ImageButton
+		    android:id="@+id/delete_file"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
 		    android:layout_alignParentLeft="true"
-           	android:text="@string/no_record"
-           	android:contentDescription="@string/no_record"
-           	android:visibility="gone"
-           	android:src="@drawable/ic_alerts_and_states_error" />
+		    android:layout_alignParentBottom="true"
+		    android:layout_above="@+id/save_file"
+		    android:background="?attr/customDeleteFile"
+		    android:contentDescription="@string/delete"
+		    android:soundEffectsEnabled="true" />
+		
+		<ImageButton
+		    android:id="@+id/save_file"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentBottom="true"
+		    android:background="?attr/customSaveFile"
+		    android:contentDescription="@string/save_file"
+		    android:soundEffectsEnabled="true" />
+		
+<!-- 		<ImageView -->
+<!--             android:id="@+id/no_record_message" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!-- 		    android:layout_alignParentBottom="true" -->
+<!-- 		    android:layout_alignParentLeft="true" -->
+<!--            	android:text="@string/no_record" -->
+<!--            	android:contentDescription="@string/no_record" -->
+<!--            	android:visibility="gone" -->
+<!--            	android:src="@drawable/ic_alerts_and_states_error" /> -->
 
 	</RelativeLayout>
 	

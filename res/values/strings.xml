@@ -79,6 +79,7 @@
     <string name="file_delete">File cancellato!</string>
     <string name="download_completed">File salvato!</string>
     <string name="download_running">Download in corso&#8230;</string>
+    <string name="download_cancelled">Download annullato!</string>
     <string name="present_yet">Canto già presente!</string>
     <string name="dialog_present_yet">&#200; già presente il canto: </string>
     <string name="dialog_wonna_replace">. Vuoi sostituirlo?</string>
@@ -197,5 +198,8 @@
     <string name="downlink_message">Desideri utilizzare la funzione di donwload della registrazione da internet per poterla riascoltare senza connessione, oppure associare un file mp3 presente nella memoria del tuo dispositivo?</string>
     <string name="downlink_download">DOWNLOAD</string>
     <string name="downlink_choose">ASSOCIA</string>
+    <string name="only_link">Vuoi associare un file mp3 presente nella memoria del tuo dispositivo?</string>
+    <string name="dialog_delete_link">Sei sicuro di voler scollegare dal brano presente nella memoria? (Il file non sarà cancellato)</string>
+    <string name="delink_delete">File scollegato!</string>
     
 </resources>
