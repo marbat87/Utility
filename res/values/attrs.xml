@@ -35,6 +35,7 @@
 	    <attr name="customChangelog" format="reference" />
 	    <attr name="customDrawer" format="reference" />
 	    <attr name="customSliderBackground" format="color" />
+	    <attr name="customDots" format="reference" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />

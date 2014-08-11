@@ -19,6 +19,7 @@
     
     <style name="AppThemeLight" parent="@style/Holo.Theme.Light">
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left_dark</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlowDark</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left_dark</item>
 	    <item name="customChord">@drawable/ic_action_content_chord_dark</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit_dark</item>
@@ -52,10 +53,12 @@
 		<item name="customHome">@drawable/ic_action_home_dark</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info_dark</item>
+		<item name="customDots">@drawable/ic_action_dots_dark</item>
     </style>
     
     <style name="AppThemeDark" parent="@style/Holo.Theme">
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -89,10 +92,12 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style>
 
     <style name="AppThemeMixed" parent="@style/Holo.Theme.Light.DarkActionBar">
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -126,10 +131,12 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style> 
     
     <style name="AppThemeSliderLight" parent="@style/Holo.Theme.Slider.Light">
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars_dark</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlowDark</item>
         <item name="customSliderBackground">@color/custom_slider_backgound_dark</item>
 	    <item name="customChord">@drawable/ic_action_content_chord_dark</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit_dark</item>
@@ -163,10 +170,12 @@
 		<item name="customHome">@drawable/ic_action_home_dark</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info_dark</item>
+		<item name="customDots">@drawable/ic_action_dots_dark</item>
     </style>
     
     <style name="AppThemeSliderDark" parent="@style/Holo.Theme.Slider">
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="customSliderBackground">@color/custom_slider_backgound_light</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -200,10 +209,12 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style>
 
     <style name="AppThemeSliderMixed" parent="@style/Holo.Theme.Slider.Light.DarkActionBar">
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="customSliderBackground">@color/custom_slider_backgound_light</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -237,6 +248,7 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style> 
   
     <style name="MyActionButton" parent="">
@@ -248,5 +260,13 @@
         <item name="android:gravity">center</item>
         <item name="android:maxLines">2</item>
     </style>
+
+	<style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+    	<item name="android:src">@drawable/ic_action_dots</item>
+	</style>
+	
+	<style name="OverFlowDark" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+    	<item name="android:src">@drawable/ic_action_dots_dark</item>
+	</style>
     
 </resources>
