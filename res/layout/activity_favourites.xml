@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_min_margin"
+    android:paddingLeft="@dimen/activity_min_margin"
+    android:paddingRight="@dimen/activity_min_margin"
+    android:paddingTop="@dimen/activity_min_margin"
+    android:orientation="vertical"
+    android:weightSum="1.0"
+    tools:context=".FavouritesActivity" >
+
+    <TextView
+        android:id="@+id/no_favourites"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_favourites" />
+    
+    <ListView 
+        android:id="@+id/favouritesList"
+        android:layout_weight="0.99"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/hint_remove"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_remove" />
+
+</LinearLayout>
