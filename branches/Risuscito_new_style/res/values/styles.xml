@@ -51,6 +51,7 @@
 		<item name="customHome">@drawable/ic_action_home_dark</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info_dark</item>
+		<item name="customDots">@drawable/ic_action_dots_dark</item>
     </style>
     
     <style name="AppThemeDark" parent="@style/Holo.Theme">
@@ -87,6 +88,7 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style>
 
     <style name="AppThemeMixed" parent="@style/Holo.Theme.Light.DarkActionBar">
@@ -123,6 +125,7 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style> 
     
     <style name="AppThemeSliderLight" parent="@style/Holo.Theme.Slider.Light">
@@ -160,6 +163,7 @@
 		<item name="customHome">@drawable/ic_action_home_dark</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info_dark</item>
+		<item name="customDots">@drawable/ic_action_dots_dark</item>
     </style>
     
     <style name="AppThemeSliderDark" parent="@style/Holo.Theme.Slider">
@@ -197,6 +201,7 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style>
 
     <style name="AppThemeSliderMixed" parent="@style/Holo.Theme.Slider.Light.DarkActionBar">
@@ -234,6 +239,7 @@
 		<item name="customHome">@drawable/ic_action_home</item>
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customChangelog">@drawable/ic_fa_info</item>
+		<item name="customDots">@drawable/ic_action_dots</item>
     </style> 
   
     <style name="MyActionButton" parent="">
@@ -245,5 +251,15 @@
         <item name="android:gravity">center</item>
         <item name="android:maxLines">2</item>
     </style>
+    
+    <style name="Widget.AppCompat.Base.ActionButton.Overflow"
+           parent="Widget.AppCompat.Base.ActionButton">
+		<item name="android:src">?attr/customDots</item>
+	</style>
+
+    <style name="Widget.AppCompat.Light.Base.ActionButton.Overflow"
+           parent="Widget.AppCompat.Light.Base.ActionButton">
+		<item name="android:src">?attr/customDots</item>
+	</style>
     
 </resources>

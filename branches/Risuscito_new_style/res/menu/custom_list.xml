@@ -13,7 +13,7 @@
         android:icon="?attr/customShare"
         android:showAsAction="ifRoom"
         android:title="@string/action_share"
-        android:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
+        android:actionProviderClass="it.cammino.risuscito.HomeAwayShareProvider" />
     
 	<item
         android:id="@+id/action_add_list"
