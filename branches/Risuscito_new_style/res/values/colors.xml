@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    <color name="bottomBarLight">#EBEBEB</color>
+    <color name="bottomBarDark">#050607</color>
+    <color name="bluHolo">#33b5e5</color>
+    <color name="tabHoloLight">#CDCDCD</color>
+    <color name="tabHoloDark">#202122</color>
+    <color name="dividerHoloLight">#B8B8B8</color>
+    <color name="dividerHoloDark">#414243</color>
+    <color name="custom_slider_backgound_light">#222222</color>
+ 	<color name="custom_slider_backgound_dark">#DDDDDD</color>
+ 
+</resources> 
