@@ -140,6 +140,24 @@ public class Utility {
 		        	case 5:
 		        		activity.setTheme(R.style.RedDark);
 		        		break;
+		        	case 6:
+		        		activity.setTheme(R.style.DeepPurpleLight);
+		        		break;
+		        	case 7:
+		        		activity.setTheme(R.style.DeepPurpleDark);
+		        		break;
+		        	case 8:
+		        		activity.setTheme(R.style.TealLight);
+		        		break;
+		        	case 9:
+		        		activity.setTheme(R.style.TealDark);
+		        		break;
+		        	case 10:
+		        		activity.setTheme(R.style.BrownLight);
+		        		break;
+		        	case 11:
+		        		activity.setTheme(R.style.BrownDark);
+		        		break;
 		        	default:
 		        		activity.setTheme(R.style.IndigoLight);
 		        		break;
@@ -174,7 +192,25 @@ public class Utility {
 		        		break;
 		        	case 5:
 		        		activity.setTheme(R.style.RedSliderDark);
-		        		break;		        		
+		        		break;		 
+		        	case 6:
+		        		activity.setTheme(R.style.DeepPurpleSliderLight);
+		        		break;
+		        	case 7:
+		        		activity.setTheme(R.style.DeepPurpleSliderDark);
+		        		break;
+		        	case 8:
+		        		activity.setTheme(R.style.TealSliderLight);
+		        		break;
+		        	case 9:
+		        		activity.setTheme(R.style.TealSliderDark);
+		        		break;	
+		        	case 10:
+		        		activity.setTheme(R.style.BrownSliderLight);
+		        		break;
+		        	case 11:
+		        		activity.setTheme(R.style.BrownSliderDark);
+		        		break;	
 		        	default:
 //		        		Log.i("VADO", "2");
 		        		activity.setTheme(R.style.IndigoSliderLight);
