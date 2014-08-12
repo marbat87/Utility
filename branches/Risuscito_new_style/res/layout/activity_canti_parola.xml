@@ -36,7 +36,7 @@
 	        android:clickable="true"
 	        android:minHeight="@dimen/list_preferred_item_height_small"
 	        android:orientation="horizontal"
-	        android:background="@drawable/list_selector_holo_light" >
+	        android:background="?attr/selectableItemBackground" >
 	
 	        <ImageView
 	            android:id="@+id/imageView1"
@@ -73,7 +73,7 @@
 			    android:paddingLeft="@dimen/default_padding_selectable"
 			    android:paddingRight="@dimen/default_padding_selectable"
 			    android:minHeight="@dimen/list_preferred_item_height_small"
-			    android:background="@drawable/list_selector_holo_light"
+			    android:background="?attr/selectableItemBackground"
 			    android:textAppearance="?android:attr/textAppearanceMedium" />
 		
 		</LinearLayout>
@@ -100,7 +100,7 @@
 	        android:clickable="true"
 	        android:minHeight="@dimen/list_preferred_item_height_small"
 	        android:orientation="horizontal"
-	        android:background="@drawable/list_selector_holo_light" >
+	        android:background="?attr/selectableItemBackground" >
 	
 	        <ImageView
 	            android:id="@+id/imageView2"
@@ -137,7 +137,7 @@
 			   	android:paddingLeft="@dimen/default_padding_selectable"
 			    android:paddingRight="@dimen/default_padding_selectable"
 			    android:minHeight="@dimen/list_preferred_item_height_small"
-			    android:background="@drawable/list_selector_holo_light"
+			    android:background="?attr/selectableItemBackground"
 			    android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		</LinearLayout>
@@ -164,7 +164,7 @@
 	        android:clickable="true"
 	        android:minHeight="@dimen/list_preferred_item_height_small"
 	        android:orientation="horizontal"
-	        android:background="@drawable/list_selector_holo_light" >
+	        android:background="?attr/selectableItemBackground" >
 	
 	        <ImageView
 	            android:id="@+id/imageView3"
@@ -201,7 +201,7 @@
 			    android:paddingLeft="@dimen/default_padding_selectable"
 			    android:paddingRight="@dimen/default_padding_selectable"
 			    android:minHeight="@dimen/list_preferred_item_height_small"
-			    android:background="@drawable/list_selector_holo_light"
+			    android:background="?attr/selectableItemBackground"
 			    android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		</LinearLayout>
@@ -228,7 +228,7 @@
 	        android:clickable="true"
 	        android:minHeight="@dimen/list_preferred_item_height_small"
 	        android:orientation="horizontal"
-	        android:background="@drawable/list_selector_holo_light" >
+	        android:background="?attr/selectableItemBackground" >
 	
 	        <ImageView
 	            android:id="@+id/imageView4"
@@ -265,7 +265,7 @@
 			    android:paddingLeft="@dimen/default_padding_selectable"
 			    android:paddingRight="@dimen/default_padding_selectable"
 			    android:minHeight="@dimen/list_preferred_item_height_small"
-			    android:background="@drawable/list_selector_holo_light"
+			    android:background="?attr/selectableItemBackground"
 			    android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		 </LinearLayout>
@@ -292,7 +292,7 @@
 	        android:clickable="true"
 	        android:minHeight="@dimen/list_preferred_item_height_small"
 	        android:orientation="horizontal"
-	        android:background="@drawable/list_selector_holo_light" >
+	        android:background="?attr/selectableItemBackground" >
 	
 	        <ImageView
 	            android:id="@+id/imageView5"
@@ -329,7 +329,7 @@
 			    android:paddingLeft="@dimen/default_padding_selectable"
 			    android:paddingRight="@dimen/default_padding_selectable"
 			    android:minHeight="@dimen/list_preferred_item_height_small"
-			    android:background="@drawable/list_selector_holo_light"
+			    android:background="?attr/selectableItemBackground"
 			    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		</LinearLayout>		    

@@ -39,6 +39,8 @@
 		<item name="customPstsIndicatorColor">@color/RedTheme</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="android:actionMenuTextColor">@android:color/white</item>
+		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_red_light</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_red_light</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_action_bar_red_light</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Action_bar_red_light</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_red_light</item>
@@ -89,6 +91,8 @@
 		<item name="customPstsIndicatorColor">@color/RedTheme</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="android:actionMenuTextColor">@android:color/white</item>
+		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_red_light</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_red_light</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_action_bar_red_light</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Action_bar_red_light</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_red_light</item>
@@ -157,6 +161,8 @@
 		<item name="customChangelog">@drawable/ic_fa_info</item>
 		<item name="customPstsIndicatorColor">@color/RedTheme</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
+		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_red_dark</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_red_dark</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_action_bar_red_dark</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Action_bar_red_dark</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_red_dark</item>
@@ -206,6 +212,8 @@
 		<item name="customChangelog">@drawable/ic_fa_info</item>
 		<item name="customPstsIndicatorColor">@color/RedTheme</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
+		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_red_dark</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_red_dark</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_action_bar_red_dark</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Action_bar_red_dark</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_red_dark</item>

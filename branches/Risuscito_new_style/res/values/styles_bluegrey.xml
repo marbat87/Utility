@@ -39,6 +39,8 @@
 		<item name="customPstsIndicatorColor">@color/BlueGrey</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="actionMenuTextColor">@android:color/white</item>
+        <item name="selectableItemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_light</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_light</item>
@@ -89,6 +91,8 @@
 		<item name="customPstsIndicatorColor">@color/BlueGrey</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="actionMenuTextColor">@android:color/white</item>
+        <item name="selectableItemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_light</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_light</item>
@@ -183,6 +187,8 @@
 		<item name="customDots">@drawable/ic_action_dots</item>
 		<item name="customPstsIndicatorColor">@color/BlueGrey</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
+        <item name="selectableItemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_dark</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_dark</item>
@@ -232,6 +238,8 @@
 		<item name="customDots">@drawable/ic_action_dots</item>
 		<item name="customPstsIndicatorColor">@color/BlueGrey</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
+        <item name="selectableItemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_dark</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_dark</item>

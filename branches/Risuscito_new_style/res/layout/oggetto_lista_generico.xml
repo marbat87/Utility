@@ -20,7 +20,7 @@
         android:clickable="true"
         android:minHeight="@dimen/list_preferred_item_height_small"
         android:orientation="horizontal"
-        android:background="@drawable/list_selector_holo_light" >
+        android:background="?attr/selectableItemBackground" >
 	
 	    <TextView
 	        android:id="@+id/id_posizione"
@@ -69,7 +69,7 @@
 		    android:paddingRight="@dimen/default_padding_selectable"
 		    android:gravity="center_vertical"
 		    android:minHeight="@dimen/list_preferred_item_height_small"
-		    android:background="@drawable/list_selector_holo_light"
+		    android:background="?attr/selectableItemBackground"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
     
     </LinearLayout>
