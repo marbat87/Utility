@@ -147,7 +147,10 @@ public class CreaListaActivity extends Activity
         //A quanto parae non si riesce usando gli attributes direttamente nel layout
         if (Utility.getChoosedTheme(CreaListaActivity.this) == 1
         		|| Utility.getChoosedTheme(CreaListaActivity.this) == 3
-        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 5)
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 5
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 7
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 9
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 11)
         	positionLI = R.layout.position_list_item_dark;
         else
         	positionLI = R.layout.position_list_item_light;
