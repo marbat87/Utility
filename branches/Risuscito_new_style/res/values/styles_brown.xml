@@ -50,6 +50,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_brown_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_brown_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_brown_light</item>>
+        <item name="android:editTextStyle">@style/EditTexttheme_brown</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_brown</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_brown</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_brown</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_brown</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_brown</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_brown</item>
     </style>
     
 	<style name="BrownLight" parent="@style/Holo.Theme.Light">
@@ -102,6 +109,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_brown_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_brown_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_brown_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_brown</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_brown</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_brown</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_brown</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_brown</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_brown</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_brown</item>
     </style>
 
     <style name="ActionBar.Solid.Action_bar_brown_light" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
@@ -198,6 +212,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_brown_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_brown_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_brown_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_brown</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_brown</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_brown</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_brown</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_brown</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_brown</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_brown</item>
     </style>   
 
 	<style name="BrownDark" parent="@style/Holo.Theme">
@@ -249,6 +270,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_brown_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_brown_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_brown_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_brown</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_brown</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_brown</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_brown</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_brown</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_brown</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_brown</item>
     </style>
 	
     <style name="ActionBar.Solid.Action_bar_brown_dark" parent="@style/Widget.AppCompat.ActionBar.Solid">

@@ -50,6 +50,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_indigo_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
 	</style>
 	
   	<style name="IndigoLight" parent="@style/Holo.Theme.Light">
@@ -103,6 +110,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_indigo_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
     </style>
 	
    	<style name="IndigoSliderDark" parent="@style/Holo.Theme.Slider">
@@ -154,6 +168,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_indigo_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
     </style>   
     
 	<style name="IndigoDark" parent="@style/Holo.Theme">
@@ -206,6 +227,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_indigo_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
     </style>
     
 </resources>

@@ -50,6 +50,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_bluegrey_light</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_bluegrey_light</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_bluegrey_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_bluegrey</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_bluegrey</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_bluegrey</item>
     </style>
     
 	<style name="BlueGreyLight" parent="@style/Holo.Theme.Light">
@@ -102,6 +109,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_bluegrey_light</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_bluegrey_light</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_bluegrey_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_bluegrey</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_bluegrey</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_bluegrey</item>
     </style>
 
     <style name="ActionBar.Solid.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
@@ -172,6 +186,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_bluegrey_dark</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_bluegrey_dark</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_bluegrey_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_bluegrey</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_bluegrey</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_bluegrey</item>
     </style>   
 
 	<style name="BlueGreyDark" parent="@style/Holo.Theme">
@@ -222,6 +243,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_bluegrey_dark</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_bluegrey_dark</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_bluegrey_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_bluegrey</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_bluegrey</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_bluegrey</item>
     </style>
     
     <style name="ActionBar.Solid.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ActionBar.Solid">

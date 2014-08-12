@@ -51,6 +51,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_deeppurple_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_deeppurple_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_deeppurple_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_deeppurple</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_deeppurple</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_deeppurple</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_deeppurple</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_deeppurple</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_deeppurple</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_deeppurple</item>
     </style>
     
 	<style name="DeepPurpleLight" parent="@style/Holo.Theme.Light">
@@ -104,6 +111,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_deeppurple_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_deeppurple_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_deeppurple_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_deeppurple</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_deeppurple</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_deeppurple</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_deeppurple</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_deeppurple</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_deeppurple</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_deeppurple</item>
     </style>
 	
 	<style name="DeepPurpleSliderDark" parent="@style/Holo.Theme.Slider">
@@ -156,6 +170,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_deeppurple_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_deeppurple_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_deeppurple_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_deeppurple</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_deeppurple</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_deeppurple</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_deeppurple</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_deeppurple</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_deeppurple</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_deeppurple</item>
     </style>   
 
 	<style name="DeepPurpleDark" parent="@style/Holo.Theme">
@@ -208,6 +229,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_deeppurple_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_deeppurple_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_deeppurple_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_deeppurple</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_deeppurple</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_deeppurple</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_deeppurple</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_deeppurple</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_deeppurple</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_deeppurple</item>
     </style>
     
 </resources>

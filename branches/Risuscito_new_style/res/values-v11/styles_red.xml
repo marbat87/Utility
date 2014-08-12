@@ -51,6 +51,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_red_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_red_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_red_light</item>
+    	<item name="android:editTextStyle">@style/EditTexttheme_red</item>
+		<item name="android:radioButtonStyle">@style/RadioButtontheme_red</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_red</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_red</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_red</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_red</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_red</item>
     </style>
     
 	<style name="RedLight" parent="@style/Holo.Theme.Light">
@@ -104,6 +111,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_red_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_red_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_red_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_red</item>
+		<item name="android:radioButtonStyle">@style/RadioButtontheme_red</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_red</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_red</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_red</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_red</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_red</item>
     </style>
 	
 	<style name="RedSliderDark" parent="@style/Holo.Theme.Slider">
@@ -156,6 +170,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_red_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_red_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_red_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_red</item>
+		<item name="android:radioButtonStyle">@style/RadioButtontheme_red</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_red</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_red</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_red</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_red</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_red</item>
     </style>   
 
 	<style name="RedDark" parent="@style/Holo.Theme">
@@ -208,6 +229,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_red_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_red_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_red_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_red</item>
+		<item name="android:radioButtonStyle">@style/RadioButtontheme_red</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_red</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_red</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_red</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_red</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_red</item>
     </style>
     
 </resources>

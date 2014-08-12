@@ -50,6 +50,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_teal_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_teal_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
+   		<item name="android:buttonStyle">@style/Buttontheme_teal</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
     </style>
     
 	<style name="TealLight" parent="@style/Holo.Theme.Light">
@@ -102,6 +109,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_teal_light</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_teal_light</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
+   		<item name="android:buttonStyle">@style/Buttontheme_teal</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
     </style>
 
     <style name="ActionBar.Solid.Action_bar_teal_light" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
@@ -198,6 +212,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_teal_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_teal_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
+   		<item name="android:buttonStyle">@style/Buttontheme_teal</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
     </style>   
 
 	<style name="TealDark" parent="@style/Holo.Theme">
@@ -249,6 +270,13 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_teal_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_teal_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
+   		<item name="android:buttonStyle">@style/Buttontheme_teal</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
     </style>
 	
     <style name="ActionBar.Solid.Action_bar_teal_dark" parent="@style/Widget.AppCompat.ActionBar.Solid">

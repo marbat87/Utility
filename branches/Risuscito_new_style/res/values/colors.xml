@@ -16,5 +16,11 @@
  	<color name="DeepPurple">#673ab7</color>
  	<color name="Teal">#009688</color>
  	<color name ="Brown">#795548</color>
+ 	<color name="theme_bluegrey_color">#90a4ae</color>
+ 	<color name="theme_brown_color">#a1887f</color>
+ 	<color name="theme_deeppurple_color">#9575cd</color>
+ 	<color name="theme_indigo_color">#7986cb</color>
+ 	<color name="theme_red_color">#f36c60</color>
+ 	<color name="theme_teal_color">#4db6ac</color>
  
 </resources> 

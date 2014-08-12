@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="EditTexttheme_deeppurple" parent="android:Widget.EditText">
+	  <item name="android:background">@drawable/theme_deeppurple_edit_text_holo_light</item>
+	  <item name="android:textColor">?attr/tabText</item>
+  </style>
+
+  <style name="RadioButtontheme_deeppurple" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/theme_deeppurple_btn_radio_holo_light</item>
+  </style>
+
+  <style name="Buttontheme_deeppurple" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/theme_deeppurple_btn_default_holo_light</item>
+	  <item name="android:minHeight">48dip</item>
+	  <item name="android:minWidth">64dip</item>
+	  <item name="android:textColor">?attr/tabText</item>
+  </style>
+
+  <style name="ImageButtontheme_deeppurple" parent="android:Widget.ImageButton">
+	  <item name="android:background">@drawable/theme_deeppurple_btn_default_holo_light</item>
+  </style>
+
+  <style name="ProgressBartheme_deeppurple" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/theme_deeppurple_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/theme_deeppurple_progress_indeterminate_horizontal_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="SeekBartheme_deeppurple" parent="android:Widget.SeekBar">
+      <item name="android:progressDrawable">@drawable/theme_deeppurple_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/theme_deeppurple_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:minHeight">13dip</item>
+      <item name="android:maxHeight">13dip</item>
+      <item name="android:thumb">@drawable/theme_deeppurple_scrubber_control_selector_holo_light</item>
+      <item name="android:thumbOffset">16dip</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+  </style>
+
+  <style name="Toggletheme_deeppurple" parent="android:Widget.Button.Toggle">
+      <item name="android:background">@drawable/theme_deeppurple_btn_toggle_holo_light</item>
+      <item name="android:minHeight">48dip</item>
+	  <item name="android:textColor">?attr/tabText</item>
+  </style>
+
+</resources>
