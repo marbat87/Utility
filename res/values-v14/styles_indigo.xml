@@ -50,6 +50,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_indigo_light</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_light</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
 	</style>
 	
     <style name="IndigoLight" parent="@style/Holo.Theme.Light">
@@ -102,6 +109,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_indigo_light</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_light</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
 	</style>
     
         <style name="ActionBar.Solid.Action_bar_indigo_light" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
@@ -172,6 +186,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_indigo_dark</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_dark</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
     </style>
     
     <style name="IndigoDark" parent="@style/Holo.Theme">
@@ -223,6 +244,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_action_bar_indigo_dark</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_indigo_dark</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_indigo_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_indigo</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_indigo</item>
     </style>   
     
     <style name="ActionBar.Solid.Action_bar_indigo_dark" parent="@style/Widget.AppCompat.ActionBar.Solid">
