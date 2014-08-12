@@ -27,13 +27,19 @@
         <item>0</item>
     </string-array>
     <string-array name="pref_default_theme_entries">        
-        <item>Tema Misto (default)</item>
-        <item>Tema Chiaro</item>
-        <item>Tema Scuro</item>
+        <item>Indigo - Chiaro (Predefinito)</item>
+        <item>Indigo - Scuro</item>
+        <item>BlueGrey - Chiaro</item>
+        <item>BlueGrey - Scuro</item>
+        <item>Red - Chiaro</item>
+        <item>Red - Scuro</item>
     </string-array>
     <string-array name="pref_default_theme_values">        
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 </resources>

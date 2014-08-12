@@ -13,7 +13,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 public class Utility {
 	
@@ -120,62 +119,80 @@ public class Utility {
 	public static void updateTheme(Activity activity) {
 	       SharedPreferences sp = PreferenceManager
 	                .getDefaultSharedPreferences(activity);
-//	       Log.i("THEME SET", sp.getString("applicationTheme", "0") + " ");
-	       if (!sp.getString("applicationTheme", "0").equals("")) {
-		       switch (Integer.valueOf(sp.getString("applicationTheme", "0"))) {
+//	       Log.i("THEME SET", sp.getString("applicationThemeNew", "0") + " ");
+	       if (!sp.getString("applicationThemeNew", "0").equals("")) {
+		       switch (Integer.valueOf(sp.getString("applicationThemeNew", "0"))) {
 		        	case 0:
-		        		activity.setTheme(R.style.AppThemeMixed);
+		        		activity.setTheme(R.style.IndigoLight);
 		        		break;
 		        	case 1:
-		        		activity.setTheme(R.style.AppThemeLight);
+		        		activity.setTheme(R.style.IndigoDark);
 		        		break;
 		        	case 2:
-		        		activity.setTheme(R.style.AppThemeDark);
+		        		activity.setTheme(R.style.BlueGreyLight);
+		        		break;
+		        	case 3:
+		        		activity.setTheme(R.style.BlueGreyDark);
+		        		break;
+		        	case 4:
+		        		activity.setTheme(R.style.RedLight);
+		        		break;
+		        	case 5:
+		        		activity.setTheme(R.style.RedDark);
 		        		break;
 		        	default:
-		        		activity.setTheme(R.style.AppThemeMixed);
+		        		activity.setTheme(R.style.IndigoLight);
 		        		break;
 		        }
 			}
 	       else {
-	    	   activity.setTheme(R.style.AppThemeMixed); 
+	    	   activity.setTheme(R.style.IndigoLight); 
 	       }
 	}
 	
 	public static void updateThemeWithSlider(Activity activity) {
 	       SharedPreferences sp = PreferenceManager
 	                .getDefaultSharedPreferences(activity);
-	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
-	       if (!sp.getString("applicationTheme", "0").equals("")) {
-		       switch (Integer.valueOf(sp.getString("applicationTheme", "0"))) {
+//	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
+	       if (!sp.getString("applicationThemeNew", "0").equals("")) {
+		       switch (Integer.valueOf(sp.getString("applicationThemeNew", "0"))) {
 		        	case 0:
-		        		Log.i("VADO", "1");
-		        		activity.setTheme(R.style.AppThemeSliderMixed);
+//		        		Log.i("VADO", "1");
+		        		activity.setTheme(R.style.IndigoSliderLight);
 		        		break;
 		        	case 1:
-		        		activity.setTheme(R.style.AppThemeSliderLight);
+		        		activity.setTheme(R.style.IndigoSliderDark);
 		        		break;
 		        	case 2:
-		        		activity.setTheme(R.style.AppThemeSliderDark);
+		        		activity.setTheme(R.style.BlueGreySliderLight);
 		        		break;
+		        	case 3:
+		        		activity.setTheme(R.style.BlueGreySliderDark);
+		        		break;
+		        	case 4:
+		        		activity.setTheme(R.style.RedSliderLight);
+		        		break;
+		        	case 5:
+		        		activity.setTheme(R.style.RedSliderDark);
+		        		break;		        		
 		        	default:
-		        		Log.i("VADO", "2");
-		        		activity.setTheme(R.style.AppThemeSliderMixed);
+//		        		Log.i("VADO", "2");
+		        		activity.setTheme(R.style.IndigoSliderLight);
 		        		break;
 		        }
 			}
 	       else {
-	    	   Log.i("VADO", "3");
-	    	   activity.setTheme(R.style.AppThemeSliderMixed);
+//	    	   Log.i("VADO", "3");
+	    	   activity.setTheme(R.style.IndigoSliderLight);
 	       }
 	}
 	
 	public static int getChoosedTheme(Activity activity) {
 	       SharedPreferences sp = PreferenceManager
 	                .getDefaultSharedPreferences(activity);
-//	       Log.i("THEME CHOOSED", sp.getString("applicationTheme", "0") + " ");
-	       if (!sp.getString("applicationTheme", "-1").equals(""))
-	    	   return Integer.valueOf(sp.getString("applicationTheme", "0"));
+//	       Log.i("THEME CHOOSED", sp.getString("applicationThemeNew", "0") + " ");
+	       if (!sp.getString("applicationThemeNew", "-1").equals(""))
+	    	   return Integer.valueOf(sp.getString("applicationThemeNew", "0"));
 	       else
 	    	   return 0;
 	       

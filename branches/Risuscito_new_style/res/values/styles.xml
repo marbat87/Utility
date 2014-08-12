@@ -241,7 +241,7 @@
 		<item name="customChangelog">@drawable/ic_fa_info</item>
 		<item name="customDots">@drawable/ic_action_dots</item>
     </style> 
-  
+    
     <style name="MyActionButton" parent="">
         <item name="android:background">?attr/actionBarItemBackground</item>
         <item name="android:paddingLeft">12dip</item>
@@ -261,5 +261,13 @@
            parent="Widget.AppCompat.Light.Base.ActionButton">
 		<item name="android:src">?attr/customDots</item>
 	</style>
+	
+    <style name="MenuDrawerFontWhite" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
     
 </resources>

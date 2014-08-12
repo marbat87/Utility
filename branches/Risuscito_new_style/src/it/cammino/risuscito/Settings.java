@@ -34,7 +34,7 @@ public class Settings extends PreferenceFragment {
         			getResources().getStringArray(R.array.save_location_nosd_values));
         }
         
-        ListPreference applicationTheme = (ListPreference) findPreference("applicationTheme");
+        ListPreference applicationTheme = (ListPreference) findPreference("applicationThemeNew");
         applicationTheme.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			
 			@Override

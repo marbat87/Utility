@@ -35,7 +35,7 @@
     	android:defaultValue="0" />
     
    	<ListPreference 
-        android:key="applicationTheme"
+        android:key="applicationThemeNew"
     	android:title="@string/applicatgion_theme_title"
     	android:summary="@string/applicatgion_theme_summary"
     	android:entries="@array/pref_default_theme_entries"
