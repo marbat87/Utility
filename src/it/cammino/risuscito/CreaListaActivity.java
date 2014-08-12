@@ -145,7 +145,9 @@ public class CreaListaActivity extends Activity
 
         //Serve per settare il colore del testo a seconda del tema.
         //A quanto parae non si riesce usando gli attributes direttamente nel layout
-        if (Utility.getChoosedTheme(CreaListaActivity.this) == 2)
+        if (Utility.getChoosedTheme(CreaListaActivity.this) == 1
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 3
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 5)
         	positionLI = R.layout.position_list_item_dark;
         else
         	positionLI = R.layout.position_list_item_light;

@@ -10,5 +10,11 @@
     <color name="dividerHoloDark">#414243</color>
     <color name="custom_slider_backgound_light">#222222</color>
  	<color name="custom_slider_backgound_dark">#DDDDDD</color>
+ 	<color name="Indigo">#3f51b5</color>
+ 	<color name="BlueGrey">#607d8b</color>
+ 	<color name="RedTheme">#e51c23</color>
+ 	<color name="DeepPurple">#673ab7</color>
+ 	<color name="Teal">#009688</color>
+ 	<color name ="Brown">#795548</color>
  
 </resources> 

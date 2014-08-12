@@ -35,23 +35,42 @@ public class MainActivity extends Activity {
 		listaCanti = new DatabaseCanti(this);
         
         sliderMenu = addonSlider().obtainDefaultSliderMenu(R.layout.main_menu);
+        
+        addonSlider().setOverlayActionBar(false);
 
+        sliderMenu.setInverseTextColorWhenSelected(false);
+        
         sliderMenu.add(R.string.activity_homepage,
-        		Risuscito.class, SliderMenu.BLUE).setIconAttr(R.attr.customHome);
+        		Risuscito.class, SliderMenu.BLUE).setIconAttr(R.attr.customHome)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(R.string.title_activity_search,
-        		GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch);
+        		GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(R.string.title_activity_general_index,
-        		GeneralIndex.class, SliderMenu.BLUE).setIconAttr(R.attr.customIndexes);
+        		GeneralIndex.class, SliderMenu.BLUE).setIconAttr(R.attr.customIndexes)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(R.string.title_activity_custom_lists,
-        		CustomLists.class, SliderMenu.BLUE).setIconAttr(R.attr.customLists);
+        		CustomLists.class, SliderMenu.BLUE).setIconAttr(R.attr.customLists)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")",
-        		FavouritesActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customFavorite);
+        		FavouritesActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customFavorite)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(R.string.title_activity_settings,
-        		Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings);
+        		Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(R.string.title_activity_about,
-        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customChangelog);
+        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customChangelog)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
+        
         sliderMenu.add(R.string.title_activity_donate,
-        		DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks);
+        		DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks)
+        		.setTextAppereance(R.style.MenuDrawerFontWhite);
                 
         checkScreenAwake();
                 
@@ -62,8 +81,9 @@ public class MainActivity extends Activity {
     	checkScreenAwake();
     	sliderMenu.remove(4);
     	SliderItem favoritesItem = new SliderItem()
-        	.setLabel(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")")
-        .setFragmentClass(FavouritesActivity.class);
+    		.setLabel(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")")
+    		.setFragmentClass(FavouritesActivity.class)
+    		.setTextAppereance(R.style.MenuDrawerFontWhite);
         sliderMenu.add(favoritesItem, 4).setIconAttr(R.attr.customFavorite).fillColors(SliderMenu.BLUE);
     	 
     	super.onResume();

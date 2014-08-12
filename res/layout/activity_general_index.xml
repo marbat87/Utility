@@ -8,7 +8,7 @@
 
 	<com.astuetz.PagerSlidingTabStrip
 	    android:id="@+id/tabs"
-		app:pstsIndicatorColor="@color/bluHolo"
+		app:pstsIndicatorColor="?attr/customPstsIndicatorColor"
 		app:pstsDividerColor="?attr/tabDivider"
 		app:pstsUnderlineColor="?attr/tabDivider"
 		app:pstsShouldExpand="true"

@@ -250,17 +250,7 @@
 		<item name="customChangelog">@drawable/ic_fa_info</item>
 		<item name="customDots">@drawable/ic_action_dots</item>
     </style> 
-  
-    <style name="MyActionButton" parent="">
-        <item name="android:background">?attr/actionBarItemBackground</item>
-        <item name="android:paddingLeft">12dip</item>
-        <item name="android:paddingRight">12dip</item>
-        <item name="android:minWidth">@dimen/abc_action_button_min_width</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="android:gravity">center</item>
-        <item name="android:maxLines">2</item>
-    </style>
-
+    
 	<style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
     	<item name="android:src">@drawable/ic_action_dots</item>
 	</style>

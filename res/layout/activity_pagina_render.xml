@@ -123,7 +123,7 @@
 	        android:id="@+id/speed_text"
 	        android:layout_height="wrap_content"
 	        android:layout_width="wrap_content"
-	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:textAppearance="@style/myTheme.ActionBar.Text"
 	        android:layout_gravity="center_vertical"
 	        android:paddingLeft="@dimen/percent_padding"
 	        android:minEms="3"/>
