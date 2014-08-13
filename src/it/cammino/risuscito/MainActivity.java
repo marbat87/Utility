@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         
         sliderMenu = addonSlider().obtainDefaultSliderMenu(R.layout.main_menu);
         
-        addonSlider().setOverlayActionBar(false);
+//        addonSlider().setOverlayActionBar(false);
 
         sliderMenu.setInverseTextColorWhenSelected(false);
         

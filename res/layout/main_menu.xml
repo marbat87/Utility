@@ -5,11 +5,11 @@
     android:background="?customSliderBackground"
     android:orientation="vertical">
     
-<!--     <ImageView -->
-<!--         android:layout_width="fill_parent" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:src="@drawable/risuscito_menu" -->
-<!-- 		android:adjustViewBounds="true"/> -->
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/risuscito_menu"
+		android:adjustViewBounds="true"/>
 
     <ListView
         android:id="@+id/slider_menu"
