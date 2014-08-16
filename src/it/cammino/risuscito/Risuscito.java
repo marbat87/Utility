@@ -57,35 +57,6 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 				((MainActivity) getActivity()).addonSlider().toggle();	
 			}
 		});
-		
-        // recupera il pulsante che lancia l'elenco dei canti in ordine alfabetico
-//        Button buttonAlpha = (Button) rootView.findViewById(R.id.generalIndex);       
-//        buttonAlpha.setOnClickListener(new View.OnClickListener() {
-//        	@Override
-//        	public void onClick(View v) {
-//        		startSubActivityPage();
-//        	}
-//        });
-        
-        // recupera il pulsante che lancia l'elenco dei canti per pagina
-//        Button buttonNum = (Button) rootView.findViewById(R.id.predefinedLists);       
-//        buttonNum.setOnClickListener(new View.OnClickListener() {
-//        	@Override
-//        	public void onClick(View v) {
-//        		startSubActivityLists();
-//        	}
-//        }); 
-        
-        // recupera il pulsante che lancia la ricerca per titolo
-//        Button buttonSearchText = (Button) rootView.findViewById(R.id.titleSearch);       
-//        buttonSearchText.setOnClickListener(new View.OnClickListener() {
-//        	@Override
-//        	public void onClick(View v) {
-//        		startSubActivitySearch();
-//        	}
-//        });
-        
-//        checkScreenAwake();
         
 		Display display = getActivity().getWindowManager().getDefaultDisplay();
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -190,23 +161,6 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         
         return rootView;
 	}
-
-//    @Override
-//    public void onResume() {
-//    	super.onResume();
-//    	checkScreenAwake();
-//    }
-    
-    //controlla se l'app deve mantenere lo schermo acceso
-//    public void checkScreenAwake() {
-//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		boolean screenOn = pref.getBoolean("screenOn", false);
-//		ImageView imageView = (ImageView) rootView.findViewById(R.id.imageView1);
-//		if (screenOn)
-//			imageView.setKeepScreenOn(true);
-//		else
-//			imageView.setKeepScreenOn(false);
-//    }
     
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -220,36 +174,9 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 		case R.id.action_help:
 			showHelp();
 			return true;
-//		case R.id.action_settings:
-//			startActivity(new Intent(getActivity(), Settings.class));
-//			return true;
-//		case R.id.action_favourites:
-//			startActivity(new Intent(getActivity(), FavouritesActivity.class));
-//			return true;
-//		case R.id.action_donate:
-//			startActivity(new Intent(getActivity(), DonateActivity.class));
-//			return true;
-//		case R.id.action_about:
-//			startActivity(new Intent(getActivity(), AboutActivity.class));
-//			return true;
 		}
 		return false;
 	}
-    
-//    //metodo che lancia l'indice
-//    private void startSubActivityPage() {
-//    	startActivity(new Intent(getActivity(), GeneralIndex.class));
-//    }
-//    
-//    //metodo che lancia la ricerca per titolo
-//    private void startSubActivitySearch() {
-//    	startActivity(new Intent(getActivity(), GeneralSearch.class));
-//    }
-//    
-//    //metodo che lancia le liste personalizzate
-//    private void startSubActivityLists() {
-//    	startActivity(new Intent(getActivity(), CustomLists.class));
-//    }
     
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {

@@ -3,6 +3,7 @@
 	<style name="TealSliderLight" parent="@style/Holo.Theme.Slider.Light">
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
+        <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_teal</item>
         <item name="customSliderBackground">@color/Teal</item>
 	    <item name="customChord">@drawable/ic_action_content_chord_dark</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -14,13 +15,13 @@
 	    <item name="customShare">@drawable/ic_action_share</item>
 	    <item name="customReset">@drawable/ic_action_tab_reset_dark</item>
 		<item name="customSave">@drawable/ic_action_tab_save_dark</item>
-		<item name="customStar">@drawable/star</item>
-		<item name="customSaveFile">@drawable/save_music_icon</item>
-		<item name="customDeleteFile">@drawable/delete_music_icon</item>
-		<item name="customRewind">@drawable/rewind_icon</item>
-		<item name="customPlay">@drawable/play_icon</item>
-		<item name="customFF">@drawable/fast_forward_icon</item>
-		<item name="customStop">@drawable/stop_icon</item>
+		<item name="customStar">@drawable/star_teal</item>
+		<item name="customSaveFile">@drawable/save_music_icon_teal</item>
+		<item name="customDeleteFile">@drawable/delete_music_icon_teal</item>
+		<item name="customRewind">@drawable/rewind_icon_teal</item>
+		<item name="customPlay">@drawable/play_icon_teal</item>
+		<item name="customFF">@drawable/fast_forward_icon_teal</item>
+		<item name="customStop">@drawable/stop_icon_teal</item>
 		<item name="customNoSong">@drawable/ic_alerts_and_states_error</item>
 		<item name="customBottomBarColor">@color/Teal</item>
 		<item name="customSlidePlay">@drawable/ic_action_slideshow</item>
@@ -41,6 +42,7 @@
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="actionMenuTextColor">@android:color/white</item>
 		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_teal_light</item>
+		<item name="customDialogButtonBackground">@drawable/selectable_background_action_bar_teal_light</item>
 		<item name="android:itemBackground">@drawable/selectable_background_action_bar_teal_light</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_teal_light</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_teal_light</item>
@@ -58,11 +60,18 @@
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
     	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
+    	<item name="android:listViewStyle">@style/ListViewtheme_teal</item>
+    	<item name="android:listViewWhiteStyle">@style/ListViewtheme_teal.White</item>
+    	<item name="android:spinnerItemStyle">@style/SpinnerItemtheme_teal</item>
+    	<item name="customInnerSwitch">@drawable/theme_teal_switch_inner_holo_light</item>
+    	<item name="customTrackSwitch">@drawable/theme_teal_switch_track_holo_light</item>
+    	<item name="customRadioButton">@drawable/theme_teal_btn_radio_holo_light</item>
     </style>
     
 	<style name="TealLight" parent="@style/Holo.Theme.Light">
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
+        <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_teal</item>
         <item name="customSliderBackground">@color/Teal</item>
 	    <item name="customChord">@drawable/ic_action_content_chord_dark</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -74,13 +83,13 @@
 	    <item name="customShare">@drawable/ic_action_share</item>
 	    <item name="customReset">@drawable/ic_action_tab_reset_dark</item>
 		<item name="customSave">@drawable/ic_action_tab_save_dark</item>
-		<item name="customStar">@drawable/star</item>
-		<item name="customSaveFile">@drawable/save_music_icon</item>
-		<item name="customDeleteFile">@drawable/delete_music_icon</item>
-		<item name="customRewind">@drawable/rewind_icon</item>
-		<item name="customPlay">@drawable/play_icon</item>
-		<item name="customFF">@drawable/fast_forward_icon</item>
-		<item name="customStop">@drawable/stop_icon</item>
+		<item name="customStar">@drawable/star_teal</item>
+		<item name="customSaveFile">@drawable/save_music_icon_teal</item>
+		<item name="customDeleteFile">@drawable/delete_music_icon_teal</item>
+		<item name="customRewind">@drawable/rewind_icon_teal</item>
+		<item name="customPlay">@drawable/play_icon_teal</item>
+		<item name="customFF">@drawable/fast_forward_icon_teal</item>
+		<item name="customStop">@drawable/stop_icon_teal</item>
 		<item name="customNoSong">@drawable/ic_alerts_and_states_error</item>
 		<item name="customBottomBarColor">@color/Teal</item>
 		<item name="customSlidePlay">@drawable/ic_action_slideshow</item>
@@ -101,6 +110,7 @@
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="actionMenuTextColor">@android:color/white</item>
 		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_teal_light</item>
+		<item name="customDialogButtonBackground">@drawable/selectable_background_action_bar_teal_light</item>
 		<item name="android:itemBackground">@drawable/selectable_background_action_bar_teal_light</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_teal_light</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_teal_light</item>
@@ -118,11 +128,18 @@
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
     	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
+    	<item name="android:listViewStyle">@style/ListViewtheme_teal</item>
+    	<item name="android:listViewWhiteStyle">@style/ListViewtheme_teal.White</item>
+    	<item name="android:spinnerItemStyle">@style/SpinnerItemtheme_teal</item>
+    	<item name="customInnerSwitch">@drawable/theme_teal_switch_inner_holo_light</item>
+    	<item name="customTrackSwitch">@drawable/theme_teal_switch_track_holo_light</item>
+    	<item name="customRadioButton">@drawable/theme_teal_btn_radio_holo_light</item>
     </style>
 	
 	<style name="TealSliderDark" parent="@style/Holo.Theme.Slider">
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
+        <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_teal</item>
         <item name="customSliderBackground">@color/Teal</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -134,13 +151,13 @@
 	    <item name="customShare">@drawable/ic_action_share</item>
 	    <item name="customReset">@drawable/ic_action_tab_reset</item>
 		<item name="customSave">@drawable/ic_action_tab_save</item>
-		<item name="customStar">@drawable/star_light</item>
-		<item name="customSaveFile">@drawable/save_music_icon_light</item>
-		<item name="customDeleteFile">@drawable/delete_music_icon_light</item>
-		<item name="customRewind">@drawable/rewind_icon_light</item>
-		<item name="customPlay">@drawable/play_icon_light</item>
-		<item name="customFF">@drawable/fast_forward_icon_light</item>
-		<item name="customStop">@drawable/stop_icon_light</item>
+		<item name="customStar">@drawable/star_light_teal</item>
+		<item name="customSaveFile">@drawable/save_music_icon_light_teal</item>
+		<item name="customDeleteFile">@drawable/delete_music_icon_light_teal</item>
+		<item name="customRewind">@drawable/rewind_icon_light_teal</item>
+		<item name="customPlay">@drawable/play_icon_light_teal</item>
+		<item name="customFF">@drawable/fast_forward_icon_light_teal</item>
+		<item name="customStop">@drawable/stop_icon_light_teal</item>
 		<item name="customNoSong">@drawable/ic_alerts_and_states_error_light</item>
 		<item name="customBottomBarColor">@color/Teal</item>
 		<item name="customSlidePlay">@drawable/ic_action_slideshow</item>
@@ -160,6 +177,7 @@
 		<item name="customPstsIndicatorColor">@color/Teal</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_teal_dark</item>
+		<item name="customDialogButtonBackground">@drawable/selectable_background_action_bar_teal_dark</item>
 		<item name="android:itemBackground">@drawable/selectable_background_action_bar_teal_dark</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_teal_dark</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_teal_dark</item>
@@ -170,18 +188,25 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_teal_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_teal_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_dark</item>
-        <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
-    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_teal_dark</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal_dark</item>
    		<item name="android:buttonStyle">@style/Buttontheme_teal</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
     	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
+    	<item name="android:listViewStyle">@style/ListViewtheme_teal_dark</item>
+    	<item name="android:listViewWhiteStyle">@style/ListViewtheme_teal.White_dark</item>
+    	<item name="android:spinnerItemStyle">@style/SpinnerItemtheme_teal_dark</item>
+    	<item name="customInnerSwitch">@drawable/theme_teal_switch_inner_holo_dark</item>
+    	<item name="customTrackSwitch">@drawable/theme_teal_switch_track_holo_dark</item>
+    	<item name="customRadioButton">@drawable/theme_teal_btn_radio_holo_dark</item>
     </style>   
 
 	<style name="TealDark" parent="@style/Holo.Theme">
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
+        <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_teal</item>
         <item name="customSliderBackground">@color/Teal</item>
 	    <item name="customChord">@drawable/ic_action_content_chord</item>
 	    <item name="customEdit">@drawable/ic_action_content_edit</item>
@@ -193,13 +218,13 @@
 	    <item name="customShare">@drawable/ic_action_share</item>
 	    <item name="customReset">@drawable/ic_action_tab_reset</item>
 		<item name="customSave">@drawable/ic_action_tab_save</item>
-		<item name="customStar">@drawable/star_light</item>
-		<item name="customSaveFile">@drawable/save_music_icon_light</item>
-		<item name="customDeleteFile">@drawable/delete_music_icon_light</item>
-		<item name="customRewind">@drawable/rewind_icon_light</item>
-		<item name="customPlay">@drawable/play_icon_light</item>
-		<item name="customFF">@drawable/fast_forward_icon_light</item>
-		<item name="customStop">@drawable/stop_icon_light</item>
+		<item name="customStar">@drawable/star_light_teal</item>
+		<item name="customSaveFile">@drawable/save_music_icon_light_teal</item>
+		<item name="customDeleteFile">@drawable/delete_music_icon_light_teal</item>
+		<item name="customRewind">@drawable/rewind_icon_light_teal</item>
+		<item name="customPlay">@drawable/play_icon_light_teal</item>
+		<item name="customFF">@drawable/fast_forward_icon_light_teal</item>
+		<item name="customStop">@drawable/stop_icon_light_teal</item>
 		<item name="customNoSong">@drawable/ic_alerts_and_states_error_light</item>
 		<item name="customBottomBarColor">@color/Teal</item>
 		<item name="customSlidePlay">@drawable/ic_action_slideshow</item>
@@ -219,6 +244,7 @@
 		<item name="customPstsIndicatorColor">@color/Teal</item>
 		<item name="menuDrawerTextColor">@style/MenuDrawerFontWhite</item>
 		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_teal_dark</item>
+		<item name="customDialogButtonBackground">@drawable/selectable_background_action_bar_teal_dark</item>
 		<item name="android:itemBackground">@drawable/selectable_background_action_bar_teal_dark</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_action_bar_teal_dark</item>
         <item name="popupMenuStyle">@style/PopupMenu.Action_bar_teal_dark</item>
@@ -229,13 +255,19 @@
         <item name="actionModeBackground">@drawable/cab_background_top_action_bar_teal_dark</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_teal_dark</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_dark</item>
-        <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
-    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_teal_dark</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal_dark</item>
    		<item name="android:buttonStyle">@style/Buttontheme_teal</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
     	<item name="android:buttonStyleToggle">@style/Toggletheme_teal</item>
+    	<item name="android:listViewStyle">@style/ListViewtheme_teal_dark</item>
+    	<item name="android:listViewWhiteStyle">@style/ListViewtheme_teal.White_dark</item>
+    	<item name="android:spinnerItemStyle">@style/SpinnerItemtheme_teal_dark</item>
+    	<item name="customInnerSwitch">@drawable/theme_teal_switch_inner_holo_dark</item>
+    	<item name="customTrackSwitch">@drawable/theme_teal_switch_track_holo_dark</item>
+    	<item name="customRadioButton">@drawable/theme_teal_btn_radio_holo_dark</item>
     </style>
     
 </resources>

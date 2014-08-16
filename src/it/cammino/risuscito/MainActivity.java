@@ -23,6 +23,32 @@ public class MainActivity extends Activity {
     private SliderMenu sliderMenu;
     private DatabaseCanti listaCanti;
     
+    public static final int[] BLUEGREY = new int[]{
+        R.color.theme_bluegrey_color, R.color.BlueGreyDark
+    };
+    
+    public static final int[] BROWN = new int[]{
+        R.color.theme_brown_color, R.color.BrownDark
+    };
+    
+    public static final int[] INDIGO = new int[]{
+        R.color.theme_indigo_color, R.color.IndigoDark
+    };
+    
+    public static final int[] RED = new int[]{
+        R.color.theme_red_color, R.color.RedThemeDark
+    };
+    
+    public static final int[] DEEPPURPLE = new int[]{
+        R.color.theme_deeppurple_color, R.color.DeepPurpleDark
+    };
+    
+    public static final int[] TEAL = new int[]{
+        R.color.theme_teal_color, R.color.TealDark
+    };
+    
+    public static int[] themeColor;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	Utility.updateThemeWithSlider(MainActivity.this);
@@ -39,37 +65,67 @@ public class MainActivity extends Activity {
 //        addonSlider().setOverlayActionBar(false);
 
         sliderMenu.setInverseTextColorWhenSelected(false);
+                
+        switch (Utility.getChoosedTheme(MainActivity.this)) {
+        	case 0:
+        	case 1:
+        		themeColor = INDIGO;
+        		break;
+        	case 2:
+        	case 3:
+        		themeColor = BLUEGREY;
+        		break;
+        	case 4:
+        	case 5:
+        		themeColor = RED;
+        		break;
+        	case 6:
+        	case 7:
+        		themeColor = DEEPPURPLE;
+        		break;
+        	case 8:
+        	case 9:
+        		themeColor = TEAL;
+        		break;
+        	case 10:
+        	case 11:
+        		themeColor = BROWN;
+        		break;
+        	default:
+        		themeColor = INDIGO;
+        		break;
+        }  
         
         sliderMenu.add(R.string.activity_homepage,
-        		Risuscito.class, SliderMenu.BLUE).setIconAttr(R.attr.customHome)
+        		Risuscito.class, themeColor).setIconAttr(R.attr.customHome)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(R.string.title_activity_search,
-        		GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch)
+        		GeneralSearch.class, themeColor).setIconAttr(R.attr.customSearch)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(R.string.title_activity_general_index,
-        		GeneralIndex.class, SliderMenu.BLUE).setIconAttr(R.attr.customIndexes)
+        		GeneralIndex.class, themeColor).setIconAttr(R.attr.customIndexes)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(R.string.title_activity_custom_lists,
-        		CustomLists.class, SliderMenu.BLUE).setIconAttr(R.attr.customLists)
+        		CustomLists.class, themeColor).setIconAttr(R.attr.customLists)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")",
-        		FavouritesActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customFavorite)
+        		FavouritesActivity.class, themeColor).setIconAttr(R.attr.customFavorite)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(R.string.title_activity_settings,
-        		Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings)
+        		Settings.class, themeColor).setIconAttr(R.attr.customSettings)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(R.string.title_activity_about,
-        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customChangelog)
+        		AboutActivity.class, themeColor).setIconAttr(R.attr.customChangelog)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
         
         sliderMenu.add(R.string.title_activity_donate,
-        		DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks)
+        		DonateActivity.class, themeColor).setIconAttr(R.attr.customThanks)
         		.setTextAppereance(R.style.MenuDrawerFontWhite);
                 
         checkScreenAwake();
@@ -84,7 +140,7 @@ public class MainActivity extends Activity {
     		.setLabel(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")")
     		.setFragmentClass(FavouritesActivity.class)
     		.setTextAppereance(R.style.MenuDrawerFontWhite);
-        sliderMenu.add(favoritesItem, 4).setIconAttr(R.attr.customFavorite).fillColors(SliderMenu.BLUE);
+        sliderMenu.add(favoritesItem, 4).setIconAttr(R.attr.customFavorite).fillColors(themeColor);
     	 
     	super.onResume();
     }    

@@ -28,7 +28,6 @@ import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.CheckBox;
 import org.holoeverywhere.widget.ImageButton;
-import org.holoeverywhere.widget.LinearLayout;
 import org.holoeverywhere.widget.RelativeLayout;
 import org.holoeverywhere.widget.SeekBar;
 import org.holoeverywhere.widget.SeekBar.OnSeekBarChangeListener;
