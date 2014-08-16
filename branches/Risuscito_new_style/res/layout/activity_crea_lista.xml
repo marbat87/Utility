@@ -65,7 +65,8 @@
 		    dslv:sort_enabled="true"
 		    dslv:remove_enabled="true"
 		    dslv:drag_start_mode="onMove"
-		    dslv:remove_mode="flingRemove" />
+		    dslv:remove_mode="flingRemove"
+		    dslv:float_background_color="?attr/customBottomBarColor" />
     
 	</LinearLayout>
 	

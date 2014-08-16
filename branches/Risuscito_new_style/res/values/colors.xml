@@ -22,5 +22,13 @@
  	<color name="theme_indigo_color">#7986cb</color>
  	<color name="theme_red_color">#f36c60</color>
  	<color name="theme_teal_color">#4db6ac</color>
+ 	<color name="neutral_color_light">#e0e0e0</color>
+ 	<color name="neutral_color_dark">#212121</color>
+ 	<color name="IndigoDark">#303f9f</color>
+ 	<color name="BlueGreyDark">#455a64</color>
+ 	<color name="RedThemeDark">#d01716</color>
+ 	<color name="DeepPurpleDark">#512da8</color>
+ 	<color name="TealDark">#00796b</color>
+ 	<color name="BrownDark">#5d4037</color>
  
 </resources> 
