@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.holoeverywhere.ThemeManager;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.DialogFragment;
@@ -1681,8 +1682,10 @@ public class PaginaRenderActivity extends Activity
     	else if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {
     		dialog.dismiss();
     		setRequestedOrientation(prevOrientation);
-    		startActivityForResult(new Intent(
-    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+    		ThemeManager.startActivity(PaginaRenderActivity.this, new Intent(
+    				PaginaRenderActivity.this, FileChooserActivity.class), null);
+//    		startActivityForResult(new Intent(
+//    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
     	}
     }
     
