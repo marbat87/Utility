@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ChangeLog">
+    	<![CDATA[
+<p>
+Changelog:
+</p>
++ XX/05/2014 <u>v 2.3.1</u>:
+<ul>
+<li>Corretti testo e accordi di alcuni canti</li>
+</ul>
++ 15/05/2014 <u>v 2.3.0</u>:
+<ul>
+<li>Inserito lo scroll automatico del testo dei canti, con velocit&#224; impostabile 
+e memorizzata automaticamente all\'uscita dal canto!</li>
+<li>Corretto l\'errore ortografico nel titolo dell\'inno dei vespri da pasqua a pentecoste 
+e rimossa la registrazione errata (purtroppo quella corretta non &#232; disponibile)</li>
+<li>Aggiunto il barr&#232; al settimo tasto</li>
+<li>Aggiunta la ricerca avanzata anche nell\'inserimento dei canti nelle liste predefinite/personalizzate</li>
+</ul>
++ 04/05/2014 <u>v 2.2.0</u>:
+<ul>
+<li>Aggiunta la possibilit&#224; di cambiare e salvare la posizione del barr&#232;!</li>
+<li>Rimesso il canto \"Una gran se&#241;al\" in azzurro</li>
+<li>Unite le due parti di: \"Preconio pasquale\" \"Non morir&#242;\", \"Eli, Eli, lamm&#224; sabactani?\"</li>
+<li>Aggiornati i link di alcune registrazioni</li>
+<li>Portato a 30 il numero massimo di elementi delle liste personalizzate</li>
+<li>Ora modificando una lista personalizzata non si perdono i canti scelti</li>
+</ul>
++ 04/04/2014 <u>v 2.1.0</u>:
+<ul>
+<li>Migliorati i risultati della ricerca avanzata</li>
+<li>Inserito il men&#249; \"Aggiungi a...\" anche nella ricerca</li>
+<li>Corretti alcuni testi dei canti</li>
+<li>Aggiunta la possibilit&#224; di rinominare le posizioni, nella creazione lista (tenendo premuto)</li>
+<li>Aggiunta guida dettagliata all\'apertura della creazione lista</li>
+<li>Corretta l\'apertura del popup all\'uscita dalla creazione lista (premendo il tasto indietro)</li>
+<li>Rimosso lo swype&#45;to&#45;remove dalla lista dei preferiti (capitava troppo spesso di rimuovere i canti per errore)</li>
+</ul>
++ 26/03/2014 <u>v 2.0.0</u>:
+<ul>
+<li>Riscritti da zero tutti i canti, per garantire un corretto allineamento degli accordi!</li>
+<li>Aggiunta la possibilit&#224; di cambiare e salvare la tonalit&#224; degli accordi</li>
+<li>Fix vari</li>
+</ul>
++ 21/02/2014 <u>v 1.7.2</u>:
+<ul>
+<li>Aggiunta la possibilit&#224; di modificare le liste personalizzate</li>
+<li>Correzione per evitare il crash per chi ha aggiornato direttamente dalla versione 1.5.0 o inferiore</li>
+</ul>
++ 19/02/2014 <u>v 1.7.1</u>:
+<ul>
+<li>Corretto bug nelle liste personalizzate su Android JellyBean</li>
+</ul>
++ 19/02/2014 <u>v 1.7.0</u>:
+<ul>
+<li>Aggiunta la creazione delle liste personalizzate! &#200; presente il pulsante \'crea\' nella barra in alto,
+all\'interno della sezione delle liste predefinite. Una volta scelto il nome della lista e delle varie \'posizioni\' per i canti,
+essa comparir&#224; assieme alle liste predefinite.</li>
+<li>Corretta una label errata nel menu \'aggiungi a...\'</li>
+<li>Correzioni varie</li>
+</ul>
++ 08/02/2014 <u>v 1.6.3</u>:
+<ul>
+<li>Aggiustamento del layout della schermata principale (l\'ultimo tasto non era visibile su dispositivi con schermo piccolo)</li>
+<li>Risoluzione di alcuni arresti anomali nella ricerca avanzata. Grazie per le segnalazioni, continuate cos&#236; :)</li>
+</ul>
++ 06/02/2014 <u>v 1.6.1</u>:
+<ul>
+<li>Nuova funzione di <b>ricerca nel testo dei canti</b>, disponibile nel nuovo tab \"Ricerca Avanzata\", insieme alla ricerca veloce nel titolo</li>
+<li>Possibilit&#224; di aggiungere i canti ad una lista o ai preferiti, direttamente dagli indici (tieni premuto)</li>
+<li>Aggiunto il canto alla seconda lettura per l\'Eucarestia (attivabile dalle impostazioni)</li>
+</ul>
++ 01/02/2014 <u>v 1.5.0</u>:
+<ul>
+<li>Aggiunto il salvataggio automatico dello zoom all\'interno di ogni canto!</li>
+<li>Ora &#232; possibile aggiungere quanti canti si desidera alla frazione del pane e al vino</li>
+<li>Aggiunti i numeri della pagine nei risultati delle ricerche per titolo</li>
+<li><strike>Possibile soluzione per arresto anomalo su Galaxy Note 10.1 (da verificare)</strike></li>
+<li>Fix vari</li>
+</ul>
++ 16/01/2014 <u>v 1.4.0</u>:
+<ul>
+<li>Aggiunto il canto mancante \"Ave, o Maria, colomba incorrotta\"</li>
+<li>Aggiunta la possibilit&#224; di salvare le registrazioni in memoria, per poterle riascoltare senza necessit&#224; di connessione internet:
+\n&#200; presente il pulsante nella pagina del canto</li>
+<li>Fix vari</li>
+</ul>
++ 05/01/2014 <u>v 1.3.1</u>:
+<ul>
+<li>Corretto un possibile crash alla chiusura degli indici (per piacere mettete
+un commento su cosa e quando vi &#232; successo quando segnalate
+ un arresto anomalo)</li>
+<li>Pausa automatica della riproduzione alla ricezione di una chiamata</li>
+<li>Abbassamento temporaneo del volume in caso di notifiche</li>
+<li>Aggiunti i canti pi&#249; recenti:
+	<ul>
+		<li>Una gran senal (versione con ritornello in Spagnolo e strofe in Italiano)</li>
+		<li>Se siete risorti con Cristo</li>
+		<li>Resurrexit</li>
+		<li>Ecco il mio servo</li>
+	</ul>
+</li>
+</ul>
++ 05/12/2013 <u>v 1.3</u>:
+<ul>
+<li>Canti in versione HTML!! Niente pi&#249; canti sfocati e dimensione dell\'applicazione notevolmente diminuita!</li>
+<li>Corretto il layout nelle liste predefinite: ora il pulsante \"PULISCI LISTA\" &#232; sempre visibile</li>
+<li>Nuova modalit&#224; di eliminazione nella lista dei preferiti: swype a sinistra o destra</li>
+</ul>
++ 23/11/2013 <u>v 1.2</u>:
+<ul>
+<li>Aggiunte le registrazioni dei canti, avviabili tramite appositi comandi all\'interno delle pagine dei canti! (Leggi la NOTA2 sotto)</li>
+<li>Cambiata l\'icona dei preferiti, dalla stella al cuore</li>
+<li>Rimosso il link ai preferiti nella pagina del canto, per evitare dei cicli di apertura infiniti</li>
+<li>Sostituito il pulsante \"INVIA LISTA\" con la condivisione standard nella barra in alto</li>
+<li>Aggiunti tutti i metodi di condivisione che supportano l\'invio di testo, <b>Whatsapp</b> compreso!</li>
+<li>Risolto il bug che non permetteva di condividere le liste per messaggio su Android 4.4</li>
+</ul>
++ 07/11/2013 <u>v 1.1.1</u>:
+<ul>
+<li>Aggiunto doppio tap per zoomare sui canti</li>
+<li>Nuova grafica con i TAB negli elenchi</li>
+<li>Il men&#249; \"preferiti\" ora &#232; sempre visibile nella action bar (tranne nelle impostazioni)</li>
+<li>UI in tema HOLO anche per le versioni precedenti ad Honeycomb</li>
+<li>Il tasto indietro nella barra di navigazione, ora porta alla pagina genitore e non pi&#249; sempre alla Home</li>
+<li>Fixato lo switch per il "no standby" che su alcuni dispositivi risultava troppo ampio</li>
+<li>Aggiunto il colore dei canti in tutte le liste</li>
+</ul>
++ 24/10/2013 <u>v 1.0</u>:</dt>
+<ul>
+<li>First Release</li>
+</ul>
+<p>
+<b>NOTA</b>: Questa applicazione &#232; completamente gratuita e priva di pubblicit&#224;, fatta senza scopi di lucro.
+</p>
+<p>
+<b>NOTA2:</b>Le registrazioni dei canti sono prese dal sito www.resuscicanti.com e richiedono, ovviamente, 
+	una connessione ad internet attiva per poter essere ascoltati.
+	<u>A tutti i fratelli, ricordo comunque che i canti registrati da Kiko o altri catechisti, sono puramente indicativi.
+	Vi invito, quindi, ad attenervi principalmente alla versione trasmessa dai vostri catechisti, qualora possibile.
+	</u>
+</p>
+<p><b>La Pace.</b></p>
+ 		]]>
+</string>
+<string name="new_changes">
+    <![CDATA[
++ 15/05/2014 <u>v 2.3.0</u>:
+<ul>
+<li>Inserito lo scroll automatico del testo dei canti, con velocit&#224; impostabile 
+e memorizzata automaticamente all\'uscita dal canto!</li>
+<li>Corretto l\'errore ortografico nel titolo dell\'inno dei vespri da pasqua a pentecoste 
+e rimossa la registrazione errata (purtroppo quella corretta non &#232; disponibile)</li>
+<li>Aggiunto il barr&#232; al settimo tasto</li>
+<li>Aggiunta la ricerca avanzata anche nell\'inserimento dei canti nelle liste predefinite/personalizzate</li>
+</ul>
+ 		]]></string>        
+    
+</resources>

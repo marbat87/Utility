@@ -1,0 +1,107 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    <style name="MyActionButton" parent="">
+        <item name="android:background">?attr/actionBarItemBackground</item>
+        <item name="android:paddingLeft">12dip</item>
+        <item name="android:paddingRight">12dip</item>
+        <item name="android:minWidth">@dimen/abc_action_button_min_width</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">2</item>
+    </style>
+    
+    <style name="Widget.AppCompat.Base.ActionButton.Overflow"
+           parent="Widget.AppCompat.Base.ActionButton">
+		<item name="android:src">?attr/customDots</item>
+	</style>
+
+    <style name="Widget.AppCompat.Light.Base.ActionButton.Overflow"
+           parent="Widget.AppCompat.Light.Base.ActionButton">
+		<item name="android:src">?attr/customDots</item>
+	</style>
+	
+    <style name="MenuDrawerFontWhite" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+	<style name="Holo.Button.Borderless" parent="Holo.Button">
+    	<item name="android:background">?attr/customDialogButtonBackground</item>
+    	<item name="android:paddingLeft">4dip</item>
+    	<item name="android:paddingRight">4dip</item>
+  	</style>
+  	
+	<style name="Widget.AppCompat.Base.ListView.DropDown" parent="android:Widget.ListView">
+        <item name="android:listSelector">?attr/customDialogButtonBackground</item>
+    </style>
+    
+	<style name="Holo.ListView.Light" parent="Holo.ListView">
+    	<item name="android:cacheColorHint">@drawable/background_cache_hint_selector_holo_light</item>
+    	<item name="android:divider">@drawable/list_divider_holo_light</item>
+    	<item name="android:listDivider">@drawable/list_divider_holo_light</item>
+    	<item name="android:listSelector">?attr/customDialogButtonBackground</item>
+  	</style>
+	
+	<style name="Holo.ListView" parent="Holo.ListView.Base">
+    	<item name="android:cacheColorHint">@drawable/background_cache_hint_selector_holo_dark</item>
+    	<item name="android:divider">@drawable/list_divider_holo_dark</item>
+    	<item name="android:fadingEdge">vertical</item>
+    	<item name="android:listDivider">@drawable/list_divider_holo_dark</item>
+    	<item name="android:listSelector">?attr/customDialogButtonBackground</item>
+    	<item name="android:scrollbars">vertical</item>
+  	</style>
+	
+	<style name="Holo.Switch" parent="Holo">
+    	<item name="switchMinWidth">96dp</item>
+    	<item name="switchPadding">16dp</item>
+    	<item name="switchTextAppearance">@style/Holo.Switch.TextAppearance</item>
+    	<item name="textOff">@string/capital_off</item>
+    	<item name="textOn">@string/capital_on</item>
+    	<item name="thumb">?attr/customInnerSwitch</item>
+    	<item name="thumbTextPadding">12dp</item>
+    	<item name="toggleWhenClick">true</item>
+    	<item name="track">?attr/customTrackSwitch</item>
+  	</style>
+  	
+	<style name="Holo.Switch.Light" parent="Holo.Switch">
+    	<item name="switchTextAppearance">@style/Holo.Switch.TextAppearance.Light</item>
+    	<item name="thumb">?attr/customInnerSwitch</item>
+    	<item name="track">?attr/customTrackSwitch</item>
+  	</style>
+  	
+	<style name="GoogleNavDrawer.MainSectionText" parent="android:TextAppearance.Medium">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:minHeight">@dimen/main_section_item_height</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="GoogleNavDrawer.SecondarySectionText" parent="GoogleNavDrawer.MainSectionText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:minHeight">@dimen/secondary_section_item_height</item>
+    </style>
+    
+</resources>

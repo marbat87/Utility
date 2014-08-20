@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+          android:drawable="@drawable/ic_av_play_pressed_bluegrey" /> <!-- pressed -->
+    <item android:state_selected="true"
+          android:drawable="@drawable/ic_av_pause_active_light" /> <!-- playing -->
+   	<item android:drawable="@drawable/ic_av_play_active_light" /> <!-- default -->
+</selector>
