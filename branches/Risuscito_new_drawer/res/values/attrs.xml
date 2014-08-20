@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<declare-styleable name="customAttrs">
+	    <attr name="customChord" format="reference" />
+	    <attr name="customEdit" format="reference" />
+	    <attr name="customNew" format="reference" />
+	    <attr name="customFavorite" format="reference" />
+	    <attr name="customHelp" format="reference" />
+	    <attr name="customDelete" format="reference" />
+	    <attr name="customSettings" format="reference" />
+	    <attr name="customShare" format="reference" />
+	    <attr name="customReset" format="reference" />
+	    <attr name="customSave" format="reference" />
+	    <attr name="customStar" format="reference" />
+	    <attr name="customSaveFile" format="reference" />
+	    <attr name="customDeleteFile" format="reference" />
+	    <attr name="customRewind" format="reference" />
+	    <attr name="customPlay" format="reference" />
+	    <attr name="customFF" format="reference" />
+	    <attr name="customStop" format="reference" />
+	    <attr name="customNoSong" format="reference" />
+	    <attr name="customBottomBarColor" format="reference" />
+	    <attr name="customSlidePlay" format="reference" />
+	    <attr name="customSlideStop" format="reference" />
+	    <attr name="customExpPDF" format="reference" />
+	    <attr name="tabText" format="color" />
+	    <attr name="tabBackground" format="color" />
+	    <attr name="tabDivider" format="color" />
+	    <attr name="customSearch" format="reference" />
+	    <attr name="customThanks" format="reference" />
+	    <attr name="customIndexes" format="reference" />
+	    <attr name="customLists" format="reference" />
+	    <attr name="customHome" format="reference" />
+	    <attr name="customInsertItem" format="reference" />
+	    <attr name="customChangelog" format="reference" />
+	    <attr name="customDrawer" format="reference" />
+	    <attr name="customSliderBackground" format="color" />
+	    <attr name="customDots" format="reference" />
+	    <attr name="customPstsIndicatorColor" format="color" />
+	    <attr name ="menuDrawerTextColor" format="reference" />
+	    <attr name ="customTabBackground" format="reference" />
+	    <attr name="customDialogButtonBackground" format="reference" />
+	    <attr name="customInnerSwitch" format="reference" />
+	    <attr name="customTrackSwitch" format="reference" />
+	    <attr name="customRadioButton" format="reference" />
+	</declare-styleable>
+	<declare-styleable name="DragSortListView">
+	    <attr name="collapsed_height" format="dimension" />
+	    <attr name="drag_scroll_start" format="float" />
+	    <attr name="max_drag_scroll_speed" format="float" />
+	    <attr name="float_background_color" format="color" />
+	    <attr name="remove_mode">
+	      <enum name="clickRemove" value="0" />
+	      <enum name="flingRemove" value="1" />
+	    </attr>
+	    <attr name="track_drag_sort" format="boolean"/>
+	    <attr name="float_alpha" format="float"/>
+	    <attr name="slide_shuffle_speed" format="float"/>
+	    <attr name="remove_animation_duration" format="integer"/>
+	    <attr name="drop_animation_duration" format="integer"/>
+	    <attr name="drag_enabled" format="boolean" />
+	    <attr name="sort_enabled" format="boolean" />
+	    <attr name="remove_enabled" format="boolean" />
+	    <attr name="drag_start_mode">
+	      <enum name="onDown" value="0" />
+	      <enum name="onMove" value="1" />
+	      <enum name="onLongPress" value="2"/>
+	    </attr>
+	    <attr name="drag_handle_id" format="integer" />
+	    <attr name="fling_handle_id" format="integer" />
+	    <attr name="click_remove_id" format="integer" />
+	    <attr name="use_default_controller" format="boolean" />
+  </declare-styleable>
+</resources>

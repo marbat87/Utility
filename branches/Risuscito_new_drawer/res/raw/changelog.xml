@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+
+    <changelogversion versionName="2.6.0" changeDate="XX Luglio 2014">
+        <changelogtext>Nuovi temi (6) ispirati al Google Material Design!</changelogtext>
+        <changelogtext>Possibile correzione per un crash all'avvio su alcuni dispositivi</changelogtext>
+        <changelogtext>Aggiunta la possibilità di associare mp3 propri per la riproduzione (stesso pulsante del download brano)</changelogtext>
+        <changelogtext>Aggiunto l'indice dei salmi musicati (quarta scheda nella sezione degli indici)</changelogtext>
+        <changelogtext>Corretto il testo di "Davanti agli angeli"</changelogtext>
+        <changelogtext>Corretto il testo di "Preghiera litanica penitenziale"</changelogtext>
+        <changelogtext>Corretto il bug che costringeva ad uscire e rientrare nel canto per poterlo riascoltare, una volta terminata la riproduzione</changelogtext>
+	</changelogversion>
+
+</changelog>
