@@ -6,7 +6,11 @@
         android:layout_height="match_parent"
         drawer:drawer_gravity="start"
         drawer:list_headerView="@layout/menu_header"
-        drawer:list_headerClickable="false">
+        drawer:list_headerClickable="false"
+        drawer:list_mainSectionsEntries="@array/navigation_main_sections"
+        drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
+        drawer:list_mainSectionsDrawables="?attr/drawerIcons"
+        drawer:list_secondarySectionsDrawables="@array/drawable_ids_secondary_light">
 
    	<FrameLayout
             android:id="@+id/content_layout"

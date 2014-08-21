@@ -25,7 +25,7 @@ public class GeneralIndex extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 				
-		getSupportActionBar().setTitle(R.string.title_activity_general_index);
+//		getSupportActionBar().setTitle(R.string.title_activity_general_index);
 		View rootView = inflater.inflate(R.layout.activity_general_index, container, false);
 		
 		// Create the adapter that will return a fragment for each of the three

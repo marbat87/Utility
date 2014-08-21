@@ -21,7 +21,7 @@ public class GeneralSearch extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		getSupportActionBar().setTitle(R.string.title_activity_search);
+//		getSupportActionBar().setTitle(R.string.title_activity_search);
 		View rootView = inflater.inflate(R.layout.activity_general_search, container, false);
 		
 		// Create the adapter that will return a fragment for each of the three

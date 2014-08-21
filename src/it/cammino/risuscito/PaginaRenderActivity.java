@@ -1227,9 +1227,10 @@ public class PaginaRenderActivity extends Activity
 	public void onDestroy() {
 		SaveZoom();
 		if (am != null)
-			am.abandonAudioFocus(afChangeListener);	
+			am.abandonAudioFocus(afChangeListener);
+		if (listaCanti != null)
+			listaCanti.close();
 		super.onDestroy();
-		listaCanti.close();
 	}
     
 	public void pulisciVars() {
