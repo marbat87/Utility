@@ -6,7 +6,6 @@ import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 
-import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,13 +27,28 @@ public class MainActivity extends Activity {
         FontLoader.setDefaultFont(FontLoader.ROBOTO_CONDENSED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
+
+        /*
+         * We get the drawerToggle object order to
+         * allow showing the NavigationDrawer icon
+         */
+        drawerToggle = new ActionBarDrawerToggle(this,
+                mDrawer,
+                R.drawable.ic_fa_bars,
+                R.string.app_name,
+                R.string.app_name);
+
+        mDrawer.setDrawerListener(drawerToggle); //Attach the DrawerListener
+
+        mDrawer.setShouldChangeTitle(MainActivity.this, true);
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        
         getSupportActionBar().setLogo(R.drawable.transparent);
-        
-		//crea un istanza dell'oggetto DatabaseCanti
-		listaCanti = new DatabaseCanti(this);
+//		//crea un istanza dell'oggetto DatabaseCanti
+//		listaCanti = new DatabaseCanti(this);
         
         if (findViewById(R.id.content_layout) != null) {
 
@@ -56,41 +70,41 @@ public class MainActivity extends Activity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.content_layout, firstFragment).commit();
         }
-
-    }
-    
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//        drawerToggle.syncState();
-//    }
-    
-    @Override
-    public void onResume() {
-    	mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
         
-        String[] mainSections = getResources().getStringArray(R.array.navigation_main_sections);
-        mainSections[4] +=  " (" + getFavoritesCount() + ")";
-
-        mDrawer.setListViewSections(mainSections, // Main sections
-        		getResources().getStringArray(R.array.navigation_secondary_sections), // Secondary sections
-                getDrawablesMain(), // Main sections icon ids
-                getDrawablesSecondary()); // Secondary sections icon ids
+//    	mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
+        
+//        String[] mainSections = getResources().getStringArray(R.array.navigation_main_sections);
+//        mainSections[4] +=  " (" + getFavoritesCount() + ")";
+//
+//        Log.i("PRIMA DOPPIO AGG", "OK");
+//        mDrawer.setListViewSections(mainSections, // Main sections
+//        		getResources().getStringArray(R.array.navigation_secondary_sections), // Secondary sections
+//                getDrawablesMain(), // Main sections icon ids
+//                getDrawablesSecondary()); // Secondary sections icon ids
+//        Log.i("DOPO DOPPIO AGG", "OPS");
         
 //        mDrawer.setShouldChangeTitle(MainActivity.this, true);
         
         //Prepare the drawerToggle in order to be able to open/close the drawer
-        drawerToggle = new ActionBarDrawerToggle(this,
-                mDrawer,
-                R.drawable.ic_fa_bars,
-                R.string.app_name,
-                R.string.app_name);
-      
-        //Attach the DrawerListener
-        mDrawer.setDrawerListener(drawerToggle);
+//        drawerToggle = new ActionBarDrawerToggle(this,
+//                mDrawer,
+//                R.drawable.ic_fa_bars,
+//                R.string.app_name,
+//                R.string.app_name);
+//      
+//        //Attach the DrawerListener
+//        mDrawer.setDrawerListener(drawerToggle);
         
-        drawerToggle.syncState();
-        
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        
+//        getSupportActionBar().setLogo(R.drawable.transparent);
+
+    }
+    
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         mDrawer.setOnNavigationSectionSelected(new GoogleNavigationDrawer.OnNavigationSectionSelected() {
             @Override
             public void onSectionSelected(View v, int i, long l) {
@@ -134,12 +148,18 @@ public class MainActivity extends Activity {
                 transaction.commit();
             }
         });
+        drawerToggle.syncState();
+    }
+    
+    @Override
+    public void onResume() {
     	super.onResume();
     }    
     
 	@Override
 	public void onDestroy() {
-		listaCanti.close();
+		if (listaCanti != null)
+			listaCanti.close();
 		super.onDestroy();
 	}
     
@@ -210,46 +230,46 @@ public class MainActivity extends Activity {
 		return total;
     }
     
-    private int[] getDrawablesMain(){
-    	
-    	int theme = Utility.getChoosedTheme(MainActivity.this);
-    	TypedArray imgs = null;
-    	
-    	if (theme%2 == 0)
-    		imgs = getResources()
-    			.obtainTypedArray(R.array.drawable_ids_main_light);
-    	else
-    		imgs = getResources()
-			.obtainTypedArray(R.array.drawable_ids_main_dark);
-
-        int[] mainSectionDrawables = new int[imgs.length()];
-
-        for(int i=0;i<imgs.length();i++){
-            mainSectionDrawables[i] = imgs.getResourceId(i, 0);
-        }
-
-        return mainSectionDrawables;
-    }
-    
-    private int[] getDrawablesSecondary(){
-    	
-    	int theme = Utility.getChoosedTheme(MainActivity.this);
-    	TypedArray imgs = null;
-    	
-    	if (theme%2 == 0)
-    		imgs = getResources()
-    			.obtainTypedArray(R.array.drawable_ids_secondary_light);
-    	else
-    		imgs = getResources()
-			.obtainTypedArray(R.array.drawable_ids_secondary_dark);
-
-        int[] mainSectionDrawables = new int[imgs.length()];
-
-        for(int i=0;i<imgs.length();i++){
-            mainSectionDrawables[i] = imgs.getResourceId(i, 0);
-        }
-
-        return mainSectionDrawables;
-    }
+//    private int[] getDrawablesMain(){
+//    	
+//    	int theme = Utility.getChoosedTheme(MainActivity.this);
+//    	TypedArray imgs = null;
+//    	
+//    	if (theme%2 == 0)
+//    		imgs = getResources()
+//    			.obtainTypedArray(R.array.drawable_ids_main_light);
+//    	else
+//    		imgs = getResources()
+//			.obtainTypedArray(R.array.drawable_ids_main_dark);
+//
+//        int[] mainSectionDrawables = new int[imgs.length()];
+//
+//        for(int i=0;i<imgs.length();i++){
+//            mainSectionDrawables[i] = imgs.getResourceId(i, 0);
+//        }
+//
+//        return mainSectionDrawables;
+//    }
+//    
+//    private int[] getDrawablesSecondary(){
+//    	
+//    	int theme = Utility.getChoosedTheme(MainActivity.this);
+//    	TypedArray imgs = null;
+//    	
+//    	if (theme%2 == 0)
+//    		imgs = getResources()
+//    			.obtainTypedArray(R.array.drawable_ids_secondary_light);
+//    	else
+//    		imgs = getResources()
+//			.obtainTypedArray(R.array.drawable_ids_secondary_dark);
+//
+//        int[] mainSectionDrawables = new int[imgs.length()];
+//
+//        for(int i=0;i<imgs.length();i++){
+//            mainSectionDrawables[i] = imgs.getResourceId(i, 0);
+//        }
+//
+//        return mainSectionDrawables;
+//    }
     
 }

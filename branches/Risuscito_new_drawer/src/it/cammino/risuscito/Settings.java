@@ -14,8 +14,8 @@ public class Settings extends PreferenceFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		getSupportActionBar().setTitle(R.string.title_activity_settings);
 		addPreferencesFromResource(R.xml.xml_settings);
+//		getSupportActionBar().setTitle(R.string.title_activity_settings);
 		
 //		final ActionBar actionBar = getSupportActionBar();
 //		actionBar.setDisplayHomeAsUpEnabled(true);

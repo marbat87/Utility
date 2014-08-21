@@ -413,8 +413,9 @@ public class CreaListaActivity extends Activity
     
 	@Override
 	public void onDestroy() {
+		if (listaCanti != null)
+			listaCanti.close();
 		super.onDestroy();
-		listaCanti.close();
 	}
 	
 	@Override

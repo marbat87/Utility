@@ -49,7 +49,7 @@ public class CustomLists extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		getSupportActionBar().setTitle(R.string.title_activity_custom_lists);
+//		getSupportActionBar().setTitle(R.string.title_activity_custom_lists);
 		View rootView = inflater.inflate(R.layout.activity_custom_lists, container, false);
 
 		//crea un istanza dell'oggetto DatabaseCanti
