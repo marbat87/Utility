@@ -39,7 +39,7 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-//		getSupportActionBar().setTitle(R.string.title_activity_favourites);
+		getSupportActionBar().setTitle(R.string.title_activity_favourites);
 		rootView = inflater.inflate(R.layout.activity_favourites, container, false);
 		
 //		final ActionBar actionBar = getSupportActionBar();

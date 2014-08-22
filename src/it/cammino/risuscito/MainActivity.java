@@ -6,8 +6,6 @@ import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentTransaction;
@@ -16,7 +14,7 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
-    private DatabaseCanti listaCanti;
+//    private DatabaseCanti listaCanti;
     
     public GoogleNavigationDrawer mDrawer;
     private ActionBarDrawerToggle drawerToggle;
@@ -42,7 +40,7 @@ public class MainActivity extends Activity {
 
         mDrawer.setDrawerListener(drawerToggle); //Attach the DrawerListener
 
-        mDrawer.setShouldChangeTitle(MainActivity.this, true);
+//        mDrawer.setShouldChangeTitle(MainActivity.this, true);
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -70,35 +68,6 @@ public class MainActivity extends Activity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.content_layout, firstFragment).commit();
         }
-        
-//    	mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
-        
-//        String[] mainSections = getResources().getStringArray(R.array.navigation_main_sections);
-//        mainSections[4] +=  " (" + getFavoritesCount() + ")";
-//
-//        Log.i("PRIMA DOPPIO AGG", "OK");
-//        mDrawer.setListViewSections(mainSections, // Main sections
-//        		getResources().getStringArray(R.array.navigation_secondary_sections), // Secondary sections
-//                getDrawablesMain(), // Main sections icon ids
-//                getDrawablesSecondary()); // Secondary sections icon ids
-//        Log.i("DOPO DOPPIO AGG", "OPS");
-        
-//        mDrawer.setShouldChangeTitle(MainActivity.this, true);
-        
-        //Prepare the drawerToggle in order to be able to open/close the drawer
-//        drawerToggle = new ActionBarDrawerToggle(this,
-//                mDrawer,
-//                R.drawable.ic_fa_bars,
-//                R.string.app_name,
-//                R.string.app_name);
-//      
-//        //Attach the DrawerListener
-//        mDrawer.setDrawerListener(drawerToggle);
-        
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        
-//        getSupportActionBar().setLogo(R.drawable.transparent);
 
     }
     
@@ -156,12 +125,12 @@ public class MainActivity extends Activity {
     	super.onResume();
     }    
     
-	@Override
-	public void onDestroy() {
-		if (listaCanti != null)
-			listaCanti.close();
-		super.onDestroy();
-	}
+//	@Override
+//	public void onDestroy() {
+//		if (listaCanti != null)
+//			listaCanti.close();
+//		super.onDestroy();
+//	}
     
 //    @Override
 //    public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -206,29 +175,29 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
-    private int getFavoritesCount() {
-    	
-    	// crea un manipolatore per il Database in modalità READ
-		SQLiteDatabase db = listaCanti.getReadableDatabase();
-		
-		// lancia la ricerca dei preferiti
-		String query = "SELECT count(*)" +
-				"		FROM ELENCO" +
-				"		WHERE favourite = 1";
-		Cursor curs = db.rawQuery(query, null);
-		
-		curs.moveToFirst();
-		
-		//recupera il numero di record trovati
-		int total = curs.getInt(0);
-		
-		// chiude il cursore
-		curs.close();
-		
-		db.close();
-		
-		return total;
-    }
+//    private int getFavoritesCount() {
+//    	
+//    	// crea un manipolatore per il Database in modalità READ
+//		SQLiteDatabase db = listaCanti.getReadableDatabase();
+//		
+//		// lancia la ricerca dei preferiti
+//		String query = "SELECT count(*)" +
+//				"		FROM ELENCO" +
+//				"		WHERE favourite = 1";
+//		Cursor curs = db.rawQuery(query, null);
+//		
+//		curs.moveToFirst();
+//		
+//		//recupera il numero di record trovati
+//		int total = curs.getInt(0);
+//		
+//		// chiude il cursore
+//		curs.close();
+//		
+//		db.close();
+//		
+//		return total;
+//    }
     
 //    private int[] getDrawablesMain(){
 //    	

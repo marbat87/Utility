@@ -1,6 +1,9 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
-	<style name="IndigoSliderLight" parent="@style/Holo.Theme.Slider.Light">
+	<style name="IndigoSliderLight" parent="@style/Holo.Theme.Light">
+	    <item name="drawerBackground">@drawable/drawer_background_light</item>
+        <item name="drawerIcons">@array/drawable_ids_main_light</item>
+        <item name="drawerIconsSecondary">@array/drawable_ids_secondary_light</item>
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
         <item name="customSliderBackground">@color/Indigo</item>
@@ -179,7 +182,10 @@
         <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_indigo_light</item>
     </style>
 	
-	<style name="IndigoSliderDark" parent="@style/Holo.Theme.Slider">
+	<style name="IndigoSliderDark" parent="@style/Holo.Theme">
+	    <item name="drawerBackground">@drawable/drawer_background_dark</item>
+        <item name="drawerIcons">@array/drawable_ids_main_dark</item>
+        <item name="drawerIconsSecondary">@array/drawable_ids_secondary_dark</item>
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
         <item name="customSliderBackground">@color/Indigo</item>

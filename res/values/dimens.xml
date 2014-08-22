@@ -12,8 +12,8 @@
     <dimen name="percent_padding">15dip</dimen>
     <dimen name="menu_width">250dp</dimen>
     
-    <dimen name="main_section_item_height">50dp</dimen>
-    <dimen name="secondary_section_item_height">35dp</dimen>
+    <dimen name="main_section_item_height">53dp</dimen>
+    <dimen name="secondary_section_item_height">38dp</dimen>
 
     <dimen name="main_section_icon_size">35dp</dimen>
     <dimen name="secondary_section_icon_size">27dp</dimen>
