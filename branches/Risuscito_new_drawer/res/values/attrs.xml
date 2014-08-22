@@ -44,6 +44,8 @@
 	    <attr name="customTrackSwitch" format="reference" />
 	    <attr name="customRadioButton" format="reference" />
 	    <attr name="drawerIcons" format="reference" />
+	    <attr name="drawerBackground" format="reference" />
+	    <attr name="drawerIconsSecondary" format="reference" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />

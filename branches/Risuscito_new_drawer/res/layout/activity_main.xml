@@ -10,7 +10,8 @@
         drawer:list_mainSectionsEntries="@array/navigation_main_sections"
         drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
         drawer:list_mainSectionsDrawables="?attr/drawerIcons"
-        drawer:list_secondarySectionsDrawables="@array/drawable_ids_secondary_light">
+        drawer:list_secondarySectionsDrawables="?attr/drawerIconsSecondary"
+        drawer:list_mainSectionsBackground="?attr/drawerBackground">
 
    	<FrameLayout
             android:id="@+id/content_layout"
