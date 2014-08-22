@@ -11,7 +11,7 @@
         drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
         drawer:list_mainSectionsDrawables="?attr/drawerIcons"
         drawer:list_secondarySectionsDrawables="?attr/drawerIconsSecondary"
-        drawer:list_mainSectionsBackground="?attr/drawerBackground">
+        drawer:list_secondary_divider="?attr/tabDivider">
 
    	<FrameLayout
             android:id="@+id/content_layout"

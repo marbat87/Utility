@@ -1,7 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   
-    <style name="IndigoSliderLight" parent="@style/Holo.Theme.Slider.Light">
-        <item name="drawerBackground">@color/bright_foreground_light_disabled</item>
+    <style name="IndigoSliderLight" parent="@style/Holo.Theme.Light">
+        <item name="drawerBackground">@drawable/drawer_background_light</item>
         <item name="drawerIcons">@array/drawable_ids_main_light</item>
         <item name="drawerIconsSecondary">@array/drawable_ids_secondary_light</item>
         <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
@@ -159,8 +159,8 @@
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_indigo_light</item>
     </style>
     
-    <style name="IndigoSliderDark" parent="@style/Holo.Theme.Slider">
-        <item name="drawerBackground">@color/bright_foreground_dark_disabled</item>
+    <style name="IndigoSliderDark" parent="@style/Holo.Theme">
+        <item name="drawerBackground">@drawable/drawer_background_dark</item>
         <item name="drawerIcons">@array/drawable_ids_main_dark</item>
         <item name="drawerIconsSecondary">@array/drawable_ids_secondary_dark</item>
    	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 

@@ -12,7 +12,7 @@ public class AboutActivity extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-//		getSupportActionBar().setTitle(R.string.title_activity_about);
+		getSupportActionBar().setTitle(R.string.title_activity_about);
 		View rootView = inflater.inflate(R.layout.activity_about, container, false);
 //		Utility.updateTheme(AboutActivity.this);
 //		super.onCreate(savedInstanceState);

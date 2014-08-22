@@ -1,5 +1,6 @@
 package it.cammino.risuscito;
 
+import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.preference.ListPreference;
 import org.holoeverywhere.preference.Preference;
 import org.holoeverywhere.preference.Preference.OnPreferenceChangeListener;
@@ -7,6 +8,8 @@ import org.holoeverywhere.preference.PreferenceFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class Settings extends PreferenceFragment {
 
@@ -48,5 +51,11 @@ public class Settings extends PreferenceFragment {
 		});
                 
 	}
-		
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		getSupportActionBar().setTitle(R.string.title_activity_settings);
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
 }
