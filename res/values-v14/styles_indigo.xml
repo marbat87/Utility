@@ -1,7 +1,9 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   
     <style name="IndigoSliderLight" parent="@style/Holo.Theme.Slider.Light">
+        <item name="drawerBackground">@color/bright_foreground_light_disabled</item>
         <item name="drawerIcons">@array/drawable_ids_main_light</item>
+        <item name="drawerIconsSecondary">@array/drawable_ids_secondary_light</item>
         <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
@@ -69,7 +71,9 @@
 	</style>
   	
     <style name="IndigoLight" parent="@style/Holo.Theme.Light">
+        <item name="drawerBackground">@color/background_holo_light</item>
         <item name="drawerIcons">@array/drawable_ids_main_light</item>
+        <item name="drawerIconsSecondary">@array/drawable_ids_secondary_light</item>
         <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
@@ -156,7 +160,9 @@
     </style>
     
     <style name="IndigoSliderDark" parent="@style/Holo.Theme.Slider">
+        <item name="drawerBackground">@color/bright_foreground_dark_disabled</item>
         <item name="drawerIcons">@array/drawable_ids_main_dark</item>
+        <item name="drawerIconsSecondary">@array/drawable_ids_secondary_dark</item>
    	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
         <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
@@ -223,7 +229,9 @@
     </style>
     
     <style name="IndigoDark" parent="@style/Holo.Theme">
+        <item name="drawerBackground">@color/background_holo_dark</item>
         <item name="drawerIcons">@array/drawable_ids_main_dark</item>
+        <item name="drawerIconsSecondary">@array/drawable_ids_secondary_dark</item>
    	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
