@@ -9,15 +9,16 @@ import org.holoeverywhere.preference.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends Activity {
-
-//    private DatabaseCanti listaCanti;
     
     public GoogleNavigationDrawer mDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    
+    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,14 +40,10 @@ public class MainActivity extends Activity {
                 R.string.app_name);
 
         mDrawer.setDrawerListener(drawerToggle); //Attach the DrawerListener
-
-//        mDrawer.setShouldChangeTitle(MainActivity.this, true);
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setLogo(R.drawable.transparent);
-//		//crea un istanza dell'oggetto DatabaseCanti
-//		listaCanti = new DatabaseCanti(this);
         
         if (findViewById(R.id.content_layout) != null) {
 
@@ -66,7 +63,7 @@ public class MainActivity extends Activity {
             
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content_layout, firstFragment).commit();
+                    .add(R.id.content_layout, firstFragment, TAG_MAIN_FRAGMENT).commit();
         }
 
     }
@@ -82,7 +79,7 @@ public class MainActivity extends Activity {
 
             	switch (i) {
 				case 1:
-	                transaction.replace(R.id.content_layout, new Risuscito());
+	                transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
 					break;
 				case 2:
 	                transaction.replace(R.id.content_layout, new GeneralSearch());
@@ -106,12 +103,12 @@ public class MainActivity extends Activity {
 	                transaction.replace(R.id.content_layout, new DonateActivity());
 	                break;
 	            default:
-	                transaction.replace(R.id.content_layout, new Risuscito());
+	            	transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
             	}
 
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack so the user can navigate back
-                transaction.addToBackStack(null);
+//                transaction.addToBackStack(null);
 
                 // Commit the transaction
                 transaction.commit();
@@ -121,31 +118,21 @@ public class MainActivity extends Activity {
     }
     
     @Override
-    public void onResume() {
-    	super.onResume();
-    }    
-    
-//	@Override
-//	public void onDestroy() {
-//		if (listaCanti != null)
-//			listaCanti.close();
-//		super.onDestroy();
-//	}
-    
-//    @Override
-//    public boolean onKeyUp(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//			if (mDrawer. == 0) {
-//				finish();
-//				return true;
-//			}
-//			else {
-//				mDrawer.setCurrentPage(0);
-//				return true;
-//			}
-//        }
-//        return super.onKeyUp(keyCode, event);
-//    }
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        	Risuscito myFragment = (Risuscito)getSupportFragmentManager().findFragmentByTag(TAG_MAIN_FRAGMENT);
+        	if (myFragment != null && myFragment.isVisible()) {
+        		finish();
+        	}
+        	else {
+        		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        		transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
+        		transaction.commit();
+        	}
+        	return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
     
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {
@@ -174,71 +161,5 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
-//    private int getFavoritesCount() {
-//    	
-//    	// crea un manipolatore per il Database in modalità READ
-//		SQLiteDatabase db = listaCanti.getReadableDatabase();
-//		
-//		// lancia la ricerca dei preferiti
-//		String query = "SELECT count(*)" +
-//				"		FROM ELENCO" +
-//				"		WHERE favourite = 1";
-//		Cursor curs = db.rawQuery(query, null);
-//		
-//		curs.moveToFirst();
-//		
-//		//recupera il numero di record trovati
-//		int total = curs.getInt(0);
-//		
-//		// chiude il cursore
-//		curs.close();
-//		
-//		db.close();
-//		
-//		return total;
-//    }
-    
-//    private int[] getDrawablesMain(){
-//    	
-//    	int theme = Utility.getChoosedTheme(MainActivity.this);
-//    	TypedArray imgs = null;
-//    	
-//    	if (theme%2 == 0)
-//    		imgs = getResources()
-//    			.obtainTypedArray(R.array.drawable_ids_main_light);
-//    	else
-//    		imgs = getResources()
-//			.obtainTypedArray(R.array.drawable_ids_main_dark);
-//
-//        int[] mainSectionDrawables = new int[imgs.length()];
-//
-//        for(int i=0;i<imgs.length();i++){
-//            mainSectionDrawables[i] = imgs.getResourceId(i, 0);
-//        }
-//
-//        return mainSectionDrawables;
-//    }
-//    
-//    private int[] getDrawablesSecondary(){
-//    	
-//    	int theme = Utility.getChoosedTheme(MainActivity.this);
-//    	TypedArray imgs = null;
-//    	
-//    	if (theme%2 == 0)
-//    		imgs = getResources()
-//    			.obtainTypedArray(R.array.drawable_ids_secondary_light);
-//    	else
-//    		imgs = getResources()
-//			.obtainTypedArray(R.array.drawable_ids_secondary_dark);
-//
-//        int[] mainSectionDrawables = new int[imgs.length()];
-//
-//        for(int i=0;i<imgs.length();i++){
-//            mainSectionDrawables[i] = imgs.getResourceId(i, 0);
-//        }
-//
-//        return mainSectionDrawables;
-//    }
     
 }

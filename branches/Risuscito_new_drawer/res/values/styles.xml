@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    
+        
    	<style name="RisuscitoThemeLight" parent="@style/Holo.Theme.Light">
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
        	<item name="drawerBackground">@drawable/drawer_background_light</item>

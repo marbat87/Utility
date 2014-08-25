@@ -364,7 +364,7 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     
