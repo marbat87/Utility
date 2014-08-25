@@ -1,6 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   
-	<style name="RedLight" parent="@style/RedBaseLight">
+    <style name="RedLight" parent="@style/RedV14Light" />
+    
+	<style name="RedV14Light" parent="@style/RedBaseLight">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>
@@ -34,7 +36,9 @@
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_red_light</item>
     </style>
     
-	<style name="RedDark" parent="@style/RedBaseDark">
+    <style name="RedDark" parent="@style/RedV14Dark" />
+    
+	<style name="RedV14Dark" parent="@style/RedBaseDark">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>

@@ -27,6 +27,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(MainActivity.this);
+        
         mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
 
         /*

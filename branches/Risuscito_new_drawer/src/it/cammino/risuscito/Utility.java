@@ -11,10 +11,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 public class Utility {
+	
+	private static final int[] THEME_COLORS = {R.color.IndigoDark, R.color.IndigoDark,
+												R.color.BlueGreyDark, R.color.BlueGreyDark,
+												R.color.RedThemeDark, R.color.RedThemeDark,
+												R.color.DeepPurpleDark, R.color.DeepPurpleDark,
+												R.color.TealDark, R.color.TealDark,
+												R.color.BrownDark, R.color.BrownDark };
 	
     //metodo che restituisce la stringa di input senza la pagina all'inizio
     public static String truncatePage(String input) {
@@ -233,5 +243,13 @@ public class Utility {
 	    	   return 0;
 	       
 	}
+	
+    public static void setupTransparentTints(Activity context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+        	return;
+        SystemBarTintManager tintManager = new SystemBarTintManager(context);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(THEME_COLORS[getChoosedTheme(context)]);
+    }
 	
 }

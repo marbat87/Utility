@@ -1,6 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
-	<style name="BlueGreyLight" parent="@style/BlueGreyBaseLight">
+    <style name="BlueGreyLight" parent="@style/BlueGreyV14Light" />
+    
+	<style name="BlueGreyV14Light" parent="@style/BlueGreyBaseLight">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>
@@ -34,7 +36,9 @@
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_light</item>
     </style>
     
-	<style name="BlueGreyDark" parent="@style/BlueGreyBaseDark">
+    <style name="BlueGreyDark" parent="@style/BlueGreyV14Dark" />
+    
+	<style name="BlueGreyV14Dark" parent="@style/BlueGreyBaseDark">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>

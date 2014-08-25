@@ -1,6 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   
-	<style name="DeepPurpleLight" parent="@style/DeepPurpleBaseLight">
+    <style name="DeepPurpleLight" parent="@style/DeepPurpleV14Light" />
+    
+	<style name="DeepPurpleV14Light" parent="@style/DeepPurpleBaseLight">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>
@@ -34,7 +36,9 @@
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_deeppurple_light</item>
     </style>
     
-	<style name="DeepPurpleDark" parent="@style/DeepPurpleBaseDark">
+    <style name="DeepPurpleDark" parent="@style/DeepPurpleV14Dark" />
+    
+	<style name="DeepPurpleV14Dark" parent="@style/DeepPurpleBaseDark">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>

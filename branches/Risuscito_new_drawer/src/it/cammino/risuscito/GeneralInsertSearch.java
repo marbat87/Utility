@@ -38,6 +38,9 @@ public class GeneralInsertSearch extends Activity {
 		
 		setContentView(R.layout.activity_general_search);
 		
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(GeneralInsertSearch.this);
+		
 		Bundle bundle = GeneralInsertSearch.this.getIntent().getExtras();
 		fromAdd = bundle.getInt("fromAdd");
         idLista = bundle.getInt("idLista");
