@@ -361,7 +361,7 @@ public class RicercaVeloceFragment extends Fragment implements GenericDialogList
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     

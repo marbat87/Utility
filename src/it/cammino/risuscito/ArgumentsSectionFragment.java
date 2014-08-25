@@ -436,7 +436,7 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     

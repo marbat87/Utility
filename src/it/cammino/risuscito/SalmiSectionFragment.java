@@ -368,7 +368,7 @@ public class SalmiSectionFragment extends Fragment implements GenericDialogListe
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     

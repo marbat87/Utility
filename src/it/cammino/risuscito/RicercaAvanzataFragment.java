@@ -330,7 +330,7 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     
