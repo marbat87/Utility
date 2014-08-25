@@ -180,7 +180,9 @@ public class PaginaRenderActivity extends Activity
 		actionbar.setLogo(R.drawable.transparent);
         
         setContentView(R.layout.activity_pagina_render);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(PaginaRenderActivity.this);
         
         listaCanti = new DatabaseCanti(this);
 

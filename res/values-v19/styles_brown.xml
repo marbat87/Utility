@@ -1,0 +1,13 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+      
+	<style name="BrownLight" parent="@style/BrownV14Light">
+	   	<item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    
+	<style name="BrownDark" parent="@style/BrownV14Dark">
+	   	<item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    
+</resources>

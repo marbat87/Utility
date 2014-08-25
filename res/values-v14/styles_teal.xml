@@ -1,6 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   
-	<style name="TealLight" parent="@style/TealBaseLight">
+    <style name="TealLight" parent="@style/TealV14Light" />
+    
+	<style name="TealV14Light" parent="@style/TealBaseLight">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>
@@ -34,7 +36,9 @@
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_teal_light</item>
     </style>
     
-	<style name="TealDark" parent="@style/TealBaseDark">
+    <style name="TealDark" parent="@style/TealV14Dark" />
+    
+	<style name="TealV14Dark" parent="@style/TealBaseDark">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>

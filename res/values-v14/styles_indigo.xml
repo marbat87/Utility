@@ -1,6 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   
-	<style name="IndigoLight" parent="@style/IndigoBaseLight">
+    <style name="IndigoLight" parent="@style/IndigoV14Light" />
+    
+	<style name="IndigoV14Light" parent="@style/IndigoBaseLight">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>
@@ -34,7 +36,9 @@
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_indigo_light</item>
     </style>
     
-	<style name="IndigoDark" parent="@style/IndigoBaseDark">
+    <style name="IndigoDark" parent="@style/IndigoV14Dark" />
+    
+	<style name="IndigoV14Dark" parent="@style/IndigoBaseDark">
 	   	<item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
 	    <item name="android:actionMenuTextColor">@android:color/white</item>

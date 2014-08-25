@@ -82,8 +82,10 @@ public class CreaListaActivity extends Activity
 		actionbar.setLogo(R.drawable.transparent);
 		
 		setContentView(R.layout.activity_crea_lista);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);	
 	
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(CreaListaActivity.this);
+		
 		listaCanti = new DatabaseCanti(this);
 		
         Bundle bundle = this.getIntent().getExtras();
