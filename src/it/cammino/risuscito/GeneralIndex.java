@@ -34,18 +34,24 @@ public class GeneralIndex extends Fragment {
 	    mViewPager.setAdapter(mSectionsPagerAdapter);
 //	    mViewPager.setCurrentItem(0);
 
-    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-		defaultIndex = Integer.parseInt(pref.getString("defaultIndex", "0"));
-//		mViewPager.setCurrentItem(defaultIndex);
-		mViewPager.postDelayed(new Runnable() {
-
-	        @Override
-	        public void run() {
-	        	mViewPager.setCurrentItem(defaultIndex);
-	        }
-	    }, 100);
+	    if (savedInstanceState == null) {
+	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
+			defaultIndex = Integer.parseInt(pref.getString("defaultIndex", "0"));
+			mViewPager.setCurrentItem(defaultIndex);
+//			mViewPager.postDelayed(new Runnable() {
+//	
+//		        @Override
+//		        public void run() {
+//		        	mViewPager.setCurrentItem(defaultIndex);
+//		        }
+//		    }, 100);
+	    }
+	    else {
+	    	mViewPager.setCurrentItem(savedInstanceState.getInt("pageViewed", 0));
+	    }
 	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
 	    tabs.setViewPager(mViewPager);
+
 
 //		checkScreenAwake();
 		
@@ -96,6 +102,12 @@ public class GeneralIndex extends Fragment {
 //			mViewPager.setKeepScreenOn(false);
 //    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("pageViewed", mViewPager.getCurrentItem());
+    }
+	
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
