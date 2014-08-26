@@ -10,6 +10,7 @@
         drawer:list_mainSectionsEntries="@array/navigation_main_sections"
         drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
         drawer:list_mainSectionsDrawables="?attr/drawerIcons"
+        drawer:list_width="@dimen/drawer_width"
         drawer:list_secondarySectionsDrawables="?attr/drawerIconsSecondary"
         drawer:list_secondary_divider="?attr/tabDivider">
 
