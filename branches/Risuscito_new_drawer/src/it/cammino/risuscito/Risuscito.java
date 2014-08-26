@@ -219,7 +219,7 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         		, R.string.help_new_menu_title
         		, R.string.help_new_menu_desc);
 		showcaseView.setShowcase(ShowcaseView.NONE);
-		showcaseView.animateGesture(0, screenHeight/2, screenWidth/2, screenHeight/2, true);
+		showcaseView.animateGesture(0, screenHeight/2, screenWidth/3, screenHeight/2, true);
 		showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {				
 				@Override
 				public void onShowcaseViewShow(ShowcaseView showcaseView) { }

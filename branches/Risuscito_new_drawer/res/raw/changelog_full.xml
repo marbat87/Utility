@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     
-    <changelogversion versionName="2.6.2" changeDate="28 Agosto 2014">
+    <changelogversion versionName="2.6.3" changeDate="28 Agosto 2014">
         <changelogtext>Rinnovata la grafica con 6 temi ispirati al Google Material Design</changelogtext>
         <changelogtext>System bar colorata a seconda del tema (Solo per versioni di Android da 4.4 Kikat in su)</changelogtext>
         <changelogtext>Menù laterale in stile google play store</changelogtext>
