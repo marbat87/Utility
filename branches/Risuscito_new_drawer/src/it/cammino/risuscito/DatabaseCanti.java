@@ -12,7 +12,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
 //	private static final int DB_VERSION = 24;
-	private static final int DB_VERSION = 25;
+	private static final int DB_VERSION = 26;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -597,7 +597,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (76, 64, 'Criso Gesù è il Signore! - Inno della Kenosis (Fil. 2,1-11)', 'inno_della_kenosis', 0, '"
+		sql += "VALUES (76, 64, 'Cristo Gesù è il Signore! - Inno della Kenosis (Fil. 2,1-11)', 'inno_della_kenosis', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/cristogesueilsignore.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
