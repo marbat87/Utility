@@ -1,0 +1,17 @@
+<resources>
+
+    <!--
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw600dp devices (e.g. 7" tablets) here.
+    -->
+    <dimen name="activity_min_margin">10dip</dimen>
+    <dimen name="button_length_vertical">600dip</dimen>
+    <dimen name="risuscito_land_bottomspacing">10dip</dimen>
+    <dimen name="button_height_vertical">80dip</dimen>
+    <dimen name="button_height_horizontal">100dip</dimen>
+    <dimen name="button_text_size">30sp</dimen>
+    <dimen name="button_text_size_h">40sp</dimen>
+    <dimen name="about_image_width">200dip</dimen>
+    <dimen name="menu_width">400dp</dimen>
+
+</resources>
