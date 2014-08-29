@@ -1,0 +1,13 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  
+	<style name="RedLight" parent="@style/RedV14Light">
+	   	<item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    
+	<style name="RedDark" parent="@style/RedV14Dark">
+	   	<item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    
+</resources>
