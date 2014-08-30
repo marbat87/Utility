@@ -12,30 +12,35 @@
     android:weightSum="1.0"
     tools:context=".CreaListaActivity" >
 	
-    <LinearLayout 
+    <RelativeLayout 
     	android:layout_width="fill_parent"
     	android:layout_height="0dp"
-    	android:orientation="vertical"
-    	android:layout_weight="0.15">
+    	android:layout_weight="0.2">
     
  		<TextView
+ 		    android:id="@+id/textTitleDescription"
     		android:layout_width="wrap_content"
+    		android:layout_centerVertical="true"
           	android:layout_height="wrap_content"
+          	android:layout_alignParentLeft="true"
           	android:text="@string/list_title" /> 
           	
  		<EditText
         	android:id="@+id/textfieldTitle"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
+        	android:layout_marginLeft="10dp"
+        	android:layout_alignBaseline="@id/textTitleDescription"
+        	android:layout_toRightOf="@id/textTitleDescription"
         	android:hint="@string/list_title_modif" />
         	
-    </LinearLayout>
+    </RelativeLayout>
     
     <LinearLayout 
     	android:layout_width="fill_parent"
     	android:layout_height="0dp"
     	android:orientation="vertical"
-    	android:layout_weight="0.85">
+    	android:layout_weight="0.8">
     
         <TextView
     		android:layout_width="wrap_content"

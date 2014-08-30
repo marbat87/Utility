@@ -201,5 +201,9 @@
     <string name="only_link">Vuoi associare un file mp3 presente nella memoria del tuo dispositivo?</string>
     <string name="dialog_delete_link">Sei sicuro di voler scollegare dal brano presente nella memoria? (Il file non sarà cancellato)</string>
     <string name="delink_delete">File scollegato!</string>
+    <string name="list_title">TITOLO DELLA LISTA:</string>
+    <string name="list_title_modif">Modifica il titolo&#8230;</string>
+    <string name="list_elements">ELEMENTI DELLA LISTA:</string>
+    <string name="no_title_edited">Il titolo non è stato moodificato in quanto vuoto!</string>
     
 </resources>
