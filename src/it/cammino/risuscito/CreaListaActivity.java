@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.TextView;
 
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
@@ -58,6 +59,7 @@ public class CreaListaActivity extends Activity
 	private int idModifica;
 	private RetainedFragment dataFragment;
 	private RetainedFragment dataFragment2;
+	private RetainedFragment dataFragment3;
 	private int positionToRename;
 	private RelativeLayout.LayoutParams lps;
 	private boolean fakeItemCreated;
@@ -65,12 +67,14 @@ public class CreaListaActivity extends Activity
 	private int screenHeight;
 	private ArrayList<String> nomiCanti;
 	private int positionLI;
+	private Bundle tempArgs;
 	
 	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
 	
 	private final String AGGIUNGI_POSIZIONE_TAG = "1";
 	private final String RINOMINA_POSIZIONE_TAG = "2";
 	private final String SALVA_LISTA_TAG = "3";
+	private final String TEMP_TITLE = "temp_title";
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +149,17 @@ public class CreaListaActivity extends Activity
 	        }
         }
 
+        dataFragment3 = (RetainedFragment) getSupportFragmentManager().findFragmentByTag(TEMP_TITLE);
+        if (dataFragment3 != null) {
+        	tempArgs = dataFragment3.getArguments();
+            ((TextView)findViewById(R.id.textfieldTitle))
+            	.setText(tempArgs.getCharSequence(TEMP_TITLE, ""));
+        }
+        else {
+        	((TextView)findViewById(R.id.textfieldTitle))
+        	.setText(titoloLista);
+        }
+        
         //Serve per settare il colore del testo a seconda del tema.
         //A quanto parae non si riesce usando gli attributes direttamente nel layout
         if (Utility.getChoosedTheme(CreaListaActivity.this) == 1
@@ -367,6 +382,18 @@ public class CreaListaActivity extends Activity
 	
     private boolean saveList()  {
 		celebrazione = new ListaPersonalizzata();
+		
+		if (((TextView)findViewById(R.id.textfieldTitle)).getText() != null
+				&& !((TextView)findViewById(R.id.textfieldTitle)).getText()
+					.toString().trim().equalsIgnoreCase("")) {
+    		titoloLista = ((TextView)findViewById(R.id.textfieldTitle)).getText().toString();
+		}
+		else {
+    		Toast toast = Toast.makeText(CreaListaActivity.this
+    				, getString(R.string.no_title_edited), Toast.LENGTH_SHORT);
+    		toast.show();
+		}
+		
 		celebrazione.setName(titoloLista);
 		for (int i = 0; i < nomiElementi.size(); i++) {
 			if (celebrazione.addPosizione(nomiElementi.get(i)) == -2) {
@@ -422,15 +449,24 @@ public class CreaListaActivity extends Activity
 	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-      dataFragment = new RetainedFragment();
-      getSupportFragmentManager().beginTransaction().add(dataFragment, "nomiElementi").commit();
-	  dataFragment.setData(nomiElementi);
-	  if (modifica) {
-		  dataFragment2 = new RetainedFragment();
-		  getSupportFragmentManager().beginTransaction().add(dataFragment2, "nomiCanti").commit();
-		  dataFragment2.setData(nomiCanti);
-	  }
-	  super.onSaveInstanceState(savedInstanceState);
+		
+		dataFragment = new RetainedFragment();
+		getSupportFragmentManager().beginTransaction().add(dataFragment, "nomiElementi").commit();
+		dataFragment.setData(nomiElementi);
+	  
+		if (modifica) {
+			dataFragment2 = new RetainedFragment();
+			getSupportFragmentManager().beginTransaction().add(dataFragment2, "nomiCanti").commit();
+			dataFragment2.setData(nomiCanti);
+		}
+	  
+		dataFragment3 = new RetainedFragment();
+		tempArgs = new Bundle();
+		tempArgs.putCharSequence(TEMP_TITLE, ((TextView)findViewById(R.id.textfieldTitle)).getText());
+		dataFragment3.setArguments(tempArgs);
+		getSupportFragmentManager().beginTransaction().add(dataFragment3, TEMP_TITLE).commit();
+	  
+		super.onSaveInstanceState(savedInstanceState);
 	}
 	
     //controlla se l'app deve mantenere lo schermo acceso
