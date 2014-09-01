@@ -43,8 +43,7 @@ import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.mobeta.android.dslv.DragSortListView;
 
-@SuppressWarnings("deprecation")
-@SuppressLint("NewApi")
+@SuppressLint("NewApi") @SuppressWarnings("deprecation")
 public class CreaListaActivity extends Activity
 								implements TextDialogListener, ThreeButtonsDialogListener {
 
@@ -153,7 +152,7 @@ public class CreaListaActivity extends Activity
         if (dataFragment3 != null) {
         	tempArgs = dataFragment3.getArguments();
             ((TextView)findViewById(R.id.textfieldTitle))
-            	.setText(tempArgs.getCharSequence(TEMP_TITLE, ""));
+            	.setText(tempArgs.getCharSequence(TEMP_TITLE));
         }
         else {
         	((TextView)findViewById(R.id.textfieldTitle))

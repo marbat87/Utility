@@ -128,6 +128,7 @@ public class MainActivity extends Activity {
         		finish();
         	}
         	else {
+        		mDrawer.check(1);
         		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         		transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
         		transaction.commit();

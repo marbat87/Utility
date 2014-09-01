@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingTop="@dimen/activity_min_margin"
@@ -7,37 +8,53 @@
     android:paddingRight="@dimen/activity_min_margin"
     android:paddingBottom="@dimen/activity_min_margin"
     android:orientation="vertical"
-    android:weightSum="1.0"
     tools:context=".ListaPersonalizzataFragment" >
     
-    <ScrollView 
-        android:layout_width="fill_parent"
-    	android:layout_height="0dp"
-    	android:layout_weight="0.99"
-    	android:orientation="vertical">
-    	
-   	<LinearLayout
-   	    android:id="@+id/listaScroll"
-   	    android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-        android:orientation="vertical" />
-		   		    
-	</ScrollView>
-	   	
-  	<RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="right"
-        android:orientation="horizontal" >
+    <FrameLayout 
+    	android:layout_width="fill_parent"
+   		android:layout_height="fill_parent">
     
-  		<Button
-	        android:id="@+id/button_resetListPers"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:text="@string/button_clean_list" />   
+	    <ScrollView 
+	        android:id="@+id/personalizedScrollView"
+	        android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+		    android:overScrollMode="never"
+	    	android:orientation="vertical">
+	    	
+	   	<LinearLayout
+	   	    android:id="@+id/listaScroll"
+	   	    android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	        android:orientation="vertical" />
+			   		    
+		</ScrollView>
+		
+	   	<com.melnykov.fab.FloatingActionButton
+            android:id="@+id/button_floating_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_icon_broom"
+            fab:fab_colorNormal="?attr/customPstsIndicatorColor"
+            fab:fab_colorPressed="?attr/customLightColor" />
+		
+	</FrameLayout>
+	   	
+<!--   	<RelativeLayout -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center_vertical" -->
+<!--         android:gravity="right" -->
+<!--         android:orientation="horizontal" > -->
+    
+<!--   		<Button -->
+<!-- 	        android:id="@+id/button_resetListPers" -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:gravity="center" -->
+<!-- 	        android:text="@string/button_clean_list" />    -->
 	  	
-	</RelativeLayout>
+<!-- 	</RelativeLayout> -->
 	
 </LinearLayout>

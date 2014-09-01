@@ -7,6 +7,7 @@
 	<style name="DeepPurpleLight" parent="@style/DeepPurpleBaseLight" />
 	
 	<style name="DeepPurpleBaseLight" parent="@style/RisuscitoThemeLight">
+	    <item name="customLightColor">@color/theme_deeppurple_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_deeppurple</item>
 		<item name="customStar">@drawable/star_deeppurple</item>
 		<item name="customSaveFile">@drawable/save_music_icon_deeppurple</item>
@@ -96,6 +97,7 @@
 	<style name="DeepPurpleDark" parent="@style/DeepPurpleBaseDark" />
 	
 	<style name="DeepPurpleBaseDark" parent="@style/RisuscitoThemeDark">
+	    <item name="customLightColor">@color/theme_deeppurple_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_deeppurple</item>
 		<item name="customStar">@drawable/star_light_deeppurple</item>
 		<item name="customSaveFile">@drawable/save_music_icon_light_deeppurple</item>

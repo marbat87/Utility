@@ -11,8 +11,8 @@
     tools:context=".CantiParola" >
     
     <FrameLayout 
-    	android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    	android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
     
 	    <ScrollView 
 	        android:id="@+id/parolaScrollView"
@@ -357,8 +357,8 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="5dp"
             android:src="@drawable/ic_icon_broom"
-            fab:fab_colorNormal="@color/Indigo"
-            fab:fab_colorPressed="@color/theme_indigo_color"/>
+            fab:fab_colorNormal="?attr/customPstsIndicatorColor"
+            fab:fab_colorPressed="?attr/customLightColor" />
 		
 	</FrameLayout>
 	    

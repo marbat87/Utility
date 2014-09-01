@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Risuscit&#242;</string>
-    <string name="action_settings">Impostazioni</string>
+<!--     <string name="action_settings">Impostazioni</string> -->
     <string name="action_about">About</string>
     <string name="action_favourites">Preferiti</string>
     <string name="action_share">Condividi</string>
@@ -185,7 +185,7 @@
     <string name="no_pdf_reader">Nessun PDF Reader trovato!</string>
     <string name="export_running">Esportazione in corso&#8230;</string>
     <string name="open_pdf">Apri PDF</string>
-    <string name="action_donate">Ringrazia</string>
+<!--     <string name="action_donate">Ringrazia</string> -->
     <string name="content_donate">Dona</string>
     <string name="title_activity_donate">Ringrazia</string>
     <string name="activity_homepage">Home page</string>
@@ -204,6 +204,9 @@
     <string name="list_title">TITOLO DELLA LISTA:</string>
     <string name="list_title_modif">Modifica il titolo&#8230;</string>
     <string name="list_elements">ELEMENTI DELLA LISTA:</string>
-    <string name="no_title_edited">Il titolo non è stato moodificato in quanto vuoto!</string>
+    <string name="no_title_edited">Il titolo non è stato modificato in quanto vuoto!</string>
+    <string name="title_activity_settings_capital">IMPOSTAZIONI</string>
+    <string name="title_activity_about_capital">CHANGELOG</string>
+    <string name="title_activity_donate_capital">RINGRAZIA</string>
     
 </resources>
