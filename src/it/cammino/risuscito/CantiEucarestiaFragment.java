@@ -13,6 +13,8 @@ import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.LinearLayout;
 import org.holoeverywhere.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +34,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 @SuppressWarnings("deprecation")
 public class CantiEucarestiaFragment extends Fragment implements GenericDialogListener {
@@ -61,7 +64,11 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-		rootView.findViewById(R.id.button_resetList2).setOnClickListener(new OnClickListener() {		
+		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.parolaScrollView);
+		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
+		floatingActionButton.attachToScrollView(scrollView);
+		
+		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {		
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
