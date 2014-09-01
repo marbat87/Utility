@@ -64,7 +64,7 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.parolaScrollView);
+		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.eucarestiaScrollView);
 		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
 		floatingActionButton.attachToScrollView(scrollView);
 		

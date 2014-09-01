@@ -7,6 +7,7 @@
 	<style name="IndigoLight" parent="@style/IndigoBaseLight" />
 	
 	<style name="IndigoBaseLight" parent="@style/RisuscitoThemeLight">
+	    <item name="customLightColor">@color/theme_indigo_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
 		<item name="customStar">@drawable/star_indigo</item>
 		<item name="customSaveFile">@drawable/save_music_icon_indigo</item>
@@ -96,6 +97,7 @@
 	<style name="IndigoDark" parent="@style/IndigoBaseDark" />
 	
 	<style name="IndigoBaseDark" parent="@style/RisuscitoThemeDark">
+	    <item name="customLightColor">@color/theme_indigo_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_indigo</item>
 		<item name="customStar">@drawable/star_light_indigo</item>
 		<item name="customSaveFile">@drawable/save_music_icon_light_indigo</item>

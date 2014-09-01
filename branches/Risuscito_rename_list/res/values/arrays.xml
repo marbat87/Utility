@@ -64,9 +64,9 @@
     </string-array>
 
     <string-array name="navigation_secondary_sections">
-        <item>@string/title_activity_settings</item>
-        <item>@string/title_activity_about</item>
-		<item>@string/title_activity_donate</item>
+        <item>@string/title_activity_settings_capital</item>
+        <item>@string/title_activity_about_capital</item>
+		<item>@string/title_activity_donate_capital</item>
     </string-array>
 
     <array name="drawable_ids_main_light">
