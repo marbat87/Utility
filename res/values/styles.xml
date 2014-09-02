@@ -23,6 +23,7 @@
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 		<item name="customDots">@drawable/ic_action_dots</item>
 		<item name="actionMenuTextColor">@android:color/white</item>
+		<item name="customSaveList">@drawable/ic_action_tab_save</item>
     </style>
 	
 	<style name="RisuscitoThemeDark" parent="@style/Holo.Theme">
@@ -48,6 +49,7 @@
 		<item name="customInsertItem">@drawable/ic_fa_plus_circle</item>
 		<item name="customDots">@drawable/ic_action_dots</item>
 		<item name="actionMenuTextColor">@android:color/white</item>
+		<item name="customSaveList">@drawable/ic_action_tab_save</item>
     </style>
     
     <style name="MyActionButton" parent="">
