@@ -41,6 +41,7 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
 @SuppressLint("NewApi") @SuppressWarnings("deprecation")
@@ -67,6 +68,7 @@ public class CreaListaActivity extends Activity
 	private ArrayList<String> nomiCanti;
 	private int positionLI;
 	private Bundle tempArgs;
+	private FloatingActionButton floatingActionButton;
 	
 	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
 	
@@ -210,8 +212,12 @@ public class CreaListaActivity extends Activity
 			}
 		});
 		
-		View addPosizione = (View) findViewById(R.id.addPosizione);
-		addPosizione.setOnClickListener(new View.OnClickListener() {
+		floatingActionButton = (FloatingActionButton) findViewById(R.id.button_floating_action);
+		floatingActionButton.attachToListView(lv);
+		
+//		View addPosizione = (View) findViewById(R.id.addPosizione);
+//		addPosizione.setOnClickListener(new View.OnClickListener() {
+		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
@@ -596,8 +602,10 @@ public class CreaListaActivity extends Activity
 		co.buttonLayoutParams = lps;
 		
 		//benvenuto del tutorial
+		floatingActionButton.show();
    		ShowcaseView showcaseView = ShowcaseView.insertShowcaseView(
-        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+//        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+        		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
         		, CreaListaActivity.this
         		, R.string.title_activity_nuova_lista
         		, R.string.showcase_welcome_crea
@@ -615,7 +623,8 @@ public class CreaListaActivity extends Activity
         		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
         		co.buttonLayoutParams = lps;
 		   		showcaseView = ShowcaseView.insertShowcaseView(
-		        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+//		        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+		        		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
 		        		, CreaListaActivity.this
 		        		, R.string.add_position
 		        		, R.string.showcase_add_pos_desc
