@@ -203,14 +203,14 @@ public class CreaListaActivity extends Activity
 			}
 		});	
         
-		Button saveExit = (Button) findViewById(R.id.button_save_exit);
-		saveExit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (saveList())
-					finish();
-			}
-		});
+//		Button saveExit = (Button) findViewById(R.id.button_save_exit);
+//		saveExit.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if (saveList())
+//					finish();
+//			}
+//		});
 		
 		floatingActionButton = (FloatingActionButton) findViewById(R.id.button_floating_action);
 		floatingActionButton.attachToListView(lv);
@@ -277,7 +277,7 @@ public class CreaListaActivity extends Activity
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.help_menu, menu);
+		getMenuInflater().inflate(R.menu.crea_lista_menu, menu);
 		return true;
 	}
 	
@@ -287,6 +287,10 @@ public class CreaListaActivity extends Activity
 		case R.id.action_help:
 			showHelp();
 	        return true;
+		case R.id.action_save_list:
+			if (saveList())
+				finish();
+			return true;
 		case android.R.id.home:
 			if (nomiElementi.size() > 0) {
 				blockOrientation();
@@ -706,14 +710,21 @@ public class CreaListaActivity extends Activity
 												//spiegazione di come salvare
 								        		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
 								        		co.buttonLayoutParams = lps;
-										   		showcaseView = ShowcaseView.insertShowcaseView(
-										        		new ViewTarget(R.id.button_save_exit, CreaListaActivity.this)
+//										   		showcaseView = ShowcaseView.insertShowcaseView(
+//										        		new ViewTarget(R.id.button_save_exit, CreaListaActivity.this)
+//										        		, CreaListaActivity.this
+//										        		, R.string.list_save_exit
+//										        		, R.string.showcase_saveexit_desc
+//										        		, co);
+										        ActionItemTarget target = new ActionItemTarget(CreaListaActivity.this, R.id.action_save_list);
+										        showcaseView = ShowcaseView.insertShowcaseView(target
 										        		, CreaListaActivity.this
 										        		, R.string.list_save_exit
 										        		, R.string.showcase_saveexit_desc
-										        		, co);
+										        		,co);
 												showcaseView.setButtonText(getString(R.string.showcase_button_next));
-												showcaseView.setScaleMultiplier(0.7f);
+//												showcaseView.setScaleMultiplier(0.7f);
+												showcaseView.setScaleMultiplier(0.3f);
 												showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 		
 													@Override

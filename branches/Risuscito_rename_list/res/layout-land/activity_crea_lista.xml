@@ -119,7 +119,7 @@
             android:id="@+id/button_floating_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
+            android:layout_gravity="bottom|right"
             android:layout_margin="5dp"
             android:src="@drawable/ic_floating_add"
             fab:fab_colorNormal="?attr/customPstsIndicatorColor"
@@ -127,20 +127,20 @@
 
 	</FrameLayout>
 	
-  	<RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="right|bottom"
-        android:orientation="horizontal" >
+<!--   	<RelativeLayout -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center_vertical" -->
+<!--         android:gravity="right|bottom" -->
+<!--         android:orientation="horizontal" > -->
     
-  		<Button
-	        android:id="@+id/button_save_exit"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:text="@string/list_save_exit" />
+<!--   		<Button -->
+<!-- 	        android:id="@+id/button_save_exit" -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:gravity="center" -->
+<!-- 	        android:text="@string/list_save_exit" /> -->
 
-	</RelativeLayout>
+<!-- 	</RelativeLayout> -->
     	
 </LinearLayout>

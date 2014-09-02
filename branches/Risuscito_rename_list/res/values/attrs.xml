@@ -47,6 +47,7 @@
 	    <attr name="drawerBackground" format="reference" />
 	    <attr name="drawerIconsSecondary" format="reference" />
 	    <attr name="customLightColor" format="color" />
+	    <attr name="customSaveList" format="reference" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />
