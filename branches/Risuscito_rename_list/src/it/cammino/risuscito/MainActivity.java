@@ -82,30 +82,38 @@ public class MainActivity extends Activity {
 
             	switch (i) {
 				case 1:
-	                transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);	                transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
 					break;
 				case 2:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new GeneralSearch());
 					break;
 				case 3:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new GeneralIndex());
 	                break;
 				case 4:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new CustomLists());
 	                break;
 				case 5:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new FavouritesActivity());
 	                break;
 				case 6:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new Settings());
 	                break;
 				case 7:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new AboutActivity());
 	                break;
 				case 8:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	                transaction.replace(R.id.content_layout, new DonateActivity());
 	                break;
 	            default:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
 	            	transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
             	}
 
@@ -130,6 +138,7 @@ public class MainActivity extends Activity {
         	else {
         		mDrawer.check(1);
         		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+				transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         		transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
         		transaction.commit();
         	}
