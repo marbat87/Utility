@@ -12,7 +12,6 @@ import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.RelativeLayout;
 import org.holoeverywhere.widget.Toast;
 
@@ -243,6 +242,9 @@ public class CreaListaActivity extends Activity
 			}
 		});
 		
+		if (nomiElementi.size() > 0)
+			findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
+		
 		Display display = getWindowManager().getDefaultDisplay();
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
 			screenWidth = display.getWidth();
@@ -386,6 +388,8 @@ public class CreaListaActivity extends Activity
 //                    	Log.i("RIMOSSO", which + "");
 
                     }
+                    if (adapter.getCount() == 0)
+                    	findViewById(R.id.noElementsAdded).setVisibility(View.VISIBLE);
                 }
             };
 	
@@ -497,6 +501,7 @@ public class CreaListaActivity extends Activity
 	    		toast.show();
 	    	}
 	    	else {
+	    		findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
 	    		nomiElementi.add(titolo);
 	    		if (modifica)
 	    			nomiCanti.add("");
@@ -586,6 +591,7 @@ public class CreaListaActivity extends Activity
     
    	private void showHelp() {
    		if (nomiElementi.size() == 0) {
+   			findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
    			nomiElementi.add("CANTO DI ESEMPIO");
    			adapter.notifyDataSetChanged();
    			fakeItemCreated = true;
@@ -750,6 +756,7 @@ public class CreaListaActivity extends Activity
 															@Override
 															public void onShowcaseViewHide(ShowcaseView showcaseView) {
 																if (fakeItemCreated) {
+																	findViewById(R.id.noElementsAdded).setVisibility(View.VISIBLE);
 																	nomiElementi.remove(0);
 																	adapter.notifyDataSetChanged();
 																	fakeItemCreated = false;
