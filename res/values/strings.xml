@@ -208,5 +208,6 @@
     <string name="title_activity_settings_capital">IMPOSTAZIONI</string>
     <string name="title_activity_about_capital">CHANGELOG</string>
     <string name="title_activity_donate_capital">RINGRAZIA</string>
+    <string name="no_elements_added">Non hai ancora aggiunto nessun elemento.</string>
     
 </resources>
