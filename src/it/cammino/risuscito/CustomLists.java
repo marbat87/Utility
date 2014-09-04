@@ -139,6 +139,7 @@ public class CustomLists extends Fragment
 			bundle.putInt("idDaModif", idListe[mViewPager.getCurrentItem() - 2]);
 			bundle.putBoolean("modifica", true);
 			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+			getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
 			return true;
 		case R.id.action_remove_list:
 			blockOrientation();
@@ -387,7 +388,8 @@ public class CustomLists extends Fragment
 			Bundle bundle = new Bundle();
 			bundle.putString("titolo", titolo);
 			bundle.putBoolean("modifica", false);
-			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));			
+			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+			getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
     	}
 		
     }

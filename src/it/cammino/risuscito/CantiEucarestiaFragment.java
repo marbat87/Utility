@@ -141,6 +141,7 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
     	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
     
     private void openPagina(View v) {
@@ -174,6 +175,7 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
     }
     
     private void updateLista() {
