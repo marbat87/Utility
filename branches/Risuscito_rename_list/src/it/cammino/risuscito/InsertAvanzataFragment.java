@@ -348,6 +348,7 @@ public class InsertAvanzataFragment extends Fragment {
 	    			}
 	    			    
 	    			getActivity().finish();
+	    			getActivity().overridePendingTransition(0, R.anim.slide_out_right);
     			          			      
     			}
     		});

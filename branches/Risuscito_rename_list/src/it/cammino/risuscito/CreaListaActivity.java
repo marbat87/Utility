@@ -290,8 +290,10 @@ public class CreaListaActivity extends Activity
 			showHelp();
 	        return true;
 		case R.id.action_save_list:
-			if (saveList())
+			if (saveList()) {
 				finish();
+				overridePendingTransition(0, R.anim.slide_out_bottom);
+			}
 			return true;
 		case android.R.id.home:
 			if (nomiElementi.size() > 0) {
@@ -319,6 +321,7 @@ public class CreaListaActivity extends Activity
 			}
 			else {
 				finish();
+				overridePendingTransition(0, R.anim.slide_out_bottom);
 			}
 			return true;	
 			}
@@ -353,6 +356,7 @@ public class CreaListaActivity extends Activity
 			}
 			else {
 				finish();
+				overridePendingTransition(0, R.anim.slide_out_bottom);
 				return true;
 			}
         }
@@ -526,8 +530,10 @@ public class CreaListaActivity extends Activity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
 		setRequestedOrientation(prevOrientation);
-    	if (saveList())
+    	if (saveList()) {
     		finish();
+    		overridePendingTransition(0, R.anim.slide_out_bottom);
+    	}
     }
     
     @Override
@@ -547,6 +553,7 @@ public class CreaListaActivity extends Activity
     		dialog.dismiss();
     		setRequestedOrientation(prevOrientation);
     		finish();
+    		overridePendingTransition(0, R.anim.slide_out_bottom);
     	}
     }
     

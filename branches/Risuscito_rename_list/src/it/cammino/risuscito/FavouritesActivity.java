@@ -96,6 +96,7 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
 	
     private void updateFavouritesList() {

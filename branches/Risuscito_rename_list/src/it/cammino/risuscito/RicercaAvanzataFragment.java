@@ -492,6 +492,7 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
     	Intent intent = new Intent(getActivity().getApplicationContext(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
     
     private class SongRowAdapter extends ArrayAdapter<String> {

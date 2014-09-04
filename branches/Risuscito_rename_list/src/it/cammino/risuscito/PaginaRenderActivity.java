@@ -930,7 +930,7 @@ public class PaginaRenderActivity extends Activity
       	   	  && barreCambio.equals(barreSalvato))) {
         		pulisciVars();
 				finish();
-		    	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+		    	overridePendingTransition(0, R.anim.slide_out_right);
 	            return true;
 			}
 			else {
@@ -1080,7 +1080,7 @@ public class PaginaRenderActivity extends Activity
         	  && barreCambio.equals(barreSalvato))) {
         		pulisciVars();
 				finish();
-				overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+				overridePendingTransition(0, R.anim.slide_out_right);
 	            return true;
         	}
         	else {
@@ -1683,7 +1683,7 @@ public class PaginaRenderActivity extends Activity
     		db.close();
     		pulisciVars();
 			finish();
-			overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+			overridePendingTransition(0, R.anim.slide_out_right);
     	}
     	else if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {
     		dialog.dismiss();
@@ -1708,7 +1708,7 @@ public class PaginaRenderActivity extends Activity
     	if (dialog.getTag().equals(SALVA_ACCORDO_TAG)) {
     		pulisciVars();
 			finish();
-			overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+			overridePendingTransition(0, R.anim.slide_out_right);
     	}
     	else {
     		dialog.dismiss();
