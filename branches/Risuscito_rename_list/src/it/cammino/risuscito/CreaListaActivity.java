@@ -69,7 +69,8 @@ public class CreaListaActivity extends Activity
 	private Bundle tempArgs;
 	private FloatingActionButton floatingActionButton;
 	
-	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
+//	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
+	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista_v2";
 	
 	private final String AGGIUNGI_POSIZIONE_TAG = "1";
 	private final String RINOMINA_POSIZIONE_TAG = "2";
