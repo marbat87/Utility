@@ -72,6 +72,12 @@ public class MainActivity extends Activity {
     }
     
     @Override
+    protected void onResume() {
+    	super.onResume();
+    	checkScreenAwake();
+    }
+    
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawer.setOnNavigationSectionSelected(new GoogleNavigationDrawer.OnNavigationSectionSelected() {
@@ -152,9 +158,9 @@ public class MainActivity extends Activity {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 			boolean screenOn = pref.getBoolean("screenOn", false);
 		if (screenOn)
-			findViewById(R.id.slider_menu).setKeepScreenOn(true);
+			findViewById(R.id.content_layout).setKeepScreenOn(true);
 		else
-			findViewById(R.id.slider_menu).setKeepScreenOn(true);
+			findViewById(R.id.content_layout).setKeepScreenOn(true);
     }
     
     @Override
