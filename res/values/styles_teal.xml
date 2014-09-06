@@ -50,7 +50,7 @@
         <item name="backgroundStacked">@drawable/ab_stacked_solid_action_bar_teal_light</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_action_bar_teal_light</item>
         <item name="progressBarStyle">@style/ProgressBar.Action_bar_teal_light</item>
-        <item name="titleTextStyle">@style/myTheme.ActionBar.Text</item>
+        <item name="titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
     </style>
 
     <style name="ActionBar.Transparent.Action_bar_teal_light" parent="@style/Widget.AppCompat.Light.ActionBar">
@@ -140,6 +140,7 @@
         <item name="backgroundStacked">@drawable/ab_stacked_solid_action_bar_teal_dark</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_action_bar_teal_dark</item>
         <item name="progressBarStyle">@style/ProgressBar.Action_bar_teal_dark</item>
+        <item name="titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
     </style>
 
     <style name="ActionBar.Transparent.Action_bar_teal_dark" parent="@style/Widget.AppCompat.ActionBar">
