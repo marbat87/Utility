@@ -22,7 +22,7 @@
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_action_bar_red_light</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_action_bar_red_light</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Action_bar_red_light</item>
-    	<item name="android:titleTextStyle">@style/myTheme.ActionBar.Text</item>
+    	<item name="android:titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
     </style>
 
     <style name="ActionBar.Transparent.Action_bar_red_light" parent="@style/Widget.AppCompat.Light.ActionBar">
@@ -58,6 +58,7 @@
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_action_bar_red_dark</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_action_bar_red_dark</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Action_bar_red_dark</item>
+        <item name="android:titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
     </style>
 
     <style name="ActionBar.Transparent.Action_bar_red_dark" parent="@style/Widget.AppCompat.ActionBar">

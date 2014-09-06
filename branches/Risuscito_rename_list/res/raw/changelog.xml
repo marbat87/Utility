@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-    <changelogversion versionName="2.6.6" changeDate="XX Agosto 2014">
+    <changelogversion versionName="2.6.7" changeDate="XX Settembre 2014">
         <changelogtext>Ristrutturata la pagina di creazione liste</changelogtext>
         <changelogtext>Aggiunta la possibililtà di rinominare le proprie liste personalizzate (entrare in modifica)</changelogtext>
 		<changelogtext>Nuovi floating button nelle liste personalizzate e nella creazione/modifica lista</changelogtext>

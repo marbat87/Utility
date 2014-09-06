@@ -1,6 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
         
    	<style name="RisuscitoThemeLight" parent="@style/Holo.Theme.Light">
+   	    <item name="android:actionBarSize">@dimen/material_action_bar_size</item>
+   	    <item name="actionBarSize">@dimen/material_action_bar_size</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
        	<item name="drawerBackground">@drawable/drawer_background_light</item>
         <item name="drawerIcons">@array/drawable_ids_main_light</item>
@@ -27,6 +29,8 @@
     </style>
 	
 	<style name="RisuscitoThemeDark" parent="@style/Holo.Theme">
+	    <item name="android:actionBarSize">@dimen/material_action_bar_size</item>
+	    <item name="actionBarSize">@dimen/material_action_bar_size</item>
         <item name="homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
        	<item name="drawerBackground">@drawable/drawer_background_dark</item>
         <item name="drawerIcons">@array/drawable_ids_main_dark</item>
@@ -51,7 +55,7 @@
 		<item name="actionMenuTextColor">@android:color/white</item>
 		<item name="customSaveList">@drawable/ic_action_tab_save</item>
     </style>
-    
+	
     <style name="MyActionButton" parent="">
         <item name="android:background">?attr/actionBarItemBackground</item>
         <item name="android:paddingLeft">12dip</item>
@@ -78,6 +82,11 @@
     
     <style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="myTheme.ActionBar.TitleText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
     </style>
     
 	<style name="Holo.Button.Borderless" parent="Holo.Button">
