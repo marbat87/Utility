@@ -8,13 +8,15 @@
 
 	<com.astuetz.PagerSlidingTabStrip
 	    android:id="@+id/tabs"
-		app:pstsIndicatorColor="?attr/customPstsIndicatorColor"
-		app:pstsDividerColor="?attr/tabDivider"
-		app:pstsUnderlineColor="?attr/tabDivider"
+	    android:background="?attr/customPstsIndicatorColor"
+		app:pstsIndicatorColor="?attr/accentColor"
+		app:pstsIndicatorHeight="2dp"
+		app:pstsDividerColor="@android:color/transparent"
+		app:pstsUnderlineColor="@android:color/transparent"
 		app:pstsShouldExpand="true"
 		app:pstsTabBackground="?attr/customTabBackground"
 	    android:layout_width="match_parent"
-	    android:textColor="?attr/tabText"
+	    android:textColor="@android:color/white"
 	    android:layout_height="48dip" />
 	
 	<org.holoeverywhere.widget.ViewPager

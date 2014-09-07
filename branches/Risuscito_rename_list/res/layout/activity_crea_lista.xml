@@ -5,36 +5,41 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingTop="@dimen/activity_min_margin"
-    android:paddingLeft="@dimen/activity_min_margin"
-    android:paddingRight="@dimen/activity_min_margin"
-    android:paddingBottom="@dimen/activity_min_margin"
     android:orientation="vertical"
     tools:context=".CreaListaActivity" >
 	
-    <LinearLayout 
+   	<LinearLayout 
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:background="?attr/customPstsIndicatorColor"
     	android:orientation="vertical">
     
  		<TextView
     		android:layout_width="wrap_content"
           	android:layout_height="wrap_content"
+          	android:textColor="@android:color/white"
+          	android:paddingLeft="@dimen/activity_min_margin"
           	android:text="@string/list_title" /> 
           	
  		<EditText
         	android:id="@+id/textfieldTitle"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
+        	android:layout_marginLeft="@dimen/activity_min_margin"
+        	android:layout_marginRight="@dimen/activity_min_margin"
+        	android:layout_marginBottom="@dimen/activity_min_margin"
+        	android:textColor="@android:color/white"
+        	android:textCursorDrawable="@null"
         	android:hint="@string/list_title_modif" />
  		
- 		<TextView
-    		android:layout_width="wrap_content"
-          	android:layout_height="wrap_content"
-          	android:layout_marginTop="5dp"
-          	android:text="@string/list_elements" /> 
-        	
     </LinearLayout>
+	
+	<TextView
+		android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:paddingTop="@dimen/activity_min_margin"
+     	android:paddingLeft="@dimen/activity_min_margin"
+     	android:text="@string/list_elements" />
     
 <!--     <LinearLayout  -->
 <!--     	android:layout_width="fill_parent" -->
@@ -75,7 +80,9 @@
 	        
 <!-- 	    </RelativeLayout> -->
 
-    <FrameLayout 
+    <FrameLayout
+    	android:paddingLeft="@dimen/activity_min_margin"
+    	android:paddingRight="@dimen/activity_min_margin"
     	android:layout_width="fill_parent"
    		android:layout_height="fill_parent">
  		

@@ -7,6 +7,7 @@
 	<style name="BlueGreyLight" parent="@style/BlueGreyBaseLight" />
 	
 	<style name="BlueGreyBaseLight" parent="@style/RisuscitoThemeLight">
+	    <item name="accentColor">@color/bluegrey_accent</item>
 	    <item name="customLightColor">@color/theme_bluegrey_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_bluegrey</item>
 		<item name="customStar">@drawable/star_bluegrey</item>
@@ -97,6 +98,7 @@
 	<style name="BlueGreyDark" parent="@style/BlueGreyBaseDark" />
 	
 	<style name="BlueGreyBaseDark" parent="@style/RisuscitoThemeDark">
+	    <item name="accentColor">@color/bluegrey_accent</item>
 	    <item name="customLightColor">@color/theme_bluegrey_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_bluegrey</item>
 		<item name="customStar">@drawable/star_light_bluegrey</item>

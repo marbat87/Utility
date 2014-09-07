@@ -7,6 +7,7 @@
 	<style name="BrownLight" parent="@style/BrownBaseLight" />
 	
 	<style name="BrownBaseLight" parent="@style/RisuscitoThemeLight">
+	    <item name="accentColor">@color/brown_accent</item>
 	    <item name="customLightColor">@color/theme_brown_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_brown</item>
 		<item name="customStar">@drawable/star_brown</item>
@@ -97,6 +98,7 @@
     <style name="BrownDark" parent="@style/BrownBaseDark" />
 	
 	<style name="BrownBaseDark" parent="@style/RisuscitoThemeDark">
+	    <item name="accentColor">@color/brown_accent</item>
 	    <item name="customLightColor">@color/theme_brown_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_brown</item>
 		<item name="customStar">@drawable/star_light_brown</item>

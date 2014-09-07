@@ -2,12 +2,10 @@
   
 	<style name="DeepPurpleLight" parent="@style/DeepPurpleV14Light">
 	   	<item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowContentOverlay">@null</item>
     </style>
     
 	<style name="DeepPurpleDark" parent="@style/DeepPurpleV14Dark">
 	   	<item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowContentOverlay">@null</item>
     </style>
     
 </resources>
