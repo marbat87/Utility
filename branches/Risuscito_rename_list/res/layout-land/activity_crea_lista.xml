@@ -39,6 +39,7 @@
         		android:layout_marginBottom="@dimen/activity_min_margin"
 	        	android:layout_alignBaseline="@id/textTitleDescription"
 	        	android:layout_toRightOf="@id/textTitleDescription"
+	        	android:background="?attr/actionBarEditTextBackground"
 	        	android:textColor="@android:color/white"
 	        	android:textCursorDrawable="@null"
 	        	android:hint="@string/list_title_modif" />

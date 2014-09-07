@@ -49,6 +49,7 @@
 	    <attr name="customLightColor" format="color" />
 	    <attr name="customSaveList" format="reference" />
 	    <attr name="accentColor" format="color" />
+	    <attr name="actionBarEditTextBackground" format="reference" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />
