@@ -25,6 +25,12 @@
  	<color name="DeepPurpleDark">#512da8</color>
  	<color name="TealDark">#00796b</color>
  	<color name="BrownDark">#5d4037</color>
+ 	<color name="bluegrey_accent">#cfd8dc</color>
+ 	<color name="brown_accent">#d7ccc8</color>
+ 	<color name="deeppurple_accent">#b388ff</color>
+ 	<color name="indigo_accent">#8c9eff</color>
+ 	<color name="red_accent">#ff7997</color>
+ 	<color name="teal_accent">#a7ffeb</color>
  	<color name="secondary_section_selected">@android:color/transparent</color>
  
 </resources> 

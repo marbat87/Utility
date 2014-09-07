@@ -34,7 +34,7 @@
 	    <attr name="customInsertItem" format="reference" />
 	    <attr name="customChangelog" format="reference" />
 	    <attr name="customDrawer" format="reference" />
-	    <attr name="customSliderBackground" format="color" />
+	    <attr name="mainDarkLightColor" format="color" />
 	    <attr name="customDots" format="reference" />
 	    <attr name="customPstsIndicatorColor" format="color" />
 	    <attr name ="menuDrawerTextColor" format="reference" />
@@ -48,6 +48,7 @@
 	    <attr name="drawerIconsSecondary" format="reference" />
 	    <attr name="customLightColor" format="color" />
 	    <attr name="customSaveList" format="reference" />
+	    <attr name="accentColor" format="color" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />

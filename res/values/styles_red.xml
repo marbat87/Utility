@@ -7,6 +7,7 @@
 	<style name="RedLight" parent="@style/RedBaseLight"></style>
 	
 	<style name="RedBaseLight" parent="@style/RisuscitoThemeLight">
+	    <item name="accentColor">@color/red_accent</item>
 	    <item name="customLightColor">@color/theme_red_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_red</item>
 		<item name="customStar">@drawable/star_red</item>
@@ -97,6 +98,7 @@
 	<style name="RedDark" parent="@style/RedBaseDark"></style>
 	
 	<style name="RedBaseDark" parent="@style/RisuscitoThemeDark">
+	    <item name="accentColor">@color/red_accent</item>
 	    <item name="customLightColor">@color/theme_red_color</item>
         <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_red</item>
 		<item name="customStar">@drawable/star_light_red</item>
