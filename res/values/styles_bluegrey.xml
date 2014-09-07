@@ -44,6 +44,7 @@
     	<item name="customInnerSwitch">@drawable/theme_bluegrey_switch_inner_holo_light</item>
     	<item name="customTrackSwitch">@drawable/theme_bluegrey_switch_track_holo_light</item>
     	<item name="customRadioButton">@drawable/theme_bluegrey_btn_radio_holo_light</item>
+    	<item name="actionBarEditTextBackground">@drawable/theme_bluegrey_accent_edit_text_holo_dark</item>
     </style>
 
     <style name="ActionBar.Solid.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
@@ -135,6 +136,7 @@
     	<item name="customInnerSwitch">@drawable/theme_bluegrey_switch_inner_holo_dark</item>
     	<item name="customTrackSwitch">@drawable/theme_bluegrey_switch_track_holo_dark</item>
     	<item name="customRadioButton">@drawable/theme_bluegrey_btn_radio_holo_dark</item>
+    	<item name="actionBarEditTextBackground">@drawable/theme_bluegrey_accent_edit_text_holo_dark</item>
     </style>
 	
     <style name="ActionBar.Solid.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ActionBar.Solid">
