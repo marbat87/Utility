@@ -95,7 +95,9 @@
 	        
 <!-- 	    </RelativeLayout> -->
     
-    <FrameLayout 
+    <FrameLayout
+        android:paddingLeft="@dimen/activity_min_margin"
+    	android:paddingRight="@dimen/activity_min_margin"
     	android:layout_width="fill_parent"
    		android:layout_height="fill_parent">
 		    
