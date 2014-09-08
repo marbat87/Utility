@@ -89,7 +89,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int dividerWidth = 1;
 
 	private int tabTextSize = 12;
-	private int tabTextColor = 0xFF666666;
+//	private int tabTextColor = 0xFF666666;
+	private int tabTextColor = 0x99FFFFFF;
+	private int tabTextSelectedColor = 0xFFFFFF;
 	private Typeface tabTypeface = null;
 	private int tabTypefaceStyle = Typeface.BOLD;
 
@@ -133,7 +135,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
 
 		tabTextSize = a.getDimensionPixelSize(0, tabTextSize);
-		tabTextColor = a.getColor(1, tabTextColor);
+//		tabTextColor = a.getColor(1, tabTextColor);
 
 		a.recycle();
 
@@ -152,6 +154,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsShouldExpand, shouldExpand);
 		scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsScrollOffset, scrollOffset);
 		textAllCaps = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);
+		
+		tabTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsUnselectedTextColor, tabTextColor);
+		tabTextSelectedColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsSelectedTextColor, tabTextSelectedColor);
 
 		a.recycle();
 
@@ -220,6 +225,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 				currentPosition = pager.getCurrentItem();
 				scrollToChild(currentPosition, 0);
+				((TextView)tabsContainer.getChildAt(currentPosition)).setTextColor(tabTextSelectedColor);
 			}
 		});
 
@@ -264,6 +270,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 //				Log.i(TAG, "^ tab onClick");
 				unselectAllTabs();
 				tab.setSelected(true);
+				TextView tab1 = (TextView) tab;
+	            tab1.setTextColor(tabTextSelectedColor);
 			}
 		});
 
@@ -275,6 +283,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private void unselectAllTabs() {
 	    for (int i = 0; i < tabCount; i++) {
             View v = tabsContainer.getChildAt(i);
+            TextView tab = (TextView) v;
+            tab.setTextColor(tabTextColor);
             v.setSelected(false);
 	    }
 	}
@@ -386,6 +396,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			unselectAllTabs();
 			if (tabCount>0) {
 			    tabsContainer.getChildAt(position).setSelected(true);
+			    TextView tab = (TextView) tabsContainer.getChildAt(position);
+	            tab.setTextColor(tabTextSelectedColor);
 			}
 			invalidate();
 
