@@ -395,9 +395,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 //			scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
 			unselectAllTabs();
 			if (tabCount>0) {
-			    tabsContainer.getChildAt(position).setSelected(true);
 			    TextView tab = (TextView) tabsContainer.getChildAt(position);
 	            tab.setTextColor(tabTextSelectedColor);
+			    tab.setSelected(true);
 			}
 			invalidate();
 
