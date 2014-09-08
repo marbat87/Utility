@@ -14,8 +14,9 @@
 		app:pstsUnderlineColor="@android:color/transparent"
 		app:pstsShouldExpand="true"
 		app:pstsTabBackground="?attr/customTabBackground"
+		app:pstsUnselectedTextColor="@color/unselectedTabTextColor"
+	    app:pstsSelectedTextColor="@android:color/white"
 	    android:layout_width="match_parent"
-	    android:textColor="@android:color/white"
 	    android:layout_height="48dip" />
 	
 	<org.holoeverywhere.widget.ViewPager

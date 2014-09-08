@@ -32,5 +32,6 @@
  	<color name="red_accent">#ff7997</color>
  	<color name="teal_accent">#a7ffeb</color>
  	<color name="secondary_section_selected">@android:color/transparent</color>
+ 	<color name="unselectedTabTextColor">#99FFFFFF</color>
  
 </resources> 
