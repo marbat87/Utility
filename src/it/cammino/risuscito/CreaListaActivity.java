@@ -115,7 +115,7 @@ public class CreaListaActivity extends Activity
         else
         	titoloLista = bundle.getString("titolo");
         
-        getSupportActionBar().setTitle(titoloLista);
+//        getSupportActionBar().setTitle(titoloLista);
 				
 		lv = (DragSortListView) findViewById(android.R.id.list);
 		
@@ -273,6 +273,8 @@ public class CreaListaActivity extends Activity
         	showHelp();
         }
        	
+        findViewById(R.id.textTitleDescription).requestFocus();
+        
 		checkScreenAwake();
 	}
 	
