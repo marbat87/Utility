@@ -6,6 +6,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
+    android:focusable="true"
+	android:focusableInTouchMode="true"
     tools:context=".CreaListaActivity" >
 	
    	<LinearLayout 
@@ -15,21 +17,26 @@
     	android:orientation="vertical">
     
  		<TextView
+ 		    android:id="@+id/textTitleDescription"
     		android:layout_width="wrap_content"
           	android:layout_height="wrap_content"
-          	android:textColor="@android:color/white"
-          	android:paddingLeft="@dimen/activity_min_margin"
+          	android:textColor="?attr/accentColor"
+          	android:paddingLeft="@dimen/action_bar_text_field_margin"
           	android:text="@string/list_title" /> 
           	
  		<EditText
         	android:id="@+id/textfieldTitle"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
+        	android:scrollHorizontally="true"
+        	android:singleLine="true"
+        	android:maxLines="1"
         	android:layout_marginLeft="@dimen/activity_min_margin"
         	android:layout_marginRight="@dimen/activity_min_margin"
         	android:layout_marginBottom="@dimen/activity_min_margin"
         	android:background="?attr/actionBarEditTextBackground"
         	android:textColor="@android:color/white"
+        	android:textSize="30sp"
         	android:textCursorDrawable="@null"
         	android:hint="@string/list_title_modif" />
  		

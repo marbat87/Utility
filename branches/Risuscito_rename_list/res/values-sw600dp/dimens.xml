@@ -15,5 +15,6 @@
     <dimen name="menu_width">400dp</dimen>
     
     <dimen name="material_action_bar_size">64dp</dimen>
+    <dimen name="action_bar_text_field_margin">20dip</dimen>
 
 </resources>
