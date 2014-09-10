@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="0dip"
+    	android:layout_weight="1"
+    	android:gravity="top"
+    	android:orientation="vertical">
+
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="@dimen/activity_min_margin"
+    		android:paddingRight="@dimen/activity_min_margin"
+    		android:paddingTop="@dimen/activity_min_margin"
+    		android:paddingBottom="@dimen/activity_min_margin"
+	        android:orientation="horizontal" >
+	
+	        <CheckBox
+	            android:id="@+id/favorite"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:button="?attr/customStar"
+	            android:soundEffectsEnabled="true" />
+	
+	        <ImageButton
+	            android:id="@+id/rewind_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_toLeftOf="@+id/play_song"
+	            android:background="?attr/customRewind"
+	            android:contentDescription="@string/rewind"
+	            android:soundEffectsEnabled="true" />
+	
+	        <ImageButton
+	            android:id="@+id/play_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_toLeftOf="@+id/fast_forward_song"
+	            android:background="?attr/customPlay"
+	            android:contentDescription="@string/play_song"
+	            android:soundEffectsEnabled="true" />
+	
+	        <ImageButton
+	            android:id="@+id/fast_forward_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_toLeftOf="@+id/stop_song"
+	            android:background="?attr/customFF"
+	            android:contentDescription="@string/fast_forward"
+	            android:soundEffectsEnabled="true" />
+	
+	        <ImageButton
+	            android:id="@+id/stop_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_toLeftOf="@+id/delete_file"
+	            android:layout_alignParentTop="true"
+	            android:background="?attr/customStop"
+	            android:contentDescription="@string/stop_song"
+	            android:soundEffectsEnabled="true" />
+	
+	     	<ImageButton
+	            android:id="@+id/delete_file"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_alignParentRight="true"
+	            android:layout_toLeftOf="@+id/save_file"
+	            android:background="?attr/customDeleteFile"
+	            android:contentDescription="@string/delete"
+	            android:soundEffectsEnabled="true" />
+	        
+			<ImageButton
+	            android:id="@+id/save_file"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_alignParentRight="true"
+	            android:background="?attr/customSaveFile"
+	            android:contentDescription="@string/save_file"
+	            android:soundEffectsEnabled="true" />
+	
+
+<!-- 	        <ImageView -->
+<!-- 	            android:id="@+id/no_record_message" -->
+<!-- 	            android:layout_width="wrap_content" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_alignParentRight="true" -->
+<!-- 	            android:layout_alignParentTop="true" -->
+<!-- 	            android:contentDescription="@string/no_record" -->
+<!-- 	            android:src="?attr/customNoSong" -->
+<!-- 	            android:text="@string/no_record" -->
+<!-- 	            android:visibility="gone" /> -->
+	    </RelativeLayout>
+	
+	    <WebView
+	        android:id="@+id/cantoView"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"/>
+	
+	</LinearLayout>
+
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_gravity="bottom"
+        android:background="?attr/customBottomBarColor"
+        android:divider="?attr/dividerVertical"
+        android:layout_height="@dimen/abc_action_bar_default_height"
+	    android:orientation="horizontal" >
+	
+	    <TextView 
+	        android:id="@+id/speed_text"
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textAppearance="@style/myTheme.ActionBar.Text"
+	        android:layout_gravity="center_vertical"
+	        android:paddingLeft="@dimen/percent_padding"
+	        android:minEms="3"/>
+	    
+	    <SeekBar
+	        android:id="@+id/speed_seekbar"
+	        android:layout_width="0dip"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:max="50"
+	        android:soundEffectsEnabled="true" />
+	
+	    <ImageButton
+	        android:id="@+id/play_scroll"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/play_scroll"
+	        style="@style/MyActionButton"
+	        android:src="?attr/customSlidePlay"
+	        android:soundEffectsEnabled="true" />
+	    
+	   	<ImageButton
+	        android:id="@+id/stop_scroll"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/stop_scroll"
+	        style="@style/MyActionButton"
+	        android:src="?attr/customSlideStop"
+	        android:soundEffectsEnabled="true" />
+	        
+	</LinearLayout>
+	
+</LinearLayout>

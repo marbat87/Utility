@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    <color name="tabHoloLight">#CDCDCD</color>
+    <color name="tabHoloDark">#202122</color>
+    <color name="dividerHoloLight">#B8B8B8</color>
+    <color name="dividerHoloDark">#414243</color>
+ 	<color name="Indigo">#3f51b5</color>
+ 	<color name="BlueGrey">#607d8b</color>
+ 	<color name="RedTheme">#e51c23</color>
+ 	<color name="DeepPurple">#673ab7</color>
+ 	<color name="Teal">#009688</color>
+ 	<color name ="Brown">#795548</color>
+ 	<color name="theme_bluegrey_color">#90a4ae</color>
+ 	<color name="theme_brown_color">#a1887f</color>
+ 	<color name="theme_deeppurple_color">#9575cd</color>
+ 	<color name="theme_indigo_color">#7986cb</color>
+ 	<color name="theme_red_color">#f36c60</color>
+ 	<color name="theme_teal_color">#4db6ac</color>
+ 	<color name="neutral_color_light">#e0e0e0</color>
+ 	<color name="neutral_color_dark">#212121</color>
+ 	<color name="IndigoDark">#303f9f</color>
+ 	<color name="BlueGreyDark">#455a64</color>
+ 	<color name="RedThemeDark">#d01716</color>
+ 	<color name="DeepPurpleDark">#512da8</color>
+ 	<color name="TealDark">#00796b</color>
+ 	<color name="BrownDark">#5d4037</color>
+ 	<color name="bluegrey_accent">#cfd8dc</color>
+ 	<color name="brown_accent">#d7ccc8</color>
+ 	<color name="deeppurple_accent">#b388ff</color>
+ 	<color name="indigo_accent">#8c9eff</color>
+ 	<color name="red_accent">#ff7997</color>
+ 	<color name="teal_accent">#a7ffeb</color>
+ 	<color name="secondary_section_selected">@android:color/transparent</color>
+ 	<color name="unselectedTabTextColor">#99FFFFFF</color>
+ 
+</resources> 
