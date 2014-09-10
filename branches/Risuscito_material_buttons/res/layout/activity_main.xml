@@ -1,0 +1,23 @@
+<org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:drawer="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation_drawer_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        drawer:drawer_gravity="start"
+        drawer:list_headerView="@layout/menu_header"
+        drawer:list_headerClickable="false"
+        drawer:list_mainSectionsEntries="@array/navigation_main_sections"
+        drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
+        drawer:list_mainSectionsDrawables="?attr/drawerIcons"
+        drawer:list_secondarySectionsDrawables="?attr/drawerIconsSecondary"
+        drawer:list_background="?attr/mainDarkLightColor"
+        drawer:list_secondary_divider="?attr/tabDivider">
+
+   	<FrameLayout
+            android:id="@+id/content_layout"
+            android:background="?attr/mainDarkLightColor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+</org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
