@@ -12,7 +12,7 @@
     <string name="arg_search_text">Indice per argomento</string>
     <string name="list_result_title">Risultati della ricerca:</string>
     <string name="args_result_title">Elenco degli argomenti</string>
-    <string name="button_pulisci">Pulisci</string>
+    <string name="button_pulisci">PULISCI</string>
     <string name="button_clean_list">Pulisci lista</string>
     <string name="always_on">No standby</string>
     <string name="always_on_summary">Impedisce allo schermo di andare in standby all\'interno dell\'applicazione.</string>
@@ -86,7 +86,7 @@
     <string name="fast_search_title">Ricerca veloce</string>
     <string name="advanced_search_title">Ricerca avanzata</string>
     <string name="title_activity_search">Ricerca canto</string>
-    <string name="button_search">Cerca</string>
+    <string name="button_search">CERCA</string>
     <string name="search_running">Ricerca in corso&#8230;</string>
     <string name="advanced_search_subtitle">CERCA NEL TITOLO E NEL TESTO</string>
     <string name="fast_search_subtitle">CERCA PER TITOLO</string>

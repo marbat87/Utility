@@ -38,6 +38,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
 	        android:layout_alignParentTop="true"
+	        android:layout_marginRight="@dimen/min_button_margin"
 	        android:gravity="center"
 	        android:text="@string/button_pulisci" />
 

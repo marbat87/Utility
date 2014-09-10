@@ -33,7 +33,7 @@
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_light</item>
         <item name="android:editTextStyle">@style/EditTexttheme_teal</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal</item>
-    	<item name="android:buttonStyle">@style/Buttontheme_teal</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_teal_light</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>
@@ -125,7 +125,7 @@
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_teal_dark</item>
         <item name="android:editTextStyle">@style/EditTexttheme_teal_dark</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_teal_dark</item>
-    	<item name="android:buttonStyle">@style/Buttontheme_teal</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_teal_dark</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_teal</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_teal</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_teal</item>

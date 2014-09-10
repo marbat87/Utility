@@ -12,11 +12,25 @@
       <item name="android:button">@drawable/theme_brown_btn_radio_holo_light</item>
   </style>
 
-  <style name="Buttontheme_brown" parent="android:Widget.Button">
-	  <item name="android:background">@drawable/theme_brown_btn_default_holo_light</item>
-	  <item name="android:minHeight">48dip</item>
-	  <item name="android:minWidth">64dip</item>
-	  <item name="android:textColor">?attr/tabText</item>
+<!--   <style name="Buttontheme_brown" parent="android:Widget.Button"> -->
+<!-- 	  <item name="android:background">@drawable/theme_brown_btn_default_holo_light</item> -->
+<!-- 	  <item name="android:minHeight">48dip</item> -->
+<!-- 	  <item name="android:minWidth">64dip</item> -->
+<!-- 	  <item name="android:textColor">?attr/tabText</item> -->
+<!--   </style> -->
+  
+  <style name="Buttontheme_brown_light" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/btn_brown_material_light</item>
+	  <item name="android:minHeight">36dip</item>
+	  <item name="android:minWidth">88dip</item>
+	  <item name="android:textColor">@color/btn_text_color</item>
+  </style>
+  
+  <style name="Buttontheme_brown_dark" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/btn_brown_material_dark</item>
+	  <item name="android:minHeight">36dip</item>
+	  <item name="android:minWidth">88dip</item>
+	  <item name="android:textColor">@color/btn_text_color</item>
   </style>
 
   <style name="ImageButtontheme_brown" parent="android:Widget.ImageButton">
