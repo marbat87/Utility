@@ -7,7 +7,6 @@ import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.DialogFragment;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.EditText;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
@@ -37,6 +36,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.indris.material.RippleView;
 
 @SuppressWarnings("deprecation")
 public class RicercaVeloceFragment extends Fragment implements GenericDialogListener {
@@ -171,7 +172,8 @@ public class RicercaVeloceFragment extends Fragment implements GenericDialogList
 			
 		});
 		
-		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
+		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
+//		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -22,6 +22,8 @@ import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.indris.material.RippleView;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -88,7 +90,8 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 				
 		lv = (ListView) rootView.findViewById(R.id.matchedList);
 		searchPar.setText("");
-		rootView.findViewById(R.id.button_search).setEnabled(false);		
+		rootView.findViewById(R.id.button_search).setEnabled(false);
+		rootView.findViewById(R.id.search_ripple).setVisibility(View.GONE);	
 		
 		try {
 //        	InputStream in = getActivity().getAssets().open("fileout.xml");
@@ -108,10 +111,14 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				//abilita il pulsante solo se la stringa ha più di 3 caratteri, senza contare gli spazi
-				if (s.toString().trim().length() >= 3)
+				if (s.toString().trim().length() >= 3) {
 					rootView.findViewById(R.id.button_search).setEnabled(true);
-				else
+					rootView.findViewById(R.id.search_ripple).setVisibility(View.VISIBLE);
+				}
+				else {
 					rootView.findViewById(R.id.button_search).setEnabled(false);
+					rootView.findViewById(R.id.search_ripple).setVisibility(View.GONE);
+				}
 			}
 			
 			@Override
@@ -121,7 +128,8 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 			
 		});
 		
-		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
+		RippleView ricerca = (RippleView) rootView.findViewById(R.id.search_ripple);
+//		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
 		ricerca.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -139,7 +147,8 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 			}
 		});
 		
-		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
+		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
+//		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
