@@ -1,13 +1,11 @@
 package it.cammino.risuscito;
 
 import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.ViewPager;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
