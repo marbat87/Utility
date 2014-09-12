@@ -33,29 +33,35 @@
 	        android:paddingLeft="@dimen/activity_min_margin"
 	        android:text="@string/list_result_title" />
 
-		<FrameLayout
-	    	android:id="@+id/frame_pulisci"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_marginRight="@dimen/min_button_margin"
-        	android:layout_alignParentRight="true"
-		    android:layout_alignParentTop="true">
+<!-- 		<FrameLayout -->
+<!-- 	    	android:id="@+id/frame_pulisci" -->
+<!--         	android:layout_width="wrap_content" -->
+<!--         	android:layout_height="wrap_content" -->
+<!--         	android:layout_marginRight="@dimen/min_button_margin" -->
+<!--         	android:layout_alignParentRight="true" -->
+<!-- 		    android:layout_alignParentTop="true"> -->
 	    
-		    <Button
-		        android:id="@+id/button_pulisci"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:gravity="center"
-		        android:text="@string/button_pulisci" />
+<!-- 		    <Button -->
+<!-- 		        android:id="@+id/button_pulisci" -->
+<!-- 		        android:layout_width="wrap_content" -->
+<!-- 		        android:layout_height="wrap_content" -->
+<!-- 		        android:gravity="center" -->
+<!-- 		        android:text="@string/button_pulisci" /> -->
 	    
 	    	<com.indris.material.RippleView
+	    	    style="?attr/customButtonStyle"
             	android:id="@+id/pulisci_ripple"
-            	android:layout_width="match_parent"
-            	android:layout_height="match_parent"
-            	ripple:alphaFactor="8.0"
+            	android:layout_marginRight="@dimen/min_button_margin"
+            	android:layout_alignParentTop="true"
+            	android:layout_alignParentRight="true"
+            	android:text="@string/button_pulisci"
+            	android:gravity="center"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	ripple:alphaFactor="0.7"
             	ripple:rippleColor="?attr/customLightColor" />
 
-	    </FrameLayout>
+<!-- 	    </FrameLayout> -->
 	    	
     </RelativeLayout>
     

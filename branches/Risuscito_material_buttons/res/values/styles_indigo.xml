@@ -34,6 +34,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_indigo</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo</item>
     	<item name="android:buttonStyle">@style/Buttontheme_indigo_light</item>
+    	<item name="customButtonStyle">@style/Buttontheme_indigo_light</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>
@@ -126,6 +127,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_indigo_dark</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_indigo_dark</item>
     	<item name="android:buttonStyle">@style/Buttontheme_indigo_dark</item>
+    	<item name="customButtonStyle">@style/Buttontheme_indigo_dark</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_indigo</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_indigo</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_indigo</item>

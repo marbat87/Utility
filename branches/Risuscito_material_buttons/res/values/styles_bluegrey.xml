@@ -34,6 +34,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_bluegrey</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey</item>
     	<item name="android:buttonStyle">@style/Buttontheme_bluegrey_light</item>
+    	<item name="customButtonStyle">@style/Buttontheme_bluegrey_light</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
@@ -126,6 +127,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_bluegrey_dark</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey_dark</item>
     	<item name="android:buttonStyle">@style/Buttontheme_bluegrey_dark</item>
+    	<item name="customButtonStyle">@style/Buttontheme_bluegrey_dark</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>

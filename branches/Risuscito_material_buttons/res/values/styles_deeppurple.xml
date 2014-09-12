@@ -34,6 +34,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_deeppurple</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_deeppurple</item>
     	<item name="android:buttonStyle">@style/Buttontheme_deeppurple_light</item>
+    	<item name="customButtonStyle">@style/Buttontheme_deeppurple_light</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_deeppurple</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_deeppurple</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_deeppurple</item>
@@ -126,6 +127,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_deeppurple_dark</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_deeppurple_dark</item>
     	<item name="android:buttonStyle">@style/Buttontheme_deeppurple_dark</item>
+    	<item name="customButtonStyle">@style/Buttontheme_deeppurple_dark</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_deeppurple</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_deeppurple</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_deeppurple</item>

@@ -34,6 +34,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_red</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_red</item>
     	<item name="android:buttonStyle">@style/Buttontheme_red_light</item>
+    	<item name="customButtonStyle">@style/Buttontheme_red_light</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_red</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_red</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_red</item>
@@ -126,6 +127,7 @@
         <item name="android:editTextStyle">@style/EditTexttheme_red_dark</item>
     	<item name="android:radioButtonStyle">@style/RadioButtontheme_red_dark</item>
     	<item name="android:buttonStyle">@style/Buttontheme_red_dark</item>
+    	<item name="customButtonStyle">@style/Buttontheme_red_dark</item>
     	<item name="android:imageButtonStyle">@style/ImageButtontheme_red</item>
     	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_red</item>
     	<item name="android:seekBarStyle">@style/SeekBartheme_red</item>
