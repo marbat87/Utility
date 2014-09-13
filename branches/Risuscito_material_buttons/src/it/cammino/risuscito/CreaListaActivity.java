@@ -673,6 +673,12 @@ public class CreaListaActivity extends Activity
 						showcaseView.setScaleMultiplier(0.5f);
 						int[] coords = new int[2];
 						adapter.getView(0, lv, lv).getLocationOnScreen(coords);
+						coords[0] = (coords[0]*2 + 
+								adapter.getView(0, lv, lv).findViewById(R.id.drag_handle).getWidth())
+								/ 2;
+						coords[1] = (coords[1]*2 + 
+								adapter.getView(0, lv, lv).findViewById(R.id.drag_handle).getHeight())
+								/ 2;
 						showcaseView.animateGesture(coords[0], coords[1], coords[0], coords[1] + (screenHeight - coords[1])/3, true);
 						showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 
@@ -694,6 +700,15 @@ public class CreaListaActivity extends Activity
 						        		, co);
 								showcaseView.setButtonText(getString(R.string.showcase_button_next));
 //								showcaseView.setScaleMultiplier(0.5f);
+								int[] coords = new int[2];
+								adapter.getView(0, lv, lv).getLocationOnScreen(coords);
+								coords[0] = (coords[0]*2 + 
+										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getWidth())
+										/ 2;
+								coords[1] = (coords[1]*2 + 
+										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getHeight())
+										/ 2;
+								showcaseView.animateGesture(coords[0], coords[1], coords[0], coords[1], true);
 								showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 
 									@Override
@@ -714,7 +729,14 @@ public class CreaListaActivity extends Activity
 								        		, co);
 										showcaseView.setButtonText(getString(R.string.showcase_button_next));
 										int[] coords = new int[2];
-										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getLocationOnScreen(coords);
+//										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getLocationOnScreen(coords);
+										adapter.getView(0, lv, lv).getLocationOnScreen(coords);
+										coords[0] = (coords[0]*2 + 
+												adapter.getView(0, lv, lv).findViewById(R.id.position_name).getWidth())
+												/ 2;
+										coords[1] = (coords[1]*2 + 
+												adapter.getView(0, lv, lv).findViewById(R.id.position_name).getHeight())
+												/ 2;
 										showcaseView.animateGesture(coords[0], coords[1], coords[0] + (screenWidth - coords[0])/2, coords[1], true);
 										showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 
