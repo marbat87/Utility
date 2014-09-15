@@ -17,6 +17,8 @@
         android:id="@+id/textfieldRicerca"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:hint="@string/search_hint" />
 
     <RelativeLayout
