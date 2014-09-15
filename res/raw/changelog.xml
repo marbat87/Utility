@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-    <changelogversion versionName="2.6.8" changeDate="15 Settembre 2014">
-        <changelogtext>Ristrutturata la pagina di creazione liste</changelogtext>
-        <changelogtext>Aggiunta la possibililtà di rinominare le proprie liste personalizzate (entrare in modifica)</changelogtext>
-		<changelogtext>Nuovi floating button nelle liste personalizzate e nella creazione/modifica lista</changelogtext>
-		<changelogtext>Adeguata la grafica dei TAB al material design</changelogtext>
-		<changelogtext>Cambiato la grafica dei pulsanti di ricerca</changelogtext>
-		<changelogtext>Nuove animazioni di transizione tra le pagine</changelogtext>
-		<changelogtext>Corretti gli accordi di "Canto dei liberati" e "Preconio Pasquale"</changelogtext>
+    <changelogversion versionName="2.6.9" changeDate="XX Settembre 2014">
+        <changelogtext>Corretto un comportamento indesiderato nei campi di testo</changelogtext>
 	</changelogversion>
 
 </changelog>
