@@ -3,6 +3,7 @@
     
     <changelogversion versionName="2.6.9" changeDate="XX Settembre 2014">
         <changelogtext>Corretto un comportamento indesiderato nei campi di testo</changelogtext>
+		<changelogtext>Corretto il canto "La voce del mio amato"</changelogtext>
 	</changelogversion>
     
     <changelogversion versionName="2.6.8" changeDate="15 Settembre 2014">
