@@ -3,8 +3,8 @@
 
     <changelogversion versionName="2.6.9" changeDate="XX Settembre 2014">
         <changelogtext>Corretto un comportamento indesiderato nei campi di testo</changelogtext>
-		<changelogtext>Corretto il canto "La voce del mio amato" e "Signore, non punirmi nel tuo sdegno"</changelogtext>
-		<changelogtext>Corretti gli accordi del canto "A te Signore con la mia voce"</changelogtext>
+		<changelogtext>Corretti i canti: "La voce del mio amato" - "Signore, non punirmi nel tuo sdegno"
+		    - "A te Signore con la mia voce" - "Ti vedranno i re"</changelogtext>
 	</changelogversion>
 
 </changelog>
