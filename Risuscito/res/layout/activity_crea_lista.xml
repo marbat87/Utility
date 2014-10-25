@@ -2,54 +2,109 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:dslv="http://schemas.android.com/apk/res/it.cammino.risuscito"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingTop="@dimen/activity_min_margin"
-    android:paddingLeft="@dimen/activity_min_margin"
-    android:paddingRight="@dimen/activity_min_margin"
-    android:paddingBottom="@dimen/activity_min_margin"
     android:orientation="vertical"
-    android:weightSum="1.0"
+    android:focusable="true"
+	android:focusableInTouchMode="true"
     tools:context=".CreaListaActivity" >
 	
-    <LinearLayout 
+   	<LinearLayout 
     	android:layout_width="fill_parent"
-    	android:layout_height="0dp"
-    	android:orientation="vertical"
-    	android:layout_weight="1">
+    	android:layout_height="wrap_content"
+    	android:background="?attr/customPstsIndicatorColor"
+    	android:orientation="vertical">
     
-	    <RelativeLayout
-	        android:id="@+id/addPosizione"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical"
-	        android:clickable="true"
-	        android:minHeight="@dimen/list_preferred_item_height_medium"
-	        android:orientation="horizontal"
-	        android:background="@drawable/list_selector_holo_light" >
+ 		<TextView
+ 		    android:id="@+id/textTitleDescription"
+    		android:layout_width="wrap_content"
+          	android:layout_height="wrap_content"
+          	android:textColor="?attr/accentColor"
+          	android:paddingLeft="@dimen/action_bar_text_field_margin"
+          	android:text="@string/list_title" /> 
+          	
+ 		<EditText
+        	android:id="@+id/textfieldTitle"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:scrollHorizontally="true"
+        	android:singleLine="true"
+        	android:maxLines="1"
+        	android:layout_marginLeft="@dimen/activity_min_margin"
+        	android:layout_marginRight="@dimen/activity_min_margin"
+        	android:layout_marginBottom="@dimen/activity_min_margin"
+        	android:background="?attr/actionBarEditTextBackground"
+        	android:textColor="@android:color/white"
+        	android:textSize="30sp"
+        	android:textCursorDrawable="@null"
+        	android:hint="@string/list_title_modif" />
+ 		
+    </LinearLayout>
 	
-	        <ImageView
-	            android:id="@+id/imagePlus"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerVertical="true"
-	            android:contentDescription="@string/add_inizio"
-	            android:src="?customInsertItem" />
+	<TextView
+		android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:paddingTop="@dimen/activity_min_margin"
+     	android:paddingLeft="@dimen/activity_min_margin"
+     	android:text="@string/list_elements" />
+    
+<!--     <LinearLayout  -->
+<!--     	android:layout_width="fill_parent" -->
+<!--     	android:layout_height="0dp" -->
+<!--     	android:orientation="vertical" -->
+<!--     	android:layout_weight="0.85"> -->
+    
+<!--         <TextView -->
+<!--     		android:layout_width="wrap_content" -->
+<!--           	android:layout_height="wrap_content" -->
+<!--           	android:text="@string/list_elements" />  -->
+        
+<!-- 	    <RelativeLayout -->
+<!-- 	        android:id="@+id/addPosizione" -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:layout_gravity="center_vertical" -->
+<!-- 	        android:clickable="true" -->
+<!-- 	        android:minHeight="@dimen/list_preferred_item_height_medium" -->
+<!-- 	        android:orientation="horizontal" -->
+<!-- 	        android:background="?attr/selectableItemBackground" > -->
 	
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerVertical="true"
-	            android:layout_toRightOf="@+id/imagePlus"
-	            android:text="@string/add_position"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />
+<!-- 	        <ImageView -->
+<!-- 	            android:id="@+id/imagePlus" -->
+<!-- 	            android:layout_width="wrap_content" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_centerVertical="true" -->
+<!-- 	            android:contentDescription="@string/add_inizio" -->
+<!-- 	            android:src="?customInsertItem" /> -->
+	
+<!-- 	        <TextView -->
+<!-- 	            android:layout_width="wrap_content" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_centerVertical="true" -->
+<!-- 	            android:layout_toRightOf="@+id/imagePlus" -->
+<!-- 	            android:text="@string/add_position" -->
+<!-- 	            android:textAppearance="?android:attr/textAppearanceMedium" /> -->
 	        
-	    </RelativeLayout>
-		    
+<!-- 	    </RelativeLayout> -->
+
+    <FrameLayout
+    	android:paddingLeft="@dimen/activity_min_margin"
+    	android:paddingRight="@dimen/activity_min_margin"
+    	android:layout_width="fill_parent"
+   		android:layout_height="fill_parent">
+ 		
+        <TextView
+        	android:id="@+id/noElementsAdded"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/no_elements_added" />
+ 		
 		<com.mobeta.android.dslv.DragSortListView
 		    android:id="@android:id/list"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
+		    android:divider="?attr/dividerHorizontal"
 		    android:paddingTop="0dp"
 		    android:paddingBottom="0dp"
 		    android:dividerHeight="1dp"
@@ -65,24 +120,37 @@
 		    dslv:sort_enabled="true"
 		    dslv:remove_enabled="true"
 		    dslv:drag_start_mode="onMove"
-		    dslv:remove_mode="flingRemove" />
+		    dslv:remove_mode="flingRemove"
+		    dslv:float_background_color="?attr/customBottomBarColor" />
     
-	</LinearLayout>
-	
-  	<RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="right|bottom"
-        android:orientation="horizontal" >
-    
-  		<Button
-	        android:id="@+id/button_save_exit"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:text="@string/list_save_exit" />
+<!-- 	</LinearLayout> -->
 
-	</RelativeLayout>
+	   	<com.melnykov.fab.FloatingActionButton
+            android:id="@+id/button_floating_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_floating_add"
+            fab:fab_colorNormal="?attr/customPstsIndicatorColor"
+            fab:fab_colorPressed="?attr/customLightColor" />
+
+	</FrameLayout>
+	
+<!--   	<RelativeLayout -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center_vertical" -->
+<!--         android:gravity="right|bottom" -->
+<!--         android:orientation="horizontal" > -->
+    
+<!--   		<Button -->
+<!-- 	        android:id="@+id/button_save_exit" -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:gravity="center" -->
+<!-- 	        android:text="@string/list_save_exit" /> -->
+
+<!-- 	</RelativeLayout> -->
     	
 </LinearLayout>

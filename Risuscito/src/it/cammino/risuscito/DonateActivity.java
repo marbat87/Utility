@@ -35,7 +35,12 @@ public class DonateActivity extends Fragment {
 		donateView.setBackgroundColor(0);
 		String text = "";
 		
-        if (Utility.getChoosedTheme(getActivity()) == 2) {
+        if (Utility.getChoosedTheme(getActivity()) == 1
+        		|| Utility.getChoosedTheme(getActivity()) == 3
+        		|| Utility.getChoosedTheme(getActivity()) == 5
+        		|| Utility.getChoosedTheme(getActivity()) == 7
+        		|| Utility.getChoosedTheme(getActivity()) == 9
+        		|| Utility.getChoosedTheme(getActivity()) == 11) {
         	text = "<html><head>"
 		          + "<style type=\"text/css\">body{color: #FFFFFF;}"
 		          + "</style></head>"

@@ -11,8 +11,8 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	private static final String DB_NAME = "DBCanti";	
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
-//	private static final int DB_VERSION = 22;
-	private static final int DB_VERSION = 24;
+//	private static final int DB_VERSION = 24;
+	private static final int DB_VERSION = 26;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -78,6 +78,12 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		sql += "_id INTEGER PRIMARY KEY,";
 		sql += "num_salmo TEXT NOT NULL,";
 		sql += "titolo_salmo TEXT NOT NULL";
+		sql += ");";
+		db.execSQL(sql);
+		
+		sql = "CREATE TABLE IF NOT EXISTS LOCAL_LINKS (";
+		sql += "_id INTEGER PRIMARY KEY,";
+		sql += "local_path TEXT NOT NULL";
 		sql += ");";
 		db.execSQL(sql);
 
@@ -591,7 +597,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (76, 64, 'Criso Gesù è il Signore! - Inno della Kenosis (Fil. 2,1-11)', 'inno_della_kenosis', 0, '"
+		sql += "VALUES (76, 64, 'Cristo Gesù è il Signore! - Inno della Kenosis (Fil. 2,1-11)', 'inno_della_kenosis', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/cristogesueilsignore.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -3040,13 +3046,31 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 			cursor.close();
 		}
 		
+		//dalla versionee 25 è stata introdotta la tabella di link locali. Va fatto il backup
+		BackupLocalLink[] backupLink = new BackupLocalLink[300];
+		if(oldVersion >= 25) {
+			String sql = "SELECT _id, local_path FROM LOCAL_LINKS";
+			Cursor cursor = db.rawQuery(sql, null);
+			cursor.moveToFirst();
+			for (int i = 0; i < cursor.getCount(); i++) {
+				BackupLocalLink localLinkBackup = new BackupLocalLink();
+				localLinkBackup.setIdCanto(cursor.getInt(0));
+				localLinkBackup.setLocalPath(cursor.getString(1));
+				backupLink[i] = localLinkBackup;
+				cursor.moveToNext();
+			}
+			cursor.close();
+		}
+		
 		reCreateDatabse(db);
+		
+		ContentValues values = null;
 		
 		if (oldVersion >= 19) {
 			for (int i = 0; i < backup.length; i++) {
 				if (backup[i] == null)
 					break;
-		    	ContentValues  values = new  ContentValues( );
+		    	values = new  ContentValues( );
 		    	values.put("zoom" , backup[i].getZoom());
 		    	//Nella versione 22 sono stati completati i ritornelli di tutti i canti,
 		    	//quindi meglio resettare lo scroll salvato
@@ -3092,13 +3116,24 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 						
 					}
 				}
-				ContentValues  values = new  ContentValues( );
+				values = new  ContentValues( );
 		    	values.put("lista" , ListaPersonalizzata.serializeObject(lista));
 		    	db.update("LISTE_PERS", values, "_id = " + idLista, null );
 				cursor.moveToNext();
 			}
 			
 			cursor.close();
+		}
+		
+		if (oldVersion >= 25) {
+			for (int i = 0; i < backupLink.length; i++) {
+				if (backupLink[i] == null)
+					break;
+		    	values = new  ContentValues( );
+		    	values.put("_id", backupLink[i].getIdCanto());
+		    	values.put("local_path", backupLink[i].getLocalPath());
+		    	db.insert("LOCAL_LINKS", null, values);
+			}
 		}
 		
 	}
@@ -3115,6 +3150,8 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 //		sql = "DROP TABLE IF EXISTS LISTE_PERS";
 //		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS SALMI_MUSICA";
+		db.execSQL(sql);
+		sql = "DROP TABLE IF EXISTS LOCAL_LINKS";
 		db.execSQL(sql);
 		
 		onCreate(db);
@@ -3203,9 +3240,34 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		public void setSpeed(int speed) {
 			this.speed = speed;
+		}	
+	}
+	
+	private class BackupLocalLink{
+		private int idCanto;
+		private String localPath;
+
+				
+		public BackupLocalLink() {
+			this.idCanto = 0;
+			this.localPath = "";
 		}
-			
-		
+
+		public int getIdCanto() {
+			return idCanto;
+		}
+
+		public void setIdCanto(int idCanto) {
+			this.idCanto = idCanto;
+		}
+
+		public String getLocalPath() {
+			return localPath;
+		}
+
+		public void setLocalPath(String localPath) {
+			this.localPath = localPath;
+		}
 	}
 
 }

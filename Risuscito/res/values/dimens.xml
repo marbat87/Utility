@@ -11,5 +11,14 @@
     <dimen name="about_image_width">100dip</dimen>
     <dimen name="percent_padding">15dip</dimen>
     <dimen name="menu_width">250dp</dimen>
+    
+    <dimen name="main_section_item_height">53dp</dimen>
+    <dimen name="secondary_section_item_height">38dp</dimen>
+    <dimen name="main_section_icon_size">35dp</dimen>
+    <dimen name="secondary_section_icon_size">27dp</dimen>
+    
+    <dimen name="material_action_bar_size">56dp</dimen>
+    <dimen name="action_bar_text_field_margin">15dip</dimen>
+    <dimen name="min_button_margin">10dip</dimen>
 	
 </resources>

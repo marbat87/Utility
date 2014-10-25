@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Risuscit&#242;</string>
-    <string name="action_settings">Impostazioni</string>
+<!--     <string name="action_settings">Impostazioni</string> -->
     <string name="action_about">About</string>
     <string name="action_favourites">Preferiti</string>
     <string name="action_share">Condividi</string>
@@ -12,7 +12,7 @@
     <string name="arg_search_text">Indice per argomento</string>
     <string name="list_result_title">Risultati della ricerca:</string>
     <string name="args_result_title">Elenco degli argomenti</string>
-    <string name="button_pulisci">Pulisci</string>
+    <string name="button_pulisci">PULISCI</string>
     <string name="button_clean_list">Pulisci lista</string>
     <string name="always_on">No standby</string>
     <string name="always_on_summary">Impedisce allo schermo di andare in standby all\'interno dell\'applicazione.</string>
@@ -79,13 +79,14 @@
     <string name="file_delete">File cancellato!</string>
     <string name="download_completed">File salvato!</string>
     <string name="download_running">Download in corso&#8230;</string>
+    <string name="download_cancelled">Download annullato!</string>
     <string name="present_yet">Canto già presente!</string>
     <string name="dialog_present_yet">&#200; già presente il canto: </string>
     <string name="dialog_wonna_replace">. Vuoi sostituirlo?</string>
     <string name="fast_search_title">Ricerca veloce</string>
     <string name="advanced_search_title">Ricerca avanzata</string>
     <string name="title_activity_search">Ricerca canto</string>
-    <string name="button_search">Cerca</string>
+    <string name="button_search">CERCA</string>
     <string name="search_running">Ricerca in corso&#8230;</string>
     <string name="advanced_search_subtitle">CERCA NEL TITOLO E NEL TESTO</string>
     <string name="fast_search_subtitle">CERCA PER TITOLO</string>
@@ -184,7 +185,7 @@
     <string name="no_pdf_reader">Nessun PDF Reader trovato!</string>
     <string name="export_running">Esportazione in corso&#8230;</string>
     <string name="open_pdf">Apri PDF</string>
-    <string name="action_donate">Ringrazia</string>
+<!--     <string name="action_donate">Ringrazia</string> -->
     <string name="content_donate">Dona</string>
     <string name="title_activity_donate">Ringrazia</string>
     <string name="activity_homepage">Home page</string>
@@ -194,5 +195,19 @@
     <string name="help_new_menu_desc">&#200; stato introdotto il nuovo men&#249; di navigazione, apribile cliccando sul simbolo in alto a sinistra, sulla copertina o facendo
         swype da sinistra col dito. Prova!</string>
     <string name="salmi_musica_index">Indice salmi musicati</string>
+    <string name="downlink_message">Desideri utilizzare la funzione di donwload della registrazione da internet per poterla riascoltare senza connessione, oppure associare un file mp3 presente nella memoria del tuo dispositivo?</string>
+    <string name="downlink_download">DOWNLOAD</string>
+    <string name="downlink_choose">ASSOCIA</string>
+    <string name="only_link">Vuoi associare un file mp3 presente nella memoria del tuo dispositivo?</string>
+    <string name="dialog_delete_link">Sei sicuro di voler scollegare dal brano presente nella memoria? (Il file non sarà cancellato)</string>
+    <string name="delink_delete">File scollegato!</string>
+    <string name="list_title">Titolo della lista</string>
+    <string name="list_title_modif">Modifica il titolo&#8230;</string>
+    <string name="list_elements">ELEMENTI DELLA LISTA:</string>
+    <string name="no_title_edited">Il titolo non è stato modificato in quanto vuoto!</string>
+    <string name="title_activity_settings_capital">IMPOSTAZIONI</string>
+    <string name="title_activity_about_capital">CHANGELOG</string>
+    <string name="title_activity_donate_capital">RINGRAZIA</string>
+    <string name="no_elements_added">Non hai ancora aggiunto nessun elemento.</string>
     
 </resources>

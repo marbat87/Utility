@@ -244,6 +244,7 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
     
     private class SongRowAdapter extends SimpleExpandableListAdapter {
@@ -436,7 +437,7 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     

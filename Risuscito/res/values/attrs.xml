@@ -34,7 +34,23 @@
 	    <attr name="customInsertItem" format="reference" />
 	    <attr name="customChangelog" format="reference" />
 	    <attr name="customDrawer" format="reference" />
-	    <attr name="customSliderBackground" format="color" />
+	    <attr name="mainDarkLightColor" format="color" />
+	    <attr name="customDots" format="reference" />
+	    <attr name="customPstsIndicatorColor" format="color" />
+	    <attr name ="menuDrawerTextColor" format="reference" />
+	    <attr name ="customTabBackground" format="reference" />
+	    <attr name="customDialogButtonBackground" format="reference" />
+	    <attr name="customInnerSwitch" format="reference" />
+	    <attr name="customTrackSwitch" format="reference" />
+	    <attr name="customRadioButton" format="reference" />
+	    <attr name="drawerIcons" format="reference" />
+	    <attr name="drawerBackground" format="reference" />
+	    <attr name="drawerIconsSecondary" format="reference" />
+	    <attr name="customLightColor" format="color" />
+	    <attr name="customSaveList" format="reference" />
+	    <attr name="accentColor" format="color" />
+	    <attr name="actionBarEditTextBackground" format="reference" />
+	    <attr name="customButtonStyle" format="reference" />
 	</declare-styleable>
 	<declare-styleable name="DragSortListView">
 	    <attr name="collapsed_height" format="dimension" />

@@ -1,91 +1,154 @@
 package it.cammino.risuscito;
 
+import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
 import org.holoeverywhere.FontLoader;
-import org.holoeverywhere.addon.AddonSlider;
-import org.holoeverywhere.addon.Addons;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.slider.SliderItem;
-import org.holoeverywhere.slider.SliderMenu;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.MenuItem;
+import android.view.View;
 
-@Addons(AddonSlider.class)
 public class MainActivity extends Activity {
-    public AddonSlider.AddonSliderA addonSlider() {
-        return addon(AddonSlider.class);
-    }
-		
-    private SliderMenu sliderMenu;
-    private DatabaseCanti listaCanti;
+    
+    public GoogleNavigationDrawer mDrawer;
+    private ActionBarDrawerToggle drawerToggle;
+    
+    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	Utility.updateThemeWithSlider(MainActivity.this);
         FontLoader.setDefaultFont(FontLoader.ROBOTO_CONDENSED);
-        super.onCreate(savedInstanceState);      
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(MainActivity.this);
+        
+        mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
+
+        /*
+         * We get the drawerToggle object order to
+         * allow showing the NavigationDrawer icon
+         */
+        drawerToggle = new ActionBarDrawerToggle(this,
+                mDrawer,
+                R.drawable.ic_fa_bars,
+                R.string.app_name,
+                R.string.app_name);
+
+        mDrawer.setDrawerListener(drawerToggle); //Attach the DrawerListener
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setLogo(R.drawable.transparent);
         
-		//crea un istanza dell'oggetto DatabaseCanti
-		listaCanti = new DatabaseCanti(this);
-        
-        sliderMenu = addonSlider().obtainDefaultSliderMenu(R.layout.main_menu);
+        if (findViewById(R.id.content_layout) != null) {
 
-        sliderMenu.add(R.string.activity_homepage,
-        		Risuscito.class, SliderMenu.BLUE).setIconAttr(R.attr.customHome);
-        sliderMenu.add(R.string.title_activity_search,
-        		GeneralSearch.class, SliderMenu.BLUE).setIconAttr(R.attr.customSearch);
-        sliderMenu.add(R.string.title_activity_general_index,
-        		GeneralIndex.class, SliderMenu.BLUE).setIconAttr(R.attr.customIndexes);
-        sliderMenu.add(R.string.title_activity_custom_lists,
-        		CustomLists.class, SliderMenu.BLUE).setIconAttr(R.attr.customLists);
-        sliderMenu.add(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")",
-        		FavouritesActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customFavorite);
-        sliderMenu.add(R.string.title_activity_settings,
-        		Settings.class, SliderMenu.BLUE).setIconAttr(R.attr.customSettings);
-        sliderMenu.add(R.string.title_activity_about,
-        		AboutActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customChangelog);
-        sliderMenu.add(R.string.title_activity_donate,
-        		DonateActivity.class, SliderMenu.BLUE).setIconAttr(R.attr.customThanks);
-                
-        checkScreenAwake();
-                
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            // Create a new Fragment to be placed in the activity layout
+            Risuscito firstFragment = new Risuscito();
+            
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            firstFragment.setArguments(getIntent().getExtras());
+            
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content_layout, firstFragment, TAG_MAIN_FRAGMENT).commit();
+        }
+
     }
     
     @Override
-    public void onResume() {
-    	checkScreenAwake();
-    	sliderMenu.remove(4);
-    	SliderItem favoritesItem = new SliderItem()
-        	.setLabel(getString(R.string.title_activity_favourites) + " (" + getFavoritesCount() + ")")
-        .setFragmentClass(FavouritesActivity.class);
-        sliderMenu.add(favoritesItem, 4).setIconAttr(R.attr.customFavorite).fillColors(SliderMenu.BLUE);
-    	 
+    protected void onResume() {
     	super.onResume();
-    }    
+    	checkScreenAwake();
+    }
     
-	@Override
-	public void onDestroy() {
-		listaCanti.close();
-		super.onDestroy();
-	}
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawer.setOnNavigationSectionSelected(new GoogleNavigationDrawer.OnNavigationSectionSelected() {
+            @Override
+            public void onSectionSelected(View v, int i, long l) {
+                
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            	switch (i) {
+				case 1:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);	                transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
+					break;
+				case 2:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new GeneralSearch());
+					break;
+				case 3:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new GeneralIndex());
+	                break;
+				case 4:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new CustomLists());
+	                break;
+				case 5:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new FavouritesActivity());
+	                break;
+				case 6:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new Settings());
+	                break;
+				case 7:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new AboutActivity());
+	                break;
+				case 8:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	                transaction.replace(R.id.content_layout, new DonateActivity());
+	                break;
+	            default:
+					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+	            	transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
+            	}
+
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack so the user can navigate back
+//                transaction.addToBackStack(null);
+
+                // Commit the transaction
+                transaction.commit();
+            }
+        });
+        drawerToggle.syncState();
+    }
     
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (sliderMenu.getCurrentPage() == 0) {
-				finish();
-				return true;
-			}
-			else {
-				sliderMenu.setCurrentPage(0);
-				return true;
-			}
+        	Risuscito myFragment = (Risuscito)getSupportFragmentManager().findFragmentByTag(TAG_MAIN_FRAGMENT);
+        	if (myFragment != null && myFragment.isVisible()) {
+        		finish();
+        	}
+        	else {
+        		mDrawer.check(1);
+        		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+				transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        		transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
+        		transaction.commit();
+        	}
+        	return true;
         }
         return super.onKeyUp(keyCode, event);
     }
@@ -95,33 +158,27 @@ public class MainActivity extends Activity {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 			boolean screenOn = pref.getBoolean("screenOn", false);
 		if (screenOn)
-			findViewById(R.id.slider_menu).setKeepScreenOn(true);
+			findViewById(R.id.content_layout).setKeepScreenOn(true);
 		else
-			findViewById(R.id.slider_menu).setKeepScreenOn(true);
+			findViewById(R.id.content_layout).setKeepScreenOn(true);
     }
     
-    private int getFavoritesCount() {
-    	
-    	// crea un manipolatore per il Database in modalità READ
-		SQLiteDatabase db = listaCanti.getReadableDatabase();
-		
-		// lancia la ricerca dei preferiti
-		String query = "SELECT count(*)" +
-				"		FROM ELENCO" +
-				"		WHERE favourite = 1";
-		Cursor curs = db.rawQuery(query, null);
-		
-		curs.moveToFirst();
-		
-		//recupera il numero di record trovati
-		int total = curs.getInt(0);
-		
-		// chiude il cursore
-		curs.close();
-		
-		db.close();
-		
-		return total;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        /*
+         * Declare the behaviour of clicking at the
+         * application icon, opening and closing the drawer
+         */
+        if(item.getItemId() == android.R.id.home) {
+            if(mDrawer != null) {
+                if(mDrawer.isDrawerMenuOpen()) {
+                    mDrawer.closeDrawerMenu();
+                } else {
+                    mDrawer.openDrawerMenu();
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
     
 }

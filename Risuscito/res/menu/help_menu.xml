@@ -5,6 +5,6 @@
         android:orderInCategory="99"
         android:icon="?attr/customHelp"
         android:showAsAction="always"
-        android:title="@string/action_add_list" />
+        android:title="@string/action_help" />
 
 </menu>

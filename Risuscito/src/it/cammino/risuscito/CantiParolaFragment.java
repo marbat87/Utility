@@ -28,6 +28,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+
+import com.melnykov.fab.FloatingActionButton;
 
 @SuppressWarnings("deprecation")
 public class CantiParolaFragment extends Fragment 
@@ -303,7 +306,11 @@ public class CantiParolaFragment extends Fragment
 			}
 		});
 		
-		rootView.findViewById(R.id.button_resetList1).setOnClickListener(new OnClickListener() {
+		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.parolaScrollView);
+		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
+		floatingActionButton.attachToScrollView(scrollView);
+		
+		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -456,6 +463,7 @@ public class CantiParolaFragment extends Fragment
     	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
     
     private void openPagina(View v) {
@@ -489,6 +497,7 @@ public class CantiParolaFragment extends Fragment
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
     }
     
     //recupera il titolo del canto in posizione "position" nella lista

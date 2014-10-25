@@ -12,6 +12,8 @@ import org.holoeverywhere.widget.LinearLayout;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.ViewPager;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +33,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 @SuppressWarnings("deprecation")
 public class ListaPersonalizzataFragment extends Fragment
@@ -63,7 +66,11 @@ public class ListaPersonalizzataFragment extends Fragment
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-		rootView.findViewById(R.id.button_resetListPers).setOnClickListener(new OnClickListener() {
+		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.personalizedScrollView);
+		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
+		floatingActionButton.attachToScrollView(scrollView);
+		
+		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -182,6 +189,7 @@ public class ListaPersonalizzataFragment extends Fragment
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
     }
     
     private void updateLista() {
@@ -224,6 +232,7 @@ public class ListaPersonalizzataFragment extends Fragment
 				    	Intent intent = new Intent(getActivity(), GeneralInsertSearch.class);
 				    	intent.putExtras(bundle);
 				    	startActivity(intent);
+				    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
 					}
 				}); 
 				

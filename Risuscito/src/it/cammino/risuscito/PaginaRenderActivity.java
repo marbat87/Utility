@@ -1,5 +1,6 @@
 package it.cammino.risuscito;
 
+import it.cammino.risuscito.DownloadOrLinkDialogFragment.DownloadOrLinkDialogListener;
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
 
 import java.io.BufferedReader;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.holoeverywhere.ThemeManager;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.Dialog;
 import org.holoeverywhere.app.DialogFragment;
@@ -34,6 +36,7 @@ import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -71,12 +74,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
 
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -88,7 +91,8 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PaginaRenderActivity extends Activity implements GenericDialogListener {
+public class PaginaRenderActivity extends Activity
+			implements GenericDialogListener, DownloadOrLinkDialogListener {
     
 	private DatabaseCanti listaCanti;
 	private String pagina;
@@ -111,6 +115,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	private String primoBarre;
 	private String barreSalvato;
 	private static String barreCambio;
+	private String personalUrl;
 
 	enum MP_State {
 	    Idle, Initialized, Prepared, Started, Paused, 
@@ -155,6 +160,9 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	private final String SAVE_DIALOG_TAG = "1";
 	private final String DELETE_DIALOG_TAG = "2";
 	private final String SALVA_ACCORDO_TAG = "3";
+	private final String DOWN_CHOOSE_DIALOG_TAG = "4";
+	private final String DELETE_LINK_TAG = "5";
+	private final String DELETE_ONLY_LINK_TAG = "6";
 	
 	private ProgressDialog mExportDialog;
 	private String localPDFPath;
@@ -172,7 +180,9 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		actionbar.setLogo(R.drawable.transparent);
         
         setContentView(R.layout.activity_pagina_render);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(PaginaRenderActivity.this);
         
         listaCanti = new DatabaseCanti(this);
 
@@ -219,28 +229,129 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
         scroll_speed_bar = (SeekBar) findViewById(R.id.speed_seekbar);
         speed_text = (TextView) findViewById(R.id.speed_text);
         
+    	am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+		afChangeListener = new OnAudioFocusChangeListener() {
+		    public void onAudioFocusChange(int focusChange) {
+		        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+		            // Lower the volume
+		        	if (mediaPlayerState == MP_State.Started) {
+		        		mediaPlayer.setVolume(0.1f, 0.1f);
+		        	}
+		        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+		            // Raise it back to normal
+		        	if (mediaPlayerState == MP_State.Started) {
+		        		mediaPlayer.setVolume(1.0f, 1.0f);
+		        	}
+		        }
+		    }
+		};
+		
+        stop_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				cmdStop();
+			}
+		});
+        
+        // tenendo premuto il pulsante fast forward, si va avanti veloce
+        ff_button.setOnLongClickListener(new OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+
+                final Runnable r = new Runnable() {
+                    
+                	public void run() {
+
+ 						int currentPosition = mediaPlayer.getCurrentPosition();
+ 						// check if seekForward time is lesser than song duration
+ 						if (currentPosition + 5000 <= mediaPlayer.getDuration()) {
+ 							// forward song
+ 							mediaPlayer.seekTo(currentPosition + 5000);
+ 						} else {
+ 							// forward to end position
+ 							mediaPlayer.seekTo(mediaPlayer.getDuration());
+ 						}
+                    	
+                        if(ff_button.isPressed()){
+                        	ff_button.postDelayed(this, 1000); //delayed for 1 sec
+                        }else{
+
+                            ff_button.postInvalidate();
+                            ff_button.invalidate();
+                        }
+                    }
+                };
+
+                ff_button.post(r);
+
+                return true;
+            }
+        });
+		
+        // tenendo premuto il pulsante rewind, si ravvolge
+        rewind_button.setOnLongClickListener(new OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+
+                final Runnable r = new Runnable() {
+                    
+                	public void run() {
+
+			        	int currentPosition = mediaPlayer.getCurrentPosition();
+			        	// check if seekBackward time is greater than 0 sec
+			            if (currentPosition - 5000 >= 0) {
+			                // forward song
+			                mediaPlayer.seekTo(currentPosition - 5000);
+			            } else {
+			                // backward to starting position
+			                mediaPlayer.seekTo(0);
+			            }
+                    	
+                        if(rewind_button.isPressed()){
+                        	rewind_button.postDelayed(this, 1000); //delayed for 1 sec
+                        }else{
+
+                        	rewind_button.postInvalidate();
+                        	rewind_button.invalidate();
+                        }
+                    }
+                };
+
+                rewind_button.post(r);
+
+                return true;
+            }
+		});
+        
+        phoneStateListener = new PhoneStateListener() {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                if (state == TelephonyManager.CALL_STATE_RINGING) {
+                	 //Incoming call: Pause music
+                	if (mediaPlayerState == MP_State.Started)
+                		cmdPause();
+                } else if(state == TelephonyManager.CALL_STATE_OFFHOOK) {
+                	//A call is dialing, active or on hold
+                	if (mediaPlayerState == MP_State.Started)
+                		cmdPause();
+                }
+                super.onCallStateChanged(state, incomingNumber);
+            }
+        };
+        TelephonyManager mgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        if(mgr != null) {
+            mgr.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        }
+        
         if (!url.equalsIgnoreCase("")) {
-        	
-        	am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-    		afChangeListener = new OnAudioFocusChangeListener() {
-    		    public void onAudioFocusChange(int focusChange) {
-    		        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-    		            // Lower the volume
-    		        	if (mediaPlayerState == MP_State.Started) {
-    		        		mediaPlayer.setVolume(0.1f, 0.1f);
-    		        	}
-    		        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-    		            // Raise it back to normal
-    		        	if (mediaPlayerState == MP_State.Started) {
-    		        		mediaPlayer.setVolume(1.0f, 1.0f);
-    		        	}
-    		        }
-    		    }
-    		};
         	
     		localUrl = Utility.retrieveMediaFileLink(this, url);
     		
-    		if (localUrl.equalsIgnoreCase("")) {
+    		if (localUrl.equalsIgnoreCase("") &&
+    				personalUrl.equalsIgnoreCase("")) {
     			save_file.setEnabled(true);
     			save_file.setVisibility(View.VISIBLE);
     			delete_file.setEnabled(false);
@@ -253,26 +364,28 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     			delete_file.setVisibility(View.VISIBLE);
     		}
     		
+        	//mostra i pulsanti per il lettore musicale
+        	play_button.setVisibility(View.VISIBLE);
+        	stop_button.setVisibility(View.VISIBLE);
+        	rewind_button.setVisibility(View.VISIBLE);
+        	ff_button.setVisibility(View.VISIBLE);
+    		
         	if (mediaPlayer == null) {
 	    		mediaPlayer = new MediaPlayer();
 	    		mediaPlayerState = MP_State.Idle;
 	    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
 	    		
-	        	//mostra i pulsanti per il lettore musicale
-	        	play_button.setVisibility(View.VISIBLE);
-	        	stop_button.setVisibility(View.VISIBLE);
-	        	rewind_button.setVisibility(View.VISIBLE);
-	        	ff_button.setVisibility(View.VISIBLE);
-	        	((ImageView) findViewById(R.id.no_record_message)).setVisibility(View.GONE);
-	    		
-
-	    		if (localUrl.equalsIgnoreCase("")) {
+	    		if (localUrl.equalsIgnoreCase("")
+	    				&& personalUrl.equalsIgnoreCase("")) {
 	    			localFile = false;
 	    			cmdSetDataSource(url);
 	    		}
 	    		else {
 	    			localFile = true;
-	    			cmdSetDataSource(localUrl);
+	    			if (!localUrl.equals(""))
+	    				cmdSetDataSource(localUrl);
+	    			else
+	    				cmdSetDataSource(personalUrl);
 	    		}
 	        	    	
 	        	//disabilita il pulsante non utilizzabili in modalità stop
@@ -334,12 +447,22 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     					default:
     			    		localUrl = Utility.retrieveMediaFileLink(getApplicationContext(), url);
     			    		if (localUrl.equalsIgnoreCase("")) {
-    			    			localFile = false;
-    			    			cmdSetDataSource(url);
-    			    			save_file.setEnabled(true);
-    			    			save_file.setVisibility(View.VISIBLE);
-    			    			delete_file.setEnabled(false);
-    			    			delete_file.setVisibility(View.GONE);
+    			    			if (personalUrl.equalsIgnoreCase("")) {
+	    			    			localFile = false;
+	    			    			cmdSetDataSource(url);
+	    			    			save_file.setEnabled(true);
+	    			    			save_file.setVisibility(View.VISIBLE);
+	    			    			delete_file.setEnabled(false);
+	    			    			delete_file.setVisibility(View.GONE);
+    			    			}
+    			    			else {
+        			    			localFile = true;
+        			    			cmdSetDataSource(personalUrl);
+        			    			save_file.setEnabled(false);
+        			    			save_file.setVisibility(View.GONE);
+        			    			delete_file.setEnabled(true);
+        			    			delete_file.setVisibility(View.VISIBLE);
+    			    			}
     			    			
     			    		}
     			    		else {
@@ -359,112 +482,242 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
             });
             
             // setta il comportamento al click sul pulsante stop
-            stop_button.setOnClickListener(new OnClickListener() {
+//            stop_button.setOnClickListener(new OnClickListener() {
+//    			
+//    			@Override
+//    			public void onClick(View v) {
+//    				cmdStop();
+//    			}
+//    		});
+            
+//            // tenendo premuto il pulsante fast forward, si va avanti veloce
+//            ff_button.setOnLongClickListener(new OnLongClickListener() {
+//
+//                @Override
+//                public boolean onLongClick(View v) {
+//
+//                    final Runnable r = new Runnable() {
+//                        
+//                    	public void run() {
+//
+//     						int currentPosition = mediaPlayer.getCurrentPosition();
+//     						// check if seekForward time is lesser than song duration
+//     						if (currentPosition + 5000 <= mediaPlayer.getDuration()) {
+//     							// forward song
+//     							mediaPlayer.seekTo(currentPosition + 5000);
+//     						} else {
+//     							// forward to end position
+//     							mediaPlayer.seekTo(mediaPlayer.getDuration());
+//     						}
+//                        	
+//                            if(ff_button.isPressed()){
+//                            	ff_button.postDelayed(this, 1000); //delayed for 1 sec
+//                            }else{
+//
+//                                ff_button.postInvalidate();
+//                                ff_button.invalidate();
+//                            }
+//                        }
+//                    };
+//
+//                    ff_button.post(r);
+//
+//                    return true;
+//                }
+//            });
+//			
+//            // tenendo premuto il pulsante rewind, si ravvolge
+//            rewind_button.setOnLongClickListener(new OnLongClickListener() {
+//
+//                @Override
+//                public boolean onLongClick(View v) {
+//
+//                    final Runnable r = new Runnable() {
+//                        
+//                    	public void run() {
+//
+//    			        	int currentPosition = mediaPlayer.getCurrentPosition();
+//    			        	// check if seekBackward time is greater than 0 sec
+//    			            if (currentPosition - 5000 >= 0) {
+//    			                // forward song
+//    			                mediaPlayer.seekTo(currentPosition - 5000);
+//    			            } else {
+//    			                // backward to starting position
+//    			                mediaPlayer.seekTo(0);
+//    			            }
+//                        	
+//                            if(rewind_button.isPressed()){
+//                            	rewind_button.postDelayed(this, 1000); //delayed for 1 sec
+//                            }else{
+//
+//                            	rewind_button.postInvalidate();
+//                            	rewind_button.invalidate();
+//                            }
+//                        }
+//                    };
+//
+//                    rewind_button.post(r);
+//
+//                    return true;
+//                }
+//			});
+//            
+//            phoneStateListener = new PhoneStateListener() {
+//                @Override
+//                public void onCallStateChanged(int state, String incomingNumber) {
+//                    if (state == TelephonyManager.CALL_STATE_RINGING) {
+//                    	 //Incoming call: Pause music
+//                    	if (mediaPlayerState == MP_State.Started)
+//                    		cmdPause();
+//                    } else if(state == TelephonyManager.CALL_STATE_OFFHOOK) {
+//                    	//A call is dialing, active or on hold
+//                    	if (mediaPlayerState == MP_State.Started)
+//                    		cmdPause();
+//                    }
+//                    super.onCallStateChanged(state, incomingNumber);
+//                }
+//            };
+//            TelephonyManager mgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+//            if(mgr != null) {
+//                mgr.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+//            }
+            
+            save_file.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					blockOrientation();
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.dialog_download_mp3));
+//					dialog.setListener(PaginaRenderActivity.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
+//	                dialog.setCancelable(false);
+					DownloadOrLinkDialogFragment dialog = new DownloadOrLinkDialogFragment();
+					dialog.setListener(PaginaRenderActivity.this);
+					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+			            @Override
+			            public boolean onKey(DialogInterface arg0, int keyCode,
+			                    KeyEvent event) {
+			                if (keyCode == KeyEvent.KEYCODE_BACK
+			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+			                    arg0.dismiss();
+								setRequestedOrientation(prevOrientation);
+								return true;
+			                }
+			                return false;
+			            }
+			        });
+	                dialog.show(getSupportFragmentManager(), DOWN_CHOOSE_DIALOG_TAG);
+	                dialog.setCancelable(false);
+				}
+			});
+
+            delete_file.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (personalUrl.equalsIgnoreCase("")) {
+						blockOrientation();
+						GenericDialogFragment dialog = new GenericDialogFragment();
+						dialog.setCustomMessage(getString(R.string.dialog_delete_mp3));
+						dialog.setListener(PaginaRenderActivity.this);
+						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+	
+				            @Override
+				            public boolean onKey(DialogInterface arg0, int keyCode,
+				                    KeyEvent event) {
+				                if (keyCode == KeyEvent.KEYCODE_BACK
+				                		&& event.getAction() == KeyEvent.ACTION_UP) {
+				                    arg0.dismiss();
+									setRequestedOrientation(prevOrientation);
+									return true;
+				                }
+				                return false;
+				            }
+				        });
+		                dialog.show(getSupportFragmentManager(), DELETE_DIALOG_TAG);
+		                dialog.setCancelable(false);
+					}
+					else {
+						blockOrientation();
+						GenericDialogFragment dialog = new GenericDialogFragment();
+						dialog.setCustomMessage(getString(R.string.dialog_delete_link));
+						dialog.setListener(PaginaRenderActivity.this);
+						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+				            @Override
+				            public boolean onKey(DialogInterface arg0, int keyCode,
+				                    KeyEvent event) {
+				                if (keyCode == KeyEvent.KEYCODE_BACK
+				                		&& event.getAction() == KeyEvent.ACTION_UP) {
+				                    arg0.dismiss();
+									setRequestedOrientation(prevOrientation);
+									return true;
+				                }
+				                return false;
+				            }
+				        });
+		                dialog.show(getSupportFragmentManager(), DELETE_LINK_TAG);
+		                dialog.setCancelable(false);
+					}
+				}
+			});
+            
+        }
+        else {
+        	
+            // aggiunge il clicklistener sul pulsante play
+            play_button.setOnClickListener(new OnClickListener() {
     			
     			@Override
     			public void onClick(View v) {
-    				cmdStop();
+    				
+    				switch (mediaPlayerState) {
+    					case Paused:
+    						cmdStart();
+    						break;
+    					case Started:
+    						cmdPause();
+    						break;
+    					case Initialized:
+    						cmdPrepare();
+    						break;
+    					case Stopped:
+    					case PlaybackCompleted:
+    					default:
+		        			localFile = true;
+		        			cmdSetDataSource(personalUrl);
+			    			save_file.setEnabled(false);
+			    			save_file.setVisibility(View.GONE);
+			    			delete_file.setEnabled(true);
+			    			delete_file.setVisibility(View.VISIBLE);
+    			    		
+			    			if (mediaPlayerState == MP_State.Initialized)
+    			    			cmdPrepare();
+    						break;
+    				}
     			}
-    		});
-            
-            // tenendo premuto il pulsante fast forward, si va avanti veloce
-            ff_button.setOnLongClickListener(new OnLongClickListener() {
-
-                @Override
-                public boolean onLongClick(View v) {
-
-                    final Runnable r = new Runnable() {
-                        
-                    	public void run() {
-
-     						int currentPosition = mediaPlayer.getCurrentPosition();
-     						// check if seekForward time is lesser than song duration
-     						if (currentPosition + 5000 <= mediaPlayer.getDuration()) {
-     							// forward song
-     							mediaPlayer.seekTo(currentPosition + 5000);
-     						} else {
-     							// forward to end position
-     							mediaPlayer.seekTo(mediaPlayer.getDuration());
-     						}
-                        	
-                            if(ff_button.isPressed()){
-                            	ff_button.postDelayed(this, 1000); //delayed for 1 sec
-                            }else{
-
-                                ff_button.postInvalidate();
-                                ff_button.invalidate();
-                            }
-                        }
-                    };
-
-                    ff_button.post(r);
-
-                    return true;
-                }
             });
-			
-            // tenendo premuto il pulsante rewind, si ravvolge
-            rewind_button.setOnLongClickListener(new OnLongClickListener() {
-
-                @Override
-                public boolean onLongClick(View v) {
-
-                    final Runnable r = new Runnable() {
-                        
-                    	public void run() {
-
-    			        	int currentPosition = mediaPlayer.getCurrentPosition();
-    			        	// check if seekBackward time is greater than 0 sec
-    			            if (currentPosition - 5000 >= 0) {
-    			                // forward song
-    			                mediaPlayer.seekTo(currentPosition - 5000);
-    			            } else {
-    			                // backward to starting position
-    			                mediaPlayer.seekTo(0);
-    			            }
-                        	
-                            if(rewind_button.isPressed()){
-                            	rewind_button.postDelayed(this, 1000); //delayed for 1 sec
-                            }else{
-
-                            	rewind_button.postInvalidate();
-                            	rewind_button.invalidate();
-                            }
-                        }
-                    };
-
-                    rewind_button.post(r);
-
-                    return true;
-                }
-			});
-            
-            phoneStateListener = new PhoneStateListener() {
-                @Override
-                public void onCallStateChanged(int state, String incomingNumber) {
-                    if (state == TelephonyManager.CALL_STATE_RINGING) {
-                    	 //Incoming call: Pause music
-                    	if (mediaPlayerState == MP_State.Started)
-                    		cmdPause();
-                    } else if(state == TelephonyManager.CALL_STATE_OFFHOOK) {
-                    	//A call is dialing, active or on hold
-                    	if (mediaPlayerState == MP_State.Started)
-                    		cmdPause();
-                    }
-                    super.onCallStateChanged(state, incomingNumber);
-                }
-            };
-            TelephonyManager mgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-            if(mgr != null) {
-                mgr.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-            }
             
             save_file.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					blockOrientation();
 					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.dialog_download_mp3));
+					dialog.setCustomMessage(getString(R.string.only_link));
 					dialog.setListener(PaginaRenderActivity.this);
 					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
@@ -490,7 +743,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 				public void onClick(View v) {
 					blockOrientation();
 					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.dialog_delete_mp3));
+					dialog.setCustomMessage(getString(R.string.dialog_delete_link));
 					dialog.setListener(PaginaRenderActivity.this);
 					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
@@ -506,24 +759,72 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			                return false;
 			            }
 			        });
-	                dialog.show(getSupportFragmentManager(), DELETE_DIALOG_TAG);
+	                dialog.show(getSupportFragmentManager(), DELETE_ONLY_LINK_TAG);
 	                dialog.setCancelable(false);
 				}
 			});
             
-        }
-        else {
-        	// nasconde i pulsanti
-			Toast toast = Toast.makeText(PaginaRenderActivity.this
-					, getString(R.string.no_record), Toast.LENGTH_SHORT);
-			toast.show();
-        	play_button.setVisibility(View.GONE);
-        	stop_button.setVisibility(View.GONE);
-        	rewind_button.setVisibility(View.GONE);
-        	ff_button.setVisibility(View.GONE);
-        	save_file.setVisibility(View.GONE);
-        	delete_file.setVisibility(View.GONE);
-        	((ImageView) findViewById(R.id.no_record_message)).setVisibility(View.VISIBLE);
+            if (mediaPlayer == null) {
+	    		mediaPlayer = new MediaPlayer();
+	    		mediaPlayerState = MP_State.Idle;
+	    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+	    		
+	        	//disabilita il pulsante non utilizzabili in modalità stop
+	            stop_button.setEnabled(false);
+	            rewind_button.setEnabled(false);
+	            ff_button.setEnabled(false);
+            }
+        	else {
+        		switch (mediaPlayerState) {
+        		case Started:
+            		play_button.setSelected(true);
+            		stop_button.setEnabled(true);
+            		ff_button.setEnabled(true);
+            		rewind_button.setEnabled(true);
+            		break;
+        		case Paused:
+        			play_button.setSelected(false);
+        			stop_button.setEnabled(true);
+        			ff_button.setEnabled(false);
+        			rewind_button.setEnabled(false);
+        			break;
+        		default:
+        			play_button.setSelected(false);
+        			stop_button.setEnabled(false);
+        			ff_button.setEnabled(false);
+        			rewind_button.setEnabled(false);
+        			break;
+        		}
+        	}
+            
+            if (!personalUrl.equalsIgnoreCase("")) {
+    			save_file.setEnabled(false);
+    			save_file.setVisibility(View.GONE);
+    			delete_file.setEnabled(true);
+    			delete_file.setVisibility(View.VISIBLE);
+    	    		
+    			//mostra i pulsanti per il lettore musicale
+	        	play_button.setVisibility(View.VISIBLE);
+	        	stop_button.setVisibility(View.VISIBLE);
+	        	rewind_button.setVisibility(View.VISIBLE);
+	        	ff_button.setVisibility(View.VISIBLE);
+            }
+            else {
+	        	// nasconde i pulsanti
+            	
+    			save_file.setEnabled(true);
+    			save_file.setVisibility(View.VISIBLE);
+    			delete_file.setEnabled(false);
+    			delete_file.setVisibility(View.GONE
+    					);
+				Toast toast = Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.no_record), Toast.LENGTH_SHORT);
+				toast.show();
+	        	play_button.setVisibility(View.GONE);
+	        	stop_button.setVisibility(View.GONE);
+	        	rewind_button.setVisibility(View.GONE);
+	        	ff_button.setVisibility(View.GONE);
+            }
 
         }
         
@@ -629,6 +930,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
       	   	  && barreCambio.equals(barreSalvato))) {
         		pulisciVars();
 				finish();
+		    	overridePendingTransition(0, R.anim.slide_out_right);
 	            return true;
 			}
 			else {
@@ -657,15 +959,6 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 		case R.id.action_exp_pdf:
 			(new PdfExportTask()).execute();
 			return true;
-//		case R.id.action_settings:
-//			startActivity(new Intent(this, Settings.class));
-//			return true;
-//		case R.id.action_donate:
-//			startActivity(new Intent(this, DonateActivity.class));
-//			return true;
-//		case R.id.action_about:
-//			startActivity(new Intent(this, AboutActivity.class));
-//			return true;
 		case R.id.action_help_canto:
 			showHelp();
 			return true;
@@ -787,6 +1080,7 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
         	  && barreCambio.equals(barreSalvato))) {
         		pulisciVars();
 				finish();
+				overridePendingTransition(0, R.anim.slide_out_right);
 	            return true;
         	}
         	else {
@@ -937,9 +1231,10 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	public void onDestroy() {
 		SaveZoom();
 		if (am != null)
-			am.abandonAudioFocus(afChangeListener);	
+			am.abandonAudioFocus(afChangeListener);
+		if (listaCanti != null)
+			listaCanti.close();
 		super.onDestroy();
-		listaCanti.close();
 	}
     
 	public void pulisciVars() {
@@ -1030,6 +1325,21 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    defaultScrollY = cursor.getInt(3);
 	    
 	    cursor.close();
+	    
+	    query = "SELECT local_path" +
+	      		"  FROM LOCAL_LINKS" +
+	      		"  WHERE _id =  " + idCanto;  
+	    cursor = db.rawQuery(query, null);
+	    
+	    if (cursor.getCount() == 1) {
+	    	cursor.moveToFirst();
+	    	personalUrl = cursor.getString(0);
+	    }
+	    else
+	    	personalUrl = "";
+	    
+	    cursor.close();
+	    
 	    db.close();
 	    		
     }
@@ -1083,7 +1393,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     	mediaPlayer.setOnCompletionListener(mediaPlayerOnCompletedListener);
     	
     	if(mediaPlayerState == MP_State.Initialized
-    		||mediaPlayerState == MP_State.Stopped){
+    		||mediaPlayerState == MP_State.Stopped
+    		|| mediaPlayerState == MP_State.PlaybackCompleted){
     		try {
     			mediaPlayer.prepareAsync();
     		} catch (IllegalStateException e) {
@@ -1258,12 +1569,14 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 			cmdStop();
 			mediaPlayerState = MP_State.PlaybackCompleted;
 			showMediaPlayerState();
+			mediaPlayerState = MP_State.Idle;
 		}
 	};
 	
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-    	if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {  		
+//    	if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {  	
+    	if (dialog.getTag().equals(DOWN_CHOOSE_DIALOG_TAG))  {  
 	    	final DownloadTask downloadTask = new DownloadTask(this);
 	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 			int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
@@ -1284,13 +1597,11 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 	    	    @Override
 	    	    public void onCancel(DialogInterface dialog) {
+	                Toast.makeText(PaginaRenderActivity.this, getString(R.string.download_cancelled), Toast.LENGTH_SHORT).show();
 	    	        downloadTask.cancel(true);
 	    	        setRequestedOrientation(prevOrientation);
 	    	    }
-	    	});
-    		
-//    		startActivityForResult(new Intent(this, FileChooserActivity .class), REQUEST_CODE);
-    	
+	    	});    	
     	}
     	else if (dialog.getTag().equals(DELETE_DIALOG_TAG))  {         
     		File fileToDelete = new File(localUrl);
@@ -1305,23 +1616,60 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     		mediaPlayerState = MP_State.Idle;
     		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
             
-    		localUrl = Utility.retrieveMediaFileLink(getApplicationContext(), url);
-    		if (localUrl.equalsIgnoreCase("")) {
+//    		localUrl = Utility.retrieveMediaFileLink(getApplicationContext(), url);
+//    		if (localUrl.equalsIgnoreCase("")) {
     			localFile = false;
     			cmdSetDataSource(url);
     			save_file.setEnabled(true);
     			save_file.setVisibility(View.VISIBLE);
     			delete_file.setEnabled(false);
     			delete_file.setVisibility(View.GONE);
-    		}
-    		else {
-    			localFile = true;
-    			cmdSetDataSource(localUrl);
-    			save_file.setEnabled(false);
-    			save_file.setVisibility(View.GONE);
-    			delete_file.setEnabled(true);
-    			delete_file.setVisibility(View.VISIBLE);
-    		}
+//    		}
+//    		else {
+//    			localFile = true;
+//    			cmdSetDataSource(localUrl);
+//    			save_file.setEnabled(false);
+//    			save_file.setVisibility(View.GONE);
+//    			delete_file.setEnabled(true);
+//    			delete_file.setVisibility(View.VISIBLE);
+//    		}
+    		dialog.dismiss();
+    		setRequestedOrientation(prevOrientation);
+    	}
+    	else if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)
+    			|| dialog.getTag().equals(DELETE_LINK_TAG))  {         
+    		Toast.makeText(this, getString(R.string.delink_delete), Toast.LENGTH_SHORT).show();
+            
+            if (mediaPlayerState == MP_State.Started
+            		|| mediaPlayerState == MP_State.Paused)
+            	cmdStop();
+            
+            mediaPlayer = new MediaPlayer();
+    		mediaPlayerState = MP_State.Idle;
+    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+            
+			localFile = false;
+			personalUrl = "";
+//			cmdSetDataSource(url);
+    		
+    		SQLiteDatabase db = listaCanti.getReadableDatabase();
+    		String sql = "DELETE FROM LOCAL_LINKS" +
+    				"  WHERE _id =  " + idCanto;
+    		db.execSQL(sql);
+    		db.close();
+    					
+			save_file.setEnabled(true);
+			save_file.setVisibility(View.VISIBLE);
+			delete_file.setEnabled(false);
+			delete_file.setVisibility(View.GONE);
+
+			if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)) {
+				play_button.setVisibility(View.GONE);
+        		stop_button.setVisibility(View.GONE);
+        		rewind_button.setVisibility(View.GONE);
+        		ff_button.setVisibility(View.GONE);
+			}
+			
     		dialog.dismiss();
     		setRequestedOrientation(prevOrientation);
     	}
@@ -1335,14 +1683,32 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
     		db.close();
     		pulisciVars();
 			finish();
+			overridePendingTransition(0, R.anim.slide_out_right);
+    	}
+    	else if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {
+    		dialog.dismiss();
+    		setRequestedOrientation(prevOrientation);
+    		ThemeManager.startActivity(PaginaRenderActivity.this, new Intent(
+    				PaginaRenderActivity.this, FileChooserActivity.class), null);
+//    		startActivityForResult(new Intent(
+//    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
     	}
     }
+    
+    @Override
+    public void onDialogNeutralClick(DialogFragment dialog) {
+		dialog.dismiss();
+		setRequestedOrientation(prevOrientation);
+		startActivityForResult(new Intent(
+				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+	}
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
     	if (dialog.getTag().equals(SALVA_ACCORDO_TAG)) {
     		pulisciVars();
 			finish();
+			overridePendingTransition(0, R.anim.slide_out_right);
     	}
     	else {
     		dialog.dismiss();
@@ -1398,9 +1764,37 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 //                        Log.i(FILE_CHOOSER_TAG, "Uri = " + uri.toString());
                         try {
                             // Get the file path from the URI
-                            final String path = FileUtils.getPath(this, uri);
+                            String path = FileUtils.getPath(this, uri);
                             Toast.makeText(PaginaRenderActivity.this,
                                     "File Selected: " + path, Toast.LENGTH_LONG).show();
+                            
+                            if (mediaPlayerState == MP_State.Started
+                            		|| mediaPlayerState == MP_State.Paused)
+                            	cmdStop();
+                            mediaPlayer = new MediaPlayer();
+            	    		mediaPlayerState = MP_State.Idle;
+            	    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+                            
+                    		SQLiteDatabase db = listaCanti.getReadableDatabase();		
+                    		ContentValues values = new ContentValues();
+                    		values.put("_id", idCanto);
+                    		values.put("local_path", path);
+                    		db.insert("LOCAL_LINKS", null, values);
+                    		db.close();
+                    		
+                    		localFile = true;
+                    		personalUrl = path;
+                            
+                			save_file.setEnabled(false);
+                			save_file.setVisibility(View.GONE);
+                			delete_file.setEnabled(true);
+                			delete_file.setVisibility(View.VISIBLE);
+                	    		
+                			//mostra i pulsanti per il lettore musicale
+            	        	play_button.setVisibility(View.VISIBLE);
+            	        	stop_button.setVisibility(View.VISIBLE);
+            	        	rewind_button.setVisibility(View.VISIBLE);
+            	        	ff_button.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             Log.e("FileSelectorTestActivity", "File select error", e);
                         }
@@ -1725,7 +2119,8 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
             this.context = context;
         }
 
-        @Override
+        @SuppressWarnings("resource")
+		@Override
         protected String doInBackground(String... sUrl) {
             // take CPU lock to prevent CPU from going off if the user 
             // presses the power button during download
@@ -1762,8 +2157,20 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
                     int count;
                     while ((count = input.read(data)) != -1) {
                         // allow canceling with back button
-                        if (isCancelled())
-                            return null;
+                        if (isCancelled()) {
+                        	try {
+	                        	if (output != null)
+	                        		output.close();
+	                            if (input != null)
+	                                input.close();
+	                    		File fileToDelete = new File(sUrl[1]);
+	                    		fileToDelete.delete();
+                        	} 
+                        	catch (IOException ignored) { }
+                        	if (connection != null)
+                        		connection.disconnect();
+                        	return null;
+                        }
                         total += count;
                         // publishing the progress....
                         if (fileLength > 0) // only if total length is known
@@ -1831,22 +2238,22 @@ public class PaginaRenderActivity extends Activity implements GenericDialogListe
 	    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
                 
 	    		localUrl = Utility.retrieveMediaFileLink(getApplicationContext(), url);
-	    		if (localUrl.equalsIgnoreCase("")) {
-	    			localFile = false;
-	    			cmdSetDataSource(url);
-	    			save_file.setEnabled(true);
-	    			save_file.setVisibility(View.VISIBLE);
-	    			delete_file.setEnabled(false);
-	    			delete_file.setVisibility(View.GONE);
-	    		}
-	    		else {
+////	    		if (localUrl.equalsIgnoreCase("")) {
+//	    			localFile = false;
+//	    			cmdSetDataSource(url);
+//	    			save_file.setEnabled(true);
+//	    			save_file.setVisibility(View.VISIBLE);
+//	    			delete_file.setEnabled(false);
+//	    			delete_file.setVisibility(View.GONE);
+//	    		}
+//	    		else {
 	    			localFile = true;
 	    			cmdSetDataSource(localUrl);
 	    			save_file.setEnabled(false);
 	    			save_file.setVisibility(View.GONE);
 	    			delete_file.setEnabled(true);
 	    			delete_file.setVisibility(View.VISIBLE);
-	    		}
+//	    		}
             }
         }
     }

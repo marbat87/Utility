@@ -3,17 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-	tools:context=".GeneralSearch">
+    android:orientation="vertical">
 
 	<com.astuetz.PagerSlidingTabStrip
 	    android:id="@+id/tabs"
-		app:pstsIndicatorColor="@color/bluHolo"
-		app:pstsDividerColor="?attr/tabDivider"
-		app:pstsUnderlineColor="?attr/tabDivider"
+	    android:background="?attr/customPstsIndicatorColor"
+		app:pstsIndicatorColor="?attr/accentColor"
+		app:pstsIndicatorHeight="2dp"
+		app:pstsDividerColor="@android:color/transparent"
+		app:pstsUnderlineColor="@android:color/transparent"
 		app:pstsShouldExpand="true"
+		app:pstsTabBackground="?attr/customTabBackground"
+		app:pstsUnselectedTextColor="@color/unselectedTabTextColor"
+	    app:pstsSelectedTextColor="@android:color/white"
 	    android:layout_width="match_parent"
-	    android:textColor="?attr/tabText"
 	    android:layout_height="48dip" />
 	
 	<org.holoeverywhere.widget.ViewPager

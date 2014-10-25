@@ -179,6 +179,7 @@ public class SalmiSectionFragment extends Fragment implements GenericDialogListe
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
     
     private class SongRowAdapter extends ArrayAdapter<String> implements Scrollable {
@@ -368,7 +369,7 @@ public class SalmiSectionFragment extends Fragment implements GenericDialogListe
 		toast.show();
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
     

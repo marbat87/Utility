@@ -74,7 +74,8 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
     
 	@Override
 	public void onDestroy() {
-		listaCanti.close();
+		if (listaCanti != null)
+			listaCanti.close();
 		super.onDestroy();
 	}
 
@@ -95,6 +96,7 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
     	startActivity(intent);
+    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
    	}
 	
     private void updateFavouritesList() {
@@ -250,7 +252,7 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
 		getActivity().setRequestedOrientation(prevOrientation);
 		
 		//permette di aggiornare il numero dei preferiti nel menu laterale
-		((MainActivity) getActivity()).onResume();
+//		((MainActivity) getActivity()).onResume();
 		
     }
 

@@ -1,9 +1,9 @@
 package it.cammino.risuscito;
 
+import org.holoeverywhere.FontLoader;
 import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.EditText;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.indris.material.RippleView;
 
 public class InsertVeloceFragment extends Fragment {
 
@@ -165,6 +167,7 @@ public class InsertVeloceFragment extends Fragment {
 			    			}
 			    			    
 			    			getActivity().finish();
+			    			getActivity().overridePendingTransition(0, R.anim.slide_out_right);
 		    			          			      
 		    			}
 		    		});
@@ -188,7 +191,9 @@ public class InsertVeloceFragment extends Fragment {
 			
 		});
 		
-		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
+		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
+		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
+//		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

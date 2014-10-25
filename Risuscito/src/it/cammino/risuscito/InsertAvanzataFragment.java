@@ -8,11 +8,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.holoeverywhere.FontLoader;
 import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.app.ProgressDialog;
 import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.EditText;
 import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.Toast;
@@ -35,6 +35,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.indris.material.RippleView;
 
 public class InsertAvanzataFragment extends Fragment {
 
@@ -66,7 +68,8 @@ public class InsertAvanzataFragment extends Fragment {
 				
 		lv = (ListView) rootView.findViewById(R.id.matchedList);
 		searchPar.setText("");
-		rootView.findViewById(R.id.button_search).setEnabled(false);
+//		rootView.findViewById(R.id.button_search).setEnabled(false);
+		rootView.findViewById(R.id.search_ripple).setEnabled(false);	
 		
 		Bundle bundle = getArguments(); 
 		fromAdd = bundle.getInt("fromAdd");
@@ -90,10 +93,14 @@ public class InsertAvanzataFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				//abilita il pulsante solo se la stringa ha più di 3 caratteri, senza contare gli spazi
-				if (s.toString().trim().length() >= 3)
-					rootView.findViewById(R.id.button_search).setEnabled(true);
-				else
-					rootView.findViewById(R.id.button_search).setEnabled(false);
+				if (s.toString().trim().length() >= 3) {
+//					rootView.findViewById(R.id.button_search).setEnabled(true);
+					rootView.findViewById(R.id.search_ripple).setEnabled(true);
+				}
+				else {
+//					rootView.findViewById(R.id.button_search).setEnabled(false);
+					rootView.findViewById(R.id.search_ripple).setEnabled(false);	
+				}
 			}
 			
 			@Override
@@ -103,7 +110,9 @@ public class InsertAvanzataFragment extends Fragment {
 			
 		});
 		
-		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
+		RippleView ricerca = (RippleView) rootView.findViewById(R.id.search_ripple);
+		ricerca.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
+//		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
 		ricerca.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -121,7 +130,9 @@ public class InsertAvanzataFragment extends Fragment {
 			}
 		});
 		
-		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
+		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
+		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
+//		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -348,6 +359,7 @@ public class InsertAvanzataFragment extends Fragment {
 	    			}
 	    			    
 	    			getActivity().finish();
+	    			getActivity().overridePendingTransition(0, R.anim.slide_out_right);
     			          			      
     			}
     		});

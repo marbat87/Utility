@@ -12,7 +12,6 @@ import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.RelativeLayout;
 import org.holoeverywhere.widget.Toast;
 
@@ -35,15 +34,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.TextView;
 
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
-@SuppressWarnings("deprecation")
-@SuppressLint("NewApi")
+@SuppressLint("NewApi") @SuppressWarnings("deprecation")
 public class CreaListaActivity extends Activity
 								implements TextDialogListener, ThreeButtonsDialogListener {
 
@@ -58,6 +58,7 @@ public class CreaListaActivity extends Activity
 	private int idModifica;
 	private RetainedFragment dataFragment;
 	private RetainedFragment dataFragment2;
+	private RetainedFragment dataFragment3;
 	private int positionToRename;
 	private RelativeLayout.LayoutParams lps;
 	private boolean fakeItemCreated;
@@ -65,12 +66,16 @@ public class CreaListaActivity extends Activity
 	private int screenHeight;
 	private ArrayList<String> nomiCanti;
 	private int positionLI;
+	private Bundle tempArgs;
+	private FloatingActionButton floatingActionButton;
 	
-	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
+//	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
+	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista_v2";
 	
 	private final String AGGIUNGI_POSIZIONE_TAG = "1";
 	private final String RINOMINA_POSIZIONE_TAG = "2";
 	private final String SALVA_LISTA_TAG = "3";
+	private final String TEMP_TITLE = "temp_title";
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +87,10 @@ public class CreaListaActivity extends Activity
 		actionbar.setLogo(R.drawable.transparent);
 		
 		setContentView(R.layout.activity_crea_lista);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);	
 	
+        // setta il colore della barra di stato, solo da KITAKT in su
+        Utility.setupTransparentTints(CreaListaActivity.this);
+		
 		listaCanti = new DatabaseCanti(this);
 		
         Bundle bundle = this.getIntent().getExtras();
@@ -108,7 +115,7 @@ public class CreaListaActivity extends Activity
         else
         	titoloLista = bundle.getString("titolo");
         
-        getSupportActionBar().setTitle(titoloLista);
+//        getSupportActionBar().setTitle(titoloLista);
 				
 		lv = (DragSortListView) findViewById(android.R.id.list);
 		
@@ -143,9 +150,25 @@ public class CreaListaActivity extends Activity
 	        }
         }
 
+        dataFragment3 = (RetainedFragment) getSupportFragmentManager().findFragmentByTag(TEMP_TITLE);
+        if (dataFragment3 != null) {
+        	tempArgs = dataFragment3.getArguments();
+            ((TextView)findViewById(R.id.textfieldTitle))
+            	.setText(tempArgs.getCharSequence(TEMP_TITLE));
+        }
+        else {
+        	((TextView)findViewById(R.id.textfieldTitle))
+        	.setText(titoloLista);
+        }
+        
         //Serve per settare il colore del testo a seconda del tema.
         //A quanto parae non si riesce usando gli attributes direttamente nel layout
-        if (Utility.getChoosedTheme(CreaListaActivity.this) == 2)
+        if (Utility.getChoosedTheme(CreaListaActivity.this) == 1
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 3
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 5
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 7
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 9
+        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 11)
         	positionLI = R.layout.position_list_item_dark;
         else
         	positionLI = R.layout.position_list_item_light;
@@ -180,17 +203,21 @@ public class CreaListaActivity extends Activity
 			}
 		});	
         
-		Button saveExit = (Button) findViewById(R.id.button_save_exit);
-		saveExit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (saveList())
-					finish();
-			}
-		});
+//		Button saveExit = (Button) findViewById(R.id.button_save_exit);
+//		saveExit.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if (saveList())
+//					finish();
+//			}
+//		});
 		
-		View addPosizione = (View) findViewById(R.id.addPosizione);
-		addPosizione.setOnClickListener(new View.OnClickListener() {
+		floatingActionButton = (FloatingActionButton) findViewById(R.id.button_floating_action);
+		floatingActionButton.attachToListView(lv);
+		
+//		View addPosizione = (View) findViewById(R.id.addPosizione);
+//		addPosizione.setOnClickListener(new View.OnClickListener() {
+		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
@@ -215,6 +242,9 @@ public class CreaListaActivity extends Activity
 		        dialog.setCancelable(false);
 			}
 		});
+		
+		if (nomiElementi.size() > 0)
+			findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
 		
 		Display display = getWindowManager().getDefaultDisplay();
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -243,6 +273,8 @@ public class CreaListaActivity extends Activity
         	showHelp();
         }
        	
+        findViewById(R.id.textTitleDescription).requestFocus();
+        
 		checkScreenAwake();
 	}
 	
@@ -250,7 +282,7 @@ public class CreaListaActivity extends Activity
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.help_menu, menu);
+		getMenuInflater().inflate(R.menu.crea_lista_menu, menu);
 		return true;
 	}
 	
@@ -260,6 +292,12 @@ public class CreaListaActivity extends Activity
 		case R.id.action_help:
 			showHelp();
 	        return true;
+		case R.id.action_save_list:
+			if (saveList()) {
+				finish();
+				overridePendingTransition(0, R.anim.slide_out_bottom);
+			}
+			return true;
 		case android.R.id.home:
 			if (nomiElementi.size() > 0) {
 				blockOrientation();
@@ -286,6 +324,7 @@ public class CreaListaActivity extends Activity
 			}
 			else {
 				finish();
+				overridePendingTransition(0, R.anim.slide_out_bottom);
 			}
 			return true;	
 			}
@@ -320,6 +359,7 @@ public class CreaListaActivity extends Activity
 			}
 			else {
 				finish();
+				overridePendingTransition(0, R.anim.slide_out_bottom);
 				return true;
 			}
         }
@@ -355,11 +395,25 @@ public class CreaListaActivity extends Activity
 //                    	Log.i("RIMOSSO", which + "");
 
                     }
+                    if (adapter.getCount() == 0)
+                    	findViewById(R.id.noElementsAdded).setVisibility(View.VISIBLE);
                 }
             };
 	
     private boolean saveList()  {
 		celebrazione = new ListaPersonalizzata();
+		
+		if (((TextView)findViewById(R.id.textfieldTitle)).getText() != null
+				&& !((TextView)findViewById(R.id.textfieldTitle)).getText()
+					.toString().trim().equalsIgnoreCase("")) {
+    		titoloLista = ((TextView)findViewById(R.id.textfieldTitle)).getText().toString();
+		}
+		else {
+    		Toast toast = Toast.makeText(CreaListaActivity.this
+    				, getString(R.string.no_title_edited), Toast.LENGTH_SHORT);
+    		toast.show();
+		}
+		
 		celebrazione.setName(titoloLista);
 		for (int i = 0; i < nomiElementi.size(); i++) {
 			if (celebrazione.addPosizione(nomiElementi.get(i)) == -2) {
@@ -408,21 +462,31 @@ public class CreaListaActivity extends Activity
     
 	@Override
 	public void onDestroy() {
+		if (listaCanti != null)
+			listaCanti.close();
 		super.onDestroy();
-		listaCanti.close();
 	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-      dataFragment = new RetainedFragment();
-      getSupportFragmentManager().beginTransaction().add(dataFragment, "nomiElementi").commit();
-	  dataFragment.setData(nomiElementi);
-	  if (modifica) {
-		  dataFragment2 = new RetainedFragment();
-		  getSupportFragmentManager().beginTransaction().add(dataFragment2, "nomiCanti").commit();
-		  dataFragment2.setData(nomiCanti);
-	  }
-	  super.onSaveInstanceState(savedInstanceState);
+		
+		dataFragment = new RetainedFragment();
+		getSupportFragmentManager().beginTransaction().add(dataFragment, "nomiElementi").commit();
+		dataFragment.setData(nomiElementi);
+	  
+		if (modifica) {
+			dataFragment2 = new RetainedFragment();
+			getSupportFragmentManager().beginTransaction().add(dataFragment2, "nomiCanti").commit();
+			dataFragment2.setData(nomiCanti);
+		}
+	  
+		dataFragment3 = new RetainedFragment();
+		tempArgs = new Bundle();
+		tempArgs.putCharSequence(TEMP_TITLE, ((TextView)findViewById(R.id.textfieldTitle)).getText());
+		dataFragment3.setArguments(tempArgs);
+		getSupportFragmentManager().beginTransaction().add(dataFragment3, TEMP_TITLE).commit();
+	  
+		super.onSaveInstanceState(savedInstanceState);
 	}
 	
     //controlla se l'app deve mantenere lo schermo acceso
@@ -444,6 +508,7 @@ public class CreaListaActivity extends Activity
 	    		toast.show();
 	    	}
 	    	else {
+	    		findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
 	    		nomiElementi.add(titolo);
 	    		if (modifica)
 	    			nomiCanti.add("");
@@ -468,8 +533,10 @@ public class CreaListaActivity extends Activity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
 		setRequestedOrientation(prevOrientation);
-    	if (saveList())
+    	if (saveList()) {
     		finish();
+    		overridePendingTransition(0, R.anim.slide_out_bottom);
+    	}
     }
     
     @Override
@@ -489,6 +556,7 @@ public class CreaListaActivity extends Activity
     		dialog.dismiss();
     		setRequestedOrientation(prevOrientation);
     		finish();
+    		overridePendingTransition(0, R.anim.slide_out_bottom);
     	}
     }
     
@@ -533,6 +601,7 @@ public class CreaListaActivity extends Activity
     
    	private void showHelp() {
    		if (nomiElementi.size() == 0) {
+   			findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
    			nomiElementi.add("CANTO DI ESEMPIO");
    			adapter.notifyDataSetChanged();
    			fakeItemCreated = true;
@@ -553,8 +622,10 @@ public class CreaListaActivity extends Activity
 		co.buttonLayoutParams = lps;
 		
 		//benvenuto del tutorial
+		floatingActionButton.show();
    		ShowcaseView showcaseView = ShowcaseView.insertShowcaseView(
-        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+//        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+        		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
         		, CreaListaActivity.this
         		, R.string.title_activity_nuova_lista
         		, R.string.showcase_welcome_crea
@@ -572,7 +643,8 @@ public class CreaListaActivity extends Activity
         		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
         		co.buttonLayoutParams = lps;
 		   		showcaseView = ShowcaseView.insertShowcaseView(
-		        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+//		        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
+		        		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
 		        		, CreaListaActivity.this
 		        		, R.string.add_position
 		        		, R.string.showcase_add_pos_desc
@@ -601,6 +673,12 @@ public class CreaListaActivity extends Activity
 						showcaseView.setScaleMultiplier(0.5f);
 						int[] coords = new int[2];
 						adapter.getView(0, lv, lv).getLocationOnScreen(coords);
+						coords[0] = (coords[0]*2 + 
+								adapter.getView(0, lv, lv).findViewById(R.id.drag_handle).getWidth())
+								/ 2;
+						coords[1] = (coords[1]*2 + 
+								adapter.getView(0, lv, lv).findViewById(R.id.drag_handle).getHeight())
+								/ 2;
 						showcaseView.animateGesture(coords[0], coords[1], coords[0], coords[1] + (screenHeight - coords[1])/3, true);
 						showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 
@@ -622,6 +700,15 @@ public class CreaListaActivity extends Activity
 						        		, co);
 								showcaseView.setButtonText(getString(R.string.showcase_button_next));
 //								showcaseView.setScaleMultiplier(0.5f);
+								int[] coords = new int[2];
+								adapter.getView(0, lv, lv).getLocationOnScreen(coords);
+								coords[0] = (coords[0]*2 + 
+										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getWidth())
+										/ 2;
+								coords[1] = (coords[1]*2 + 
+										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getHeight())
+										/ 2;
+								showcaseView.animateGesture(coords[0], coords[1], coords[0], coords[1], true);
 								showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 
 									@Override
@@ -642,7 +729,14 @@ public class CreaListaActivity extends Activity
 								        		, co);
 										showcaseView.setButtonText(getString(R.string.showcase_button_next));
 										int[] coords = new int[2];
-										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getLocationOnScreen(coords);
+//										adapter.getView(0, lv, lv).findViewById(R.id.position_name).getLocationOnScreen(coords);
+										adapter.getView(0, lv, lv).getLocationOnScreen(coords);
+										coords[0] = (coords[0]*2 + 
+												adapter.getView(0, lv, lv).findViewById(R.id.position_name).getWidth())
+												/ 2;
+										coords[1] = (coords[1]*2 + 
+												adapter.getView(0, lv, lv).findViewById(R.id.position_name).getHeight())
+												/ 2;
 										showcaseView.animateGesture(coords[0], coords[1], coords[0] + (screenWidth - coords[0])/2, coords[1], true);
 										showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 
@@ -654,14 +748,21 @@ public class CreaListaActivity extends Activity
 												//spiegazione di come salvare
 								        		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
 								        		co.buttonLayoutParams = lps;
-										   		showcaseView = ShowcaseView.insertShowcaseView(
-										        		new ViewTarget(R.id.button_save_exit, CreaListaActivity.this)
+//										   		showcaseView = ShowcaseView.insertShowcaseView(
+//										        		new ViewTarget(R.id.button_save_exit, CreaListaActivity.this)
+//										        		, CreaListaActivity.this
+//										        		, R.string.list_save_exit
+//										        		, R.string.showcase_saveexit_desc
+//										        		, co);
+										        ActionItemTarget target = new ActionItemTarget(CreaListaActivity.this, R.id.action_save_list);
+										        showcaseView = ShowcaseView.insertShowcaseView(target
 										        		, CreaListaActivity.this
 										        		, R.string.list_save_exit
 										        		, R.string.showcase_saveexit_desc
-										        		, co);
+										        		,co);
 												showcaseView.setButtonText(getString(R.string.showcase_button_next));
-												showcaseView.setScaleMultiplier(0.7f);
+//												showcaseView.setScaleMultiplier(0.7f);
+												showcaseView.setScaleMultiplier(0.3f);
 												showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 		
 													@Override
@@ -687,6 +788,7 @@ public class CreaListaActivity extends Activity
 															@Override
 															public void onShowcaseViewHide(ShowcaseView showcaseView) {
 																if (fakeItemCreated) {
+																	findViewById(R.id.noElementsAdded).setVisibility(View.VISIBLE);
 																	nomiElementi.remove(0);
 																	adapter.notifyDataSetChanged();
 																	fakeItemCreated = false;
