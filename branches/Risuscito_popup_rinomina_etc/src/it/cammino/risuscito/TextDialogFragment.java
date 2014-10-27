@@ -24,6 +24,7 @@ public class TextDialogFragment extends DialogFragment {
     TextDialogListener mListener;
     OnKeyListener kListener;
     private String customMessage;
+    private String defaultText;
     
     public void setListener(TextDialogListener listener) {
         mListener = listener;	
@@ -37,12 +38,22 @@ public class TextDialogFragment extends DialogFragment {
     	kListener = listener;
     }
     
+    public void setDefaultText(String text) {
+    	defaultText = text;
+    }
+    
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	final EditText input = new EditText(getActivity());
 //    	if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.GINGERBREAD_MR1)
 //    		input.setTextColor(Color.B);
-    	input.setInputType(InputType.TYPE_CLASS_TEXT);
+    	input.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+    	
+    	if (defaultText != null) {
+    		input.setText(defaultText);
+    		input.selectAll();
+    	}
+    	
         // Build the dialog and set up the button click handlers
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(customMessage)
