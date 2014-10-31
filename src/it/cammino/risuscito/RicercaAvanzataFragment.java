@@ -110,6 +110,11 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				
+				String tempText = ((EditText) getActivity().findViewById(R.id.tempTextField)).getText().toString();
+				if (!tempText.equals(s.toString()))
+					((EditText) getActivity().findViewById(R.id.tempTextField)).setText(s);
+				
 				//abilita il pulsante solo se la stringa ha più di 3 caratteri, senza contare gli spazi
 				if (s.toString().trim().length() >= 3) {
 //					rootView.findViewById(R.id.button_search).setEnabled(true);
@@ -117,16 +122,35 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 				}
 				else {
 //					rootView.findViewById(R.id.button_search).setEnabled(false);
-					rootView.findViewById(R.id.search_ripple).setEnabled(false);
+					rootView.findViewById(R.id.search_ripple).setEnabled(false); 
 				}
 			}
 			
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+			
 			@Override
-			public void afterTextChanged(Editable s) {}
+			public void afterTextChanged(Editable s) { }
 			
 		});
+		
+	    ((EditText) getActivity().findViewById(R.id.tempTextField)).addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				String tempText = searchPar.getText().toString();
+				if (!tempText.equals(s.toString()))
+					searchPar.setText(s);
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+			@Override
+			public void afterTextChanged(Editable s) { }
+			
+	    });
 		
 		RippleView ricerca = (RippleView) rootView.findViewById(R.id.search_ripple);
 		ricerca.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
@@ -184,10 +208,14 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 		return rootView;
 	}
 
-    @Override
-    public void onResume() {
-    	super.onResume();
-    }
+//    @Override
+//    public void onResume() {
+//    	Log.i("RICERCA AVANZATA", "RESUMED");
+//    	super.onResume();
+//		if (getActivity().findViewById(R.id.tempTextField) != null)
+//			((EditText) rootView.findViewById(R.id.textfieldRicerca))
+//			.setText(((EditText) getActivity().findViewById(R.id.tempTextField)).getText());
+//    }
     
 	@Override
 	public void onDestroy() {
