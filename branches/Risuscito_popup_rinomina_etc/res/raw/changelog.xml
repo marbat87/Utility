@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
-    <changelogversion versionName="2.7.0" changeDate="XX Novembre 2014">
+    <changelogversion versionName="2.7.0" changeDate="03 Novembre 2014">
         <changelogtext>Corretto un comportamento indesiderato nei campi di testo</changelogtext>
 		<changelogtext>Corretti i canti: "La voce del mio amato" - "Signore, non punirmi nel tuo sdegno" - "A te Signore con la mia voce" - "Ti vedranno i re" - "Se siete risorti con Cristo"</changelogtext>
 		<changelogtext>Correzioni nella modifica titoli esistenti della creazione liste personalizzate</changelogtext>
+		<changelogtext>Ora digitando testo nella ricerca veloce, esso viene riportato anche nella ricerca avanzata, e viceversa</changelogtext>
 	</changelogversion>
 
 </changelog>
