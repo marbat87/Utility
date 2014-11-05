@@ -5,19 +5,11 @@ import it.cammino.risuscito.ThreeButtonsDialogFragment.ThreeButtonsDialogListene
 
 import java.util.ArrayList;
 
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.RelativeLayout;
-import org.holoeverywhere.widget.Toast;
-
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -25,7 +17,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -34,7 +30,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
@@ -44,7 +43,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
 @SuppressLint("NewApi") @SuppressWarnings("deprecation")
-public class CreaListaActivity extends Activity
+public class CreaListaActivity extends ActionBarActivity
 								implements TextDialogListener, ThreeButtonsDialogListener {
 
 	private ListaPersonalizzata celebrazione;
@@ -79,14 +78,17 @@ public class CreaListaActivity extends Activity
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(CreaListaActivity.this);
+//		Utility.updateTheme(CreaListaActivity.this);
 		super.onCreate(savedInstanceState);
 		
-		ActionBar actionbar = getSupportActionBar();
-		actionbar.setDisplayHomeAsUpEnabled(true);
-		actionbar.setLogo(R.drawable.transparent);
+//		ActionBar actionbar = getSupportActionBar();
+//		actionbar.setDisplayHomeAsUpEnabled(true);
+//		actionbar.setLogo(R.drawable.transparent);
 		
 		setContentView(R.layout.activity_crea_lista);
+		
+		Toolbar toolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);
+        setSupportActionBar(toolbar);
 	
         // setta il colore della barra di stato, solo da KITAKT in su
         Utility.setupTransparentTints(CreaListaActivity.this);
@@ -161,17 +163,19 @@ public class CreaListaActivity extends Activity
         	.setText(titoloLista);
         }
         
+        positionLI = R.layout.position_list_item_light;
+        
         //Serve per settare il colore del testo a seconda del tema.
         //A quanto parae non si riesce usando gli attributes direttamente nel layout
-        if (Utility.getChoosedTheme(CreaListaActivity.this) == 1
-        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 3
-        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 5
-        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 7
-        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 9
-        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 11)
-        	positionLI = R.layout.position_list_item_dark;
-        else
-        	positionLI = R.layout.position_list_item_light;
+//        if (Utility.getChoosedTheme(CreaListaActivity.this) == 1
+//        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 3
+//        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 5
+//        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 7
+//        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 9
+//        		|| Utility.getChoosedTheme(CreaListaActivity.this) == 11)
+//        	positionLI = R.layout.position_list_item_dark;
+//        else
+//        	positionLI = R.layout.position_list_item_light;
         
         adapter = new PositionAdapter();
         lv.setAdapter(adapter);

@@ -7,8 +7,9 @@
     android:gravity="center_vertical"
     android:paddingRight="16dip"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:textColor="?textColorAlertDialogListItem"
+    android:textColor="@color/abc_primary_text_material_light"
     android:layout_height="wrap_content"
     android:checkMark="?attr/customRadioButton"
     android:id="@android:id/text1">
 </CheckedTextView>
+<!-- android:textColor="?android:attr/textColorAlertDialogListItem" -->

@@ -1,23 +1,64 @@
-<org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:drawer="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/navigation_drawer_container"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+  	xmlns:drawer="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        drawer:drawer_gravity="start"
-        drawer:list_headerView="@layout/menu_header"
-        drawer:list_headerClickable="false"
-        drawer:list_mainSectionsEntries="@array/navigation_main_sections"
-        drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
-        drawer:list_mainSectionsDrawables="?attr/drawerIcons"
-        drawer:list_secondarySectionsDrawables="?attr/drawerIconsSecondary"
-        drawer:list_background="?attr/mainDarkLightColor"
-        drawer:list_secondary_divider="?attr/tabDivider">
+        android:orientation="vertical">
+    
+        <android.support.v7.widget.Toolbar
+		    android:id="@+id/risuscito_toolbar"
+		    android:layout_height="wrap_content"
+		    android:layout_width="match_parent"
+		    android:minHeight="?attr/actionBarSize"
+		    android:background="?attr/colorPrimary" />
+        
+	    <FrameLayout
+	        android:id="@+id/content_frame"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />
+	    
+	</LinearLayout>
+	
+   	<ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="304dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="@android:color/white"/>
+    
+</android.support.v4.widget.DrawerLayout>
+		
+<!-- 		<org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer -->
+<!-- 		        android:id="@+id/navigation_drawer_container" -->
+<!-- 		        android:layout_width="match_parent" -->
+<!-- 		        android:layout_height="match_parent" -->
+<!-- 		        drawer:drawer_gravity="start" -->
+<!-- 		        drawer:list_headerView="@layout/menu_header" -->
+<!-- 		        drawer:list_headerClickable="false" -->
+<!-- 		        drawer:list_mainSectionsEntries="@array/navigation_main_sections" -->
+<!-- 		        drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections" -->
+<!-- 		        drawer:list_mainSectionsDrawables="?attr/drawerIcons" -->
+<!-- 		        drawer:list_secondarySectionsDrawables="?attr/drawerIconsSecondary" -->
+<!-- 		        drawer:list_background="?attr/mainDarkLightColor" -->
+<!-- 		        drawer:list_secondary_divider="?attr/tabDivider"> -->
+		
+<!-- 		   	<FrameLayout -->
+<!-- 		            android:id="@+id/content_layout" -->
+<!-- 		            android:background="?attr/mainDarkLightColor" -->
+<!-- 		            android:layout_width="match_parent" -->
+<!-- 		            android:layout_height="match_parent" /> -->
+		
+<!-- 		</org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer> -->
 
-   	<FrameLayout
-            android:id="@+id/content_layout"
-            android:background="?attr/mainDarkLightColor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+<!-- </LinearLayout> -->
 
-</org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>

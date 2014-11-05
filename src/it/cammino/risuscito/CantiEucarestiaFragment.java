@@ -4,29 +4,24 @@ import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
 
 import java.util.Locale;
 
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.LinearLayout;
-import org.holoeverywhere.widget.TextView;
-
-import com.melnykov.fab.FloatingActionButton;
-
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,9 +29,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
-@SuppressWarnings("deprecation")
+import com.melnykov.fab.FloatingActionButton;
+
 public class CantiEucarestiaFragment extends Fragment implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this

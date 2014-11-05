@@ -5,13 +5,7 @@ import it.cammino.risuscito.TextDialogFragment.TextDialogListener;
 
 import java.util.Locale;
 
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.Toast;
-import org.holoeverywhere.widget.ViewPager;
-
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -19,17 +13,23 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ShareActionProvider;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -49,8 +49,11 @@ public class CustomLists extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		getSupportActionBar().setTitle(R.string.title_activity_custom_lists);
+//		getSupportActionBar().setTitle(R.string.title_activity_custom_lists);
 		View rootView = inflater.inflate(R.layout.activity_custom_lists, container, false);
+		
+		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
+		toolbar.setTitle(R.string.title_activity_custom_lists);
 
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
@@ -131,7 +134,7 @@ public class CustomLists extends Fragment
 	                return false;
 	            }
 	        });
-			dialog.show(getChildFragmentManager());
+			dialog.show(getChildFragmentManager(), null);
 			dialog.setCancelable(false);
 			return true;
 		case R.id.action_edit_list:
@@ -161,7 +164,7 @@ public class CustomLists extends Fragment
 	                return false;
 	            }
 	        });
-			dialogR.show(getChildFragmentManager());
+			dialogR.show(getChildFragmentManager(), null);
 			dialogR.setCancelable(false);
 			return true;
 //		case R.id.action_settings:

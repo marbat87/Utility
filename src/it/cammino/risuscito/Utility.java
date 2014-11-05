@@ -4,9 +4,6 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -126,130 +123,130 @@ public class Utility {
 		return "";
 	}
 	
-	public static void updateTheme(Activity activity) {
-	       SharedPreferences sp = PreferenceManager
-	                .getDefaultSharedPreferences(activity);
-//	       Log.i("THEME SET", sp.getString("applicationThemeNew", "0") + " ");
-	       if (!sp.getString("applicationThemeNew", "0").equals("")) {
-		       switch (Integer.valueOf(sp.getString("applicationThemeNew", "0"))) {
-		        	case 0:
-		        		activity.setTheme(R.style.IndigoLight);
-		        		break;
-		        	case 1:
-		        		activity.setTheme(R.style.IndigoDark);
-		        		break;
-		        	case 2:
-		        		activity.setTheme(R.style.BlueGreyLight);
-		        		break;
-		        	case 3:
-		        		activity.setTheme(R.style.BlueGreyDark);
-		        		break;
-		        	case 4:
-		        		activity.setTheme(R.style.RedLight);
-		        		break;
-		        	case 5:
-		        		activity.setTheme(R.style.RedDark);
-		        		break;
-		        	case 6:
-		        		activity.setTheme(R.style.DeepPurpleLight);
-		        		break;
-		        	case 7:
-		        		activity.setTheme(R.style.DeepPurpleDark);
-		        		break;
-		        	case 8:
-		        		activity.setTheme(R.style.TealLight);
-		        		break;
-		        	case 9:
-		        		activity.setTheme(R.style.TealDark);
-		        		break;
-		        	case 10:
-		        		activity.setTheme(R.style.BrownLight);
-		        		break;
-		        	case 11:
-		        		activity.setTheme(R.style.BrownDark);
-		        		break;
-		        	default:
-		        		activity.setTheme(R.style.IndigoLight);
-		        		break;
-		        }
-			}
-	       else {
-	    	   activity.setTheme(R.style.IndigoLight); 
-	       }
-	}
+//	public static void updateTheme(Activity activity) {
+//	       SharedPreferences sp = PreferenceManager
+//	                .getDefaultSharedPreferences(activity);
+////	       Log.i("THEME SET", sp.getString("applicationThemeNew", "0") + " ");
+//	       if (!sp.getString("applicationThemeNew", "0").equals("")) {
+//		       switch (Integer.valueOf(sp.getString("applicationThemeNew", "0"))) {
+//		        	case 0:
+//		        		activity.setTheme(R.style.IndigoLight);
+//		        		break;
+//		        	case 1:
+//		        		activity.setTheme(R.style.IndigoDark);
+//		        		break;
+//		        	case 2:
+//		        		activity.setTheme(R.style.BlueGreyLight);
+//		        		break;
+//		        	case 3:
+//		        		activity.setTheme(R.style.BlueGreyDark);
+//		        		break;
+//		        	case 4:
+//		        		activity.setTheme(R.style.RedLight);
+//		        		break;
+//		        	case 5:
+//		        		activity.setTheme(R.style.RedDark);
+//		        		break;
+//		        	case 6:
+//		        		activity.setTheme(R.style.DeepPurpleLight);
+//		        		break;
+//		        	case 7:
+//		        		activity.setTheme(R.style.DeepPurpleDark);
+//		        		break;
+//		        	case 8:
+//		        		activity.setTheme(R.style.TealLight);
+//		        		break;
+//		        	case 9:
+//		        		activity.setTheme(R.style.TealDark);
+//		        		break;
+//		        	case 10:
+//		        		activity.setTheme(R.style.BrownLight);
+//		        		break;
+//		        	case 11:
+//		        		activity.setTheme(R.style.BrownDark);
+//		        		break;
+//		        	default:
+//		        		activity.setTheme(R.style.IndigoLight);
+//		        		break;
+//		        }
+//			}
+//	       else {
+//	    	   activity.setTheme(R.style.IndigoLight); 
+//	       }
+//	}
+//	
+//	public static void updateThemeWithSlider(Activity activity) {
+//	       SharedPreferences sp = PreferenceManager
+//	                .getDefaultSharedPreferences(activity);
+////	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
+//	       if (!sp.getString("applicationThemeNew", "0").equals("")) {
+//		       switch (Integer.valueOf(sp.getString("applicationThemeNew", "0"))) {
+//		        	case 0:
+////		        		Log.i("VADO", "1");
+//		        		activity.setTheme(R.style.IndigoSliderLight);
+//		        		break;
+//		        	case 1:
+//		        		activity.setTheme(R.style.IndigoSliderDark);
+//		        		break;
+//		        	case 2:
+//		        		activity.setTheme(R.style.BlueGreySliderLight);
+//		        		break;
+//		        	case 3:
+//		        		activity.setTheme(R.style.BlueGreySliderDark);
+//		        		break;
+//		        	case 4:
+//		        		activity.setTheme(R.style.RedSliderLight);
+//		        		break;
+//		        	case 5:
+//		        		activity.setTheme(R.style.RedSliderDark);
+//		        		break;		 
+//		        	case 6:
+//		        		activity.setTheme(R.style.DeepPurpleSliderLight);
+//		        		break;
+//		        	case 7:
+//		        		activity.setTheme(R.style.DeepPurpleSliderDark);
+//		        		break;
+//		        	case 8:
+//		        		activity.setTheme(R.style.TealSliderLight);
+//		        		break;
+//		        	case 9:
+//		        		activity.setTheme(R.style.TealSliderDark);
+//		        		break;	
+//		        	case 10:
+//		        		activity.setTheme(R.style.BrownSliderLight);
+//		        		break;
+//		        	case 11:
+//		        		activity.setTheme(R.style.BrownSliderDark);
+//		        		break;	
+//		        	default:
+////		        		Log.i("VADO", "2");
+//		        		activity.setTheme(R.style.IndigoSliderLight);
+//		        		break;
+//		        }
+//			}
+//	       else {
+////	    	   Log.i("VADO", "3");
+//	    	   activity.setTheme(R.style.IndigoSliderLight);
+//	       }
+//	}
 	
-	public static void updateThemeWithSlider(Activity activity) {
-	       SharedPreferences sp = PreferenceManager
-	                .getDefaultSharedPreferences(activity);
-//	       Log.i("THEME SET WITH SLIDER", sp.getString("applicationTheme", "0") + " ");
-	       if (!sp.getString("applicationThemeNew", "0").equals("")) {
-		       switch (Integer.valueOf(sp.getString("applicationThemeNew", "0"))) {
-		        	case 0:
-//		        		Log.i("VADO", "1");
-		        		activity.setTheme(R.style.IndigoSliderLight);
-		        		break;
-		        	case 1:
-		        		activity.setTheme(R.style.IndigoSliderDark);
-		        		break;
-		        	case 2:
-		        		activity.setTheme(R.style.BlueGreySliderLight);
-		        		break;
-		        	case 3:
-		        		activity.setTheme(R.style.BlueGreySliderDark);
-		        		break;
-		        	case 4:
-		        		activity.setTheme(R.style.RedSliderLight);
-		        		break;
-		        	case 5:
-		        		activity.setTheme(R.style.RedSliderDark);
-		        		break;		 
-		        	case 6:
-		        		activity.setTheme(R.style.DeepPurpleSliderLight);
-		        		break;
-		        	case 7:
-		        		activity.setTheme(R.style.DeepPurpleSliderDark);
-		        		break;
-		        	case 8:
-		        		activity.setTheme(R.style.TealSliderLight);
-		        		break;
-		        	case 9:
-		        		activity.setTheme(R.style.TealSliderDark);
-		        		break;	
-		        	case 10:
-		        		activity.setTheme(R.style.BrownSliderLight);
-		        		break;
-		        	case 11:
-		        		activity.setTheme(R.style.BrownSliderDark);
-		        		break;	
-		        	default:
-//		        		Log.i("VADO", "2");
-		        		activity.setTheme(R.style.IndigoSliderLight);
-		        		break;
-		        }
-			}
-	       else {
-//	    	   Log.i("VADO", "3");
-	    	   activity.setTheme(R.style.IndigoSliderLight);
-	       }
-	}
-	
-	public static int getChoosedTheme(Activity activity) {
-	       SharedPreferences sp = PreferenceManager
-	                .getDefaultSharedPreferences(activity);
-//	       Log.i("THEME CHOOSED", sp.getString("applicationThemeNew", "0") + " ");
-	       if (!sp.getString("applicationThemeNew", "-1").equals(""))
-	    	   return Integer.valueOf(sp.getString("applicationThemeNew", "0"));
-	       else
-	    	   return 0;
-	       
-	}
+//	public static int getChoosedTheme(Activity activity) {
+//	       SharedPreferences sp = PreferenceManager
+//	                .getDefaultSharedPreferences(activity);
+////	       Log.i("THEME CHOOSED", sp.getString("applicationThemeNew", "0") + " ");
+//	       if (!sp.getString("applicationThemeNew", "-1").equals(""))
+//	    	   return Integer.valueOf(sp.getString("applicationThemeNew", "0"));
+//	       else
+//	    	   return 0;
+//	       
+//	}
 	
     public static void setupTransparentTints(Activity context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
         	return;
         SystemBarTintManager tintManager = new SystemBarTintManager(context);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(THEME_COLORS[getChoosedTheme(context)]);
+//        tintManager.setStatusBarTintResource(THEME_COLORS[getChoosedTheme(context)]);
     }
 	
 }

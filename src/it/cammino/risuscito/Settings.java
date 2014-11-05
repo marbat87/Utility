@@ -1,16 +1,20 @@
 package it.cammino.risuscito;
 
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.preference.ListPreference;
-import org.holoeverywhere.preference.Preference;
-import org.holoeverywhere.preference.Preference.OnPreferenceChangeListener;
-import org.holoeverywhere.preference.PreferenceFragment;
+
+import android.annotation.SuppressLint;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceFragment;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+@SuppressLint("NewApi")
 public class Settings extends PreferenceFragment {
 
 	@Override
@@ -55,7 +59,11 @@ public class Settings extends PreferenceFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		getSupportActionBar().setTitle(R.string.title_activity_settings);
+//		getSupportActionBar().setTitle(R.string.title_activity_settings);
+		
+		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
+		toolbar.setTitle(R.string.title_activity_settings);
+		
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 }

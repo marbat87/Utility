@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-  
+  <!-- 
     <style name="IndigoLight" parent="@style/IndigoV14Light" />
     
 	<style name="IndigoV14Light" parent="@style/IndigoBaseLight">
@@ -30,7 +30,6 @@
         <item name="android:progressBarStyle">@style/ProgressBar.Action_bar_indigo_light</item>
     </style>
     
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
     <style name="Theme.Action_bar_indigo_light.Widget" parent="@style/Theme.AppCompat">
         <item name="android:popupMenuStyle">@style/PopupMenu.Action_bar_indigo_light</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_indigo_light</item>
@@ -66,10 +65,10 @@
         <item name="android:progressBarStyle">@style/ProgressBar.Action_bar_indigo_dark</item>
     </style>
     
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
     <style name="Theme.Action_bar_indigo_dark.Widget" parent="@style/Theme.AppCompat">
         <item name="android:popupMenuStyle">@style/PopupMenu.Action_bar_indigo_dark</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Action_bar_indigo_dark</item>
     </style>
+    -->
     
 </resources>

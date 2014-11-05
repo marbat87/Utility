@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-  
+  <!-- 
 	<style name="IndigoLight" parent="@style/IndigoV14Light">
 	   	<item name="android:windowTranslucentStatus">true</item>
     </style>
@@ -7,5 +7,5 @@
 	<style name="IndigoDark" parent="@style/IndigoV14Dark">
 	   	<item name="android:windowTranslucentStatus">true</item>
     </style>
-    
+     -->
 </resources>

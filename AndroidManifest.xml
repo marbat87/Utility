@@ -16,11 +16,11 @@
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
-        android:name="org.holoeverywhere.app.Application"
+        android:name="android.app.Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/RisuscitoThemeDark" >
+        android:theme="@style/Theme.MyTheme" >
         <activity
             android:name="it.cammino.risuscito.MainActivity"
             android:label="@string/app_name" >
@@ -91,8 +91,8 @@
         <activity
             android:name="com.ipaulpro.afilechooser.FileChooserActivity"
             android:exported="true"
-            android:icon="@drawable/transparent"
-            android:theme="@style/IndigoLight">
+            android:icon="@android:color/transparent"
+            android:theme="@style/Theme.MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
 

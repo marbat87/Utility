@@ -9,7 +9,14 @@
     android:focusable="true"
 	android:focusableInTouchMode="true"
     tools:context=".CreaListaActivity" >
-	
+
+	<android.support.v7.widget.Toolbar
+	    android:id="@+id/risuscito_toolbar"
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:minHeight="?attr/actionBarSize"
+	    android:background="?attr/colorPrimary" />
+    
    	<LinearLayout 
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
