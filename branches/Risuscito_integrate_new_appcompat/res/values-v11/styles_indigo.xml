@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-  
+  	<!-- 
     <style name="IndigoSliderLight" parent="@style/IndigoLight">
         <item name="android:homeAsUpIndicator">@drawable/ic_fa_bars</item>
 	</style>
@@ -17,5 +17,5 @@
 	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
         <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
     </style>
-    
+     -->
 </resources>

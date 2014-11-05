@@ -8,17 +8,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.holoeverywhere.FontLoader;
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.app.ProgressDialog;
-import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.EditText;
-import org.holoeverywhere.widget.TextView;
-import org.holoeverywhere.widget.Toast;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -28,13 +21,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.indris.material.RippleView;
 
@@ -135,7 +134,7 @@ public class InsertAvanzataFragment extends Fragment {
 	    });
 		
 		RippleView ricerca = (RippleView) rootView.findViewById(R.id.search_ripple);
-		ricerca.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
+//		ricerca.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 //		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
 		ricerca.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -155,7 +154,7 @@ public class InsertAvanzataFragment extends Fragment {
 		});
 		
 		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
-		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
+//		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 //		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {
 			@Override

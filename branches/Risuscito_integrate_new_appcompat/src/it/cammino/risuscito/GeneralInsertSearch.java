@@ -1,21 +1,22 @@
 package it.cammino.risuscito;
 
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.ViewPager;
-
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-public class GeneralInsertSearch extends Activity {
+public class GeneralInsertSearch extends ActionBarActivity {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	
@@ -30,14 +31,18 @@ public class GeneralInsertSearch extends Activity {
   	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(GeneralInsertSearch.this);
+//		Utility.updateTheme(GeneralInsertSearch.this);
 		super.onCreate(savedInstanceState);
+//		
+//		ActionBar actionbar = getSupportActionBar();
+//		actionbar.setDisplayHomeAsUpEnabled(true);
+//		actionbar.setLogo(R.drawable.transparent);
 		
-		ActionBar actionbar = getSupportActionBar();
-		actionbar.setDisplayHomeAsUpEnabled(true);
-		actionbar.setLogo(R.drawable.transparent);
+		setContentView(R.layout.activity_insert_search);
 		
-		setContentView(R.layout.activity_general_search);
+		Toolbar toolbar = ((Toolbar) findViewById(R.id.risuscito_toolbar));
+		toolbar.setTitle(R.string.title_activity_general_index);
+		setSupportActionBar(toolbar);
 		
         // setta il colore della barra di stato, solo da KITAKT in su
         Utility.setupTransparentTints(GeneralInsertSearch.this);

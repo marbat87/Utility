@@ -1,15 +1,7 @@
 package it.cammino.risuscito;
 
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.TextView;
-import org.holoeverywhere.widget.Toast;
-
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,10 +12,13 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,12 +28,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.andraskindler.quickscroll.QuickScroll;
 import com.andraskindler.quickscroll.Scrollable;
 
-@SuppressWarnings("deprecation")
 public class AlphabeticSectionFragment extends Fragment implements GenericDialogListener {
 	/**
 	 * The fragment argument representing the section number for this

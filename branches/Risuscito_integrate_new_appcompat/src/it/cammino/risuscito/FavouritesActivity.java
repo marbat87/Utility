@@ -1,14 +1,7 @@
 package it.cammino.risuscito;
 
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.TextView;
-
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -17,13 +10,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class FavouritesActivity extends Fragment implements GenericDialogListener {
 
@@ -39,8 +38,11 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		getSupportActionBar().setTitle(R.string.title_activity_favourites);
+//		getSupportActionBar().setTitle(R.string.title_activity_favourites);
 		rootView = inflater.inflate(R.layout.activity_favourites, container, false);
+		
+		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
+		toolbar.setTitle(R.string.title_activity_favourites);
 		
 //		final ActionBar actionBar = getSupportActionBar();
 //		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -204,7 +206,7 @@ public class FavouritesActivity extends Fragment implements GenericDialogListene
 		                return false;
 		            }
 		        });
-                dialog.show(getChildFragmentManager());
+                dialog.show(getChildFragmentManager(), null);
 				return true;
 			}
 		});	

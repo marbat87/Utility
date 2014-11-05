@@ -116,7 +116,7 @@
 	    android:layout_gravity="bottom"
         android:background="?attr/customBottomBarColor"
         android:divider="?attr/dividerVertical"
-        android:layout_height="@dimen/abc_action_bar_default_height"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
 	    android:orientation="horizontal" >
 	
 	    <TextView 

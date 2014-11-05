@@ -1,14 +1,14 @@
 package it.cammino.risuscito;
 
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.ViewPager;
-
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,8 +25,11 @@ public class GeneralIndex extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 				
-		getSupportActionBar().setTitle(R.string.title_activity_general_index);
+//		getSupportActionBar().setTitle(R.string.title_activity_general_index);
 		View rootView = inflater.inflate(R.layout.activity_general_index, container, false);
+		
+		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
+		toolbar.setTitle(R.string.title_activity_general_index);
 		
 		// Create the adapter that will return a fragment for each of the three
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());

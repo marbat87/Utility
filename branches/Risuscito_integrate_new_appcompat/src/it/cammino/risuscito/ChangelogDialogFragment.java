@@ -1,14 +1,12 @@
 package it.cammino.risuscito;
 
 import it.gmariotti.changelibs.library.view.ChangeLogListView;
-
-import org.holoeverywhere.app.AlertDialog;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 
 public class ChangelogDialogFragment extends DialogFragment {
 	

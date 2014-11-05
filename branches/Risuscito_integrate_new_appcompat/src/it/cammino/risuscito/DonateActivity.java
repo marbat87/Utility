@@ -1,19 +1,19 @@
 package it.cammino.risuscito;
 
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.Button;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 
 public class DonateActivity extends Fragment {
 
@@ -25,8 +25,11 @@ public class DonateActivity extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		getSupportActionBar().setTitle(R.string.title_activity_donate);
+//		getSupportActionBar().setTitle(R.string.title_activity_donate);
 		View rootView = inflater.inflate(R.layout.activity_donate, container, false);
+		
+		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
+		toolbar.setTitle(R.string.title_activity_donate);
 		
 //		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //		setContentView(R.layout.activity_donate);
@@ -35,27 +38,34 @@ public class DonateActivity extends Fragment {
 		donateView.setBackgroundColor(0);
 		String text = "";
 		
-        if (Utility.getChoosedTheme(getActivity()) == 1
-        		|| Utility.getChoosedTheme(getActivity()) == 3
-        		|| Utility.getChoosedTheme(getActivity()) == 5
-        		|| Utility.getChoosedTheme(getActivity()) == 7
-        		|| Utility.getChoosedTheme(getActivity()) == 9
-        		|| Utility.getChoosedTheme(getActivity()) == 11) {
-        	text = "<html><head>"
-		          + "<style type=\"text/css\">body{color: #FFFFFF;}"
-		          + "</style></head>"
-		          + "<body>"                          
-		          + getString(R.string.donate_long_text)
-		          + "</body></html>";
-        }
-        else {
-        	text = "<html><head>"
-  		          + "<style type=\"text/css\">body{color: #000000;}"
-  		          + "</style></head>"
-  		          + "<body>"                          
-  		          + getString(R.string.donate_long_text)
-  		          + "</body></html>";
-        }
+    	text = "<html><head>"
+        + "<style type=\"text/css\">body{color: #FFFFFF;}"
+        + "</style></head>"
+        + "<body>"                          
+        + getString(R.string.donate_long_text)
+        + "</body></html>";
+		
+//        if (Utility.getChoosedTheme(getActivity()) == 1
+//        		|| Utility.getChoosedTheme(getActivity()) == 3
+//        		|| Utility.getChoosedTheme(getActivity()) == 5
+//        		|| Utility.getChoosedTheme(getActivity()) == 7
+//        		|| Utility.getChoosedTheme(getActivity()) == 9
+//        		|| Utility.getChoosedTheme(getActivity()) == 11) {
+//        	text = "<html><head>"
+//		          + "<style type=\"text/css\">body{color: #FFFFFF;}"
+//		          + "</style></head>"
+//		          + "<body>"                          
+//		          + getString(R.string.donate_long_text)
+//		          + "</body></html>";
+//        }
+//        else {
+//        	text = "<html><head>"
+//  		          + "<style type=\"text/css\">body{color: #000000;}"
+//  		          + "</style></head>"
+//  		          + "<body>"                          
+//  		          + getString(R.string.donate_long_text)
+//  		          + "</body></html>";
+//        }
 		
 		donateView.loadData(text, "text/html; charset=utf-8", "UTF-8");
 

@@ -2,7 +2,6 @@ package it.cammino.risuscito;
 
 import it.cammino.risuscito.DownloadOrLinkDialogFragment.DownloadOrLinkDialogListener;
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,28 +18,16 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.holoeverywhere.ThemeManager;
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.Dialog;
-import org.holoeverywhere.app.DialogFragment;
-import org.holoeverywhere.app.ProgressDialog;
-import org.holoeverywhere.preference.PreferenceManager;
-import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.CheckBox;
-import org.holoeverywhere.widget.ImageButton;
-import org.holoeverywhere.widget.RelativeLayout;
-import org.holoeverywhere.widget.SeekBar;
-import org.holoeverywhere.widget.SeekBar.OnSeekBarChangeListener;
-import org.holoeverywhere.widget.TextView;
-import org.holoeverywhere.widget.Toast;
-
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -57,8 +44,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -72,9 +63,15 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
@@ -91,7 +88,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PaginaRenderActivity extends Activity
+public class PaginaRenderActivity extends ActionBarActivity
 			implements GenericDialogListener, DownloadOrLinkDialogListener {
     
 	private DatabaseCanti listaCanti;
@@ -170,16 +167,20 @@ public class PaginaRenderActivity extends Activity
     private static final String FILE_CHOOSER_TAG = "FileChooserExampleActivity";
     private static final int REQUEST_CODE = 6384;
 	
+	@SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-		Utility.updateTheme(PaginaRenderActivity.this);
+//		Utility.updateTheme(PaginaRenderActivity.this);
         super.onCreate(savedInstanceState);
         
-		ActionBar actionbar = getSupportActionBar();
-		actionbar.setDisplayHomeAsUpEnabled(true);
-		actionbar.setLogo(R.drawable.transparent);
+//		ActionBar actionbar = getSupportActionBar();
+//		actionbar.setDisplayHomeAsUpEnabled(true);
+//		actionbar.setLogo(R.drawable.transparent);
         
         setContentView(R.layout.activity_pagina_render);
+        
+        Toolbar toolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);
+        setSupportActionBar(toolbar);
         
         // setta il colore della barra di stato, solo da KITAKT in su
         Utility.setupTransparentTints(PaginaRenderActivity.this);
@@ -1688,10 +1689,12 @@ public class PaginaRenderActivity extends Activity
     	else if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {
     		dialog.dismiss();
     		setRequestedOrientation(prevOrientation);
-    		ThemeManager.startActivity(PaginaRenderActivity.this, new Intent(
-    				PaginaRenderActivity.this, FileChooserActivity.class), null);
-//    		startActivityForResult(new Intent(
-//    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+//    		ThemeManager.startActivity(PaginaRenderActivity.this, new Intent(
+//    				PaginaRenderActivity.this, FileChooserActivity.class), null);
+//    		startActivity(new Intent(
+//    				PaginaRenderActivity.this, FileChooserActivity.class), null);
+    		startActivityForResult(new Intent(
+    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
     	}
     }
     
