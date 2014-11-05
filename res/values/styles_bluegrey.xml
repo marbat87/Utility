@@ -1,0 +1,189 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+	<style name="BlueGreySliderLight" parent="@style/BlueGreyLight">
+        <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
+    </style>
+    
+	<style name="BlueGreyLight" parent="@style/BlueGreyBaseLight" />
+	
+	<style name="BlueGreyBaseLight" parent="@style/RisuscitoThemeLight">
+	    <item name="accentColor">@color/bluegrey_accent</item>
+	    <item name="customLightColor">@color/theme_bluegrey_color</item>
+        <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_bluegrey</item>
+		<item name="customStar">@drawable/star_bluegrey</item>
+		<item name="customSaveFile">@drawable/save_music_icon_bluegrey</item>
+		<item name="customDeleteFile">@drawable/delete_music_icon_bluegrey</item>
+		<item name="customRewind">@drawable/rewind_icon_bluegrey</item>
+		<item name="customPlay">@drawable/play_icon_bluegrey</item>
+		<item name="customFF">@drawable/fast_forward_icon_bluegrey</item>
+		<item name="customStop">@drawable/stop_icon_bluegrey</item>
+		<item name="customBottomBarColor">@color/BlueGrey</item>
+		<item name="customPstsIndicatorColor">@color/BlueGrey</item>
+		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
+		<item name="customDialogButtonBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
+		<item name="actionBarItemBackground">@drawable/selectable_background_action_bar_bluegrey_light</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_light</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_light</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Action_bar_bluegrey_light</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Action_bar_bluegrey_light</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Action_bar_bluegrey_light</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_action_bar_bluegrey_light</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_bluegrey_light</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_bluegrey_light</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_bluegrey</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_bluegrey_light</item>
+    	<item name="customButtonStyle">@style/Buttontheme_bluegrey_light</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_bluegrey</item>
+    	<item name="android:listViewStyle">@style/ListViewtheme_bluegrey</item>
+    	<item name="android:listViewWhiteStyle">@style/ListViewtheme_bluegrey.White</item>
+    	<item name="android:spinnerItemStyle">@style/SpinnerItemtheme_bluegrey</item>
+    	<item name="customInnerSwitch">@drawable/theme_bluegrey_switch_inner_holo_light</item>
+    	<item name="customTrackSwitch">@drawable/theme_bluegrey_switch_track_holo_light</item>
+    	<item name="customRadioButton">@drawable/theme_bluegrey_btn_radio_holo_light</item>
+    	<item name="actionBarEditTextBackground">@drawable/theme_bluegrey_accent_edit_text_holo_dark</item>
+    </style>
+
+    <style name="ActionBar.Solid.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_action_bar_bluegrey_light</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_action_bar_bluegrey_light</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_action_bar_bluegrey_light</item>
+        <item name="progressBarStyle">@style/ProgressBar.Action_bar_bluegrey_light</item>
+        <item name="titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="background">@drawable/ab_transparent_action_bar_bluegrey_light</item>
+        <item name="progressBarStyle">@style/ProgressBar.Action_bar_bluegrey_light</item>
+    </style>
+	
+    <style name="PopupMenu.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.PopupMenu">	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_action_bar_bluegrey_light</item>	
+    </style>
+	
+    <style name="DropDownListView.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_action_bar_bluegrey_light</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_action_bar_bluegrey</item>
+    </style>
+	
+    <style name="DropDownNav.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_action_bar_bluegrey_light</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_action_bar_bluegrey_light</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_action_bar_bluegrey_light</item>
+    </style>
+    
+    <style name="ProgressBar.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_action_bar_bluegrey_light</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.Action_bar_bluegrey_light" parent="@style/Widget.AppCompat.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_action_bar_bluegrey_light</item>
+    </style>
+    
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Action_bar_bluegrey_light.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_light</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_light</item>
+    </style>
+	
+	<style name="BlueGreySliderDark" parent="@style/BlueGreyDark">
+        <item name="homeAsUpIndicator">@drawable/ic_fa_bars</item>
+    </style>
+    
+	<style name="BlueGreyDark" parent="@style/BlueGreyBaseDark" />
+	
+	<style name="BlueGreyBaseDark" parent="@style/RisuscitoThemeDark">
+	    <item name="accentColor">@color/bluegrey_accent</item>
+	    <item name="customLightColor">@color/theme_bluegrey_color</item>
+        <item name="customTabBackground">@drawable/tab_indicator_ab_action_bar_bluegrey</item>
+		<item name="customStar">@drawable/star_light_bluegrey</item>
+		<item name="customSaveFile">@drawable/save_music_icon_light_bluegrey</item>
+		<item name="customDeleteFile">@drawable/delete_music_icon_light_bluegrey</item>
+		<item name="customRewind">@drawable/rewind_icon_light_bluegrey</item>
+		<item name="customPlay">@drawable/play_icon_light_bluegrey</item>
+		<item name="customFF">@drawable/fast_forward_icon_light_bluegrey</item>
+		<item name="customStop">@drawable/stop_icon_light_bluegrey</item>
+		<item name="customBottomBarColor">@color/BlueGrey</item>
+		<item name="customPstsIndicatorColor">@color/BlueGrey</item>
+		<item name="selectableItemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+		<item name="customDialogButtonBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+		<item name="android:itemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+		<item name="actionBarItemBackground">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_dark</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_dark</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Action_bar_bluegrey_dark</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Action_bar_bluegrey_dark</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Action_bar_bluegrey_dark</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_action_bar_bluegrey_dark</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_action_bar_bluegrey_dark</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Action_bar_bluegrey_dark</item>
+        <item name="android:editTextStyle">@style/EditTexttheme_bluegrey_dark</item>
+    	<item name="android:radioButtonStyle">@style/RadioButtontheme_bluegrey_dark</item>
+    	<item name="android:buttonStyle">@style/Buttontheme_bluegrey_dark</item>
+    	<item name="customButtonStyle">@style/Buttontheme_bluegrey_dark</item>
+    	<item name="android:imageButtonStyle">@style/ImageButtontheme_bluegrey</item>
+    	<item name="android:progressBarStyleHorizontal">@style/ProgressBartheme_bluegrey</item>
+    	<item name="android:seekBarStyle">@style/SeekBartheme_bluegrey</item>
+    	<item name="android:buttonStyleToggle">@style/Toggletheme_bluegrey</item>
+    	<item name="android:listViewStyle">@style/ListViewtheme_bluegrey_dark</item>
+    	<item name="android:listViewWhiteStyle">@style/ListViewtheme_bluegrey.White_dark</item>
+    	<item name="android:spinnerItemStyle">@style/SpinnerItemtheme_bluegrey_dark</item>
+    	<item name="customInnerSwitch">@drawable/theme_bluegrey_switch_inner_holo_dark</item>
+    	<item name="customTrackSwitch">@drawable/theme_bluegrey_switch_track_holo_dark</item>
+    	<item name="customRadioButton">@drawable/theme_bluegrey_btn_radio_holo_dark</item>
+    	<item name="actionBarEditTextBackground">@drawable/theme_bluegrey_accent_edit_text_holo_dark</item>
+    </style>
+	
+    <style name="ActionBar.Solid.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_action_bar_bluegrey_dark</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_action_bar_bluegrey_dark</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_action_bar_bluegrey_dark</item>
+        <item name="progressBarStyle">@style/ProgressBar.Action_bar_bluegrey_dark</item>
+    	<item name="titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_action_bar_bluegrey_dark</item>
+        <item name="progressBarStyle">@style/ProgressBar.Action_bar_bluegrey_dark</item>
+    </style>
+	
+    <style name="PopupMenu.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.PopupMenu">	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_action_bar_bluegrey_dark</item>	
+    </style>
+	
+    <style name="DropDownListView.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_action_bar_bluegrey</item>
+    </style>
+	
+    <style name="DropDownNav.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_action_bar_bluegrey_dark</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_action_bar_bluegrey_dark</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_action_bar_bluegrey_dark</item>
+    </style>
+    
+    <style name="ProgressBar.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_action_bar_bluegrey_dark</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.Action_bar_bluegrey_dark" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_action_bar_bluegrey_dark</item>
+    </style>
+    
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Action_bar_bluegrey_dark.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Action_bar_bluegrey_dark</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Action_bar_bluegrey_dark</item>
+    </style>
+    
+</resources>
