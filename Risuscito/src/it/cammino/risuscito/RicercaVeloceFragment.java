@@ -82,6 +82,10 @@ public class RicercaVeloceFragment extends Fragment implements
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 
+				String tempText = ((EditText) getActivity().findViewById(R.id.tempTextField)).getText().toString();
+				if (!tempText.equals(s.toString()))
+					((EditText) getActivity().findViewById(R.id.tempTextField)).setText(s);
+				
 				if (s.length() >= 3) {
 
 					rootView.findViewById(R.id.search_no_results)
@@ -189,6 +193,24 @@ public class RicercaVeloceFragment extends Fragment implements
 
 		});
 
+	    ((EditText) getActivity().findViewById(R.id.tempTextField)).addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				String tempText = searchPar.getText().toString();
+				if (!tempText.equals(s.toString()))
+					searchPar.setText(s);
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+			@Override
+			public void afterTextChanged(Editable s) { }
+			
+	    });
+		
 		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
 		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 		// Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
@@ -224,10 +246,14 @@ public class RicercaVeloceFragment extends Fragment implements
 		return rootView;
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
+//	@Override
+//	public void onResume() {
+//		Log.i("RICERCA VELOCE", "RESUMED");
+//		super.onResume();
+//		if (getActivity().findViewById(R.id.tempTextField) != null)
+//			((EditText) rootView.findViewById(R.id.textfieldRicerca))
+//			.setText(((EditText) getActivity().findViewById(R.id.tempTextField)).getText());
+//	}
 
 	@Override
 	public void onDestroy() {

@@ -60,6 +60,10 @@ public class InsertVeloceFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				
+				String tempText = ((EditText) getActivity().findViewById(R.id.tempTextField)).getText().toString();
+				if (!tempText.equals(s.toString()))
+					((EditText) getActivity().findViewById(R.id.tempTextField)).setText(s);
+				
 				if (s.length() >= 3) {
 					
 					rootView.findViewById(R.id.search_no_results).setVisibility(View.GONE);
@@ -185,11 +189,30 @@ public class InsertVeloceFragment extends Fragment {
 			}
 			
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+			
 			@Override
-			public void afterTextChanged(Editable s) {}
+			public void afterTextChanged(Editable s) { }
 			
 		});
+		
+	    ((EditText) getActivity().findViewById(R.id.tempTextField)).addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				String tempText = searchPar.getText().toString();
+				if (!tempText.equals(s.toString()))
+					searchPar.setText(s);
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+			@Override
+			public void afterTextChanged(Editable s) { }
+			
+	    });
 		
 		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
 		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
@@ -207,10 +230,10 @@ public class InsertVeloceFragment extends Fragment {
 		return rootView;
 	}
 	
-    @Override
-    public void onResume() {
-    	super.onResume();
-    }
+//    @Override
+//    public void onResume() {
+//    	super.onResume();
+//    }
     
 	@Override
 	public void onDestroy() {

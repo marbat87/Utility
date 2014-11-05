@@ -183,6 +183,7 @@ public class CreaListaActivity extends Activity
 				TextDialogFragment dialog = new TextDialogFragment();
 				dialog.setCustomMessage(getString(R.string.posizione_rename));
 				dialog.setListener(CreaListaActivity.this);
+				dialog.setDefaultText(nomiElementi.get(positionToRename));
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
 		            @Override
