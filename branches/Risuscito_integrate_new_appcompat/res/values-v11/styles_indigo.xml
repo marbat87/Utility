@@ -1,0 +1,21 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  
+    <style name="IndigoSliderLight" parent="@style/IndigoLight">
+        <item name="android:homeAsUpIndicator">@drawable/ic_fa_bars</item>
+	</style>
+	
+  	<style name="IndigoLight" parent="@style/IndigoBaseLight">
+  	    <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
+  	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
+    </style>
+	
+   	<style name="IndigoSliderDark" parent="@style/IndigoDark">
+        <item name="android:homeAsUpIndicator">@drawable/ic_fa_bars</item>
+    </style>   
+    
+	<style name="IndigoDark" parent="@style/IndigoBaseDark">
+	    <item name="android:actionOverflowButtonStyle">@style/OverFlow</item> 
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_arrow_left</item>
+    </style>
+    
+</resources>
