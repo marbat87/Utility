@@ -125,9 +125,9 @@ public class MainActivity extends ActionBarActivity {
 		case 1:
 			fragment = (Fragment) new GeneralIndex();
 			break;
-		case 2:
-			fragment = (Fragment) new GeneralSearch();
-            break;
+//		case 2:
+//			fragment = (Fragment) new GeneralSearch();
+//            break;
         default:
         	fragment = (Fragment) new Risuscito();
         	break;

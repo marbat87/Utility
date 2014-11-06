@@ -2,11 +2,9 @@ package it.cammino.risuscito;
 
 import java.util.Locale;
 
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,15 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.google.samples.apps.iosched.ui.widget.SlidingTabLayout;
-
 public class GeneralIndex extends Fragment { 
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	SlidingTabLayout mSlidingTabLayout = null;
-	private PagerSlidingTabStrip tabs;
+//	private PagerSlidingTabStrip tabs;
 	private int defaultIndex;
   	
 	@Override
@@ -55,30 +50,34 @@ public class GeneralIndex extends Fragment {
         mSlidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
 
-        setSlidingTabLayoutContentDescriptions();
+//        setSlidingTabLayoutContentDescriptions();
 
+//        TypedValue outValue = new TypedValue();
+//        getActivity().getApplicationContext().getTheme().resolveAttribute(android.R.attr.colorAccent,
+//                outValue, true);
+        
         Resources res = getResources();
-        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_selected_strip));
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.indigo_accent));
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
         
-	    if (savedInstanceState == null) {
-	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-			defaultIndex = Integer.parseInt(pref.getString("defaultIndex", "0"));
-			mViewPager.setCurrentItem(defaultIndex);
-//			mViewPager.postDelayed(new Runnable() {
-//	
-//		        @Override
-//		        public void run() {
-//		        	mViewPager.setCurrentItem(defaultIndex);
-//		        }
-//		    }, 100);
-	    }
-	    else {
-	    	mViewPager.setCurrentItem(savedInstanceState.getInt("pageViewed", 0));
-	    }
-	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
-	    tabs.setViewPager(mViewPager);
+//	    if (savedInstanceState == null) {
+//	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
+//			defaultIndex = Integer.parseInt(pref.getString("defaultIndex", "0"));
+//			mViewPager.setCurrentItem(defaultIndex);
+////			mViewPager.postDelayed(new Runnable() {
+////	
+////		        @Override
+////		        public void run() {
+////		        	mViewPager.setCurrentItem(defaultIndex);
+////		        }
+////		    }, 100);
+//	    }
+//	    else {
+//	    	mViewPager.setCurrentItem(savedInstanceState.getInt("pageViewed", 0));
+//	    }
+//	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
+//	    tabs.setViewPager(mViewPager);
 
 		return rootView;
 
