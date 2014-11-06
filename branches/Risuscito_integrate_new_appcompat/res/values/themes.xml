@@ -1,6 +1,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
         
-    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.NoActionBar">
     <!-- Set AppCompat’s actionBarStyle -->
 <!--     <item name="actionBarStyle">@style/MyActionBarStyle</item> -->
 
