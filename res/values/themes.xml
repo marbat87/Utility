@@ -6,7 +6,11 @@
 
     <!-- Set AppCompat’s color theming attrs -->
     <item name="colorPrimary">@color/Indigo</item>
-    <item name="colorPrimaryDark">@color/indigo_accent</item>
+    <item name="colorPrimaryDark">@color/IndigoDark</item>
+    
+    <!-- colorAccent is used as the default value for colorControlActivated,
+    	which is used to tint widgets -->
+    <item name="colorAccent">@color/indigo_accent</item>
     
     <!-- The rest of your attributes -->
 	</style>

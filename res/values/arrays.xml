@@ -100,7 +100,6 @@
     <string-array name="pages_array">
         <item>Home</item>
         <item>Indici</item>
-        <item>Ricerca</item>
     </string-array>
     
 </resources>
