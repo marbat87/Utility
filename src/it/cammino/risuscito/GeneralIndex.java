@@ -1,6 +1,10 @@
 package it.cammino.risuscito;
 
+import java.util.Locale;
+
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -13,11 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.google.samples.apps.iosched.ui.widget.SlidingTabLayout;
 
 public class GeneralIndex extends Fragment { 
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
+	SlidingTabLayout mSlidingTabLayout = null;
 	private PagerSlidingTabStrip tabs;
 	private int defaultIndex;
   	
@@ -33,10 +39,29 @@ public class GeneralIndex extends Fragment {
 		
 		// Create the adapter that will return a fragment for each of the three
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
-	    mViewPager.setAdapter(mSectionsPagerAdapter);
+//	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
+//	    mViewPager.setAdapter(mSectionsPagerAdapter);
 //	    mViewPager.setCurrentItem(0);
 
+	    mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+	    
+//	    int i;
+//        for (i = 0; i < Config.CONFERENCE_DAYS.length; i++) {
+//            mScheduleAdapters[i] = new MyScheduleAdapter(this, getLUtils());
+//        }
+
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+	    
+        mSlidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+
+        setSlidingTabLayoutContentDescriptions();
+
+        Resources res = getResources();
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_selected_strip));
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setViewPager(mViewPager);
+        
 	    if (savedInstanceState == null) {
 	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
 			defaultIndex = Integer.parseInt(pref.getString("defaultIndex", "0"));
@@ -55,55 +80,9 @@ public class GeneralIndex extends Fragment {
 	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
 	    tabs.setViewPager(mViewPager);
 
-
-//		checkScreenAwake();
-		
-//		setHasOptionsMenu(true);
-		
 		return rootView;
 
 	}
-
-//    @Override
-//    public void onResume() {
-//    	super.onResume();
-//    	checkScreenAwake();
-//    }
-	
-//	@Override
-//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		getActivity().getMenuInflater().inflate(R.menu.risuscito, menu);
-//		super.onCreateOptionsMenu(menu, inflater);
-//	}
-	
-//    @Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case R.id.action_settings:
-//			startActivity(new Intent(getActivity(), Settings.class));
-//			return true;
-//		case R.id.action_favourites:
-//			startActivity(new Intent(getActivity(), FavouritesActivity.class));
-//			return true;
-//		case R.id.action_donate:
-//			startActivity(new Intent(getActivity(), DonateActivity.class));
-//			return true;
-//		case R.id.action_about:
-//			startActivity(new Intent(getActivity(), AboutActivity.class));
-//			return true;
-//		}
-//		return false;
-//	}
-
-//    //controlla se l'app deve mantenere lo schermo acceso
-//    public void checkScreenAwake() {
-//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		boolean screenOn = pref.getBoolean("screenOn", false);
-//		if (screenOn)
-//			mViewPager.setKeepScreenOn(true);
-//		else
-//			mViewPager.setKeepScreenOn(false);
-//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -140,19 +119,28 @@ public class GeneralIndex extends Fragment {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-//			Locale l = Locale.getDefault();
+			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-//				return getString(R.string.letter_order_text).toUpperCase(l);
-				return getString(R.string.letter_order_text);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.letter_order_text).toUpperCase(l);
+				else
+					return getString(R.string.letter_order_text);
 			case 1:
-//				return getString(R.string.page_order_text).toUpperCase(l);
-				return getString(R.string.page_order_text);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.page_order_text).toUpperCase(l);
+				else
+					return getString(R.string.page_order_text);
 			case 2:
-//				return getString(R.string.arg_search_text).toUpperCase(l);
-				return getString(R.string.arg_search_text);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.arg_search_text).toUpperCase(l);
+				else
+					return getString(R.string.arg_search_text);
 			case 3:
-				return getString(R.string.salmi_musica_index);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.salmi_musica_index).toUpperCase(l);
+				else
+					return getString(R.string.salmi_musica_index);
 			}
 			return null;
 		}
