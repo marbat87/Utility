@@ -15,8 +15,10 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,18 +48,17 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-//		getSupportActionBar().setTitle(R.string.activity_homepage);
 		rootView = inflater.inflate(R.layout.activity_risuscito, container, false);
 		
 		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
 		toolbar.setTitle(R.string.activity_homepage);
-//	    setSupportActionBar(toolbar);
 		
 		rootView.findViewById(R.id.imageView1)
 		.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				((MainActivity) getActivity()).mDrawer.openDrawerMenu();	
+				DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.my_drawer_layout);
+				drawerLayout.openDrawer(Gravity.START);	
 			}
 		});
         

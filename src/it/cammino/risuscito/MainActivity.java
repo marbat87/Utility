@@ -1,7 +1,5 @@
 package it.cammino.risuscito;
 
-import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +16,6 @@ import android.widget.ListView;
 
 public class MainActivity extends ActionBarActivity {
     
-    public GoogleNavigationDrawer mDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private String[] mPlanetTitles;
     private ListView mDrawerList;
@@ -236,24 +232,6 @@ public class MainActivity extends ActionBarActivity {
 			findViewById(R.id.content_frame).setKeepScreenOn(true);
 		else
 			findViewById(R.id.content_frame).setKeepScreenOn(true);
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-         * Declare the behaviour of clicking at the
-         * application icon, opening and closing the drawer
-         */
-        if(item.getItemId() == android.R.id.home) {
-            if(mDrawer != null) {
-                if(mDrawer.isDrawerMenuOpen()) {
-                    mDrawer.closeDrawerMenu();
-                } else {
-                    mDrawer.openDrawerMenu();
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item);
     }
     
 }
