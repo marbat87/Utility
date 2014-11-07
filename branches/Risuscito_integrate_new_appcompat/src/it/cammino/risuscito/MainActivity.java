@@ -1,6 +1,7 @@
 package it.cammino.risuscito;
 
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,9 +20,45 @@ import android.widget.ListView;
 public class MainActivity extends ActionBarActivity {
     
     private ActionBarDrawerToggle drawerToggle;
-    private String[] mPlanetTitles;
     private ListView mDrawerList;
-    private DrawerLayout drawerLayout;
+    private DrawerLayout mDrawerLayout;
+    
+    protected static final int NAVDRAWER_ITEM_MY_SCHEDULE = 0;
+    protected static final int NAVDRAWER_ITEM_EXPLORE = 1;
+    protected static final int NAVDRAWER_ITEM_MAP = 2;
+    protected static final int NAVDRAWER_ITEM_SOCIAL = 3;
+    protected static final int NAVDRAWER_ITEM_VIDEO_LIBRARY = 4;
+    protected static final int NAVDRAWER_ITEM_SIGN_IN = 5;
+    protected static final int NAVDRAWER_ITEM_SETTINGS = 6;
+    protected static final int NAVDRAWER_ITEM_EXPERTS_DIRECTORY = 7;
+    protected static final int NAVDRAWER_ITEM_PEOPLE_IVE_MET = 8;
+    protected static final int NAVDRAWER_ITEM_INVALID = -1;
+    protected static final int NAVDRAWER_ITEM_SEPARATOR = -2;
+    protected static final int NAVDRAWER_ITEM_SEPARATOR_SPECIAL = -3;
+    
+    // titles for navdrawer items (indices must correspond to the above)
+    private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
+            R.string.activity_homepage,
+            R.string.search_name_text,
+            R.string.title_activity_general_index,
+            R.string.title_activity_custom_lists,
+            R.string.action_favourites,
+            R.string.title_activity_settings,
+            R.string.title_activity_about,
+            R.string.title_activity_donate
+    };
+
+    // icons for navdrawer items (indices must correspond to above array)
+    private static final int[] NAVDRAWER_ICON_RES_ID = new int[] {
+            R.drawable.ic_action_home_dark,  // My Schedule
+            R.drawable.ic_action_search_dark,  // Explore
+            R.drawable.ic_action_view_as_list_dark, // Map
+            R.drawable.ic_action_add_to_queue_dark, // Social
+            R.drawable.ic_action_favorite_dark, // Video Library
+            R.drawable.ic_action_settings_dark,
+            R.drawable.ic_action_about_dark,
+            R.drawable.ic_action_good_dark
+    };
     
 //    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
     
@@ -139,6 +178,115 @@ public class MainActivity extends ActionBarActivity {
         drawerLayout.closeDrawer(mDrawerList);
     }
     
+    /**
+     * Returns the navigation drawer item that corresponds to this Activity. Subclasses
+     * of BaseActivity override this to indicate what nav drawer item corresponds to them
+     * Return NAVDRAWER_ITEM_INVALID to mean that this Activity should not have a Nav Drawer.
+     */
+    protected int getSelfNavDrawerItem() {
+        return NAVDRAWER_ITEM_INVALID;
+    }
+    
+    /**
+     * Sets up the navigation drawer as appropriate. Note that the nav drawer will be
+     * different depending on whether the attendee indicated that they are attending the
+     * event on-site vs. attending remotely.
+     */
+    private void setupNavDrawer() {
+        // What nav drawer item should be selected?
+        int selfItem = getSelfNavDrawerItem();
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
+        if (mDrawerLayout == null) {
+            return;
+        }
+        mDrawerLayout.setStatusBarBackgroundColor(
+                getResources().getColor(R.color.IndigoDark));
+        ScrimInsetsScrollView navDrawer = (ScrimInsetsScrollView)
+                mDrawerLayout.findViewById(R.id.navdrawer);
+        if (selfItem == NAVDRAWER_ITEM_INVALID) {
+            // do not show a nav drawer
+            if (navDrawer != null) {
+                ((ViewGroup) navDrawer.getParent()).removeView(navDrawer);
+            }
+            mDrawerLayout = null;
+            return;
+        }
+
+        if (navDrawer != null) {
+            final View chosenAccountContentView = findViewById(R.id.chosen_account_content_view);
+            final View chosenAccountView = findViewById(R.id.chosen_account_view);
+            final int navDrawerChosenAccountHeight = getResources().getDimensionPixelSize(
+                    R.dimen.navdrawer_chosen_account_height);
+            navDrawer.setOnInsetsCallback(new ScrimInsetsScrollView.OnInsetsCallback() {
+                @Override
+                public void onInsetsChanged(Rect insets) {
+                    ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams)
+                            chosenAccountContentView.getLayoutParams();
+                    lp.topMargin = insets.top;
+                    chosenAccountContentView.setLayoutParams(lp);
+
+                    ViewGroup.LayoutParams lp2 = chosenAccountView.getLayoutParams();
+                    lp2.height = navDrawerChosenAccountHeight + insets.top;
+                    chosenAccountView.setLayoutParams(lp2);
+                }
+            });
+        }
+
+        if (mActionBarToolbar != null) {
+            mActionBarToolbar.setNavigationIcon(R.drawable.ic_drawer);
+            mActionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDrawerLayout.openDrawer(Gravity.START);
+                }
+            });
+        }
+
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // run deferred action, if we have one
+                if (mDeferredOnDrawerClosedRunnable != null) {
+                    mDeferredOnDrawerClosedRunnable.run();
+                    mDeferredOnDrawerClosedRunnable = null;
+                }
+                if (mAccountBoxExpanded) {
+                    mAccountBoxExpanded = false;
+                    setupAccountBoxToggle();
+                }
+                onNavDrawerStateChanged(false, false);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                onNavDrawerStateChanged(true, false);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                onNavDrawerStateChanged(isNavDrawerOpen(), newState != DrawerLayout.STATE_IDLE);
+            }
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                onNavDrawerSlide(slideOffset);
+            }
+        });
+
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+
+        // populate the nav drawer with the correct items
+        populateNavDrawer();
+
+        // When the user runs the app for the first time, we want to land them with the
+        // navigation drawer open. But just the first time.
+        if (!PrefUtils.isWelcomeDone(this)) {
+            // first run of the app starts with the nav drawer open
+            PrefUtils.markWelcomeDone(this);
+            mDrawerLayout.openDrawer(Gravity.START);
+        }
+    }
     
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
