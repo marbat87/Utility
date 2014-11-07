@@ -26,15 +26,24 @@
 	    
 	</LinearLayout>
 	
-   	<ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="304dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:background="@android:color/white"/>
+<!--    	<ListView -->
+<!--         android:id="@+id/left_drawer" -->
+<!--         android:layout_width="304dp" -->
+<!--         android:layout_height="match_parent" -->
+<!--         android:layout_gravity="start" -->
+<!--         android:choiceMode="singleChoice" -->
+<!--         android:divider="@android:color/transparent" -->
+<!--         android:dividerHeight="0dp" -->
+<!--         android:background="@android:color/white"/> -->
+   	
+   	            <!-- Drawer items -->
+    <LinearLayout
+		android:id="@+id/navdrawer_items_list"
+		android:layout_width="@dimen/navdrawer_width"
+		android:layout_gravity="start"
+		android:layout_height="match_parent"
+		android:background="@color/navdrawer_background"
+		android:orientation="vertical" />
     
 </android.support.v4.widget.DrawerLayout>
 		

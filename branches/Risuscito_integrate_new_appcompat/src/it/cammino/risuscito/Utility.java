@@ -3,7 +3,7 @@ package it.cammino.risuscito;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Arrays;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -11,10 +11,20 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
-
+import android.view.View;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class Utility {
+	
+    @SuppressLint("NewApi")
+	public static void setAccessibilityIgnore(View view) {
+        view.setClickable(false);
+        view.setFocusable(false);
+        view.setContentDescription("");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        }
+    }
 	
 	private static final int[] THEME_COLORS = {R.color.IndigoDark, R.color.IndigoDark,
 												R.color.BlueGreyDark, R.color.BlueGreyDark,
