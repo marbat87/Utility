@@ -12,6 +12,9 @@
     <dimen name="percent_padding">15dip</dimen>
     <dimen name="menu_width">250dp</dimen>
     
+    <dimen name="navdrawer_chosen_account_height">140dp</dimen>
+    <dimen name="navdrawer_width">260dp</dimen>
+    <dimen name="navdrawer_profile_image_size">40dp</dimen>
     <dimen name="main_section_item_height">53dp</dimen>
     <dimen name="secondary_section_item_height">38dp</dimen>
     <dimen name="main_section_icon_size">35dp</dimen>
@@ -22,5 +25,6 @@
     <dimen name="min_button_margin">10dip</dimen>
     
     <dimen name="text_size_small">12sp</dimen>
+    <dimen name="keyline_1">16dp</dimen>
 	
 </resources>
