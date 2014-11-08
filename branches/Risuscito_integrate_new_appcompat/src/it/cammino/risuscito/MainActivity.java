@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ViewGroup mDrawerItemsListContainer;
     private Toolbar mActionBarToolbar;
-    private Handler mHandler;
+//    private Handler mHandler;
     
     // list of navdrawer items that were actually added to the navdrawer, in order
     private ArrayList<Integer> mNavDrawerItems = new ArrayList<Integer>();
@@ -76,9 +75,7 @@ public class MainActivity extends ActionBarActivity {
     // different Activities of the app through the Nav Drawer
 //    private static final int MAIN_CONTENT_FADEOUT_DURATION = 150;
 //    private static final int MAIN_CONTENT_FADEIN_DURATION = 250;
-    
-    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
-    
+        
     @Override
     public void onCreate(Bundle savedInstanceState) {
 //    	Utility.updateThemeWithSlider(MainActivity.this);
@@ -92,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
         // setta il colore della barra di stato, solo da KITAKT in su
 //        Utility.setupTransparentTints(MainActivity.this);
         
-        mHandler = new Handler();
+//        mHandler = new Handler();
         
      // Now retrieve the DrawerLayout so that we can set the status bar color.
         // This only takes effect on Lollipop, or when using translucentStatusBar
@@ -137,9 +134,11 @@ public class MainActivity extends ActionBarActivity {
                 return;
             }
             
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-            transaction.replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+//            transaction.replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
+            
+            goToNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
             
             setSelectedNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
         }
@@ -209,7 +208,7 @@ public class MainActivity extends ActionBarActivity {
      */
     private void setupNavDrawer() {
         // What nav drawer item should be selected?
-        int selfItem = getSelfNavDrawerItem();
+//        int selfItem = getSelfNavDrawerItem();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
         if (mDrawerLayout == null) {
@@ -519,9 +518,13 @@ public class MainActivity extends ActionBarActivity {
         	break;
     	}
         
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.content_frame, fragment, String.valueOf(item)).commit();
+        //creo il nuovo fragment solo se non è lo stesso che sto già visualizzando
+    	Fragment myFragment = getSupportFragmentManager().findFragmentByTag(String.valueOf(item));
+    	if (myFragment == null || !myFragment.isVisible()) {
+    		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    		transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+    		transaction.replace(R.id.content_frame, fragment, String.valueOf(item)).commit();
+    	}
     }
     
     /**
@@ -607,7 +610,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-        	Risuscito myFragment = (Risuscito)getSupportFragmentManager().findFragmentByTag(String.valueOf(NAVDRAWER_ITEM_HOMEPAGE));
+        	Fragment myFragment = getSupportFragmentManager().findFragmentByTag(String.valueOf(NAVDRAWER_ITEM_HOMEPAGE));
         	if (myFragment != null && myFragment.isVisible()) {
         		finish();
         	}
