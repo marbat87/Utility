@@ -9,6 +9,11 @@
         <item name="colorControlHighlight">#3fff</item>
     </style>
     
+    <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    
     <style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
     </style>

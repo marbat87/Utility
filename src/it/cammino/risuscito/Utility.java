@@ -256,7 +256,7 @@ public class Utility {
         	return;
         SystemBarTintManager tintManager = new SystemBarTintManager(context);
         tintManager.setStatusBarTintEnabled(true);
-//        tintManager.setStatusBarTintResource(THEME_COLORS[getChoosedTheme(context)]);
+        tintManager.setStatusBarTintResource(R.color.IndigoDark);
     }
 	
 }

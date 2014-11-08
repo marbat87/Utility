@@ -10,13 +10,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
@@ -44,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_DONATE = 7;
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_SEPARATOR = -2;
-    protected static final int NAVDRAWER_ITEM_SEPARATOR_SPECIAL = -3;
+    protected static final int NAVDRAWER_ITEM_COVER = -3;
     
     // titles for navdrawer items (indices must correspond to the above)
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
@@ -71,14 +70,14 @@ public class MainActivity extends ActionBarActivity {
     };
     
     // delay to launch nav drawer item, to allow close animation to play
-    private static final int NAVDRAWER_LAUNCH_DELAY = 250;
+//    private static final int NAVDRAWER_LAUNCH_DELAY = 250;
     
     // fade in and fade out durations for the main content when switching between
     // different Activities of the app through the Nav Drawer
-    private static final int MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int MAIN_CONTENT_FADEIN_DURATION = 250;
+//    private static final int MAIN_CONTENT_FADEOUT_DURATION = 150;
+//    private static final int MAIN_CONTENT_FADEIN_DURATION = 250;
     
-//    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
+    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(mActionBarToolbar);
         
         // setta il colore della barra di stato, solo da KITAKT in su
-        Utility.setupTransparentTints(MainActivity.this);
+//        Utility.setupTransparentTints(MainActivity.this);
         
         mHandler = new Handler();
         
@@ -137,13 +136,12 @@ public class MainActivity extends ActionBarActivity {
             if (savedInstanceState != null) {
                 return;
             }
-
-            // Create a new Fragment to be placed in the activity layout
-            Risuscito fragment = new Risuscito();
             
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-            transaction.replace(R.id.content_frame, fragment).commit();
+            transaction.replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
+            
+            setSelectedNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
         }
         
 //        if (savedInstanceState == null) {
@@ -321,6 +319,7 @@ public class MainActivity extends ActionBarActivity {
 //        }
 
         // Explore is always shown
+        mNavDrawerItems.add(NAVDRAWER_ITEM_COVER);
         mNavDrawerItems.add(NAVDRAWER_ITEM_HOMEPAGE);
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEARCH);
         mNavDrawerItems.add(NAVDRAWER_ITEM_INDEXES);
@@ -379,8 +378,8 @@ public class MainActivity extends ActionBarActivity {
         int layoutToInflate = 0;
         if (itemId == NAVDRAWER_ITEM_SEPARATOR) {
             layoutToInflate = R.layout.navdrawer_separator;
-        } else if (itemId == NAVDRAWER_ITEM_SEPARATOR_SPECIAL) {
-            layoutToInflate = R.layout.navdrawer_separator;
+        } else if (itemId == NAVDRAWER_ITEM_COVER) {
+            layoutToInflate = R.layout.navdrawer_cover;
         } else {
             layoutToInflate = R.layout.navdrawer_item;
         }
@@ -419,7 +418,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private boolean isSeparator(int itemId) {
-        return itemId == NAVDRAWER_ITEM_SEPARATOR || itemId == NAVDRAWER_ITEM_SEPARATOR_SPECIAL;
+        return itemId == NAVDRAWER_ITEM_SEPARATOR || itemId == NAVDRAWER_ITEM_COVER;
     }
 
     private void formatNavDrawerItem(View view, int itemId, boolean selected) {
@@ -463,7 +462,7 @@ public class MainActivity extends ActionBarActivity {
 //      }
         
 //        if (isSpecialItem(itemId)) {
-            goToNavDrawerItem(itemId);
+//            goToNavDrawerItem(itemId);
 //        }
 //      else {
 //            // launch the target Activity after a short delay, to allow the close animation to play
@@ -522,7 +521,7 @@ public class MainActivity extends ActionBarActivity {
         
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-        transaction.replace(R.id.content_frame, fragment).commit();
+        transaction.replace(R.id.content_frame, fragment, String.valueOf(item)).commit();
     }
     
     /**
@@ -605,24 +604,24 @@ public class MainActivity extends ActionBarActivity {
 //        drawerToggle.syncState();
 //    }
     
-//    @Override
-//    public boolean onKeyUp(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//        	Risuscito myFragment = (Risuscito)getSupportFragmentManager().findFragmentByTag(TAG_MAIN_FRAGMENT);
-//        	if (myFragment != null && myFragment.isVisible()) {
-//        		finish();
-//        	}
-//        	else {
-//        		mDrawer.check(1);
-//        		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//				transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-//        		transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
-//        		transaction.commit();
-//        	}
-//        	return true;
-//        }
-//        return super.onKeyUp(keyCode, event);
-//    }
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        	Risuscito myFragment = (Risuscito)getSupportFragmentManager().findFragmentByTag(String.valueOf(NAVDRAWER_ITEM_HOMEPAGE));
+        	if (myFragment != null && myFragment.isVisible()) {
+        		finish();
+        	}
+        	else {        		        		
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                transaction.replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
+                
+                setSelectedNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
+        	}
+        	return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
     
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {
