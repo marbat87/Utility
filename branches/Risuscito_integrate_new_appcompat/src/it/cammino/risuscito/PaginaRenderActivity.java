@@ -64,12 +64,8 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +74,8 @@ import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.gc.materialdesign.views.CheckBox;
+import com.gc.materialdesign.views.Slider;
+import com.gc.materialdesign.views.Slider.OnValueChangedListener;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.itextpdf.text.BaseColor;
@@ -100,7 +98,7 @@ public class PaginaRenderActivity extends ActionBarActivity
 	private int favoriteFlag;
 	private CheckBox favouriteCheckBox;
 	ImageButton play_button, stop_button, rewind_button, ff_button, save_file, delete_file, play_scroll, stop_scroll;
-	SeekBar scroll_speed_bar;
+	Slider scroll_speed_bar;
 	TextView speed_text;
 	private ProgressDialog loadingMp3;
 	private PhoneStateListener phoneStateListener;
@@ -183,6 +181,7 @@ public class PaginaRenderActivity extends ActionBarActivity
         
         Toolbar toolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         
         // setta il colore della barra di stato, solo da KITAKT in su
         Utility.setupTransparentTints(PaginaRenderActivity.this);
@@ -229,7 +228,7 @@ public class PaginaRenderActivity extends ActionBarActivity
         delete_file = (ImageButton) findViewById(R.id.delete_file);
         play_scroll = (ImageButton) findViewById(R.id.play_scroll);
         stop_scroll = (ImageButton) findViewById(R.id.stop_scroll);
-        scroll_speed_bar = (SeekBar) findViewById(R.id.speed_seekbar);
+        scroll_speed_bar = (Slider) findViewById(R.id.speed_seekbar);
         speed_text = (TextView) findViewById(R.id.speed_text);
         
     	am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -831,18 +830,28 @@ public class PaginaRenderActivity extends ActionBarActivity
 
         }
         
-        scroll_speed_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
- 
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                speedValue = String.valueOf(progress);
-                double tempValue = progress / MAX_SPEED;
+        scroll_speed_bar.setOnValueChangedListener(new OnValueChangedListener() {
+			
+			@Override
+			public void onValueChanged(int value) {
+				speedValue = String.valueOf(value);
+                double tempValue = value / MAX_SPEED;
                 int textValue = (int)(tempValue * 100);
                 speed_text.setText(textValue + "%"); 
-            }
- 
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
+			}
+		});
+//        scroll_speed_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+// 
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+//                speedValue = String.valueOf(progress);
+//                double tempValue = progress / MAX_SPEED;
+//                int textValue = (int)(tempValue * 100);
+//                speed_text.setText(textValue + "%"); 
+//            }
+// 
+//            public void onStartTrackingTouch(SeekBar seekBar) {}
+//            public void onStopTrackingTouch(SeekBar seekBar) {}
+//        });
         
         stop_scroll.setVisibility(View.GONE);
 
@@ -1192,16 +1201,21 @@ public class PaginaRenderActivity extends ActionBarActivity
 	    
 	    if (speedValue == null) {
 //	    	Log.i("SONO APPENA ENTRATO", "setto " + savedSpeed);
-	    	scroll_speed_bar.setProgress(savedSpeed);
-	        speedValue = String.valueOf(scroll_speed_bar.getProgress());
-	        double tempValue = scroll_speed_bar.getProgress() / MAX_SPEED;
+//	    	scroll_speed_bar.setProgress(savedSpeed);
+//	        speedValue = String.valueOf(scroll_speed_bar.getProgress());
+//	        double tempValue = scroll_speed_bar.getProgress() / MAX_SPEED;
+	    	scroll_speed_bar.setValue(savedSpeed);
+	        speedValue = String.valueOf(scroll_speed_bar.getValue());
+	        double tempValue = scroll_speed_bar.getValue() / MAX_SPEED;
 	        int textValue = (int) (tempValue * 100);
 	        speed_text.setText(textValue + "%");
 	    }
 	    else {
 //	    	Log.i("ROTAZIONE", "setto " + speedValue);
-	    	scroll_speed_bar.setProgress(Integer.valueOf(speedValue));
-	        double tempValue = scroll_speed_bar.getProgress() / MAX_SPEED;
+	    	scroll_speed_bar.setValue(Integer.valueOf(speedValue));
+	    	double tempValue = scroll_speed_bar.getValue() / MAX_SPEED;
+//	    	scroll_speed_bar.setProgress(Integer.valueOf(speedValue));
+//	        double tempValue = scroll_speed_bar.getProgress() / MAX_SPEED;
 	        int textValue = (int) (tempValue * 100);
 	        speed_text.setText(textValue + "%");
 	    }
