@@ -1,7 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.CreaListaActivity.RetainedFragment;
-
 import java.util.ArrayList;
 
 import android.content.SharedPreferences;
@@ -12,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -35,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
     private View[] mNavDrawerItemViews = null;
     
     protected static final String SELECTED_ITEM = "oggetto_selezionato";
+    protected static final String TOOLBAR_TITLE = "titolo_selezionato";
     
     protected int selectedItem;
     
@@ -138,6 +138,8 @@ public class MainActivity extends ActionBarActivity {
             // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
             	setSelectedNavDrawerItem(savedInstanceState.getInt(SELECTED_ITEM));
+            	Log.i(this.getClass().toString(), "RIPRISTINATO:" + savedInstanceState.getCharSequence(TOOLBAR_TITLE).toString());
+//            	mActionBarToolbar.setTitle(savedInstanceState.getCharSequence(TOOLBAR_TITLE));
                 return;
             }
             
@@ -163,7 +165,9 @@ public class MainActivity extends ActionBarActivity {
     
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {		
-		savedInstanceState.putInt(SELECTED_ITEM, selectedItem);	  
+		savedInstanceState.putInt(SELECTED_ITEM, selectedItem);
+		Log.i(this.getClass().toString(), "SALVO:" + mActionBarToolbar.getTitle().toString());
+		savedInstanceState.putCharSequence(TOOLBAR_TITLE, mActionBarToolbar.getTitle());
 		super.onSaveInstanceState(savedInstanceState);
 	}
 //    /* The click listner for ListView in the navigation drawer */

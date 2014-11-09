@@ -4,17 +4,15 @@
     xmlns:risuscito="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
-    
-    <android.support.v7.widget.Toolbar
-		android:id="@+id/risuscito_toolbar"
-		android:layout_height="wrap_content"
-		risuscito:theme="@style/ActionBarThemeOverlay"
-		risuscito:titleTextAppearance="@style/ActionBar.TitleText"
-		android:layout_width="match_parent"
-		android:minHeight="?attr/actionBarSize"
-		android:background="?attr/colorPrimary" />
-    
+    android:orientation="vertical">    
+
+	<android.support.v7.widget.Toolbar
+    	android:id="@+id/risuscito_toolbar"
+    	android:layout_height="?attr/actionBarSize"
+    	risuscito:theme="@style/ActionBarThemeOverlay"
+    	risuscito:titleTextAppearance="@style/ActionBar.TitleText"
+    	android:layout_width="match_parent"
+    	android:background="?attr/colorPrimary" />
     
     <LinearLayout 
     	android:layout_width="fill_parent"
@@ -164,14 +162,26 @@
 	        android:paddingStart="@dimen/percent_padding"
 	        android:minEms="3"/>
 	    
-	    <SeekBar
-	        android:id="@+id/speed_seekbar"
-	        android:layout_width="0dip"
-	        android:layout_weight="1"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical"
-	        android:max="50"
-	        android:soundEffectsEnabled="true" />
+<!-- 	    <SeekBar -->
+<!-- 	        android:id="@+id/speed_seekbar" -->
+<!-- 	        android:layout_width="0dip" -->
+<!-- 	        android:layout_weight="1" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:layout_gravity="center_vertical" -->
+<!-- 	        android:max="50" -->
+<!-- 	        android:soundEffectsEnabled="true" /> -->
+	   
+		<com.gc.materialdesign.views.Slider
+        	android:id="@+id/speed_seekbar"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/theme_accent"
+            risuscito:max="50"
+            risuscito:min="0"
+            android:soundEffectsEnabled="true"
+            risuscito:showNumberIndicator="true"/>
 	
 	    <ImageButton
 	        android:id="@+id/play_scroll"
