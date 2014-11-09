@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:risuscito="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+    
+    <android.support.v7.widget.Toolbar
+		android:id="@+id/risuscito_toolbar"
+		android:layout_height="wrap_content"
+		risuscito:theme="@style/ActionBarThemeOverlay"
+		risuscito:titleTextAppearance="@style/ActionBar.TitleText"
+		android:layout_width="match_parent"
+		android:minHeight="?attr/actionBarSize"
+		android:background="?attr/colorPrimary" />
+    
     
     <LinearLayout 
     	android:layout_width="fill_parent"
@@ -21,14 +32,25 @@
     		android:paddingBottom="@dimen/activity_min_margin"
 	        android:orientation="horizontal" >
 	
-	        <CheckBox
-	            android:id="@+id/favorite"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
+<!-- 	        <CheckBox -->
+<!-- 	            android:id="@+id/favorite" -->
+<!-- 	            android:layout_width="wrap_content" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_alignParentLeft="true" -->
+<!-- 	            android:layout_alignParentTop="true" -->
+<!-- 	            android:button="?attr/customStar" -->
+<!-- 	            android:soundEffectsEnabled="true" /> -->
+	        
+	        <com.gc.materialdesign.views.CheckBox
+                android:id="@+id/favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
 	            android:layout_alignParentTop="true"
-	            android:button="?attr/customStar"
-	            android:soundEffectsEnabled="true" />
+                android:background="@color/theme_primary"
+                risuscito:check="true"
+                android:soundEffectsEnabled="true" />
 	
 	        <ImageButton
 	            android:id="@+id/rewind_song"
@@ -36,7 +58,9 @@
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
 	            android:layout_toLeftOf="@+id/play_song"
-	            android:background="?attr/customRewind"
+	            android:layout_toStartOf="@+id/play_song"
+	            android:src="@drawable/ic_av_rewind_active"
+	            android:background="@drawable/image_icon_background"
 	            android:contentDescription="@string/rewind"
 	            android:soundEffectsEnabled="true" />
 	
@@ -46,7 +70,9 @@
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
 	            android:layout_toLeftOf="@+id/fast_forward_song"
-	            android:background="?attr/customPlay"
+	            android:layout_toStartOf="@+id/fast_forward_song"
+				android:src="@drawable/ic_av_play_active"	            
+	            android:background="@drawable/image_icon_background"
 	            android:contentDescription="@string/play_song"
 	            android:soundEffectsEnabled="true" />
 	
@@ -56,7 +82,9 @@
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
 	            android:layout_toLeftOf="@+id/stop_song"
-	            android:background="?attr/customFF"
+	            android:layout_toStartOf="@+id/stop_song"
+	            android:src="@drawable/ic_av_fast_forward_active"
+	            android:background="@drawable/image_icon_background"
 	            android:contentDescription="@string/fast_forward"
 	            android:soundEffectsEnabled="true" />
 	
@@ -65,8 +93,10 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_toLeftOf="@+id/delete_file"
+	            android:layout_toStartOf="@+id/delete_file"
 	            android:layout_alignParentTop="true"
-	            android:background="?attr/customStop"
+	            android:src="@drawable/ic_av_stop_active"
+	            android:background="@drawable/image_icon_background"
 	            android:contentDescription="@string/stop_song"
 	            android:soundEffectsEnabled="true" />
 	
@@ -76,8 +106,11 @@
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
 	            android:layout_alignParentRight="true"
+	            android:layout_alignParentEnd="true"
 	            android:layout_toLeftOf="@+id/save_file"
-	            android:background="?attr/customDeleteFile"
+	            android:layout_toStartOf="@+id/save_file"
+	            android:src="@drawable/ic_content_discard_active"
+	            android:background="@drawable/image_icon_background"
 	            android:contentDescription="@string/delete"
 	            android:soundEffectsEnabled="true" />
 	        
@@ -87,7 +120,9 @@
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentTop="true"
 	            android:layout_alignParentRight="true"
-	            android:background="?attr/customSaveFile"
+	            android:layout_alignParentEnd="true"
+	            android:src="@drawable/ic_av_download_active"
+	            android:background="@drawable/image_icon_background"
 	            android:contentDescription="@string/save_file"
 	            android:soundEffectsEnabled="true" />
 	
@@ -114,7 +149,7 @@
 	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_gravity="bottom"
-        android:background="?attr/customBottomBarColor"
+        android:background="@color/theme_primary"
         android:divider="?attr/dividerVertical"
         android:layout_height="@dimen/abc_action_bar_default_height_material"
 	    android:orientation="horizontal" >
@@ -126,6 +161,7 @@
 	        android:textAppearance="@style/myTheme.ActionBar.Text"
 	        android:layout_gravity="center_vertical"
 	        android:paddingLeft="@dimen/percent_padding"
+	        android:paddingStart="@dimen/percent_padding"
 	        android:minEms="3"/>
 	    
 	    <SeekBar
@@ -143,7 +179,7 @@
 	        android:layout_height="wrap_content"
 	        android:contentDescription="@string/play_scroll"
 	        style="@style/MyActionButton"
-	        android:src="?attr/customSlidePlay"
+	        android:src="@drawable/ic_action_slideshow"
 	        android:soundEffectsEnabled="true" />
 	    
 	   	<ImageButton
@@ -152,7 +188,7 @@
 	        android:layout_height="wrap_content"
 	        android:contentDescription="@string/stop_scroll"
 	        style="@style/MyActionButton"
-	        android:src="?attr/customSlideStop"
+	        android:src="@drawable/ic_action_slideshow_stop"
 	        android:soundEffectsEnabled="true" />
 	        
 	</LinearLayout>

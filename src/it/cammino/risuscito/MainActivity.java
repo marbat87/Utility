@@ -1,5 +1,7 @@
 package it.cammino.risuscito;
 
+import it.cammino.risuscito.CreaListaActivity.RetainedFragment;
+
 import java.util.ArrayList;
 
 import android.content.SharedPreferences;
@@ -32,6 +34,10 @@ public class MainActivity extends ActionBarActivity {
     // views that correspond to each navdrawer item, null if not yet created
     private View[] mNavDrawerItemViews = null;
     
+    protected static final String SELECTED_ITEM = "oggetto_selezionato";
+    
+    protected int selectedItem;
+    
     protected static final int NAVDRAWER_ITEM_HOMEPAGE = 0;
     protected static final int NAVDRAWER_ITEM_SEARCH = 1;
     protected static final int NAVDRAWER_ITEM_INDEXES = 2;
@@ -42,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_DONATE = 7;
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_SEPARATOR = -2;
-    protected static final int NAVDRAWER_ITEM_COVER = -3;
+//    protected static final int NAVDRAWER_ITEM_COVER = -3;
     
     // titles for navdrawer items (indices must correspond to the above)
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
@@ -131,6 +137,7 @@ public class MainActivity extends ActionBarActivity {
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
+            	setSelectedNavDrawerItem(savedInstanceState.getInt(SELECTED_ITEM));
                 return;
             }
             
@@ -139,7 +146,6 @@ public class MainActivity extends ActionBarActivity {
 //            transaction.replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
             
             goToNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
-            
             setSelectedNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
         }
         
@@ -155,6 +161,11 @@ public class MainActivity extends ActionBarActivity {
     	checkScreenAwake();
     }
     
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {		
+		savedInstanceState.putInt(SELECTED_ITEM, selectedItem);	  
+		super.onSaveInstanceState(savedInstanceState);
+	}
 //    /* The click listner for ListView in the navigation drawer */
 //    private class DrawerItemClickListener implements ListView.OnItemClickListener {
 //        @Override
@@ -215,7 +226,7 @@ public class MainActivity extends ActionBarActivity {
             return;
         }
         mDrawerLayout.setStatusBarBackgroundColor(
-                getResources().getColor(R.color.IndigoDark));
+                getResources().getColor(R.color.theme_primary_dark));
 //        ScrimInsetsScrollView navDrawer = (ScrimInsetsScrollView)
 //                mDrawerLayout.findViewById(R.id.navdrawer);
 //        if (selfItem == NAVDRAWER_ITEM_INVALID) {
@@ -318,7 +329,7 @@ public class MainActivity extends ActionBarActivity {
 //        }
 
         // Explore is always shown
-        mNavDrawerItems.add(NAVDRAWER_ITEM_COVER);
+//        mNavDrawerItems.add(NAVDRAWER_ITEM_COVER);
         mNavDrawerItems.add(NAVDRAWER_ITEM_HOMEPAGE);
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEARCH);
         mNavDrawerItems.add(NAVDRAWER_ITEM_INDEXES);
@@ -377,8 +388,8 @@ public class MainActivity extends ActionBarActivity {
         int layoutToInflate = 0;
         if (itemId == NAVDRAWER_ITEM_SEPARATOR) {
             layoutToInflate = R.layout.navdrawer_separator;
-        } else if (itemId == NAVDRAWER_ITEM_COVER) {
-            layoutToInflate = R.layout.navdrawer_cover;
+//        } else if (itemId == NAVDRAWER_ITEM_COVER) {
+//            layoutToInflate = R.layout.navdrawer;
         } else {
             layoutToInflate = R.layout.navdrawer_item;
         }
@@ -417,7 +428,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private boolean isSeparator(int itemId) {
-        return itemId == NAVDRAWER_ITEM_SEPARATOR || itemId == NAVDRAWER_ITEM_COVER;
+        return itemId == NAVDRAWER_ITEM_SEPARATOR;
     }
 
     private void formatNavDrawerItem(View view, int itemId, boolean selected) {
@@ -532,6 +543,7 @@ public class MainActivity extends ActionBarActivity {
      * also be accomplished (perhaps more cleanly) with state-based layouts.
      */
     private void setSelectedNavDrawerItem(int itemId) {
+    	selectedItem = itemId;
         if (mNavDrawerItemViews != null) {
             for (int i = 0; i < mNavDrawerItemViews.length; i++) {
                 if (i < mNavDrawerItems.size()) {
