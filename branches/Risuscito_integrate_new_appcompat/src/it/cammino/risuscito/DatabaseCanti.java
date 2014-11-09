@@ -12,7 +12,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
 //	private static final int DB_VERSION = 24;
-	private static final int DB_VERSION = 26;
+	private static final int DB_VERSION = 27;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -155,7 +155,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (12, 9, 'Preghiera Ecuratistia II (1) - parte II', 'preghiera_eucaristica_II_parte2', 0, '"
+		sql += "VALUES (12, 9, 'Preghiera Eucaristica II (1) - parte II', 'preghiera_eucaristica_II_parte2', 0, '"
 				+ GIALLO + "', NULL, "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);

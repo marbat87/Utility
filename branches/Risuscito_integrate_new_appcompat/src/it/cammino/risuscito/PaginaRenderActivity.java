@@ -2,6 +2,7 @@ package it.cammino.risuscito;
 
 import it.cammino.risuscito.DownloadOrLinkDialogFragment.DownloadOrLinkDialogListener;
 import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,6 +19,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -47,7 +49,6 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneStateListener;
@@ -63,7 +64,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
@@ -72,10 +72,12 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.gc.materialdesign.views.CheckBox;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.itextpdf.text.BaseColor;
@@ -1123,31 +1125,31 @@ public class PaginaRenderActivity extends ActionBarActivity
         else
         	favouriteCheckBox.setChecked(false);
         
-        favouriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {			
-				
-				buttonView.playSoundEffect(android.view.SoundEffectConstants.CLICK);
-				int favouriteFlag = 0;
-				if (isChecked) {
-					favouriteFlag = 1;
-					Toast toast = Toast.makeText(PaginaRenderActivity.this
-							, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
-					toast.show();
-				}
-				else {
-					Toast toast = Toast.makeText(PaginaRenderActivity.this
-							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT);
-					toast.show();
-				}
-				
-				Bundle bundle = PaginaRenderActivity.this.getIntent().getExtras();
-		        String pagina = bundle.getString("pagina");
-				
-				updateFavouriteFlag(favouriteFlag, pagina);
-			}
-		});
+//        favouriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {			
+//				
+//				buttonView.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+//				int favouriteFlag = 0;
+//				if (isChecked) {
+//					favouriteFlag = 1;
+//					Toast toast = Toast.makeText(PaginaRenderActivity.this
+//							, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
+//					toast.show();
+//				}
+//				else {
+//					Toast toast = Toast.makeText(PaginaRenderActivity.this
+//							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT);
+//					toast.show();
+//				}
+//				
+//				Bundle bundle = PaginaRenderActivity.this.getIntent().getExtras();
+//		        String pagina = bundle.getString("pagina");
+//				
+//				updateFavouriteFlag(favouriteFlag, pagina);
+//			}
+//		});
         
         if (am != null && mediaPlayerState == MP_State.Started) {
 			am.requestAudioFocus(afChangeListener,

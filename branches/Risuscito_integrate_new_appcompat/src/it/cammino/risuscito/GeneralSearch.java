@@ -1,5 +1,9 @@
 package it.cammino.risuscito;
 
+import java.util.Locale;
+
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,12 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.astuetz.PagerSlidingTabStrip;
-
 public class GeneralSearch extends Fragment {
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
+	SlidingTabLayout mSlidingTabLayout = null;
   	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,17 +31,29 @@ public class GeneralSearch extends Fragment {
 		toolbar.setTitle(R.string.title_activity_search);
 		
 		// Create the adapter that will return a fragment for each of the three
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
-	    mViewPager.setAdapter(mSectionsPagerAdapter);
-	    mViewPager.setCurrentItem(0);
-	    
-	    PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
-	    tabs.setViewPager(mViewPager);
+//		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+//	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
+//	    mViewPager.setAdapter(mSectionsPagerAdapter);
+//	    mViewPager.setCurrentItem(0);
+//	    
+//	    PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
+//	    tabs.setViewPager(mViewPager);
 		
 //		checkScreenAwake();
   
 //	    setHasOptionsMenu(true);
+	    
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+	    mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        
+        mSlidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+        
+        Resources res = getResources();
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.theme_accent));
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setViewPager(mViewPager);
 	    
         return rootView;
 	}
@@ -109,16 +124,21 @@ public class GeneralSearch extends Fragment {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-//			Locale l = Locale.getDefault();
+			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-//				return getString(R.string.fast_search_title).toUpperCase(l);
-				return getString(R.string.fast_search_title);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.fast_search_title).toUpperCase(l);
+				else
+					return getString(R.string.fast_search_title);
 			case 1:
-//				return getString(R.string.advanced_search_title).toUpperCase(l);
-				return getString(R.string.advanced_search_title);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.advanced_search_title).toUpperCase(l);
+				else
+					return getString(R.string.advanced_search_title);
+			default:
+				return null;
 			}
-			return null;
 		}
 	}
 			

@@ -57,7 +57,7 @@ public class GeneralIndex extends Fragment {
 //                outValue, true);
         
         Resources res = getResources();
-        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.indigo_accent));
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.theme_accent));
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
         

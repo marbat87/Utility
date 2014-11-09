@@ -35,7 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.indris.material.RippleView;
+import com.gc.materialdesign.views.ButtonRectangle;
 
 public class RicercaVeloceFragment extends Fragment implements
 		GenericDialogListener {
@@ -207,7 +207,7 @@ public class RicercaVeloceFragment extends Fragment implements
 			
 	    });
 		
-		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
+	    ButtonRectangle pulisci = (ButtonRectangle) rootView.findViewById(R.id.pulisci_ripple);
 //		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 		// Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {

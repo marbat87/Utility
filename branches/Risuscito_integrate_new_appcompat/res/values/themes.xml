@@ -5,12 +5,12 @@
 <!--     <item name="actionBarStyle">@style/MyActionBarStyle</item> -->
 
     <!-- Set AppCompat’s color theming attrs -->
-    <item name="colorPrimary">@color/Indigo</item>
-    <item name="colorPrimaryDark">@color/IndigoDark</item>
+    <item name="colorPrimary">@color/theme_primary</item>
+    <item name="colorPrimaryDark">@color/theme_primary</item>
     
     <!-- colorAccent is used as the default value for colorControlActivated,
     	which is used to tint widgets -->
-    <item name="colorAccent">@color/indigo_accent</item>
+    <item name="colorAccent">@color/theme_accent</item>
     
     <!-- The rest of your attributes -->
 	</style>

@@ -1,8 +1,0 @@
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="@dimen/navdrawer_chosen_account_height"
-	android:gravity="start|center_vertical"
-	android:src="@drawable/copertina_about"
-	android:contentDescription="@string/copertina"
-	android:adjustViewBounds="true"/>
-
