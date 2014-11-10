@@ -11,7 +11,7 @@
     <!-- colorAccent is used as the default value for colorControlActivated,
     	which is used to tint widgets -->
     <item name="colorAccent">@color/theme_accent</item>
-    
+    <item name="customHelp">@drawable/ic_action_help</item>
     <!-- The rest of your attributes -->
 	</style>
 	
