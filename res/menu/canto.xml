@@ -1,9 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:risuscito="http://schemas.android.com/apk/res-auto">
        
 	<item
 	    android:id="@+id/tonalita"
 		android:orderInCategory="88"
-	    android:showAsAction="always"
+	    risuscito:showAsAction="always"
       	android:title="@string/action_tonalita" >
 
 		<menu>
@@ -50,7 +51,7 @@
 	<item
 	    android:id="@+id/barre"
 		android:orderInCategory="92"
-	    android:showAsAction="always"
+	    risuscito:showAsAction="always"
       	android:title="@string/action_barre" >
 
 		<menu>
@@ -109,7 +110,7 @@
         android:id="@+id/action_exp_pdf"
         android:orderInCategory="96"
         android:icon="?attr/customExpPDF"
-        android:showAsAction="ifRoom"
+        risuscito:showAsAction="ifRoom"
         android:title="@string/action_exp_pdf" />
 	
 <!--     <item -->
@@ -123,7 +124,7 @@
         android:id="@+id/action_help_canto"
         android:orderInCategory="98"
         android:icon="?attr/customHelp"
-        android:showAsAction="ifRoom"
+        risuscito:showAsAction="ifRoom"
         android:title="@string/action_help" />
     
 <!--     <item -->

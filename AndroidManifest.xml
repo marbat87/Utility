@@ -92,7 +92,7 @@
             android:name="com.ipaulpro.afilechooser.FileChooserActivity"
             android:exported="true"
             android:icon="@android:color/transparent"
-            android:theme="@style/Theme.MyTheme">
+            android:theme="@style/RisuscitoTheme">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
 

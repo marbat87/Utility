@@ -8,6 +8,8 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlHighlight">#3fff</item>
     </style>
+
+    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light" />
     
     <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">#fff</item>
