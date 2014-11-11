@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
     
+    <changelogversion versionName="2.7.1" changeDate="11 Novembre 2014">
+        <changelogtext>Risolto un crash nella ricerca canti</changelogtext>
+	</changelogversion>
+    
     <changelogversion versionName="2.7.0" changeDate="03 Novembre 2014">
         <changelogtext>Corretto un comportamento indesiderato nei campi di testo</changelogtext>
 		<changelogtext>Corretti i canti: "La voce del mio amato" - "Signore, non punirmi nel tuo sdegno" - "A te Signore con la mia voce" - "Ti vedranno i re" - "Se siete risorti con Cristo"</changelogtext>
