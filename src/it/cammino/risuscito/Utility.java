@@ -3,6 +3,7 @@ package it.cammino.risuscito;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class Utility {

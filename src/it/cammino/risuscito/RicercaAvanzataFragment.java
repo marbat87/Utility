@@ -93,7 +93,6 @@ public class RicercaAvanzataFragment extends Fragment implements GenericDialogLi
 //		rootView.findViewById(R.id.button_search).setEnabled(false);
 		ricercaButton = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
 		ricercaButton.setEnabled(false);
-		ricercaButton.setClickable(false);
 		
 		try {
 //        	InputStream in = getActivity().getAssets().open("fileout.xml");

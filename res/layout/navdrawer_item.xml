@@ -16,7 +16,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:background="?attr/selectableItemBackground"
+    android:background="@drawable/list_selector_neutral_light"
     android:gravity="start|center_vertical"
     android:paddingLeft="@dimen/keyline_1"
     android:paddingRight="@dimen/keyline_1"
