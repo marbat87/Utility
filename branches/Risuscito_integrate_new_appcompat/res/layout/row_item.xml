@@ -6,6 +6,15 @@
    	android:id="@+id/full_row"
    	android:gravity="center_vertical"
 	android:orientation="horizontal">
+	
+<!-- <com.gc.materialdesign.views.LayoutRipple -->
+<!-- 	xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--    	xmlns:tools="http://schemas.android.com/tools" -->
+<!--     android:id="@+id/full_row" -->
+<!--     android:layout_width="fill_parent" -->
+<!--     android:gravity="center_vertical" -->
+<!--     android:layout_height="wrap_content" -->
+<!--     android:clickable="true" > -->
     	
 	<TextView
     	android:id="@+id/text_page"
@@ -13,8 +22,8 @@
     	android:layout_height="fill_parent"
     	android:gravity="center_vertical|center_horizontal"
     	android:textColor="@android:color/black"
+    	android:background="@drawable/list_selector_neutral_light"
     	android:textAppearance="?android:attr/textAppearanceMedium"
-    	android:background="?attr/selectableItemBackground"
     	android:paddingLeft="@dimen/myListPreferredItemPaddingStart"
     	android:paddingRight="@dimen/myListPreferredItemPaddingStart"
     	android:minHeight="@dimen/myListPreferredItemHeightSmall" />
@@ -23,12 +32,13 @@
     	android:id="@+id/text_title"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:background="@drawable/list_selector_neutral_light"
     	android:textAppearance="?android:attr/textAppearanceMedium"
     	android:gravity="center_vertical|start"
-    	android:background="?attr/selectableItemBackground"
     	android:paddingLeft="@dimen/myListPreferredItemPaddingStart"
     	android:paddingRight="@dimen/myListPreferredItemPaddingStart"
-    	android:textColor="#000000"
+    	android:textColor="@android:color/black"
     	android:minHeight="@dimen/myListPreferredItemHeightSmall" />
 	
+<!-- </com.gc.materialdesign.views.LayoutRipple> -->
 </LinearLayout>

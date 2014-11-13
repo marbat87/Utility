@@ -29,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -181,6 +182,8 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
     
     private class SongRowAdapter extends ArrayAdapter<String> implements Scrollable {
     	
+    	LinearLayout fullrow;
+    	
     	SongRowAdapter() {
     		super(getActivity(), R.layout.row_item, R.id.text_title, titoli);
     	}
@@ -200,8 +203,22 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
 	        		
     		TextView textPage = (TextView) row.findViewById(R.id.text_page);
     		textPage.setText(pagina);
-    		View fullRow = (View) row.findViewById(R.id.full_row);
-    		fullRow.setBackgroundColor(Color.parseColor(colore));
+    		fullrow = (LinearLayout) row.findViewById(R.id.full_row);
+    		fullrow.setBackgroundColor(Color.parseColor(colore));
+    		
+//        	fullrow.post(new Runnable() {
+//    			
+//    			@Override
+//    			public void run() {
+//    				View v = layoutRipple.getChildAt(0);
+//    		    	layoutRipple.setxRippleOrigin(ViewHelper.getX(v)+v.getWidth()/2);
+//    		    	layoutRipple.setyRippleOrigin(ViewHelper.getY(v)+v.getHeight()/2);
+//    		    	
+//    		    	layoutRipple.setRippleColor(getActivity().getResources().getColor(R.color.neutral_color_dark));
+//    		    	
+//    		    	layoutRipple.setRippleSpeed(1000);
+//    			}
+//    		});
     		
     		return(row);
     	}
@@ -522,5 +539,5 @@ public class AlphabeticSectionFragment extends Fragment implements GenericDialog
         	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
     }
-
+    
 }
