@@ -25,21 +25,17 @@ public class DonateActivity extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-//		getSupportActionBar().setTitle(R.string.title_activity_donate);
 		View rootView = inflater.inflate(R.layout.activity_donate, container, false);
 		
 		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
 		toolbar.setTitle(R.string.title_activity_donate);
-		
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//		setContentView(R.layout.activity_donate);
 		
 		WebView donateView = (WebView) rootView.findViewById(R.id.donate_text);
 		donateView.setBackgroundColor(0);
 		String text = "";
 		
     	text = "<html><head>"
-        + "<style type=\"text/css\">body{color: #FFFFFF;}"
+        + "<style type=\"text/css\">body{color: #000000; opacity: 0.87;}"
         + "</style></head>"
         + "<body>"                          
         + getString(R.string.donate_long_text)
@@ -79,11 +75,6 @@ public class DonateActivity extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-//				String url = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=" 
-//						+ "marbat87%40outlook%2eit&lc=IT&item_name=Donazione%20Risuscit%c3%b2%20Android"
-//						+ "&item_number=THX_RISUSCITO_APP&no_note=0&cn="
-//						+ "Aggiungi%20istruzioni%20speciali%20per%20il%20venditore%3a&no_shipping=1&"
-//						+ "currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted";
 				String url = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENA7HP2LQKQ3G";
 
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -91,42 +82,7 @@ public class DonateActivity extends Fragment {
 			}
 		});
 		
-//		checkScreenAwake();
-		
 		return rootView;
 	}
 
-//    @Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case android.R.id.home:
-//			finish();
-//            return true;	
-//		}
-//		return false;
-//	}
-	
-//    @Override
-//    public void onResume() {
-//    	super.onResume();
-//    }
-    	
-//	@Override
-//	public void onDestroy() {
-//		super.onDestroy();
-//	}
-
-//    //controlla se l'app deve mantenere lo schermo acceso
-//    private void checkScreenAwake() {
-//    	
-//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-//		boolean screenOn = pref.getBoolean("screenOn", false);
-//		View about = (View) findViewById(R.id.donateButton);
-//		if (screenOn)
-//			about.setKeepScreenOn(true);
-//		else
-//			about.setKeepScreenOn(false);
-//		
-//    }
-	    
 }
