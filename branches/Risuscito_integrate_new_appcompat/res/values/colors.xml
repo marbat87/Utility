@@ -19,6 +19,7 @@
  	<color name="theme_teal_color">#4db6ac</color>
  	<color name="neutral_color_light">#99ebebeb</color>
  	<color name="neutral_color_dark">#1aebebeb</color>
+ 	<color name="neutral_color_for_group">#99bcbcbc</color>
  	<color name="IndigoDark">#303f9f</color>
  	<color name="BlueGreyDark">#455a64</color>
  	<color name="RedThemeDark">#d01716</color>

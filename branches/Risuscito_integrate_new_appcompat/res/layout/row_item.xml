@@ -21,7 +21,7 @@
     	android:layout_width="50dip"
     	android:layout_height="fill_parent"
     	android:gravity="center_vertical|center_horizontal"
-    	android:textColor="@android:color/black"
+    	android:textColor="@color/primary_text_default_material_light"
     	android:background="@drawable/list_selector_neutral_light"
     	android:textAppearance="?android:attr/textAppearanceMedium"
     	android:paddingLeft="@dimen/myListPreferredItemPaddingStart"
@@ -37,7 +37,7 @@
     	android:gravity="center_vertical|start"
     	android:paddingLeft="@dimen/myListPreferredItemPaddingStart"
     	android:paddingRight="@dimen/myListPreferredItemPaddingStart"
-    	android:textColor="@android:color/black"
+    	android:textColor="@color/primary_text_default_material_light"
     	android:minHeight="@dimen/myListPreferredItemHeightSmall" />
 	
 <!-- </com.gc.materialdesign.views.LayoutRipple> -->
