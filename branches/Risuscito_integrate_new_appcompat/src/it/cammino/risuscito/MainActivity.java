@@ -519,9 +519,9 @@ public class MainActivity extends ActionBarActivity {
 		case NAVDRAWER_ITEM_FAVORITES:
         	fragment = (Fragment) new FavouritesActivity();
         	break;
-//		case NAVDRAWER_ITEM_SETTINGS:
-//        	fragment = (Fragment) new Settings();
-//        	break;
+		case NAVDRAWER_ITEM_SETTINGS:
+        	fragment = (Fragment) new PreferencesFragment();
+        	break;
 		case NAVDRAWER_ITEM_ABOUT:
         	fragment = (Fragment) new AboutActivity();
         	break;

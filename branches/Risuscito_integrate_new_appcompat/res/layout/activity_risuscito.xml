@@ -8,8 +8,7 @@
     android:paddingRight="@dimen/activity_min_margin"
     android:paddingBottom="@dimen/activity_min_margin"
     android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".Risuscito" >
+    android:gravity="center" >
     
         <ImageView
             android:id="@+id/imageView1"

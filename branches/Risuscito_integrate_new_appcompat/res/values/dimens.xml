@@ -26,5 +26,7 @@
     
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="keyline_1">16dp</dimen>
+    
+    <dimen name="preference_min_margin">15dip</dimen>
 	
 </resources>
