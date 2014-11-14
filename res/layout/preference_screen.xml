@@ -1,0 +1,65 @@
+<com.gc.materialdesign.views.ScrollView 
+   	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:paddingLeft="@dimen/preference_min_margin"
+	android:paddingRight="@dimen/preference_min_margin"
+	android:overScrollMode="never"
+	android:weightSum="1.0"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+    
+    <LinearLayout 
+    	android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+    
+	    <RelativeLayout 	    	android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal"
+			android:padding="10dp"
+			android:id="@+id/screen_on_layout"
+			android:clickable="true"
+			android:background="@drawable/list_selector_group">
+			
+	        <android.support.v7.widget.SwitchCompat
+				android:id="@+id/screen_on"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentEnd="true"
+				android:layout_centerVertical="true"
+				android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:layout_marginLeft="30dp"
+		    	android:layout_marginStart="30dp"
+		    	android:clickable="false" />
+	        
+	        <LinearLayout 
+	        	android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toLeftOf="@id/screen_on"
+				android:layout_toStartOf="@id/screen_on"
+				android:orientation="vertical">
+	            
+	            <TextView 
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	            	android:text="@string/always_on"
+	            	android:textColor="@color/primary_text_default_material_light"
+	            	android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+	            	
+	           	<TextView 
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	            	android:text="@string/always_on_summary"
+	            	android:textColor="@color/secondary_text_default_material_light"
+	            	android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+	        </LinearLayout>
+		
+		</RelativeLayout>
+		
+	    <include layout="@layout/preferences_separator" />
+		
+	</LinearLayout>
+    
+</com.gc.materialdesign.views.ScrollView>
