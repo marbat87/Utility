@@ -35,7 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.indris.material.RippleView;
+import com.gc.materialdesign.views.ButtonRectangle;
 
 public class InsertAvanzataFragment extends Fragment {
 
@@ -52,9 +52,8 @@ public class InsertAvanzataFragment extends Fragment {
 	private int fromAdd;
 	private int idLista;
 	private int listPosition;
-		
-	//constructor
-	public InsertAvanzataFragment() {}
+	
+	ButtonRectangle ricercaButton;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +67,10 @@ public class InsertAvanzataFragment extends Fragment {
 		lv = (ListView) rootView.findViewById(R.id.matchedList);
 		searchPar.setText("");
 //		rootView.findViewById(R.id.button_search).setEnabled(false);
-		rootView.findViewById(R.id.search_ripple).setEnabled(false);	
+//		rootView.findViewById(R.id.search_ripple).setEnabled(false);
+		ricercaButton = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
+		ricercaButton.setEnabled(false);
+			
 		
 		Bundle bundle = getArguments(); 
 		fromAdd = bundle.getInt("fromAdd");
@@ -99,11 +101,13 @@ public class InsertAvanzataFragment extends Fragment {
 				//abilita il pulsante solo se la stringa ha più di 3 caratteri, senza contare gli spazi
 				if (s.toString().trim().length() >= 3) {
 //					rootView.findViewById(R.id.button_search).setEnabled(true);
-					rootView.findViewById(R.id.search_ripple).setEnabled(true);
+//					rootView.findViewById(R.id.search_ripple).setEnabled(true);
+					ricercaButton.setEnabled(true);
 				}
 				else {
 //					rootView.findViewById(R.id.button_search).setEnabled(false);
-					rootView.findViewById(R.id.search_ripple).setEnabled(false);	
+//					rootView.findViewById(R.id.search_ripple).setEnabled(false);
+					ricercaButton.setEnabled(false);
 				}
 			}
 			
@@ -133,10 +137,10 @@ public class InsertAvanzataFragment extends Fragment {
 			
 	    });
 		
-		RippleView ricerca = (RippleView) rootView.findViewById(R.id.search_ripple);
+//	    ButtonRectangle ricerca = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
 //		ricerca.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 //		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
-		ricerca.setOnClickListener(new View.OnClickListener() {
+	    ricercaButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (mProgressDialog == null) {
@@ -153,7 +157,7 @@ public class InsertAvanzataFragment extends Fragment {
 			}
 		});
 		
-		RippleView pulisci = (RippleView) rootView.findViewById(R.id.pulisci_ripple);
+	    ButtonRectangle pulisci = (ButtonRectangle) rootView.findViewById(R.id.pulisci_ripple);
 //		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 //		Button pulisci = (Button) rootView.findViewById(R.id.button_pulisci);
 		pulisci.setOnClickListener(new View.OnClickListener() {
