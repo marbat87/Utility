@@ -34,10 +34,8 @@ public class FavouritesActivity extends Fragment {
 			Bundle savedInstanceState) {
 		
 		rootView = inflater.inflate(R.layout.activity_favourites, container, false);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_favourites);
 		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_favourites);
-
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		

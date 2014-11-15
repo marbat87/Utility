@@ -24,10 +24,8 @@ public class PreferencesFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.preference_screen, container, false);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_settings);
 		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_settings);
-
 		screenSwitch = (SwitchCompat) rootView.findViewById(R.id.screen_on);
 		
 		View screenSwitchView = rootView.findViewById(R.id.screen_on_layout);

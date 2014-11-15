@@ -1,9 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
         
     <style name="RisuscitoTheme" parent="Theme.MyTheme">
-<!--         <item name="android:fitsSystemWindows">true</item> -->
-<!--         <item name="android:clipToPadding">true</item> -->
-    	<item name="android:windowTranslucentStatus">true</item>
+<!--     	<item name="android:windowTranslucentStatus">true</item> -->
     </style>
     
     <style name="RisuscitoTheme.WithNavDrawer" parent="RisuscitoTheme" />
