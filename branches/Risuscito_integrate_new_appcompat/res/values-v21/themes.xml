@@ -2,7 +2,11 @@
         
     <style name="RisuscitoTheme" parent="Theme.MyTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    	<item name="android:statusBarColor">@android:color/transparent</item>
+    	<item name="android:statusBarColor">@color/theme_primary_dark</item>
+    </style>
+    
+    <style name="RisuscitoTheme.WithNavDrawer" parent="RisuscitoTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
     
 </resources>
