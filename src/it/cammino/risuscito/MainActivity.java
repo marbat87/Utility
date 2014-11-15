@@ -84,8 +84,6 @@ public class MainActivity extends ActionBarActivity {
         
     @Override
     public void onCreate(Bundle savedInstanceState) {
-//    	Utility.updateThemeWithSlider(MainActivity.this);
-//        FontLoader.setDefaultFont(FontLoader.ROBOTO_CONDENSED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -93,43 +91,9 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(mActionBarToolbar);
         
         // setta il colore della barra di stato, solo da KITAKT in su
-//        Utility.setupTransparentTints(MainActivity.this);
+        Utility.setupTransparentTints(MainActivity.this);
         
-//        mHandler = new Handler();
-        
-     // Now retrieve the DrawerLayout so that we can set the status bar color.
-        // This only takes effect on Lollipop, or when using translucentStatusBar
-        // on KitKat.
-        
-//        mPlanetTitles = getResources().getStringArray(R.array.pages_array);
-//        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        
-//        drawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
-//        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.IndigoDark));
-//        mDrawer = (GoogleNavigationDrawer) findViewById(R.id.navigation_drawer_container);
-        
-//        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-//                R.layout.drawer_list_item, mPlanetTitles));
-//        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        /*
-         * We get the drawerToggle object order to
-         * allow showing the NavigationDrawer icon
-         */
-//        drawerToggle = new ActionBarDrawerToggle(this,
-//                mDrawer,
-//                R.drawable.ic_fa_bars,
-//                R.string.app_name,
-//                R.string.app_name);
-        
-//        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.drawable.ic_fa_bars, R.drawable.ic_fa_bars);
-
-//        drawerLayout.setDrawerListener(drawerToggle); //Attach the DrawerListener
         setupNavDrawer();
-        
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setLogo(R.drawable.transparent);
         
         if (findViewById(R.id.content_frame) != null) {
 
@@ -143,17 +107,10 @@ public class MainActivity extends ActionBarActivity {
                 return;
             }
             
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//            transaction.replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
-            
-            goToNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new Risuscito(), String.valueOf(NAVDRAWER_ITEM_HOMEPAGE)).commit();
+//            goToNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
             setSelectedNavDrawerItem(NAVDRAWER_ITEM_HOMEPAGE);
         }
-        
-//        if (savedInstanceState == null) {
-//            selectItem(0);
-//        }
 
     }
     
@@ -170,42 +127,6 @@ public class MainActivity extends ActionBarActivity {
 		savedInstanceState.putCharSequence(TOOLBAR_TITLE, mActionBarToolbar.getTitle());
 		super.onSaveInstanceState(savedInstanceState);
 	}
-//    /* The click listner for ListView in the navigation drawer */
-//    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            selectItem(position);
-//        }
-//    }
-//    
-//    private void selectItem(int position) {
-//        // update the main content by replacing fragments
-//        Fragment fragment = null;
-//
-//        switch (position) {
-//		case 0:
-//			fragment = (Fragment) new Risuscito();
-//			break;
-//		case 1:
-//			fragment = (Fragment) new GeneralIndex();
-//			break;
-////		case 2:
-////			fragment = (Fragment) new GeneralSearch();
-////            break;
-//        default:
-//        	fragment = (Fragment) new Risuscito();
-//        	break;
-//    	}
-//        
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//        transaction.replace(R.id.content_frame, fragment).commit();
-//
-//        // update selected item and title, then close the drawer
-//        mDrawerList.setItemChecked(position, true);
-//        setTitle(mPlanetTitles[position]);
-//        drawerLayout.closeDrawer(mDrawerList);
-//    }
     
     /**
      * Returns the navigation drawer item that corresponds to this Activity. Subclasses
@@ -231,36 +152,7 @@ public class MainActivity extends ActionBarActivity {
         }
         mDrawerLayout.setStatusBarBackgroundColor(
                 getResources().getColor(R.color.theme_primary_dark));
-//        ScrimInsetsScrollView navDrawer = (ScrimInsetsScrollView)
-//                mDrawerLayout.findViewById(R.id.navdrawer);
-//        if (selfItem == NAVDRAWER_ITEM_INVALID) {
-//            // do not show a nav drawer
-//            if (navDrawer != null) {
-//                ((ViewGroup) navDrawer.getParent()).removeView(navDrawer);
-//            }
-//            mDrawerLayout = null;
-//            return;
-//        }
-//
-//        if (navDrawer != null) {
-//            final View chosenAccountContentView = findViewById(R.id.chosen_account_content_view);
-//            final View chosenAccountView = findViewById(R.id.chosen_account_view);
-//            final int navDrawerChosenAccountHeight = getResources().getDimensionPixelSize(
-//                    R.dimen.navdrawer_chosen_account_height);
-//            navDrawer.setOnInsetsCallback(new ScrimInsetsScrollView.OnInsetsCallback() {
-//                @Override
-//                public void onInsetsChanged(Rect insets) {
-//                    ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams)
-//                            chosenAccountContentView.getLayoutParams();
-//                    lp.topMargin = insets.top;
-//                    chosenAccountContentView.setLayoutParams(lp);
-//
-//                    ViewGroup.LayoutParams lp2 = chosenAccountView.getLayoutParams();
-//                    lp2.height = navDrawerChosenAccountHeight + insets.top;
-//                    chosenAccountView.setLayoutParams(lp2);
-//                }
-//            });
-//        }
+
 
         if (mActionBarToolbar != null) {
             mActionBarToolbar.setNavigationIcon(R.drawable.ic_drawer);
@@ -272,49 +164,12 @@ public class MainActivity extends ActionBarActivity {
             });
         }
 
-//        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                // run deferred action, if we have one
-//                if (mDeferredOnDrawerClosedRunnable != null) {
-//                    mDeferredOnDrawerClosedRunnable.run();
-//                    mDeferredOnDrawerClosedRunnable = null;
-//                }
-//                if (mAccountBoxExpanded) {
-//                    mAccountBoxExpanded = false;
-//                    setupAccountBoxToggle();
-//                }
-//                onNavDrawerStateChanged(false, false);
-//            }
-//
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                onNavDrawerStateChanged(true, false);
-//            }
-//
-//            @Override
-//            public void onDrawerStateChanged(int newState) {
-//                onNavDrawerStateChanged(isNavDrawerOpen(), newState != DrawerLayout.STATE_IDLE);
-//            }
-//
-//            @Override
-//            public void onDrawerSlide(View drawerView, float slideOffset) {
-//                onNavDrawerSlide(slideOffset);
-//            }
-//        });
-
-//        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 
         // populate the nav drawer with the correct items
         populateNavDrawer();
 
-//        // When the user runs the app for the first time, we want to land them with the
-//        // navigation drawer open. But just the first time.
-//        if (!PrefUtils.isWelcomeDone(this)) {
-//            // first run of the app starts with the nav drawer open
-//            PrefUtils.markWelcomeDone(this);
-//            mDrawerLayout.openDrawer(Gravity.START);
-//        }
+
     }
     
     /** Populates the navigation drawer with the appropriate items. */
@@ -322,18 +177,6 @@ public class MainActivity extends ActionBarActivity {
 //        boolean attendeeAtVenue = PrefUtils.isAttendeeAtVenue(this);
         mNavDrawerItems.clear();
 
-//        // decide which items will appear in the nav drawer
-//        if (AccountUtils.hasActiveAccount(this)) {
-//            // Only logged-in users can save sessions, so if there is no active account,
-//            // there is no My Schedule
-//            mNavDrawerItems.add(NAVDRAWER_ITEM_MY_SCHEDULE);
-//        } else {
-//            // If no active account, show Sign In
-//            mNavDrawerItems.add(NAVDRAWER_ITEM_SIGN_IN);
-//        }
-
-        // Explore is always shown
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_COVER);
         mNavDrawerItems.add(NAVDRAWER_ITEM_HOMEPAGE);
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEARCH);
         mNavDrawerItems.add(NAVDRAWER_ITEM_INDEXES);
@@ -343,30 +186,6 @@ public class MainActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_SETTINGS);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ABOUT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_DONATE);
-        
-        
-//        // If the attendee is on-site, show Map on the nav drawer
-//        if (attendeeAtVenue) {
-//            mNavDrawerItems.add(NAVDRAWER_ITEM_MAP);
-//        }
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR);
-//
-//        // If attendee is on-site, show the People I've Met item
-//        if (attendeeAtVenue) {
-//            mNavDrawerItems.add(NAVDRAWER_ITEM_PEOPLE_IVE_MET);
-//        }
-//
-//        // If the experts directory hasn't expired, show it
-//        if (!Config.hasExpertsDirectoryExpired()) {
-//            mNavDrawerItems.add(NAVDRAWER_ITEM_EXPERTS_DIRECTORY);
-//        }
-//
-//        // Other items that are always in the nav drawer irrespective of whether the
-//        // attendee is on-site or remote:
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_SOCIAL);
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_VIDEO_LIBRARY);
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR_SPECIAL);
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_SETTINGS);
         
         createNavDrawerItems();
     }
@@ -458,43 +277,9 @@ public class MainActivity extends ActionBarActivity {
             mDrawerLayout.closeDrawer(Gravity.START);
             return;
         }
-
-//        mHandler.postDelayed(new Runnable() {
-//          @Override
-//          public void run() {
-//              goToNavDrawerItem(itemId);
-//          }
-//      }, NAVDRAWER_LAUNCH_DELAY);
-
         	
         goToNavDrawerItem(itemId);
         setSelectedNavDrawerItem(itemId);
-      // fade out the main content
-//      View mainContent = findViewById(R.id.content_frame);
-//      if (mainContent != null) {
-//          mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
-//      }
-        
-//        if (isSpecialItem(itemId)) {
-//            goToNavDrawerItem(itemId);
-//        }
-//      else {
-//            // launch the target Activity after a short delay, to allow the close animation to play
-//            mHandler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    goToNavDrawerItem(itemId);
-//                }
-//            }, NAVDRAWER_LAUNCH_DELAY);
-//
-//            // change the active item on the list so the user can see the item changed
-//            setSelectedNavDrawerItem(itemId);
-//            // fade out the main content
-//            View mainContent = findViewById(R.id.main_content);
-//            if (mainContent != null) {
-//                mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
-//            }
-//        }
 
         mDrawerLayout.closeDrawer(Gravity.START);
     }
@@ -558,71 +343,6 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//        // Sync the toggle state after onRestoreInstanceState has occurred.
-////        drawerToggle.syncState();
-//    }
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//        mDrawer.setOnNavigationSectionSelected(new GoogleNavigationDrawer.OnNavigationSectionSelected() {
-//            @Override
-//            public void onSectionSelected(View v, int i, long l) {
-//                
-//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//
-//            	switch (i) {
-//				case 1:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//					transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
-//					break;
-//				case 2:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	                transaction.replace(R.id.content_layout, new GeneralSearch());
-//					break;
-//				case 3:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	                transaction.replace(R.id.content_layout, new GeneralIndex());
-//	                break;
-//				case 4:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	                transaction.replace(R.id.content_layout, new CustomLists());
-//	                break;
-//				case 5:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	                transaction.replace(R.id.content_layout, new FavouritesActivity());
-//	                break;
-//				case 6:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//					transaction.replace(R.id.content_layout, new FavouritesActivity());
-////	                transaction.replace(R.id.content_layout, new Settings());
-//	                break;
-//				case 7:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	                transaction.replace(R.id.content_layout, new AboutActivity());
-//	                break;
-//				case 8:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	                transaction.replace(R.id.content_layout, new DonateActivity());
-//	                break;
-//	            default:
-//					transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//	            	transaction.replace(R.id.content_layout, new Risuscito(), TAG_MAIN_FRAGMENT);
-//            	}
-//
-//                // Replace whatever is in the fragment_container view with this fragment,
-//                // and add the transaction to the back stack so the user can navigate back
-////                transaction.addToBackStack(null);
-//
-//                // Commit the transaction
-//                transaction.commit();
-//            }
-//        });
-//        drawerToggle.syncState();
-//    }
-    
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -649,7 +369,7 @@ public class MainActivity extends ActionBarActivity {
 		if (screenOn)
 			findViewById(R.id.content_frame).setKeepScreenOn(true);
 		else
-			findViewById(R.id.content_frame).setKeepScreenOn(true);
+			findViewById(R.id.content_frame).setKeepScreenOn(false);
     }
     
 }
