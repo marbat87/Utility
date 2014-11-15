@@ -26,9 +26,7 @@ public class GeneralSearch extends Fragment {
 		
 //		getSupportActionBar().setTitle(R.string.title_activity_search);
 		View rootView = inflater.inflate(R.layout.activity_general_search, container, false);
-		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_search);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_search);
 		
 		// Create the adapter that will return a fragment for each of the three
 //		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());

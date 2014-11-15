@@ -50,8 +50,9 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 		
 		rootView = inflater.inflate(R.layout.activity_risuscito, container, false);
 		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.activity_homepage);
+//		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
+//		toolbar.setTitle(R.string.activity_homepage);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.activity_homepage);
 		
 		rootView.findViewById(R.id.imageView1)
 		.setOnClickListener(new OnClickListener() {			

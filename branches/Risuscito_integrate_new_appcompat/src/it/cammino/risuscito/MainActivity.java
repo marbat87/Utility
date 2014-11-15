@@ -91,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(mActionBarToolbar);
         
         // setta il colore della barra di stato, solo da KITAKT in su
-        Utility.setupTransparentTints(MainActivity.this);
+//        Utility.setupTransparentTints(MainActivity.this);
         
         setupNavDrawer();
         
@@ -102,8 +102,6 @@ public class MainActivity extends ActionBarActivity {
             // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
             	setSelectedNavDrawerItem(savedInstanceState.getInt(SELECTED_ITEM));
-            	Log.i(this.getClass().toString(), "RIPRISTINATO:" + savedInstanceState.getCharSequence(TOOLBAR_TITLE).toString());
-//            	mActionBarToolbar.setTitle(savedInstanceState.getCharSequence(TOOLBAR_TITLE));
                 return;
             }
             
@@ -123,8 +121,6 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {		
 		savedInstanceState.putInt(SELECTED_ITEM, selectedItem);
-		Log.i(this.getClass().toString(), "SALVO:" + mActionBarToolbar.getTitle().toString());
-		savedInstanceState.putCharSequence(TOOLBAR_TITLE, mActionBarToolbar.getTitle());
 		super.onSaveInstanceState(savedInstanceState);
 	}
     

@@ -28,9 +28,7 @@ public class GeneralIndex extends Fragment {
 				
 //		getSupportActionBar().setTitle(R.string.title_activity_general_index);
 		View rootView = inflater.inflate(R.layout.activity_general_index, container, false);
-		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_general_index);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_general_index);
 		
 		// Create the adapter that will return a fragment for each of the three
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());

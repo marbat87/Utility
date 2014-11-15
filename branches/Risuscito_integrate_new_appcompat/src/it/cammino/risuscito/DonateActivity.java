@@ -26,9 +26,7 @@ public class DonateActivity extends Fragment {
 			Bundle savedInstanceState) {
 		
 		View rootView = inflater.inflate(R.layout.activity_donate, container, false);
-		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_donate);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_donate);
 		
 		WebView donateView = (WebView) rootView.findViewById(R.id.donate_text);
 		donateView.setBackgroundColor(0);

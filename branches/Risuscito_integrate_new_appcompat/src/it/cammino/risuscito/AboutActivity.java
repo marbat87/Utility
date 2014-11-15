@@ -14,10 +14,8 @@ public class AboutActivity extends Fragment {
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.activity_about, container, false);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_about);
 		
-		Toolbar toolbar = ((Toolbar) getActivity().findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_about);
-
 		return rootView;
 	}
 	    
