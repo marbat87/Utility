@@ -5,14 +5,16 @@
 <!--     <item name="actionBarStyle">@style/MyActionBarStyle</item> -->
 
     <!-- Set AppCompat’s color theming attrs -->
-    <item name="colorPrimary">@color/theme_primary</item>
-    <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+    	<item name="colorPrimary">@color/theme_primary</item>
+    	<item name="colorPrimaryDark">@color/theme_primary_dark</item>
     
     <!-- colorAccent is used as the default value for colorControlActivated,
     	which is used to tint widgets -->
-    <item name="colorAccent">@color/theme_accent</item>
-    <item name="customHelp">@drawable/ic_action_help</item>
+    	<item name="colorAccent">@color/theme_accent</item>
+    
     <!-- The rest of your attributes -->
+    	<item name="customHelp">@drawable/ic_action_help</item>
+    	<item name="customInsertItem">@drawable/ic_fa_plus_circle_dark</item>
 	</style>
 	
     <style name="RisuscitoTheme" parent="Theme.MyTheme" />

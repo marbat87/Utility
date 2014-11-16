@@ -1,33 +1,35 @@
 package it.cammino.risuscito;
 
-import android.app.Activity;
+import java.util.Locale;
+
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
-import com.astuetz.PagerSlidingTabStrip;
-
 public class GeneralInsertSearch extends ActionBarActivity {
 
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private ViewPager mViewPager;
+	SlidingTabLayout mSlidingTabLayout = null;
 	
 	private int fromAdd;
 	private int idLista;
 	private int listPosition;
 	
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	ViewPager mViewPager;
+//	/**
+//	 * The {@link ViewPager} that will host the section contents.
+//	 */
+//	ViewPager mViewPager;
   	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,71 +43,42 @@ public class GeneralInsertSearch extends ActionBarActivity {
 		setContentView(R.layout.activity_insert_search);
 		
 		Toolbar toolbar = ((Toolbar) findViewById(R.id.risuscito_toolbar));
-		toolbar.setTitle(R.string.title_activity_general_index);
+//		toolbar.setTitle(R.string.title_activity_general_index);
 		setSupportActionBar(toolbar);
+		getSupportActionBar().setTitle(R.string.title_activity_general_index);
 		
         // setta il colore della barra di stato, solo da KITAKT in su
-        Utility.setupTransparentTints(GeneralInsertSearch.this);
+//        Utility.setupTransparentTints(GeneralInsertSearch.this);
 		
 		Bundle bundle = GeneralInsertSearch.this.getIntent().getExtras();
 		fromAdd = bundle.getInt("fromAdd");
         idLista = bundle.getInt("idLista");
         listPosition = bundle.getInt("position");
 		
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-	    mViewPager.setAdapter(mSectionsPagerAdapter);
-	    mViewPager.setCurrentItem(0);
-	    
-	    PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-	    tabs.setViewPager(mViewPager);
-		
-//		final ActionBar actionBar = getSupportActionBar();
-//		actionBar.setDisplayHomeAsUpEnabled(true);
-	    
-//	    mViewPager = (ViewPager) findViewById(R.id.pager);
+//		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+//		mViewPager = (ViewPager) findViewById(R.id.pager);
 //	    mViewPager.setAdapter(mSectionsPagerAdapter);
-//	    mViewPager.setOnPageChangeListener(
-//	    		new ViewPager.SimpleOnPageChangeListener() {
-//	    			@Override
-//	                public void onPageSelected(int position) {
-//	                    // When swiping between pages, select the
-//	                    // corresponding tab.
-//	    				actionBar.setSelectedNavigationItem(position);
-//	    			}
-//	    		}
-//	    );
+//	    mViewPager.setCurrentItem(0);
 //	    
-//	    // Create a tab listener that is called when the user changes tabs.
-//	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-//	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-//	        	// When the tab is selected, switch to the
-//	            // corresponding page in the ViewPager.
-//	            mViewPager.setCurrentItem(tab.getPosition());
-//	        }
-//
-//	        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-//	            // hide the given tab
-//	        }
-//
-//	        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-//	            // probably ignore this event
-//	        }
-//	    };
-//	    
-//        // For each of the sections in the app, add a tab to the action bar.
-//        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-//            // Create a tab with text corresponding to the page title defined by the adapter.
-//            // Also specify this Activity object, which implements the TabListener interface, as the
-//            // listener for when this tab is selected.
-//            actionBar.addTab(
-//                    actionBar.newTab()
-//                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-//                            .setTabListener(tabListener));
-//        }
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-//		mViewPager.setCurrentItem(0);
+//	    PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+//	    tabs.setViewPager(mViewPager);
+//		
+////				mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+//	    mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+//        mViewPager.setAdapter(mSectionsPagerAdapter);
+        
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+	    mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        
+        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+        
+        Resources res = getResources();
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.theme_accent));
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setViewPager(mViewPager);
+        
 		checkScreenAwake();
 
 	}
@@ -189,14 +162,18 @@ public class GeneralInsertSearch extends ActionBarActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-//			Locale l = Locale.getDefault();
+			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-//				return getString(R.string.fast_search_title).toUpperCase(l);
-				return getString(R.string.fast_search_title);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.fast_search_title).toUpperCase(l);
+				else
+					return getString(R.string.fast_search_title);
 			case 1:
-//				return getString(R.string.advanced_search_title).toUpperCase(l);
-				return getString(R.string.advanced_search_title);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.advanced_search_title).toUpperCase(l);
+				else
+					return getString(R.string.advanced_search_title);
 			}
 			return null;
 		}

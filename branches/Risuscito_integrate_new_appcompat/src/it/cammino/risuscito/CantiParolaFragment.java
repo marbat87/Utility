@@ -26,10 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.melnykov.fab.FloatingActionButton;
 
 public class CantiParolaFragment extends Fragment 
 			implements GenericDialogListener {
@@ -304,9 +301,10 @@ public class CantiParolaFragment extends Fragment
 			}
 		});
 		
-		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.parolaScrollView);
-		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
-		floatingActionButton.attachToScrollView(scrollView);
+//		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.parolaScrollView);
+//		ButtonFloat floatingActionButton = (ButtonFloat) rootView.findViewById(R.id.button_floating_action);
+//		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
+//		floatingActionButton.attachToScrollView(scrollView);
 		
 		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {
 			
@@ -340,16 +338,16 @@ public class CantiParolaFragment extends Fragment
 		return rootView;
 	}
 	
-//    @Override
-//    public void onResume() {
+    @Override
+    public void onResume() {
 //    	Log.i("CANTI PAROLA", "ON RESUME");
-//    	super.onResume();
-//		updateLista();
+    	super.onResume();
+		updateLista();
 //		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
 //		if (mShareActionProvider != null && tempPager.getCurrentItem() == 0)
 //			//aggiorna lo share intent usato per condividere la lista
 //			mShareActionProvider.setShareIntent(getDefaultIntent());
-//    }
+    }
 	
     @Override
 	public void onDestroy() {

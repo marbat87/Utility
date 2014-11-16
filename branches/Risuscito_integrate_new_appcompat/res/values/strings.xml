@@ -210,5 +210,6 @@
     <string name="title_activity_donate_capital">RINGRAZIA</string>
     <string name="no_elements_added">Non hai ancora aggiunto nessun elemento.</string>
     <string name="snackbar_remove">RIMUOVI</string>
+    <string name="single_choice_ok">CONFERMA</string>
     
 </resources>

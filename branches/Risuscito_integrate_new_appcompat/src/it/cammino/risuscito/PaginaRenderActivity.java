@@ -2154,6 +2154,7 @@ public class PaginaRenderActivity extends ActionBarActivity
                 HttpURLConnection connection = null;
                 try {
                     URL url = new URL(sUrl[0]);
+                    Log.i(PaginaRenderActivity.this.getClass().toString(), "URL[0]:" + sUrl[0]);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.connect();
 
@@ -2170,6 +2171,7 @@ public class PaginaRenderActivity extends ActionBarActivity
                     // download the file
                     input = connection.getInputStream();
                     output = new FileOutputStream(sUrl[1]);
+                    Log.i(PaginaRenderActivity.this.getClass().toString(), "URL[1]:" + sUrl[1]);
 
                     byte data[] = new byte[4096];
                     long total = 0;
