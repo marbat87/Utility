@@ -54,6 +54,7 @@
     <color name="theme_accent">@color/indigo_accent</color>
     <color name="theme_primary_dark">@color/IndigoDark</color>
     <color name="item_disabled">#808080</color>
+    <color name="snackbar_black">#323232</color>
 <!--     <color name="theme_primary_dark">#303f9f</color> -->
 <!--     <color name="theme_primary_light">#7986cb</color> -->
  

@@ -10,8 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -21,7 +23,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,8 +31,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.astuetz.PagerSlidingTabStrip;
 
 public class CustomLists extends Fragment
 						implements GenericDialogListener, TextDialogListener {
@@ -42,8 +41,9 @@ public class CustomLists extends Fragment
 	private DatabaseCanti listaCanti;
 	private int listaDaCanc;
 	private int prevOrientation;
-	private PagerSlidingTabStrip tabs;
+//	private PagerSlidingTabStrip tabs;
 	private ViewPager mViewPager;
+	SlidingTabLayout mSlidingTabLayout = null;
   	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,14 +60,23 @@ public class CustomLists extends Fragment
 		
 		// Create the adapter that will return a fragment for each of the three
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
+		mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+//	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 	    mViewPager.setAdapter(mSectionsPagerAdapter);
-	    mViewPager.setCurrentItem(0);
+//	    mViewPager.setCurrentItem(0);
 	    
-	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
-	    tabs.setViewPager(mViewPager);
-	   	    
-	    setHasOptionsMenu(true);
+//	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
+//	    tabs.setViewPager(mViewPager);
+	   	
+        mSlidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+	    
+        Resources res = getResources();
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.theme_accent));
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setViewPager(mViewPager);
+        
+//	    setHasOptionsMenu(true);
 	    
         return rootView;
 	}
@@ -76,8 +85,8 @@ public class CustomLists extends Fragment
     public void onResume() {
     	super.onResume();
     	updateLista();
-    	mSectionsPagerAdapter.notifyDataSetChanged();
-    	tabs.notifyDataSetChanged();
+//    	mSectionsPagerAdapter.notifyDataSetChanged();
+//    	tabs.notifyDataSetChanged();
 //    	checkScreenAwake();
     }
     
@@ -87,16 +96,6 @@ public class CustomLists extends Fragment
 			listaCanti.close();
 		super.onDestroy();
 	}
-    
-//    //controlla se l'app deve mantenere lo schermo acceso
-//    public void checkScreenAwake() {
-//    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		boolean screenOn = pref.getBoolean("screenOn", false);
-//		if (screenOn)
-//			mViewPager.setKeepScreenOn(true);
-//		else
-//			mViewPager.setKeepScreenOn(false);
-//    }
     
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
@@ -165,18 +164,6 @@ public class CustomLists extends Fragment
 			dialogR.show(getChildFragmentManager(), null);
 			dialogR.setCancelable(false);
 			return true;
-//		case R.id.action_settings:
-//			startActivity(new Intent(getActivity(), Settings.class));
-//			return true;
-//		case R.id.action_favourites:
-//			startActivity(new Intent(getActivity(), FavouritesActivity.class));
-//			return true;
-//		case R.id.action_donate:
-//			startActivity(new Intent(getActivity(), DonateActivity.class));
-//			return true;
-//		case R.id.action_about:
-//			startActivity(new Intent(getActivity(), AboutActivity.class));
-//			return true;
 		}
 		return false;
 	}
@@ -333,6 +320,7 @@ public class CustomLists extends Fragment
             case 1:
                 return new CantiEucarestiaFragment();
             default:
+//            	return new CantiParolaFragment();
             	Bundle bundle=new Bundle();
 //            	Log.i("INVIO", "position = " + position);
 //            	Log.i("INVIO", "idLista = " + idListe[position - 2]);
@@ -347,22 +335,29 @@ public class CustomLists extends Fragment
 
 		@Override
 		public int getCount() {
+//			return 2;
 			return 2 + titoliListe.length;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-//			Locale l = Locale.getDefault();
+			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-//				return getString(R.string.title_activity_canti_parola).toUpperCase(l);
-				return getString(R.string.title_activity_canti_parola);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.title_activity_canti_parola).toUpperCase(l);
+				else
+					return getString(R.string.title_activity_canti_parola);
 			case 1:
-//				return getString(R.string.title_activity_canti_eucarestia).toUpperCase(l);
-				return getString(R.string.title_activity_canti_eucarestia);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return getString(R.string.title_activity_canti_eucarestia).toUpperCase(l);
+				else
+					return getString(R.string.title_activity_canti_eucarestia);
 			default:
-//				return titoliListe[position - 2].toUpperCase(l);
-				return titoliListe[position - 2];
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+					return titoliListe[position - 2].toUpperCase(l);
+				else
+					return titoliListe[position - 2];
 			}
 		}
 		
@@ -409,7 +404,7 @@ public class CustomLists extends Fragment
 		
 		updateLista();
 		mSectionsPagerAdapter.notifyDataSetChanged();
-		tabs.notifyDataSetChanged();
+//		tabs.notifyDataSetChanged();
 		getActivity().setRequestedOrientation(prevOrientation);
     }
     

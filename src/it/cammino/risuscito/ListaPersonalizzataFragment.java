@@ -121,7 +121,7 @@ public class ListaPersonalizzataFragment extends Fragment
 			deserializeObject(cursor.getBlob(0));
 		
 		updateLista();
-		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
+		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
 		if (mShareActionProvider != null && tempPager.getCurrentItem() == fragmentIndex)
 			//aggiorna lo share intent usato per condividere la lista
 			mShareActionProvider.setShareIntent(getDefaultIntent());

@@ -12,7 +12,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
 //	private static final int DB_VERSION = 24;
-	private static final int DB_VERSION = 27;
+	private static final int DB_VERSION = 28;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -854,19 +854,19 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
-//		sql = "INSERT INTO ELENCO ";
-//		sql += "VALUES (114, 93, 'Benedici anima mia il Signore (Cantico di Tobia) (Tb 13)', 'benedici_anima_mia', 0, '"
-//				+ BIANCO
-//				+ "', 'http://www.resuscicanti.com/BENEDICI%20ANIMA%20MIA%20IL%20SIGNOREGerusalemme%20ricostruita2.mp3', "
-//				+ "0, 0, 0, NULL, NULL)";
-//		db.execSQL(sql);
-		
 		sql = "INSERT INTO ELENCO ";
 		sql += "VALUES (114, 93, 'Benedici anima mia il Signore (Cantico di Tobia) (Tb 13)', 'benedici_anima_mia', 0, '"
 				+ BIANCO
-				+ "', 'http://www.camino-neocatecumenal.org/neo/CARISMAS/cantores/cantos%20mp3/mp3/ITALIANO/Benedici_anima_mia_il_Signore.mp3', "
+				+ "', 'http://www.resuscicanti.com/BENEDICI%20ANIMA%20MIA%20IL%20SIGNOREGerusalemme%20ricostruita2.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
+		
+//		sql = "INSERT INTO ELENCO ";
+//		sql += "VALUES (114, 93, 'Benedici anima mia il Signore (Cantico di Tobia) (Tb 13)', 'benedici_anima_mia', 0, '"
+//				+ BIANCO
+//				+ "', 'http://www.camino-neocatecumenal.org/neo/CARISMAS/cantores/cantos%20mp3/mp3/ITALIANO/Benedici_anima_mia_il_Signore.mp3', "
+//				+ "0, 0, 0, NULL, NULL, 2)";
+//		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
 		sql += "VALUES (115, 94, 'Quanto sono amabili le tue dimore - Salmo 83(84)', 'quanto_sono_amabili_dimore', 0, '"

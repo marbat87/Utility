@@ -30,10 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.melnykov.fab.FloatingActionButton;
 
 public class CantiEucarestiaFragment extends Fragment implements GenericDialogListener {
 	/**
@@ -62,9 +59,9 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.eucarestiaScrollView);
-		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
-		floatingActionButton.attachToScrollView(scrollView);
+//		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.eucarestiaScrollView);
+//		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
+//		floatingActionButton.attachToScrollView(scrollView);
 		
 		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {		
 			@Override
@@ -94,20 +91,20 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 			
 		updateLista();
 		
-		setHasOptionsMenu(true);
+//		setHasOptionsMenu(true);
 		
 		return rootView;
 	}
 		   
-//    @Override
-//    public void onResume() {
-//    	super.onResume();
-//		updateLista();
+    @Override
+    public void onResume() {
+    	super.onResume();
+		updateLista();
 //		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
 //		if (mShareActionProvider != null && tempPager.getCurrentItem() == 1)
 //			//aggiorna lo share intent usato per condividere la lista
 //			mShareActionProvider.setShareIntent(getDefaultIntent());
-//    }
+    }
     
 	@Override
 	public void onDestroy() {
