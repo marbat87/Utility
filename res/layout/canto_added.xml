@@ -16,7 +16,7 @@
 	    android:paddingRight="@dimen/default_padding_selectable"
 	    android:gravity="center_vertical"
 	    android:minHeight="@dimen/list_preferred_item_height_small"
-	    android:background="?attr/selectableItemBackground"
+	    android:background="@drawable/list_selector_neutral_light"
 	    android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 </LinearLayout>
