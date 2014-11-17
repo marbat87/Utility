@@ -148,6 +148,7 @@ public class FavouritesActivity extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 		        cantoDaCanc = ((TextView) view.findViewById(R.id.text_title)).getText().toString();
 				cantoDaCanc = Utility.duplicaApostrofi(cantoDaCanc);
+				SnackBar snackbar = 
 				new SnackBar(getActivity(),
 						getString(R.string.favorite_remove),
 						getString(R.string.snackbar_remove),
@@ -163,7 +164,9 @@ public class FavouritesActivity extends Fragment {
 								db.close();
 								updateFavouritesList();
 							}
-						}).show();
+						});
+				snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+				snackbar.show();
 				return true;
 			}
 		});	

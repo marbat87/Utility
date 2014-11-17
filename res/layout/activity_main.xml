@@ -19,7 +19,6 @@
 		    risuscito:popupTheme="@style/ActionBarPopupThemeOverlay"
 		    risuscito:titleTextAppearance="@style/ActionBar.TitleText"
 		    android:layout_width="match_parent"
-		    risuscito:contentInsetStart="80dip"
 		    android:background="?attr/colorPrimary" />
         
 	    <FrameLayout

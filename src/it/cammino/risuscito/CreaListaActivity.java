@@ -39,7 +39,6 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
-import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
 @SuppressLint("NewApi") @SuppressWarnings("deprecation")
@@ -66,7 +65,7 @@ public class CreaListaActivity extends ActionBarActivity
 	private ArrayList<String> nomiCanti;
 	private int positionLI;
 	private Bundle tempArgs;
-	private FloatingActionButton floatingActionButton;
+//	private FloatingActionButton floatingActionButton;
 	
 //	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
 	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista_v2";
@@ -78,16 +77,11 @@ public class CreaListaActivity extends ActionBarActivity
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-//		Utility.updateTheme(CreaListaActivity.this);
 		super.onCreate(savedInstanceState);
-		
-//		ActionBar actionbar = getSupportActionBar();
-//		actionbar.setDisplayHomeAsUpEnabled(true);
-//		actionbar.setLogo(R.drawable.transparent);
-		
 		setContentView(R.layout.activity_crea_lista);
 		
 		Toolbar toolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);
+		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         setSupportActionBar(toolbar);
 	
         // setta il colore della barra di stato, solo da KITAKT in su
@@ -217,12 +211,13 @@ public class CreaListaActivity extends ActionBarActivity
 //			}
 //		});
 		
-		floatingActionButton = (FloatingActionButton) findViewById(R.id.button_floating_action);
-		floatingActionButton.attachToListView(lv);
+//		floatingActionButton = (FloatingActionButton) findViewById(R.id.button_floating_action);
+//		floatingActionButton.attachToListView(lv);
 		
 //		View addPosizione = (View) findViewById(R.id.addPosizione);
 //		addPosizione.setOnClickListener(new View.OnClickListener() {
-		floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//		floatingActionButton.setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.button_floating_action).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
@@ -627,7 +622,7 @@ public class CreaListaActivity extends ActionBarActivity
 		co.buttonLayoutParams = lps;
 		
 		//benvenuto del tutorial
-		floatingActionButton.show();
+//		floatingActionButton.show();
    		ShowcaseView showcaseView = ShowcaseView.insertShowcaseView(
 //        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
         		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
