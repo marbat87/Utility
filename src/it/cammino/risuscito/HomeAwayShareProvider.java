@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.View;
@@ -31,14 +30,14 @@ public class HomeAwayShareProvider extends ShareActionProvider {
         View chooserView =
                 super.onCreateActionView();
  
-        int[] attrs = new int[] { R.attr.customShare /* index 0 */};
-        TypedArray ta = mContext.obtainStyledAttributes(attrs);
+//        int[] attrs = new int[] { R.attr.customShare /* index 0 */};
+//        TypedArray ta = mContext.obtainStyledAttributes(attrs);
         // Set your drawable here
         Drawable icon = 
-//                mContext.getResources().getDrawable(R.drawable.ic_share);
+                mContext.getResources().getDrawable(R.drawable.ic_action_share);
         		
-        		ta.getDrawable(0 /* index */);       
-        ta.recycle();
+//        		ta.getDrawable(0 /* index */);       
+//        ta.recycle();
         
         Class clazz = chooserView.getClass();
  

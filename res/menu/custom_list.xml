@@ -11,15 +11,15 @@
     <item
         android:id="@+id/action_share"
         android:orderInCategory="97"
-        android:icon="?attr/customShare"
+        android:icon="@drawable/ic_action_share"
         risuscito:showAsAction="ifRoom"
         android:title="@string/action_share"
-        android:actionProviderClass="it.cammino.risuscito.HomeAwayShareProvider" />
+        risuscito:actionProviderClass="it.cammino.risuscito.HomeAwayShareProvider" />
     
 	<item
         android:id="@+id/action_add_list"
         android:orderInCategory="98"
-        android:icon="?attr/customNew"
+        android:icon="@drawable/ic_action_content_new"
         risuscito:showAsAction="ifRoom"
         android:title="@string/action_add_list" />
     
