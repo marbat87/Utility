@@ -211,5 +211,7 @@
     <string name="no_elements_added">Non hai ancora aggiunto nessun elemento.</string>
     <string name="snackbar_remove">RIMUOVI</string>
     <string name="single_choice_ok">CONFERMA</string>
+    <string name="dialog_replace_title">Sostituisci canto</string>
+    <string name="dialog_reset_list_title">Resetta lista</string>
     
 </resources>

@@ -170,13 +170,7 @@ public class PaginaRenderActivity extends ActionBarActivity
 	@SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-//		Utility.updateTheme(PaginaRenderActivity.this);
         super.onCreate(savedInstanceState);
-        
-//		ActionBar actionbar = getSupportActionBar();
-//		actionbar.setDisplayHomeAsUpEnabled(true);
-//		actionbar.setLogo(R.drawable.transparent);
-        
         setContentView(R.layout.activity_pagina_render);
         
         Toolbar toolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);

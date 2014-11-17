@@ -1,7 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
 import java.util.Locale;
 
 import android.app.Dialog;
@@ -16,9 +14,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,7 +30,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CantiEucarestiaFragment extends Fragment implements GenericDialogListener {
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.widgets.SnackBar;
+
+public class CantiEucarestiaFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -47,8 +48,8 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	private String[] titoliCanti;
 	private int prevOrientation;
 	
-	private final String RIMUOVI_CANTO_TAG = "1";
-	private final String RESETTA_LISTA_TAG = "2";
+//	private final String RIMUOVI_CANTO_TAG = "1";
+//	private final String RESETTA_LISTA_TAG = "2";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,51 +60,91 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-//		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.eucarestiaScrollView);
-//		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
-//		floatingActionButton.attachToScrollView(scrollView);
-		
 		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {		
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
-				GenericDialogFragment dialog = new GenericDialogFragment();
-				dialog.setCustomMessage(getString(R.string.reset_list_question));
-				dialog.setListener(CantiEucarestiaFragment.this);
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				GenericDialogFragment dialog = new GenericDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.reset_list_question));
+//				dialog.setListener(CantiEucarestiaFragment.this);
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							getActivity().setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//                dialog.show(getChildFragmentManager(), RESETTA_LISTA_TAG);
+//                dialog.setCancelable(false);
+                MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_reset_list_title)
+                .content(R.string.reset_list_question)
+                .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+                .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+                .callback(new MaterialDialog.FullCallback() {
+                	@Override
+                	public void onPositive(MaterialDialog dialog) {
+                		db = listaCanti.getReadableDatabase();
+                		String sql = "DELETE FROM CUST_LISTS" +
+                				" WHERE _id =  2 ";
+                		db.execSQL(sql);
+                		db.close();
+                		updateLista();
+                		mShareActionProvider.setShareIntent(getDefaultIntent());
+                		getActivity().setRequestedOrientation(prevOrientation);
+                	}
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							getActivity().setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+                	@Override
+                	public void onNeutral(MaterialDialog dialog) {}
+
+                	@Override
+                	public void onNegative(MaterialDialog dialog) {
+                		getActivity().setRequestedOrientation(prevOrientation);
+                	}
+                })
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		getActivity().setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-                dialog.show(getChildFragmentManager(), RESETTA_LISTA_TAG);
+                dialog.show();
                 dialog.setCancelable(false);
 			}
 		});
 			
 		updateLista();
 		
-//		setHasOptionsMenu(true);
+		setHasOptionsMenu(true);
 		
 		return rootView;
 	}
 		   
     @Override
     public void onResume() {
+//    	Log.i("CANTI EUCARESTIA", "ON RESUME");
     	super.onResume();
 		updateLista();
-//		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.pager);
+//		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+//		Log.i("CURRENT ITEM EUCARESTIA", tempPager.getCurrentItem()+"");
 //		if (mShareActionProvider != null && tempPager.getCurrentItem() == 1)
-//			//aggiorna lo share intent usato per condividere la lista
 //			mShareActionProvider.setShareIntent(getDefaultIntent());
+			
     }
     
 	@Override
@@ -114,14 +155,11 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	}
 	
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
-	    // Locate MenuItem with ShareActionProvider
 	    MenuItem shareItem = menu.findItem(R.id.action_share);
-
-	    // Fetch and store ShareActionProvider
 	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-	    mShareActionProvider.setShareIntent(getDefaultIntent());
+	    ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+	    if (mShareActionProvider != null && tempPager.getCurrentItem() == 1)
+	    	mShareActionProvider.setShareIntent(getDefaultIntent());
 	    super.onCreateOptionsMenu(menu, inflater);
 	}
 	
@@ -212,28 +250,29 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	   		rootView.findViewById(R.id.cantoIniziale1).setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {
-					blockOrientation();
+//					blockOrientation();
 					posizioneDaCanc = 1;
 					titoloDaCanc = Utility.duplicaApostrofi(((TextView) view).getText().toString());
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.list_remove));
-					dialog.setListener(CantiEucarestiaFragment.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								getActivity().setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
-			        });
-	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-	                dialog.setCancelable(false);
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.list_remove));
+//					dialog.setListener(CantiEucarestiaFragment.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								getActivity().setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//	                dialog.setCancelable(false);
+					snackBarRimuoviCanto();
 					return false;
 				}
 			});
@@ -283,28 +322,29 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 		   		rootView.findViewById(R.id.cantoSeconda).setOnLongClickListener(new OnLongClickListener() {
 					@Override
 					public boolean onLongClick(View view) {
-						blockOrientation();
+//						blockOrientation();
 						posizioneDaCanc = 6;
 						titoloDaCanc = Utility.duplicaApostrofi(((TextView) view).getText().toString());
-						GenericDialogFragment dialog = new GenericDialogFragment();
-						dialog.setCustomMessage(getString(R.string.list_remove));
-						dialog.setListener(CantiEucarestiaFragment.this);
-						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-				            @Override
-				            public boolean onKey(DialogInterface arg0, int keyCode,
-				                    KeyEvent event) {
-				                if (keyCode == KeyEvent.KEYCODE_BACK
-				                		&& event.getAction() == KeyEvent.ACTION_UP) {
-				                    arg0.dismiss();
-									getActivity().setRequestedOrientation(prevOrientation);
-									return true;
-				                }
-				                return false;
-				            }
-				        });
-		                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-		                dialog.setCancelable(false);
+//						GenericDialogFragment dialog = new GenericDialogFragment();
+//						dialog.setCustomMessage(getString(R.string.list_remove));
+//						dialog.setListener(CantiEucarestiaFragment.this);
+//						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//				            @Override
+//				            public boolean onKey(DialogInterface arg0, int keyCode,
+//				                    KeyEvent event) {
+//				                if (keyCode == KeyEvent.KEYCODE_BACK
+//				                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//				                    arg0.dismiss();
+//									getActivity().setRequestedOrientation(prevOrientation);
+//									return true;
+//				                }
+//				                return false;
+//				            }
+//				        });
+//		                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//		                dialog.setCancelable(false);
+						snackBarRimuoviCanto();
 						return false;
 					}
 				});
@@ -350,28 +390,29 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	   		rootView.findViewById(R.id.cantoPace).setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {		
-					blockOrientation();
+//					blockOrientation();
 					posizioneDaCanc = 2;
 					titoloDaCanc = Utility.duplicaApostrofi(((TextView) view).getText().toString());
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.list_remove));
-					dialog.setListener(CantiEucarestiaFragment.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								getActivity().setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
-			        });
-	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-	                dialog.setCancelable(false);
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.list_remove));
+//					dialog.setListener(CantiEucarestiaFragment.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								getActivity().setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//	                dialog.setCancelable(false);
+					snackBarRimuoviCanto();
 					return false;
 				}
 			});
@@ -408,28 +449,29 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	   		view.findViewById(R.id.canto).setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {
-					blockOrientation();
+//					blockOrientation();
 					posizioneDaCanc = 3;
 					titoloDaCanc = Utility.duplicaApostrofi(((TextView) view).getText().toString());
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.list_remove));
-					dialog.setListener(CantiEucarestiaFragment.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								getActivity().setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
-			        });
-	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-	                dialog.setCancelable(false);
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.list_remove));
+//					dialog.setListener(CantiEucarestiaFragment.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								getActivity().setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//	                dialog.setCancelable(false);
+					snackBarRimuoviCanto();
 					return false;
 				}
 			});
@@ -469,28 +511,29 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	   		view.findViewById(R.id.canto).setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {
-					blockOrientation();
+//					blockOrientation();
 					posizioneDaCanc = 4;
 					titoloDaCanc = Utility.duplicaApostrofi(((TextView) view).getText().toString());
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.list_remove));
-					dialog.setListener(CantiEucarestiaFragment.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								getActivity().setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
-			        });
-	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-	                dialog.setCancelable(false);
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.list_remove));
+//					dialog.setListener(CantiEucarestiaFragment.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								getActivity().setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//	                dialog.setCancelable(false);
+					snackBarRimuoviCanto();
 					return false;	
 				}
 			});
@@ -535,28 +578,29 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	   		rootView.findViewById(R.id.cantoFinale1).setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {
-					blockOrientation();
+//					blockOrientation();
 					posizioneDaCanc = 5;
 					titoloDaCanc = Utility.duplicaApostrofi(((TextView) view).getText().toString());
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.list_remove));
-					dialog.setListener(CantiEucarestiaFragment.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								getActivity().setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
-			        });
-	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-	                dialog.setCancelable(false);
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.list_remove));
+//					dialog.setListener(CantiEucarestiaFragment.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								getActivity().setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//	                dialog.setCancelable(false);
+					snackBarRimuoviCanto();
 					return false;
 				}
 			});
@@ -763,37 +807,37 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
 	    return result;
     }
     
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {  
-    	db = listaCanti.getReadableDatabase();
-    	String sql = "";
-    	
-    	if (dialog.getTag().equals(RIMUOVI_CANTO_TAG)) {	
-			sql = "DELETE FROM CUST_LISTS" +
-	      		"  WHERE _id =  2 " +
-  				"    AND position = " + posizioneDaCanc +
-  				"	 AND id_canto = (SELECT _id FROM ELENCO" +
-  				"					WHERE titolo = '" + titoloDaCanc + "')"; 
-    	}
-    	else if (dialog.getTag().equals(RESETTA_LISTA_TAG)) {
-			sql = "DELETE FROM CUST_LISTS" +
-				" WHERE _id =  2 ";
-    	}
-		db.execSQL(sql);
-		db.close();
-		updateLista();
-		//aggiorna lo share intent usato per condividere la lista
-		mShareActionProvider.setShareIntent(getDefaultIntent());
-		dialog.dismiss();
-		getActivity().setRequestedOrientation(prevOrientation);
-		
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        dialog.dismiss();
-        getActivity().setRequestedOrientation(prevOrientation);
-    }
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {  
+//    	db = listaCanti.getReadableDatabase();
+//    	String sql = "";
+//    	
+//    	if (dialog.getTag().equals(RIMUOVI_CANTO_TAG)) {	
+//			sql = "DELETE FROM CUST_LISTS" +
+//	      		"  WHERE _id =  2 " +
+//  				"    AND position = " + posizioneDaCanc +
+//  				"	 AND id_canto = (SELECT _id FROM ELENCO" +
+//  				"					WHERE titolo = '" + titoloDaCanc + "')"; 
+//    	}
+//    	else if (dialog.getTag().equals(RESETTA_LISTA_TAG)) {
+//			sql = "DELETE FROM CUST_LISTS" +
+//				" WHERE _id =  2 ";
+//    	}
+//		db.execSQL(sql);
+//		db.close();
+//		updateLista();
+//		//aggiorna lo share intent usato per condividere la lista
+//		mShareActionProvider.setShareIntent(getDefaultIntent());
+//		dialog.dismiss();
+//		getActivity().setRequestedOrientation(prevOrientation);
+//		
+//    }
+//
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//        dialog.dismiss();
+//        getActivity().setRequestedOrientation(prevOrientation);
+//    }
    
     public void blockOrientation() {
         prevOrientation = getActivity().getRequestedOrientation();
@@ -804,6 +848,31 @@ public class CantiEucarestiaFragment extends Fragment implements GenericDialogLi
         } else {
         	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
+    }
+    
+    public void snackBarRimuoviCanto() {
+    	SnackBar snackbar = 
+    	new SnackBar(getActivity(),
+    			getString(R.string.list_remove),
+    			getString(R.string.snackbar_remove),
+			new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				db = listaCanti.getReadableDatabase();
+				String sql = "DELETE FROM CUST_LISTS" +
+			      		"  WHERE _id =  2 " +
+		  				"    AND position = " + posizioneDaCanc +
+		  				"	 AND id_canto = (SELECT _id FROM ELENCO" +
+		  				"					WHERE titolo = '" + titoloDaCanc + "')"; 
+				db.execSQL(sql);
+				db.close();
+				updateLista();
+				mShareActionProvider.setShareIntent(getDefaultIntent());
+			}
+		});
+    	snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+    	snackbar.show();
     }
     
 }

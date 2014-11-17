@@ -1,7 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
 import java.util.Locale;
 
 import android.app.Dialog;
@@ -14,7 +12,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -31,8 +28,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ListaPersonalizzataFragment extends Fragment
-			implements GenericDialogListener {
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.widgets.SnackBar;
+
+public class ListaPersonalizzataFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -49,8 +48,8 @@ public class ListaPersonalizzataFragment extends Fragment
 	private int cantoIndex;
 	private int prevOrientation;
 	
-	private final String RESET_LIST_TAG = "1";
-	private final String RIMUOVI_CANTO_TAG = "2";
+//	private final String RESET_LIST_TAG = "1";
+//	private final String RIMUOVI_CANTO_TAG = "2";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,33 +60,73 @@ public class ListaPersonalizzataFragment extends Fragment
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-//		ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.personalizedScrollView);
-//		FloatingActionButton floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.button_floating_action);
-//		floatingActionButton.attachToScrollView(scrollView);
-		
 		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
-				GenericDialogFragment dialog = new GenericDialogFragment();
-				dialog.setCustomMessage(getString(R.string.reset_list_question));
-				dialog.setListener(ListaPersonalizzataFragment.this);
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				GenericDialogFragment dialog = new GenericDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.reset_list_question));
+//				dialog.setListener(ListaPersonalizzataFragment.this);
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							getActivity().setRequestedOrientation(prevOrientation);
+//		                }
+//		                return true;
+//		            }
+//		        });
+//				dialog.show(getChildFragmentManager(), RESET_LIST_TAG);
+//				dialog.setCancelable(false);
+				MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_reset_list_title)
+                .content(R.string.reset_list_question)
+                .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+                .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+                .callback(new MaterialDialog.FullCallback() {
+                	@Override
+                	public void onPositive(MaterialDialog dialog) {
+                		db = listaCanti.getReadableDatabase();
+                    	ContentValues  values = new  ContentValues( );
+                    	for (int i = 0; i < listaPersonalizzata.getNumPosizioni(); i++)
+                    		listaPersonalizzata.removeCanto(i);
+                    	values.put("lista" , ListaPersonalizzata.serializeObject(listaPersonalizzata));
+                    	db.update("LISTE_PERS", values, "_id = " + idLista, null );
+                		db.close();
+                		updateLista();
+                		mShareActionProvider.setShareIntent(getDefaultIntent());
+                		getActivity().setRequestedOrientation(prevOrientation);
+                	}
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							getActivity().setRequestedOrientation(prevOrientation);
-		                }
-		                return true;
-		            }
+                	@Override
+                	public void onNeutral(MaterialDialog dialog) {}
+
+                	@Override
+                	public void onNegative(MaterialDialog dialog) {
+                		getActivity().setRequestedOrientation(prevOrientation);
+                	}
+                })
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		getActivity().setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-				dialog.show(getChildFragmentManager(), RESET_LIST_TAG);
-				dialog.setCancelable(false);
+                dialog.show();
+                dialog.setCancelable(false);
 			}
 		});
 		
@@ -118,10 +157,10 @@ public class ListaPersonalizzataFragment extends Fragment
 			deserializeObject(cursor.getBlob(0));
 		
 		updateLista();
-		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
-		if (mShareActionProvider != null && tempPager.getCurrentItem() == fragmentIndex)
-			//aggiorna lo share intent usato per condividere la lista
-			mShareActionProvider.setShareIntent(getDefaultIntent());
+//		ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+//		if (mShareActionProvider != null && tempPager.getCurrentItem() == fragmentIndex)
+//			//aggiorna lo share intent usato per condividere la lista
+//			mShareActionProvider.setShareIntent(getDefaultIntent());
     }
     
 	@Override
@@ -132,15 +171,11 @@ public class ListaPersonalizzataFragment extends Fragment
 	}
 	
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getActivity().getMenuInflater().inflate(R.menu.list_with_delete, menu);
 		inflater.inflate(R.menu.list_with_delete, menu);
-	    // Locate MenuItem with ShareActionProvider
 	    MenuItem shareItem = menu.findItem(R.id.action_share);
-
-	    // Fetch and store ShareActionProvider
 	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-	    if (listaPersonalizzata != null)
+	    ViewPager tempPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+	    if (listaPersonalizzata != null && mShareActionProvider != null && tempPager.getCurrentItem() == fragmentIndex)
 	    	mShareActionProvider.setShareIntent(getDefaultIntent());
 	    super.onCreateOptionsMenu(menu, inflater);
 	    
@@ -255,29 +290,30 @@ public class ListaPersonalizzataFragment extends Fragment
 		   		view.findViewById(R.id.cantoGenerico).setOnLongClickListener(new OnLongClickListener() {
 					@Override
 					public boolean onLongClick(View view) {
-						blockOrientation();
+//						blockOrientation();
 						posizioneDaCanc = Integer.valueOf(
 					    		((TextView) ((LinearLayout)view.getParent()).findViewById(R.id.id_da_canc))
 					    		.getText().toString());
 //						Log.i("canto da rimuovere", posizioneDaCanc + " ");
-						GenericDialogFragment dialog = new GenericDialogFragment();
-						dialog.setCustomMessage(getString(R.string.list_remove));
-						dialog.setListener(ListaPersonalizzataFragment.this);
-						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-				            @Override
-				            public boolean onKey(DialogInterface arg0, int keyCode,
-				                    KeyEvent event) {
-				                if (keyCode == KeyEvent.KEYCODE_BACK
-				                		&& event.getAction() == KeyEvent.ACTION_UP) {
-				                    arg0.dismiss();
-									getActivity().setRequestedOrientation(prevOrientation);
-				                }
-				                return true;
-				            }
-				        });
-		                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
-		                dialog.setCancelable(false);
+//						GenericDialogFragment dialog = new GenericDialogFragment();
+//						dialog.setCustomMessage(getString(R.string.list_remove));
+//						dialog.setListener(ListaPersonalizzataFragment.this);
+//						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//				            @Override
+//				            public boolean onKey(DialogInterface arg0, int keyCode,
+//				                    KeyEvent event) {
+//				                if (keyCode == KeyEvent.KEYCODE_BACK
+//				                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//				                    arg0.dismiss();
+//									getActivity().setRequestedOrientation(prevOrientation);
+//				                }
+//				                return true;
+//				            }
+//				        });
+//		                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
+//		                dialog.setCancelable(false);
+						snackBarRimuoviCanto();
 						return false;
 					}
 				});
@@ -314,35 +350,35 @@ public class ListaPersonalizzataFragment extends Fragment
     	
     }
     
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-    	db = listaCanti.getReadableDatabase();
-    	ContentValues  values = new  ContentValues( );
-    	
-    	if (dialog.getTag().equals(RIMUOVI_CANTO_TAG)) { 	    	
-    		listaPersonalizzata.removeCanto(posizioneDaCanc);		
-			
-    	}
-    	else if (dialog.getTag().equals(RESET_LIST_TAG)) {    		
-    		for (int i = 0; i < listaPersonalizzata.getNumPosizioni(); i++)
-    			listaPersonalizzata.removeCanto(i);
-    	}
-			
-    	values.put("lista" , ListaPersonalizzata.serializeObject(listaPersonalizzata));
-    	db.update("LISTE_PERS", values, "_id = " + idLista, null );
-		db.close();
-		updateLista();
-		//aggiorna lo share intent usato per condividere la lista
-		mShareActionProvider.setShareIntent(getDefaultIntent());
-		getActivity().setRequestedOrientation(prevOrientation);
-		
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        dialog.dismiss();
-        getActivity().setRequestedOrientation(prevOrientation);
-    }
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+//    	db = listaCanti.getReadableDatabase();
+//    	ContentValues  values = new  ContentValues( );
+//    	
+//    	if (dialog.getTag().equals(RIMUOVI_CANTO_TAG)) { 	    	
+//    		listaPersonalizzata.removeCanto(posizioneDaCanc);		
+//			
+//    	}
+//    	else if (dialog.getTag().equals(RESET_LIST_TAG)) {    		
+//    		for (int i = 0; i < listaPersonalizzata.getNumPosizioni(); i++)
+//    			listaPersonalizzata.removeCanto(i);
+//    	}
+//			
+//    	values.put("lista" , ListaPersonalizzata.serializeObject(listaPersonalizzata));
+//    	db.update("LISTE_PERS", values, "_id = " + idLista, null );
+//		db.close();
+//		updateLista();
+//		//aggiorna lo share intent usato per condividere la lista
+//		mShareActionProvider.setShareIntent(getDefaultIntent());
+//		getActivity().setRequestedOrientation(prevOrientation);
+//		
+//    }
+//
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//        dialog.dismiss();
+//        getActivity().setRequestedOrientation(prevOrientation);
+//    }
     
     public void blockOrientation() {
         prevOrientation = getActivity().getRequestedOrientation();
@@ -353,6 +389,29 @@ public class ListaPersonalizzataFragment extends Fragment
         } else {
         	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
+    }
+    
+    public void snackBarRimuoviCanto() {
+    	SnackBar snackbar = 
+    	new SnackBar(getActivity(),
+    			getString(R.string.list_remove),
+    			getString(R.string.snackbar_remove),
+			new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				db = listaCanti.getReadableDatabase();
+		    	ContentValues  values = new  ContentValues( );
+				listaPersonalizzata.removeCanto(posizioneDaCanc);
+				values.put("lista" , ListaPersonalizzata.serializeObject(listaPersonalizzata));
+		    	db.update("LISTE_PERS", values, "_id = " + idLista, null );
+				db.close();
+				updateLista();
+				mShareActionProvider.setShareIntent(getDefaultIntent());
+			}
+		});
+    	snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+    	snackbar.show();
     }
     
 }

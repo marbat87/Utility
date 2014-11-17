@@ -1,7 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +16,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -38,7 +35,9 @@ import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ArgumentsSectionFragment extends Fragment implements GenericDialogListener {
+import com.afollestad.materialdialogs.MaterialDialog;
+
+public class ArgumentsSectionFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -63,8 +62,8 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 	private final int ID_FITTIZIO = 99999999;
 	private final int ID_BASE = 100;
 	
-	private final String LISTA_PERSONALIZZATA_TAG = "1";
-	private final String LISTA_PREDEFINITA_TAG = "2";
+//	private final String LISTA_PERSONALIZZATA_TAG = "1";
+//	private final String LISTA_PREDEFINITA_TAG = "2";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -383,28 +382,83 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 		    		    	}
 		    		    	else {
 			    		    	blockOrientation();
-			    				GenericDialogFragment dialog = new GenericDialogFragment();
-			    				dialog.setListener(ArgumentsSectionFragment.this);
-			    				dialog.setCustomMessage(getString(R.string.dialog_present_yet) + " " 
+//			    				GenericDialogFragment dialog = new GenericDialogFragment();
+//			    				dialog.setListener(ArgumentsSectionFragment.this);
+//			    				dialog.setCustomMessage(getString(R.string.dialog_present_yet) + " " 
+//			    						+ listePers[idListaClick].getCantoPosizione(idPosizioneClick)
+//			    						.substring(10)
+//			    						+ getString(R.string.dialog_wonna_replace));
+//			    				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//	
+//			    		            @Override
+//			    		            public boolean onKey(DialogInterface arg0, int keyCode,
+//			    		                    KeyEvent event) {
+//			    		                if (keyCode == KeyEvent.KEYCODE_BACK
+//			    		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			    		                    arg0.dismiss();
+//			    							getActivity().setRequestedOrientation(prevOrientation);
+//			    							return true;
+//			    		                }
+//			    		                return false;
+//			    		            }
+//			    		        });
+//			    	            dialog.show(getChildFragmentManager(), LISTA_PERSONALIZZATA_TAG);
+//			    	            dialog.setCancelable(false);
+			    		    	MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+			                    .title(R.string.dialog_replace_title)
+			                    .content(getString(R.string.dialog_present_yet) + " " 
 			    						+ listePers[idListaClick].getCantoPosizione(idPosizioneClick)
 			    						.substring(10)
-			    						+ getString(R.string.dialog_wonna_replace));
-			    				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-	
-			    		            @Override
-			    		            public boolean onKey(DialogInterface arg0, int keyCode,
-			    		                    KeyEvent event) {
-			    		                if (keyCode == KeyEvent.KEYCODE_BACK
-			    		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			    		                    arg0.dismiss();
-			    							getActivity().setRequestedOrientation(prevOrientation);
-			    							return true;
-			    		                }
-			    		                return false;
-			    		            }
-			    		        });
-			    	            dialog.show(getChildFragmentManager(), LISTA_PERSONALIZZATA_TAG);
-			    	            dialog.setCancelable(false);
+			    						+ getString(R.string.dialog_wonna_replace))
+			                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+			                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+			                    .callback(new MaterialDialog.FullCallback() {
+			                    	@Override
+			                    	public void onPositive(MaterialDialog dialog) {
+			                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
+			                        	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
+			                    		String query = "SELECT color, pagina" +
+			                    				"		FROM ELENCO" +
+			                    				"		WHERE titolo = '" + cantoCliccatoNoApex + "'";
+			                    		Cursor cursor = db.rawQuery(query, null);
+			                			
+			                    		cursor.moveToFirst();
+			                    							    		
+			                    		listePers[idListaClick].addCanto(Utility.intToString(
+			                    				cursor.getInt(1), 3) + cursor.getString(0) + titoloDaAgg, idPosizioneClick);
+			                						    				
+			                	    	ContentValues  values = new  ContentValues( );
+			                	    	values.put("lista" , ListaPersonalizzata.serializeObject(listePers[idListaClick]));
+			                	    	db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick], null );
+			                	    	getActivity().setRequestedOrientation(prevOrientation);
+		                    			Toast.makeText(getActivity()
+		                    					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
+			                    	}
+
+			                    	@Override
+			                    	public void onNeutral(MaterialDialog dialog) {}
+
+			                    	@Override
+			                    	public void onNegative(MaterialDialog dialog) {
+			                    		getActivity().setRequestedOrientation(prevOrientation);
+			                    	}
+			                    })
+			                    .build();
+								dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+							        @Override
+							        public boolean onKey(DialogInterface arg0, int keyCode,
+							        		KeyEvent event) {
+							        	if (keyCode == KeyEvent.KEYCODE_BACK
+							        			&& event.getAction() == KeyEvent.ACTION_UP) {
+							        		arg0.dismiss();
+							        		getActivity().setRequestedOrientation(prevOrientation);
+							        		return true;
+							            }
+							            return false;
+							        }
+						        });
+			                    dialog.show();
+			                    dialog.setCancelable(false);
 		    		    	}
 		    		    }    		
 		    		    return true;
@@ -499,26 +553,72 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 				idListaDaAgg = idLista;
 				posizioneDaAgg = listPosition;
 	    		blockOrientation();
-				GenericDialogFragment dialog = new GenericDialogFragment();
-				dialog.setListener(ArgumentsSectionFragment.this);
-				dialog.setCustomMessage(getString(R.string.dialog_present_yet) + " " +  titoloPresente
-						+ getString(R.string.dialog_wonna_replace));
+//				GenericDialogFragment dialog = new GenericDialogFragment();
+//				dialog.setListener(ArgumentsSectionFragment.this);
+//				dialog.setCustomMessage(getString(R.string.dialog_present_yet) + " " +  titoloPresente
+//						+ getString(R.string.dialog_wonna_replace));
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//	
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							getActivity().setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//	            dialog.show(getChildFragmentManager(), LISTA_PREDEFINITA_TAG);
+//	            dialog.setCancelable(false);
+	    		MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_replace_title)
+                .content(getString(R.string.dialog_present_yet) + " " + titoloPresente
+						+ getString(R.string.dialog_wonna_replace))
+                .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+                .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+                .callback(new MaterialDialog.FullCallback() {
+                	@Override
+                	public void onPositive(MaterialDialog dialog) {
+                		SQLiteDatabase db = listaCanti.getReadableDatabase();
+                    	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
+                		String sql = "UPDATE CUST_LISTS "
+            	    			+ "SET id_canto = (SELECT _id  FROM ELENCO"
+            	    			+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
+            	    			+ "WHERE _id = " + idListaDaAgg 
+            	    			+ "  AND position = " + posizioneDaAgg;
+            	    	db.execSQL(sql);	
+            	    	getActivity().setRequestedOrientation(prevOrientation);
+            			Toast.makeText(getActivity()
+            					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
+                	}
+
+                	@Override
+                	public void onNeutral(MaterialDialog dialog) {}
+
+                	@Override
+                	public void onNegative(MaterialDialog dialog) {
+                		getActivity().setRequestedOrientation(prevOrientation);
+                	}
+                })
+                .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-	
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							getActivity().setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		getActivity().setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-	            dialog.show(getChildFragmentManager(), LISTA_PREDEFINITA_TAG);
-	            dialog.setCancelable(false);
+                dialog.show();
+                dialog.setCancelable(false);
 			}
     		return;
 		}
@@ -538,49 +638,49 @@ public class ArgumentsSectionFragment extends Fragment implements GenericDialogL
 				, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-    	SQLiteDatabase db = listaCanti.getReadableDatabase();
-    	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
-    	
-    	if (dialog.getTag().equals(LISTA_PREDEFINITA_TAG)) {
-        	String sql = "UPDATE CUST_LISTS "
-        			+ "SET id_canto = (SELECT _id  FROM ELENCO"
-        			+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
-        			+ "WHERE _id = " + idListaDaAgg 
-        			+ "  AND position = " + posizioneDaAgg;
-        	db.execSQL(sql);      	
-        	
-    	}
-    	else if (dialog.getTag().equals(LISTA_PERSONALIZZATA_TAG)){    		
-	        String query = "SELECT color, pagina" +
-    				"		FROM ELENCO" +
-    				"		WHERE titolo = '" + cantoCliccatoNoApex + "'";
-    		Cursor cursor = db.rawQuery(query, null);
-			
-    		cursor.moveToFirst();
-    							    		
-    		listePers[idListaClick].addCanto(Utility.intToString(
-    				cursor.getInt(1), 3) + cursor.getString(0) + titoloDaAgg, idPosizioneClick);
-						    				
-	    	ContentValues  values = new  ContentValues( );
-	    	values.put("lista" , ListaPersonalizzata.serializeObject(listePers[idListaClick]));
-	    	db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick], null );	
-    	}
-    	db.close();
-        dialog.dismiss();
-        getActivity().setRequestedOrientation(prevOrientation);
-        
-		Toast.makeText(getActivity()
-				, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        // User touched the dialog's negative button
-        dialog.dismiss();
-        getActivity().setRequestedOrientation(prevOrientation);
-    }
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+//    	SQLiteDatabase db = listaCanti.getReadableDatabase();
+//    	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
+//    	
+//    	if (dialog.getTag().equals(LISTA_PREDEFINITA_TAG)) {
+//        	String sql = "UPDATE CUST_LISTS "
+//        			+ "SET id_canto = (SELECT _id  FROM ELENCO"
+//        			+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
+//        			+ "WHERE _id = " + idListaDaAgg 
+//        			+ "  AND position = " + posizioneDaAgg;
+//        	db.execSQL(sql);      	
+//        	
+//    	}
+//    	else if (dialog.getTag().equals(LISTA_PERSONALIZZATA_TAG)){    		
+//	        String query = "SELECT color, pagina" +
+//    				"		FROM ELENCO" +
+//    				"		WHERE titolo = '" + cantoCliccatoNoApex + "'";
+//    		Cursor cursor = db.rawQuery(query, null);
+//			
+//    		cursor.moveToFirst();
+//    							    		
+//    		listePers[idListaClick].addCanto(Utility.intToString(
+//    				cursor.getInt(1), 3) + cursor.getString(0) + titoloDaAgg, idPosizioneClick);
+//						    				
+//	    	ContentValues  values = new  ContentValues( );
+//	    	values.put("lista" , ListaPersonalizzata.serializeObject(listePers[idListaClick]));
+//	    	db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick], null );	
+//    	}
+//    	db.close();
+//        dialog.dismiss();
+//        getActivity().setRequestedOrientation(prevOrientation);
+//        
+//		Toast.makeText(getActivity()
+//				, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//        // User touched the dialog's negative button
+//        dialog.dismiss();
+//        getActivity().setRequestedOrientation(prevOrientation);
+//    }
     
     public void blockOrientation() {
         prevOrientation = getActivity().getRequestedOrientation();

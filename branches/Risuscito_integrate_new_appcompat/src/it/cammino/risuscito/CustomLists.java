@@ -19,11 +19,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,8 +55,8 @@ public class CustomLists extends Fragment
 		updateLista();
 		
 		// Create the adapter that will return a fragment for each of the three
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 	    mViewPager.setAdapter(mSectionsPagerAdapter);
 	    
         mSlidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
@@ -80,8 +77,7 @@ public class CustomLists extends Fragment
     	super.onResume();
     	updateLista();
     	mSectionsPagerAdapter.notifyDataSetChanged();
-//    	tabs.notifyDataSetChanged();
-//    	checkScreenAwake();
+//    	mViewPager.setAdapter(mSectionsPagerAdapter);
     }
     
 	@Override
@@ -94,14 +90,14 @@ public class CustomLists extends Fragment
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		getActivity().getMenuInflater().inflate(R.menu.custom_list, menu);
 		
-		if (mViewPager.getCurrentItem() == 0) {
-			MenuItem shareItem = menu.findItem(R.id.action_share);
-			ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-			if (mShareActionProvider != null)
-				mShareActionProvider.setShareIntent(getDefaultIntent());
-			else
-				Log.i(this.getClass().toString(), "mShareActionProvider: NULL");
-		}
+//		if (mViewPager.getCurrentItem() == 0) {
+//			MenuItem shareItem = menu.findItem(R.id.action_share);
+//			ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+//			if (mShareActionProvider != null)
+//				mShareActionProvider.setShareIntent(getDefaultIntent());
+//			else
+//				Log.i(this.getClass().toString(), "mShareActionProvider: NULL");
+//		}
 		
 	    super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -165,115 +161,115 @@ public class CustomLists extends Fragment
 		return false;
 	}
     
-	private Intent getDefaultIntent() {
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
-		intent.setType("text/plain");
-		return intent;
-	}
+//	private Intent getDefaultIntent() {
+//		Intent intent = new Intent(Intent.ACTION_SEND);
+//		intent.putExtra(Intent.EXTRA_TEXT, getTitlesList());
+//		intent.setType("text/plain");
+//		return intent;
+//	}
 	
-	private String getTitlesList() {
-    	
-    	Locale l = Locale.getDefault();
-    	String result = "";
-    	String temp = "";
-    	
-    	//titolo
-    	result +=  "-- CELEBRAZIONE DELLA PAROLA --\n";
-    	
-    	//canto iniziale
-    	temp = getTitoloToSendFromPosition(1);
-    	
-    	result += getResources().getString(R.string.canto_iniziale).toUpperCase(l);
-    	result += "\n";
-    	
-    	if (temp.equalsIgnoreCase(""))
-    		result += ">> da scegliere <<";
-    	else
-    		result += temp;
-    	
-    	result += "\n";
-    	
-    	//prima lettura
-    	temp = getTitoloToSendFromPosition(2);
-    	
-    	result += getResources().getString(R.string.prima_lettura).toUpperCase(l);
-    	result += "\n";
-    	
-    	if (temp.equalsIgnoreCase(""))
-    		result += ">> da scegliere <<";
-    	else
-    		result += temp;
-    	
-    	result += "\n";
-    	
-    	//seconda lettura
-    	temp = getTitoloToSendFromPosition(3);
-    	
-    	result += getResources().getString(R.string.seconda_lettura).toUpperCase(l);
-    	result += "\n";
-    	
-    	if (temp.equalsIgnoreCase(""))
-    		result += ">> da scegliere <<";
-    	else
-    		result += temp;
-    	
-    	result += "\n";
-    	
-    	//terza lettura
-    	temp = getTitoloToSendFromPosition(4);
-    	
-    	result += getResources().getString(R.string.terza_lettura).toUpperCase(l);
-    	result += "\n";
-    	
-    	if (temp.equalsIgnoreCase(""))
-    		result += ">> da scegliere <<";
-    	else
-    		result += temp;
-    	
-    	result += "\n";
-    	
-    	//canto finale
-    	temp = getTitoloToSendFromPosition(5);
-    	
-    	result += getResources().getString(R.string.canto_fine).toUpperCase(l);
-    	result += "\n";
-    	
-    	if (temp.equalsIgnoreCase(""))
-    		result += ">> da scegliere <<";
-    	else
-    		result += temp;	    	
-    	    	
-    	return result;
-    	
-    }
+//	private String getTitlesList() {
+//    	
+//    	Locale l = Locale.getDefault();
+//    	String result = "";
+//    	String temp = "";
+//    	
+//    	//titolo
+//    	result +=  "-- CELEBRAZIONE DELLA PAROLA --\n";
+//    	
+//    	//canto iniziale
+//    	temp = getTitoloToSendFromPosition(1);
+//    	
+//    	result += getResources().getString(R.string.canto_iniziale).toUpperCase(l);
+//    	result += "\n";
+//    	
+//    	if (temp.equalsIgnoreCase(""))
+//    		result += ">> da scegliere <<";
+//    	else
+//    		result += temp;
+//    	
+//    	result += "\n";
+//    	
+//    	//prima lettura
+//    	temp = getTitoloToSendFromPosition(2);
+//    	
+//    	result += getResources().getString(R.string.prima_lettura).toUpperCase(l);
+//    	result += "\n";
+//    	
+//    	if (temp.equalsIgnoreCase(""))
+//    		result += ">> da scegliere <<";
+//    	else
+//    		result += temp;
+//    	
+//    	result += "\n";
+//    	
+//    	//seconda lettura
+//    	temp = getTitoloToSendFromPosition(3);
+//    	
+//    	result += getResources().getString(R.string.seconda_lettura).toUpperCase(l);
+//    	result += "\n";
+//    	
+//    	if (temp.equalsIgnoreCase(""))
+//    		result += ">> da scegliere <<";
+//    	else
+//    		result += temp;
+//    	
+//    	result += "\n";
+//    	
+//    	//terza lettura
+//    	temp = getTitoloToSendFromPosition(4);
+//    	
+//    	result += getResources().getString(R.string.terza_lettura).toUpperCase(l);
+//    	result += "\n";
+//    	
+//    	if (temp.equalsIgnoreCase(""))
+//    		result += ">> da scegliere <<";
+//    	else
+//    		result += temp;
+//    	
+//    	result += "\n";
+//    	
+//    	//canto finale
+//    	temp = getTitoloToSendFromPosition(5);
+//    	
+//    	result += getResources().getString(R.string.canto_fine).toUpperCase(l);
+//    	result += "\n";
+//    	
+//    	if (temp.equalsIgnoreCase(""))
+//    		result += ">> da scegliere <<";
+//    	else
+//    		result += temp;	    	
+//    	    	
+//    	return result;
+//    	
+//    }
     
     //recupera il titolo del canto in posizione "position" nella lista "list"
-    private String getTitoloToSendFromPosition(int position) {
-		    	
-    	SQLiteDatabase db = listaCanti.getReadableDatabase();
-    	
-	    String query = "SELECT B.titolo, B.pagina" +
-	      		"  FROM CUST_LISTS A" +
-	      		"  	   , ELENCO B" +
-	      		"  WHERE A._id = 1" +
-	      		"  AND   A.position = " + position + 
-	      		"  AND   A.id_canto = B._id";
-	    Cursor cursor = db.rawQuery(query, null);
-	     
-	    int total = cursor.getCount();
-	    String result = "";
-	    
-	    if (total == 1) {
-	    	cursor.moveToFirst();
-	    	result =  cursor.getString(0) + " - PAG." + cursor.getInt(1);
-	    }
-	    
-	    cursor.close();
-	    db.close();
-    
-	    return result;
-    }
+//    private String getTitoloToSendFromPosition(int position) {
+//		    	
+//    	SQLiteDatabase db = listaCanti.getReadableDatabase();
+//    	
+//	    String query = "SELECT B.titolo, B.pagina" +
+//	      		"  FROM CUST_LISTS A" +
+//	      		"  	   , ELENCO B" +
+//	      		"  WHERE A._id = 1" +
+//	      		"  AND   A.position = " + position + 
+//	      		"  AND   A.id_canto = B._id";
+//	    Cursor cursor = db.rawQuery(query, null);
+//	     
+//	    int total = cursor.getCount();
+//	    String result = "";
+//	    
+//	    if (total == 1) {
+//	    	cursor.moveToFirst();
+//	    	result =  cursor.getString(0) + " - PAG." + cursor.getInt(1);
+//	    }
+//	    
+//	    cursor.close();
+//	    db.close();
+//    
+//	    return result;
+//    }
     
     private void updateLista() {
 		
@@ -317,11 +313,9 @@ public class CustomLists extends Fragment
             case 1:
                 return new CantiEucarestiaFragment();
             default:
-//            	return new CantiParolaFragment();
             	Bundle bundle=new Bundle();
 //            	Log.i("INVIO", "position = " + position);
 //            	Log.i("INVIO", "idLista = " + idListe[position - 2]);
-            	
             	bundle.putInt("position", position);
             	bundle.putInt("idLista", idListe[position - 2]);
             	ListaPersonalizzataFragment listaPersFrag = new ListaPersonalizzataFragment();
@@ -401,6 +395,7 @@ public class CustomLists extends Fragment
 		
 		updateLista();
 		mSectionsPagerAdapter.notifyDataSetChanged();
+		mViewPager.setAdapter(mSectionsPagerAdapter);
 //		tabs.notifyDataSetChanged();
 		getActivity().setRequestedOrientation(prevOrientation);
     }

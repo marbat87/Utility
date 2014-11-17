@@ -12,7 +12,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
 //	private static final int DB_VERSION = 24;
-	private static final int DB_VERSION = 28;
+	private static final int DB_VERSION = 29;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -915,7 +915,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (122, 100, 'A te Signore se deve lode in Sion - Salmo 64(65)', 'a_te_si_deve_lode_in_sion', 0, '"
+		sql += "VALUES (122, 100, 'A te Signore si deve lode in Sion - Salmo 64(65)', 'a_te_si_deve_lode_in_sion', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/A%20te%20signore%20si%20deve%20lode%20in%20Sion.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
