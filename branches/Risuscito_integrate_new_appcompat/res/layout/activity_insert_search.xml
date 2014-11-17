@@ -1,16 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:risuscito="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
    
 	<android.support.v7.widget.Toolbar
-	    android:id="@+id/risuscito_toolbar"
-	    android:layout_height="wrap_content"
-	    android:layout_width="match_parent"
-	    android:minHeight="?attr/actionBarSize"
-	    android:background="?attr/colorPrimary" />
+    	android:id="@+id/risuscito_toolbar"
+    	android:layout_height="?attr/actionBarSize"
+    	risuscito:theme="@style/ActionBarThemeOverlay"
+    	risuscito:popupTheme="@style/ActionBarPopupThemeOverlay"
+    	risuscito:titleTextAppearance="@style/ActionBar.TitleText"
+    	android:layout_width="match_parent"
+    	android:background="?attr/colorPrimary" />
 
 	<it.cammino.risuscito.SlidingTabLayout
     	android:background="?attr/colorPrimary"

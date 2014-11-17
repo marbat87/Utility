@@ -3,7 +3,7 @@
     <style name="TabIndicator" />
     
     <style name="ActionBarThemeOverlay" parent="">
-        <item name="android:textColorPrimary">#fff</item>
+<!--         <item name="android:textColorPrimary">#fff</item> -->
         <!--<item name="colorControlNormal">?actionBarIconColor</item>-->
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlHighlight">#3fff</item>

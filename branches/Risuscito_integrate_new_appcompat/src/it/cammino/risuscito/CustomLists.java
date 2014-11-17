@@ -23,6 +23,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,7 +42,6 @@ public class CustomLists extends Fragment
 	private DatabaseCanti listaCanti;
 	private int listaDaCanc;
 	private int prevOrientation;
-//	private PagerSlidingTabStrip tabs;
 	private ViewPager mViewPager;
 	SlidingTabLayout mSlidingTabLayout = null;
   	
@@ -49,7 +49,6 @@ public class CustomLists extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-//		getSupportActionBar().setTitle(R.string.title_activity_custom_lists);
 		View rootView = inflater.inflate(R.layout.activity_custom_lists, container, false);
 		((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_custom_lists);
 		
@@ -61,13 +60,8 @@ public class CustomLists extends Fragment
 		// Create the adapter that will return a fragment for each of the three
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
-//	    mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 	    mViewPager.setAdapter(mSectionsPagerAdapter);
-//	    mViewPager.setCurrentItem(0);
 	    
-//	    tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
-//	    tabs.setViewPager(mViewPager);
-	   	
         mSlidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
 	    
@@ -76,7 +70,7 @@ public class CustomLists extends Fragment
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
         
-//	    setHasOptionsMenu(true);
+	    setHasOptionsMenu(true);
 	    
         return rootView;
 	}
@@ -85,7 +79,7 @@ public class CustomLists extends Fragment
     public void onResume() {
     	super.onResume();
     	updateLista();
-//    	mSectionsPagerAdapter.notifyDataSetChanged();
+    	mSectionsPagerAdapter.notifyDataSetChanged();
 //    	tabs.notifyDataSetChanged();
 //    	checkScreenAwake();
     }
@@ -103,7 +97,10 @@ public class CustomLists extends Fragment
 		if (mViewPager.getCurrentItem() == 0) {
 			MenuItem shareItem = menu.findItem(R.id.action_share);
 			ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-			mShareActionProvider.setShareIntent(getDefaultIntent());
+			if (mShareActionProvider != null)
+				mShareActionProvider.setShareIntent(getDefaultIntent());
+			else
+				Log.i(this.getClass().toString(), "mShareActionProvider: NULL");
 		}
 		
 	    super.onCreateOptionsMenu(menu, inflater);

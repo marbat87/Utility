@@ -180,8 +180,8 @@ public class PaginaRenderActivity extends ActionBarActivity
         setContentView(R.layout.activity_pagina_render);
         
         Toolbar toolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        setSupportActionBar(toolbar);
         
         // setta il colore della barra di stato, solo da KITAKT in su
         Utility.setupTransparentTints(PaginaRenderActivity.this);

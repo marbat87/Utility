@@ -43,9 +43,8 @@ public class GeneralInsertSearch extends ActionBarActivity {
 		setContentView(R.layout.activity_insert_search);
 		
 		Toolbar toolbar = ((Toolbar) findViewById(R.id.risuscito_toolbar));
-//		toolbar.setTitle(R.string.title_activity_general_index);
+		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setTitle(R.string.title_activity_general_index);
 		
         // setta il colore della barra di stato, solo da KITAKT in su
 //        Utility.setupTransparentTints(GeneralInsertSearch.this);

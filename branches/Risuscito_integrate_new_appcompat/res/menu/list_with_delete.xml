@@ -19,14 +19,14 @@
    	<item
         android:id="@+id/action_edit_list"
         android:orderInCategory="99"
-        android:icon="?attr/customEdit"
+        android:icon="@drawable/ic_action_content_edit"
         risuscito:showAsAction="ifRoom"
         android:title="@string/action_edit_list" />
    	
    	<item
         android:id="@+id/action_remove_list"
         android:orderInCategory="100"
-        android:icon="?attr/customDelete"
+        android:icon="@drawable/ic_action_list_delete"
         risuscito:showAsAction="ifRoom"
         android:title="@string/action_remove_list" />
    	
