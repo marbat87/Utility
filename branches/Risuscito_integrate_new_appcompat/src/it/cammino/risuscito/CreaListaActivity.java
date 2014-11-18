@@ -1,8 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.TextDialogFragment.TextDialogListener;
-import it.cammino.risuscito.ThreeButtonsDialogFragment.ThreeButtonsDialogListener;
-
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
@@ -18,7 +15,6 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.internal.widget.TintEditText;
@@ -46,8 +42,7 @@ import com.espian.showcaseview.targets.ViewTarget;
 import com.mobeta.android.dslv.DragSortListView;
 
 @SuppressLint("NewApi") @SuppressWarnings("deprecation")
-public class CreaListaActivity extends ActionBarActivity
-								implements TextDialogListener, ThreeButtonsDialogListener {
+public class CreaListaActivity extends ActionBarActivity {
 
 	private ListaPersonalizzata celebrazione;
 	private DatabaseCanti listaCanti;
@@ -74,13 +69,15 @@ public class CreaListaActivity extends ActionBarActivity
 //	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista";
 	private static final String PREF_FIRST_OPEN = "prima_apertura_crealista_v2";
 	
-	private final String AGGIUNGI_POSIZIONE_TAG = "1";
-	private final String RINOMINA_POSIZIONE_TAG = "2";
-	private final String SALVA_LISTA_TAG = "3";
+//	private final String AGGIUNGI_POSIZIONE_TAG = "1";
+//	private final String RINOMINA_POSIZIONE_TAG = "2";
+//	private final String SALVA_LISTA_TAG = "3";
 	private final String TEMP_TITLE = "temp_title";
 	
-    private TintEditText titleInput;
-    private View positiveAction;
+    private TintEditText titleInputRename;
+    private View positiveActionRename;
+    private TintEditText titleInputAdd;
+    private View positiveActionAdd;
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -213,7 +210,7 @@ public class CreaListaActivity extends ActionBarActivity
 	            .callback(new MaterialDialog.Callback() {
 	                @Override
 	                public void onPositive(MaterialDialog dialog) {
-	                	nomiElementi.set(positionToRename, titleInput.getText().toString());
+	                	nomiElementi.set(positionToRename, titleInputRename.getText().toString());
         	            adapter.notifyDataSetChanged();
 //	        	    	if (titleInput.getText() == null
 //	        	    			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
@@ -225,12 +222,12 @@ public class CreaListaActivity extends ActionBarActivity
 //	        	    		nomiElementi.set(positionToRename, titleInput.getText().toString());
 //	        	            adapter.notifyDataSetChanged();
 //	        	    	}
-        	            CreaListaActivity.this.setRequestedOrientation(prevOrientation);
+        	            setRequestedOrientation(prevOrientation);
 	                }
 
 	                @Override
 	                public void onNegative(MaterialDialog dialog) {
-		        		CreaListaActivity.this.setRequestedOrientation(prevOrientation);
+		        		setRequestedOrientation(prevOrientation);
 	                }
 	            }).build();
 				
@@ -241,32 +238,32 @@ public class CreaListaActivity extends ActionBarActivity
 			        	if (keyCode == KeyEvent.KEYCODE_BACK
 			        			&& event.getAction() == KeyEvent.ACTION_UP) {
 			        		arg0.dismiss();
-			        		CreaListaActivity.this.setRequestedOrientation(prevOrientation);
+			        		setRequestedOrientation(prevOrientation);
 			        		return true;
 			            }
 			            return false;
 			        }
 		        });
 				
-				positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
-				titleInput = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
-				titleInput.setText(nomiElementi.get(positionToRename));
-				titleInput.selectAll();
-				titleInput.addTextChangedListener(new TextWatcher() {
+				positiveActionRename = dialog.getActionButton(DialogAction.POSITIVE);
+				titleInputRename = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
+				titleInputRename.setText(nomiElementi.get(positionToRename));
+				titleInputRename.selectAll();
+				titleInputRename.addTextChangedListener(new TextWatcher() {
 			        @Override
 			        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			        }
 			
 			        @Override
 			        public void onTextChanged(CharSequence s, int start, int before, int count) {
-			            positiveAction.setEnabled(s.toString().trim().length() > 0);
+			        	positiveActionRename.setEnabled(s.toString().trim().length() > 0);
 			        }
 			
 			        @Override
 			        public void afterTextChanged(Editable s) {
 			        }
 			    });
-//				titleInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//				titleInputRename.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //				    @Override
 //				    public void onFocusChange(View v, boolean hasFocus) {
 //				        if (hasFocus) {
@@ -276,20 +273,11 @@ public class CreaListaActivity extends ActionBarActivity
 //				});
 		        dialog.show();
 		        dialog.setCancelable(false);
-//		        titleInput.requestFocus();
+//		        titleInputRename.requestFocus();
 		        return true;
 			}
 		});	
         
-//		Button saveExit = (Button) findViewById(R.id.button_save_exit);
-//		saveExit.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if (saveList())
-//					finish();
-//			}
-//		});
-		
 //		floatingActionButton = (FloatingActionButton) findViewById(R.id.button_floating_action);
 //		floatingActionButton.attachToListView(lv);
 		
@@ -300,25 +288,89 @@ public class CreaListaActivity extends ActionBarActivity
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
-				TextDialogFragment dialog = new TextDialogFragment();
-				dialog.setCustomMessage(getString(R.string.posizione_add_desc));
-				dialog.setListener(CreaListaActivity.this);
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				TextDialogFragment dialog = new TextDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.posizione_add_desc));
+//				dialog.setListener(CreaListaActivity.this);
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//		        dialog.show(getSupportFragmentManager(), AGGIUNGI_POSIZIONE_TAG);
+//		        dialog.setCancelable(false);
+				MaterialDialog dialog = new MaterialDialog.Builder(CreaListaActivity.this)
+	            .title(R.string.posizione_add_desc)
+	            .customView(R.layout.dialog_customview)
+	            .positiveText(R.string.aggiungi_confirm)
+	            .negativeText(R.string.aggiungi_dismiss)
+	            .callback(new MaterialDialog.Callback() {
+	                @Override
+	                public void onPositive(MaterialDialog dialog) {
+	                	findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
+	    	    		nomiElementi.add(titleInputAdd.getText().toString());
+	    	    		if (modifica)
+	    	    			nomiCanti.add("");
+	    	            adapter.notifyDataSetChanged();
+        	            setRequestedOrientation(prevOrientation);
+	                }
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+	                @Override
+	                public void onNegative(MaterialDialog dialog) {
+		        		setRequestedOrientation(prevOrientation);
+	                }
+	            }).build();
+				
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-		        dialog.show(getSupportFragmentManager(), AGGIUNGI_POSIZIONE_TAG);
+				
+				positiveActionAdd = dialog.getActionButton(DialogAction.POSITIVE);
+				titleInputAdd = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
+				titleInputAdd.addTextChangedListener(new TextWatcher() {
+			        @Override
+			        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			        }
+			
+			        @Override
+			        public void onTextChanged(CharSequence s, int start, int before, int count) {
+			        	positiveActionAdd.setEnabled(s.toString().trim().length() > 0);
+			        }
+			
+			        @Override
+			        public void afterTextChanged(Editable s) {
+			        }
+			    });
+//				titleInputAdd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//				    @Override
+//				    public void onFocusChange(View v, boolean hasFocus) {
+//				        if (hasFocus) {
+//				            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+//				        }
+//				    }
+//				});
+		        dialog.show();
 		        dialog.setCancelable(false);
+		        positiveActionAdd.setEnabled(false); // disabled by default
+//		        titleInputAdd.requestFocus();
 			}
 		});
 		
@@ -380,25 +432,69 @@ public class CreaListaActivity extends ActionBarActivity
 		case android.R.id.home:
 			if (nomiElementi.size() > 0) {
 				blockOrientation();
-				ThreeButtonsDialogFragment dialog3 = new ThreeButtonsDialogFragment();
-				dialog3.setCustomMessage(getString(R.string.save_list_question));
-				dialog3.setListener(CreaListaActivity.this);
-				dialog3.setOnKeyListener(new Dialog.OnKeyListener() {
+//				ThreeButtonsDialogFragment dialog3 = new ThreeButtonsDialogFragment();
+//				dialog3.setCustomMessage(getString(R.string.save_list_question));
+//				dialog3.setListener(CreaListaActivity.this);
+//				dialog3.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//		        dialog3.show(getSupportFragmentManager(), SALVA_LISTA_TAG);
+//		        dialog3.setCancelable(false);
+				MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.save_list_title)
+                .content(R.string.save_list_question)
+                .positiveText(R.string.confirm)
+                .negativeText(R.string.dismiss)
+                .neutralText(R.string.cancel)
+                .callback(new MaterialDialog.FullCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                		setRequestedOrientation(prevOrientation);
+                    	if (saveList()) {
+                    		finish();
+                    		overridePendingTransition(0, R.anim.slide_out_bottom);
+                    	}
+                    }
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+                    @Override
+                    public void onNeutral(MaterialDialog dialog) {
+                    	setRequestedOrientation(prevOrientation);
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                		setRequestedOrientation(prevOrientation);
+                		finish();
+                		overridePendingTransition(0, R.anim.slide_out_bottom);
+                    }
+                })
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-		        dialog3.show(getSupportFragmentManager(), SALVA_LISTA_TAG);
-		        dialog3.setCancelable(false);
+                dialog.show();
+                dialog.setCancelable(false);
 		        return true;
 			}
 			else {
@@ -415,25 +511,69 @@ public class CreaListaActivity extends ActionBarActivity
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (nomiElementi.size() > 0) {
 				blockOrientation();
-				ThreeButtonsDialogFragment dialog = new ThreeButtonsDialogFragment();
-				dialog.setCustomMessage(getString(R.string.save_list_question));
-				dialog.setListener(CreaListaActivity.this);
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				ThreeButtonsDialogFragment dialog = new ThreeButtonsDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.save_list_question));
+//				dialog.setListener(CreaListaActivity.this);
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//		        dialog.show(getSupportFragmentManager(), SALVA_LISTA_TAG);
+//		        dialog.setCancelable(false);
+				MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.save_list_title)
+                .content(R.string.save_list_question)
+                .positiveText(R.string.confirm)
+                .negativeText(R.string.dismiss)
+                .neutralText(R.string.cancel)
+                .callback(new MaterialDialog.FullCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                		setRequestedOrientation(prevOrientation);
+                    	if (saveList()) {
+                    		finish();
+                    		overridePendingTransition(0, R.anim.slide_out_bottom);
+                    	}
+                    }
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+                    @Override
+                    public void onNeutral(MaterialDialog dialog) {
+                    	setRequestedOrientation(prevOrientation);
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                		setRequestedOrientation(prevOrientation);
+                		finish();
+                		overridePendingTransition(0, R.anim.slide_out_bottom);
+                    }
+                })
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-		        dialog.show(getSupportFragmentManager(), SALVA_LISTA_TAG);
-		        dialog.setCancelable(false);
+                dialog.show();
+                dialog.setCancelable(false);
 		        return true;
 			}
 			else {
@@ -578,66 +718,66 @@ public class CreaListaActivity extends ActionBarActivity
 			lv.setKeepScreenOn(false);
     }
     
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog, String titolo) {
-    	if (dialog.getTag().equals(AGGIUNGI_POSIZIONE_TAG)) {
-	    	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
-	    		Toast toast = Toast.makeText(getApplicationContext()
-	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
-	    		toast.show();
-	    	}
-	    	else {
-	    		findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
-	    		nomiElementi.add(titolo);
-	    		if (modifica)
-	    			nomiCanti.add("");
-	            adapter.notifyDataSetChanged();
-	    	}
-    	}
-    	else if (dialog.getTag().equals(RINOMINA_POSIZIONE_TAG)) {
-	    	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
-	    		Toast toast = Toast.makeText(getApplicationContext()
-	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
-	    		toast.show();
-	    	}
-	    	else {
-	    		nomiElementi.set(positionToRename, titolo);
-	            adapter.notifyDataSetChanged();
-	    	}
-    	}
-    	dialog.dismiss();
-    	setRequestedOrientation(prevOrientation);
-    }
-    
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-		setRequestedOrientation(prevOrientation);
-    	if (saveList()) {
-    		finish();
-    		overridePendingTransition(0, R.anim.slide_out_bottom);
-    	}
-    }
-    
-    @Override
-    public void onDialogNeutralClick(DialogFragment dialog) {
-    	dialog.dismiss();
-    	setRequestedOrientation(prevOrientation);
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-    	if (dialog.getTag().equals(AGGIUNGI_POSIZIONE_TAG)
-    			|| dialog.getTag().equals(RINOMINA_POSIZIONE_TAG)) {
-    		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
-    	}
-    	else if (dialog.getTag().equals(SALVA_LISTA_TAG)) {
-    		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
-    		finish();
-    		overridePendingTransition(0, R.anim.slide_out_bottom);
-    	}
-    }
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog, String titolo) {
+//    	if (dialog.getTag().equals(AGGIUNGI_POSIZIONE_TAG)) {
+//	    	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
+//	    		Toast toast = Toast.makeText(getApplicationContext()
+//	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+//	    		toast.show();
+//	    	}
+//	    	else {
+//	    		findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
+//	    		nomiElementi.add(titolo);
+//	    		if (modifica)
+//	    			nomiCanti.add("");
+//	            adapter.notifyDataSetChanged();
+//	    	}
+//    	}
+//    	else if (dialog.getTag().equals(RINOMINA_POSIZIONE_TAG)) {
+//	    	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
+//	    		Toast toast = Toast.makeText(getApplicationContext()
+//	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+//	    		toast.show();
+//	    	}
+//	    	else {
+//	    		nomiElementi.set(positionToRename, titolo);
+//	            adapter.notifyDataSetChanged();
+//	    	}
+//    	}
+//    	dialog.dismiss();
+//    	setRequestedOrientation(prevOrientation);
+//    }
+//    
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+//		setRequestedOrientation(prevOrientation);
+//    	if (saveList()) {
+//    		finish();
+//    		overridePendingTransition(0, R.anim.slide_out_bottom);
+//    	}
+//    }
+//    
+//    @Override
+//    public void onDialogNeutralClick(DialogFragment dialog) {
+//    	dialog.dismiss();
+//    	setRequestedOrientation(prevOrientation);
+//    }
+//
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//    	if (dialog.getTag().equals(AGGIUNGI_POSIZIONE_TAG)
+//    			|| dialog.getTag().equals(RINOMINA_POSIZIONE_TAG)) {
+//    		dialog.dismiss();
+//    		setRequestedOrientation(prevOrientation);
+//    	}
+//    	else if (dialog.getTag().equals(SALVA_LISTA_TAG)) {
+//    		dialog.dismiss();
+//    		setRequestedOrientation(prevOrientation);
+//    		finish();
+//    		overridePendingTransition(0, R.anim.slide_out_bottom);
+//    	}
+//    }
     
     private class PositionAdapter extends ArrayAdapter<String> {    
         public PositionAdapter() {
