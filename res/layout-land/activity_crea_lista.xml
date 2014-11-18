@@ -40,22 +40,40 @@
           	android:textColor="?attr/colorAccent"
           	android:text="@string/list_title" />
  		
- 		<EditText
+<!--  		<EditText -->
+<!--         	android:id="@+id/textfieldTitle" -->
+<!--         	android:layout_width="fill_parent" -->
+<!--         	android:layout_height="wrap_content" -->
+<!--         	android:scrollHorizontally="true" -->
+<!--        		android:singleLine="true" -->
+<!--        		android:maxLines="1" -->
+<!--         	android:layout_marginLeft="@dimen/activity_min_margin" -->
+<!--        		android:layout_marginRight="@dimen/activity_min_margin" -->
+<!--        		android:layout_marginBottom="@dimen/activity_min_margin" -->
+<!--         	android:layout_alignBaseline="@id/textTitleDescription" -->
+<!--         	android:layout_toRightOf="@id/textTitleDescription" -->
+<!--         	android:layout_toEndOf="@id/textTitleDescription" -->
+<!--         	android:background="@drawable/theme_indigo_accent_edit_text_holo_dark" -->
+<!--         	android:textColor="@android:color/white" -->
+<!--         	android:textSize="30sp" -->
+<!--         	android:textCursorDrawable="@null" -->
+<!--         	android:hint="@string/list_title_modif" /> -->
+
+ 		<android.support.v7.internal.widget.TintEditText
         	android:id="@+id/textfieldTitle"
-        	android:layout_width="fill_parent"
+        	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:scrollHorizontally="true"
-       		android:singleLine="true"
-       		android:maxLines="1"
+        	android:singleLine="true"
+        	android:maxLines="1"
         	android:layout_marginLeft="@dimen/activity_min_margin"
-       		android:layout_marginRight="@dimen/activity_min_margin"
-       		android:layout_marginBottom="@dimen/activity_min_margin"
+        	android:layout_marginRight="@dimen/activity_min_margin"
+        	android:layout_marginBottom="@dimen/activity_min_margin"
         	android:layout_alignBaseline="@id/textTitleDescription"
         	android:layout_toRightOf="@id/textTitleDescription"
         	android:layout_toEndOf="@id/textTitleDescription"
-        	android:background="@drawable/theme_indigo_accent_edit_text_holo_dark"
-        	android:textColor="@android:color/white"
         	android:textSize="30sp"
+        	android:textColor="@android:color/white"
         	android:textCursorDrawable="@null"
         	android:hint="@string/list_title_modif" />
  		

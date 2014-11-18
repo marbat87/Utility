@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.internal.widget.TintEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -27,8 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -45,7 +44,7 @@ public class CustomLists extends Fragment  {
 	private ViewPager mViewPager;
 	SlidingTabLayout mSlidingTabLayout = null;
 	
-    private EditText titleInput;
+    private TintEditText titleInput;
     private View positiveAction;
   	
 	@Override
@@ -136,26 +135,32 @@ public class CustomLists extends Fragment  {
             .title(R.string.lista_add_desc)
             .customView(R.layout.dialog_customview)
             .positiveText(R.string.dialog_chiudi)
-            .negativeText(android.R.string.cancel)
+            .negativeText(R.string.cancel)
             .callback(new MaterialDialog.Callback() {
                 @Override
                 public void onPositive(MaterialDialog dialog) {
-                	if (titleInput.getText() == null 
-                			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
-                		Toast toast = Toast.makeText(getActivity()
-            				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
-                		toast.show();
-                		getActivity().setRequestedOrientation(prevOrientation);
-                	}
-                	else {
-//                		dialog.dismiss();
-                		getActivity().setRequestedOrientation(prevOrientation);
-                		Bundle bundle = new Bundle();
-                		bundle.putString("titolo", titleInput.getText().toString());
-                		bundle.putBoolean("modifica", false);
-                		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
-                		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
-                	}
+//                	if (titleInput.getText() == null 
+//                			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
+//                		Toast toast = Toast.makeText(getActivity()
+//            				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+//                		toast.show();
+//                		getActivity().setRequestedOrientation(prevOrientation);
+//                	}
+//                	else {
+////                		dialog.dismiss();
+//                		getActivity().setRequestedOrientation(prevOrientation);
+//                		Bundle bundle = new Bundle();
+//                		bundle.putString("titolo", titleInput.getText().toString());
+//                		bundle.putBoolean("modifica", false);
+//                		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+//                		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
+//                	}
+                	getActivity().setRequestedOrientation(prevOrientation);
+            		Bundle bundle = new Bundle();
+            		bundle.putString("titolo", titleInput.getText().toString());
+            		bundle.putBoolean("modifica", false);
+            		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+            		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
                 }
 
                 @Override
@@ -179,7 +184,7 @@ public class CustomLists extends Fragment  {
 	        });
 			
 			positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
-			titleInput = (EditText) dialog.getCustomView().findViewById(R.id.ListTitle);
+			titleInput = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
 			titleInput.addTextChangedListener(new TextWatcher() {
 		        @Override
 		        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -229,7 +234,7 @@ public class CustomLists extends Fragment  {
 //			dialogR.setCancelable(false);
 			SnackBar snackbar = 
 			    	new SnackBar(getActivity(),
-			    			getString(R.string.snackbar_list_delete),
+			    			getString(R.string.snackbar_list_delete) + titoliListe[listaDaCanc] + "'?",
 			    			getString(R.string.snackbar_remove),
 						new OnClickListener() {
 

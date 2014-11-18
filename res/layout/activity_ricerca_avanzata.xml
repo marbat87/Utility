@@ -13,9 +13,17 @@
         android:gravity="center"
         android:text="@string/advanced_search_subtitle"/>
     
-    <EditText
+<!--     <EditText -->
+<!--         android:id="@+id/textfieldRicerca" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:scrollHorizontally="true" -->
+<!--         android:singleLine="true" -->
+<!--         android:hint="@string/search_hint" /> -->
+    
+   	<android.support.v7.internal.widget.TintEditText
         android:id="@+id/textfieldRicerca"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollHorizontally="true"
         android:singleLine="true"
@@ -36,21 +44,6 @@
 	        android:paddingLeft="@dimen/activity_min_margin"
 	        android:paddingStart="@dimen/activity_min_margin"
 	        android:text="@string/list_result_title" />
-
-<!-- 	    <FrameLayout -->
-<!-- 	    	android:id="@+id/frame_search" -->
-<!--         	android:layout_width="wrap_content" -->
-<!--         	android:layout_height="wrap_content" -->
-<!--         	android:layout_alignParentRight="true" -->
-<!-- 	        android:layout_alignParentTop="true" -->
-<!--         	android:layout_marginRight="@dimen/min_button_margin"> -->
-	    
-<!-- 		   	<Button -->
-<!-- 		   	    android:id="@+id/button_search" -->
-<!-- 		        android:layout_width="wrap_content" -->
-<!-- 		        android:layout_height="wrap_content" -->
-<!-- 		        android:gravity="center" -->
-<!-- 		        android:text="@string/button_search" /> -->
 		   	
 		   	<com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/search_ripple"
@@ -76,52 +69,6 @@
                 android:background="@color/theme_primary"
                 android:text="@string/button_pulisci" />
 		   	
-		   	
-<!-- 		   	<com.indris.material.RippleView -->
-<!-- 		   	    style="?attr/customButtonStyle" -->
-<!--             	android:id="@+id/search_ripple" -->
-<!--             	android:layout_alignParentRight="true" -->
-<!-- 	        	android:layout_alignParentTop="true" -->
-<!-- 	        	android:layout_marginRight="@dimen/min_button_margin" -->
-<!--             	android:layout_width="wrap_content" -->
-<!--             	android:layout_height="wrap_content" -->
-<!--             	android:gravity="center" -->
-<!--             	android:text="@string/button_search" -->
-<!--             	ripple:alphaFactor="0.7" -->
-<!--             	ripple:rippleColor="?attr/customLightColor" /> -->
-		   	
-<!-- 		</FrameLayout> -->
-	    
-<!-- 	    <FrameLayout -->
-<!-- 	    	android:id="@+id/frame_pulisci" -->
-<!--         	android:layout_width="wrap_content" -->
-<!--         	android:layout_height="wrap_content" -->
-<!-- 	        android:layout_alignParentTop="true" -->
-<!-- 	        android:layout_toLeftOf="@id/frame_search" -->
-<!--         	android:layout_marginRight="@dimen/min_button_margin"> -->
-	    
-<!-- 			<Button -->
-<!-- 			    android:id="@+id/button_pulisci" -->
-<!-- 		        android:layout_width="wrap_content" -->
-<!-- 		        android:layout_height="wrap_content" -->
-<!-- 		        android:gravity="center" -->
-<!-- 		        android:text="@string/button_pulisci" /> -->
-			
-<!-- 			<com.indris.material.RippleView -->
-<!-- 			    style="?attr/customButtonStyle" -->
-<!--             	android:id="@+id/pulisci_ripple" -->
-<!--             	android:layout_width="wrap_content" -->
-<!--             	android:layout_height="wrap_content" -->
-<!--             	android:gravity="center" -->
-<!-- 		        android:text="@string/button_pulisci" -->
-<!--             	android:layout_marginRight="@dimen/min_button_margin" -->
-<!--             	android:layout_alignParentTop="true" -->
-<!--             	android:layout_toLeftOf="@id/search_ripple" -->
-<!--             	ripple:alphaFactor="0.7" -->
-<!--             	ripple:rippleColor="?attr/customLightColor" /> -->
-			
-<!-- 		</FrameLayout> -->
-	   	
     </RelativeLayout>
     
     <TextView
