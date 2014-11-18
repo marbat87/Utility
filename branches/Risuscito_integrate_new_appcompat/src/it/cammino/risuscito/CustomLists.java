@@ -1,8 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-import it.cammino.risuscito.TextDialogFragment.TextDialogListener;
-
 import java.util.Locale;
 
 import android.app.Dialog;
@@ -15,23 +12,29 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
-public class CustomLists extends Fragment
-						implements GenericDialogListener, TextDialogListener {
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.widgets.SnackBar;
+
+public class CustomLists extends Fragment  {
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private String[] titoliListe;
@@ -41,6 +44,9 @@ public class CustomLists extends Fragment
 	private int prevOrientation;
 	private ViewPager mViewPager;
 	SlidingTabLayout mSlidingTabLayout = null;
+	
+    private EditText titleInput;
+    private View positiveAction;
   	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +83,7 @@ public class CustomLists extends Fragment
     	super.onResume();
     	updateLista();
     	mSectionsPagerAdapter.notifyDataSetChanged();
-//    	mViewPager.setAdapter(mSectionsPagerAdapter);
+    	mSlidingTabLayout.setViewPager(mViewPager);
     }
     
 	@Override
@@ -107,25 +113,90 @@ public class CustomLists extends Fragment
 		switch (item.getItemId()) {
 		case R.id.action_add_list:
 			blockOrientation();
-			TextDialogFragment dialog = new TextDialogFragment();
-			dialog.setCustomMessage(getString(R.string.lista_add_desc));
-			dialog.setListener(CustomLists.this);
-			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//			TextDialogFragment dialog = new TextDialogFragment();
+//			dialog.setCustomMessage(getString(R.string.lista_add_desc));
+//			dialog.setListener(CustomLists.this);
+//			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//	            @Override
+//	            public boolean onKey(DialogInterface arg0, int keyCode,
+//	                    KeyEvent event) {
+//	                if (keyCode == KeyEvent.KEYCODE_BACK
+//	                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//	                    arg0.dismiss();
+//	                    getActivity().setRequestedOrientation(prevOrientation);
+//						return true;
+//	                }
+//	                return false;
+//	            }
+//	        });
+//			dialog.show(getChildFragmentManager(), null);
+//			dialog.setCancelable(false);
+			MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+            .title(R.string.lista_add_desc)
+            .customView(R.layout.dialog_customview)
+            .positiveText(R.string.dialog_chiudi)
+            .negativeText(android.R.string.cancel)
+            .callback(new MaterialDialog.Callback() {
+                @Override
+                public void onPositive(MaterialDialog dialog) {
+                	if (titleInput.getText() == null 
+                			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
+                		Toast toast = Toast.makeText(getActivity()
+            				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+                		toast.show();
+                		getActivity().setRequestedOrientation(prevOrientation);
+                	}
+                	else {
+//                		dialog.dismiss();
+                		getActivity().setRequestedOrientation(prevOrientation);
+                		Bundle bundle = new Bundle();
+                		bundle.putString("titolo", titleInput.getText().toString());
+                		bundle.putBoolean("modifica", false);
+                		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+                		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
+                	}
+                }
 
-	            @Override
-	            public boolean onKey(DialogInterface arg0, int keyCode,
-	                    KeyEvent event) {
-	                if (keyCode == KeyEvent.KEYCODE_BACK
-	                		&& event.getAction() == KeyEvent.ACTION_UP) {
-	                    arg0.dismiss();
-	                    getActivity().setRequestedOrientation(prevOrientation);
-						return true;
-	                }
-	                return false;
-	            }
+                @Override
+                public void onNegative(MaterialDialog dialog) {
+                	getActivity().setRequestedOrientation(prevOrientation);
+                }
+            }).build();
+			
+			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+		        @Override
+		        public boolean onKey(DialogInterface arg0, int keyCode,
+		        		KeyEvent event) {
+		        	if (keyCode == KeyEvent.KEYCODE_BACK
+		        			&& event.getAction() == KeyEvent.ACTION_UP) {
+		        		arg0.dismiss();
+		        		getActivity().setRequestedOrientation(prevOrientation);
+		        		return true;
+		            }
+		            return false;
+		        }
 	        });
-			dialog.show(getChildFragmentManager(), null);
-			dialog.setCancelable(false);
+			
+			positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+			titleInput = (EditText) dialog.getCustomView().findViewById(R.id.ListTitle);
+			titleInput.addTextChangedListener(new TextWatcher() {
+		        @Override
+		        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		        }
+		
+		        @Override
+		        public void onTextChanged(CharSequence s, int start, int before, int count) {
+		            positiveAction.setEnabled(s.toString().trim().length() > 0);
+		        }
+		
+		        @Override
+		        public void afterTextChanged(Editable s) {
+		        }
+		    });
+	        dialog.show();
+	        dialog.setCancelable(false);
+	        positiveAction.setEnabled(false); // disabled by default
 			return true;
 		case R.id.action_edit_list:
 			Bundle bundle = new Bundle();
@@ -135,27 +206,51 @@ public class CustomLists extends Fragment
 			getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
 			return true;
 		case R.id.action_remove_list:
-			blockOrientation();
+//			blockOrientation();
 			listaDaCanc = mViewPager.getCurrentItem() - 2;
-			GenericDialogFragment dialogR = new GenericDialogFragment();
-			dialogR.setListener(CustomLists.this);
-			dialogR.setCustomMessage(getString(R.string.list_delete));
-			dialogR.setOnKeyListener(new Dialog.OnKeyListener() {
+//			GenericDialogFragment dialogR = new GenericDialogFragment();
+//			dialogR.setListener(CustomLists.this);
+//			dialogR.setCustomMessage(getString(R.string.list_delete));
+//			dialogR.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//	            @Override
+//	            public boolean onKey(DialogInterface arg0, int keyCode,
+//	                    KeyEvent event) {
+//	                if (keyCode == KeyEvent.KEYCODE_BACK
+//	                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//	                    arg0.dismiss();
+//	                    getActivity().setRequestedOrientation(prevOrientation);
+//						return true;
+//	                }
+//	                return false;
+//	            }
+//	        });
+//			dialogR.show(getChildFragmentManager(), null);
+//			dialogR.setCancelable(false);
+			SnackBar snackbar = 
+			    	new SnackBar(getActivity(),
+			    			getString(R.string.snackbar_list_delete),
+			    			getString(R.string.snackbar_remove),
+						new OnClickListener() {
 
-	            @Override
-	            public boolean onKey(DialogInterface arg0, int keyCode,
-	                    KeyEvent event) {
-	                if (keyCode == KeyEvent.KEYCODE_BACK
-	                		&& event.getAction() == KeyEvent.ACTION_UP) {
-	                    arg0.dismiss();
-	                    getActivity().setRequestedOrientation(prevOrientation);
-						return true;
-	                }
-	                return false;
-	            }
-	        });
-			dialogR.show(getChildFragmentManager(), null);
-			dialogR.setCancelable(false);
+						@Override
+						public void onClick(View v) {
+							SQLiteDatabase db = listaCanti.getReadableDatabase();
+					    	
+//					    	Log.i("INDICE DA CANC", listaDaCanc+" ");
+					    	
+						    String sql = "DELETE FROM LISTE_PERS"
+						      		+ " WHERE _id = " + idListe[listaDaCanc];
+						    db.execSQL(sql);
+							db.close();
+							
+							updateLista();
+							mSectionsPagerAdapter.notifyDataSetChanged();
+							mSlidingTabLayout.setViewPager(mViewPager);
+						}
+					});
+			snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+			snackbar.show();
 			return true;
 		}
 		return false;
@@ -326,7 +421,6 @@ public class CustomLists extends Fragment
 
 		@Override
 		public int getCount() {
-//			return 2;
 			return 2 + titoliListe.length;
 		}
 
@@ -358,53 +452,52 @@ public class CustomLists extends Fragment
 	    }
 	}
 	
-	//chiamato quando si conferma di voler creare una lista
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog, String titolo) {
-        // User touched the dialog's positive button
-    	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
-    		Toast toast = Toast.makeText(getActivity()
-    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
-    		toast.show();
-    		dialog.dismiss();
-    		getActivity().setRequestedOrientation(prevOrientation);
-    	}
-    	else {
-    		dialog.dismiss();
-    		getActivity().setRequestedOrientation(prevOrientation);
-			Bundle bundle = new Bundle();
-			bundle.putString("titolo", titolo);
-			bundle.putBoolean("modifica", false);
-			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
-			getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
-    	}
-		
-    }
+//	//chiamato quando si conferma di voler creare una lista
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog, String titolo) {
+//        // User touched the dialog's positive button
+//    	if (titolo == null || titolo.trim().equalsIgnoreCase("")) {
+//    		Toast toast = Toast.makeText(getActivity()
+//    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+//    		toast.show();
+//    		dialog.dismiss();
+//    		getActivity().setRequestedOrientation(prevOrientation);
+//    	}
+//    	else {
+//    		dialog.dismiss();
+//    		getActivity().setRequestedOrientation(prevOrientation);
+//			Bundle bundle = new Bundle();
+//			bundle.putString("titolo", titolo);
+//			bundle.putBoolean("modifica", false);
+//			startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+//			getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
+//    	}
+//		
+//    }
     
-    //chiamato quando si conferma di voler cancellare una lista
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-    	SQLiteDatabase db = listaCanti.getReadableDatabase();
-    	
-//    	Log.i("INDICE DA CANC", listaDaCanc+" ");
-    	
-	    String sql = "DELETE FROM LISTE_PERS"
-	      		+ " WHERE _id = " + idListe[listaDaCanc];
-	    db.execSQL(sql);
-		db.close();
-		
-		updateLista();
-		mSectionsPagerAdapter.notifyDataSetChanged();
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-//		tabs.notifyDataSetChanged();
-		getActivity().setRequestedOrientation(prevOrientation);
-    }
-    
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        dialog.dismiss();
-        getActivity().setRequestedOrientation(prevOrientation);
-    }
+//    //chiamato quando si conferma di voler cancellare una lista
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+//    	SQLiteDatabase db = listaCanti.getReadableDatabase();
+//    	
+////    	Log.i("INDICE DA CANC", listaDaCanc+" ");
+//    	
+//	    String sql = "DELETE FROM LISTE_PERS"
+//	      		+ " WHERE _id = " + idListe[listaDaCanc];
+//	    db.execSQL(sql);
+//		db.close();
+//		
+//		updateLista();
+//		mSectionsPagerAdapter.notifyDataSetChanged();
+//		mSlidingTabLayout.setViewPager(mViewPager);
+//		getActivity().setRequestedOrientation(prevOrientation);
+//    }
+//    
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//        dialog.dismiss();
+//        getActivity().setRequestedOrientation(prevOrientation);
+//    }
     
     public void blockOrientation() {
         prevOrientation = getActivity().getRequestedOrientation();
