@@ -21,7 +21,10 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.widget.TintEditText;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -32,9 +35,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ActionItemTarget;
@@ -74,6 +78,9 @@ public class CreaListaActivity extends ActionBarActivity
 	private final String RINOMINA_POSIZIONE_TAG = "2";
 	private final String SALVA_LISTA_TAG = "3";
 	private final String TEMP_TITLE = "temp_title";
+	
+    private TintEditText titleInput;
+    private View positiveAction;
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,11 +156,11 @@ public class CreaListaActivity extends ActionBarActivity
         dataFragment3 = (RetainedFragment) getSupportFragmentManager().findFragmentByTag(TEMP_TITLE);
         if (dataFragment3 != null) {
         	tempArgs = dataFragment3.getArguments();
-            ((TextView)findViewById(R.id.textfieldTitle))
+            ((TintEditText)findViewById(R.id.textfieldTitle))
             	.setText(tempArgs.getCharSequence(TEMP_TITLE));
         }
         else {
-        	((TextView)findViewById(R.id.textfieldTitle))
+        	((TintEditText)findViewById(R.id.textfieldTitle))
         	.setText(titoloLista);
         }
         
@@ -178,27 +185,99 @@ public class CreaListaActivity extends ActionBarActivity
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				blockOrientation();
 				positionToRename = position;
-				TextDialogFragment dialog = new TextDialogFragment();
-				dialog.setCustomMessage(getString(R.string.posizione_rename));
-				dialog.setListener(CreaListaActivity.this);
-				dialog.setDefaultText(nomiElementi.get(positionToRename));
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				TextDialogFragment dialog = new TextDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.posizione_rename));
+//				dialog.setListener(CreaListaActivity.this);
+//				dialog.setDefaultText(nomiElementi.get(positionToRename));
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//		        dialog.show(getSupportFragmentManager(), RINOMINA_POSIZIONE_TAG);
+//		        dialog.setCancelable(false);
+				MaterialDialog dialog = new MaterialDialog.Builder(CreaListaActivity.this)
+	            .title(R.string.posizione_rename)
+	            .customView(R.layout.dialog_customview)
+	            .positiveText(R.string.aggiungi_rename)
+	            .negativeText(R.string.aggiungi_dismiss)
+	            .callback(new MaterialDialog.Callback() {
+	                @Override
+	                public void onPositive(MaterialDialog dialog) {
+	                	nomiElementi.set(positionToRename, titleInput.getText().toString());
+        	            adapter.notifyDataSetChanged();
+//	        	    	if (titleInput.getText() == null
+//	        	    			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
+//	        	    		Toast toast = Toast.makeText(getApplicationContext()
+//	        	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+//	        	    		toast.show();
+//	        	    	}
+//	        	    	else {
+//	        	    		nomiElementi.set(positionToRename, titleInput.getText().toString());
+//	        	            adapter.notifyDataSetChanged();
+//	        	    	}
+        	            CreaListaActivity.this.setRequestedOrientation(prevOrientation);
+	                }
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+	                @Override
+	                public void onNegative(MaterialDialog dialog) {
+		        		CreaListaActivity.this.setRequestedOrientation(prevOrientation);
+	                }
+	            }).build();
+				
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		CreaListaActivity.this.setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-		        dialog.show(getSupportFragmentManager(), RINOMINA_POSIZIONE_TAG);
+				
+				positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+				titleInput = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
+				titleInput.setText(nomiElementi.get(positionToRename));
+				titleInput.selectAll();
+				titleInput.addTextChangedListener(new TextWatcher() {
+			        @Override
+			        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			        }
+			
+			        @Override
+			        public void onTextChanged(CharSequence s, int start, int before, int count) {
+			            positiveAction.setEnabled(s.toString().trim().length() > 0);
+			        }
+			
+			        @Override
+			        public void afterTextChanged(Editable s) {
+			        }
+			    });
+//				titleInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//				    @Override
+//				    public void onFocusChange(View v, boolean hasFocus) {
+//				        if (hasFocus) {
+//				            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+//				        }
+//				    }
+//				});
+		        dialog.show();
 		        dialog.setCancelable(false);
-				return true;
+//		        titleInput.requestFocus();
+		        return true;
 			}
 		});	
         
@@ -403,10 +482,10 @@ public class CreaListaActivity extends ActionBarActivity
     private boolean saveList()  {
 		celebrazione = new ListaPersonalizzata();
 		
-		if (((TextView)findViewById(R.id.textfieldTitle)).getText() != null
-				&& !((TextView)findViewById(R.id.textfieldTitle)).getText()
+		if (((TintEditText)findViewById(R.id.textfieldTitle)).getText() != null
+				&& !((TintEditText)findViewById(R.id.textfieldTitle)).getText()
 					.toString().trim().equalsIgnoreCase("")) {
-    		titoloLista = ((TextView)findViewById(R.id.textfieldTitle)).getText().toString();
+    		titoloLista = ((TintEditText)findViewById(R.id.textfieldTitle)).getText().toString();
 		}
 		else {
     		Toast toast = Toast.makeText(CreaListaActivity.this
@@ -482,7 +561,7 @@ public class CreaListaActivity extends ActionBarActivity
 	  
 		dataFragment3 = new RetainedFragment();
 		tempArgs = new Bundle();
-		tempArgs.putCharSequence(TEMP_TITLE, ((TextView)findViewById(R.id.textfieldTitle)).getText());
+		tempArgs.putCharSequence(TEMP_TITLE, ((TintEditText)findViewById(R.id.textfieldTitle)).getText());
 		dataFragment3.setArguments(tempArgs);
 		getSupportFragmentManager().beginTransaction().add(dataFragment3, TEMP_TITLE).commit();
 	  

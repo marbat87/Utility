@@ -13,9 +13,17 @@
         android:gravity="center"
         android:text="@string/fast_search_subtitle"/>
     
-    <EditText
+<!--     <EditText -->
+<!--         android:id="@+id/textfieldRicerca" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:scrollHorizontally="true" -->
+<!--         android:singleLine="true" -->
+<!--         android:hint="@string/search_hint" /> -->
+    
+     <android.support.v7.internal.widget.TintEditText
         android:id="@+id/textfieldRicerca"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollHorizontally="true"
         android:singleLine="true"

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.internal.widget.TintEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ public class InsertVeloceFragment extends Fragment {
 
 	private DatabaseCanti listaCanti;
 	private String[] titoli;
-	private EditText searchPar;
+	private TintEditText searchPar;
 	private View rootView;
 	ListView lv;
 	
@@ -43,7 +44,7 @@ public class InsertVeloceFragment extends Fragment {
 		rootView = inflater.inflate(
 				R.layout.activity_ricerca_titolo, container, false);
 				
-		searchPar = (EditText) rootView.findViewById(R.id.textfieldRicerca);
+		searchPar = (TintEditText) rootView.findViewById(R.id.textfieldRicerca);
 		listaCanti = new DatabaseCanti(getActivity());
 				
 		lv = (ListView) rootView.findViewById(R.id.matchedList);

@@ -145,7 +145,7 @@
     <string name="barre_not_saved">Non hai cambiato la posizione del barr&#232;!</string>
     <string name="showcase_end_title">Fine</string>
     <string name="list_added">Aggiunto alla lista!</string>
-    <string name="posizione_rename">Rinomina elemento:</string>
+    <string name="posizione_rename">Rinomina elemento</string>
     <string name="showcase_welcome_crea">Benvenuto. Da qui puoi creare/modificare la tua lista personalizzata per qualsiasi celebrazione.</string>
     <string name="showcase_add_pos_desc">Con questo pulsante puoi aggiungere un nuovo elemento a piacere (es. \"Canto iniziale\", \"prima lettura\", etc.).
         Puoi aggiungere fino a 30 elementi.</string>
@@ -213,6 +213,7 @@
     <string name="single_choice_ok">CONFERMA</string>
     <string name="dialog_replace_title">Sostituisci canto</string>
     <string name="dialog_reset_list_title">Resetta lista</string>
-    <string name="snackbar_list_delete">Rimuovere questa lista creata da te?</string>
+    <string name="snackbar_list_delete">Rimuovere la lista \'</string>
+    <string name="aggiungi_rename">RINOMINA</string>
     
 </resources>

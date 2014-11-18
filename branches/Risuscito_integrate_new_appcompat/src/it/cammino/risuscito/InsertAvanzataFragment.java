@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.internal.widget.TintEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class InsertAvanzataFragment extends Fragment {
 
 	private DatabaseCanti listaCanti;
 	private String[] titoli;
-	private EditText searchPar;
+	private TintEditText searchPar;
 	private View rootView;
 	private static String[][] aTexts;
 	ListView lv;
@@ -61,7 +62,7 @@ public class InsertAvanzataFragment extends Fragment {
 		rootView = inflater.inflate(
 				R.layout.activity_ricerca_avanzata, container, false);
 				
-		searchPar = (EditText) rootView.findViewById(R.id.textfieldRicerca);
+		searchPar = (TintEditText) rootView.findViewById(R.id.textfieldRicerca);
 		listaCanti = new DatabaseCanti(getActivity());
 				
 		lv = (ListView) rootView.findViewById(R.id.matchedList);
