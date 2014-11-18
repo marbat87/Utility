@@ -107,7 +107,7 @@
     <string name="lista_pers_vuota">La lista è vuota!</string>
     <string name="aggiungi_lista_crea">CREA</string>
     <string name="lista_add_desc">Titolo della nuova lista:</string>
-    <string name="list_delete">Vuoi cancellare questa lista creata da te?</string>
+<!--     <string name="list_delete">Vuoi cancellare questa lista creata da te?</string> -->
     <string name="save_list_question">Stai per uscire dalla creazione della lista personalizzata. Vuoi salvare le modifiche?</string>
     <string name="action_help">Aiuto</string>
     <string name="dialog_chiudi">OK</string>
@@ -213,5 +213,6 @@
     <string name="single_choice_ok">CONFERMA</string>
     <string name="dialog_replace_title">Sostituisci canto</string>
     <string name="dialog_reset_list_title">Resetta lista</string>
+    <string name="snackbar_list_delete">Rimuovere questa lista creata da te?</string>
     
 </resources>
