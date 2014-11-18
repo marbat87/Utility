@@ -37,7 +37,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
-import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.mobeta.android.dslv.DragSortListView;
 
@@ -973,12 +972,18 @@ public class CreaListaActivity extends ActionBarActivity {
 //										        		, R.string.list_save_exit
 //										        		, R.string.showcase_saveexit_desc
 //										        		, co);
-										        ActionItemTarget target = new ActionItemTarget(CreaListaActivity.this, R.id.action_save_list);
-										        showcaseView = ShowcaseView.insertShowcaseView(target
+//										        ActionItemTarget target = new ActionItemTarget(CreaListaActivity.this, R.id.action_save_list);
+//										        showcaseView = ShowcaseView.insertShowcaseView(target
+//										        		, CreaListaActivity.this
+//										        		, R.string.list_save_exit
+//										        		, R.string.showcase_saveexit_desc
+//										        		,co);
+										   		showcaseView = ShowcaseView.insertShowcaseView(
+										        		new ViewTarget(R.id.action_save_list, CreaListaActivity.this)
 										        		, CreaListaActivity.this
 										        		, R.string.list_save_exit
 										        		, R.string.showcase_saveexit_desc
-										        		,co);
+										        		, co);
 												showcaseView.setButtonText(getString(R.string.showcase_button_next));
 //												showcaseView.setScaleMultiplier(0.7f);
 												showcaseView.setScaleMultiplier(0.3f);
@@ -992,12 +997,18 @@ public class CreaListaActivity extends ActionBarActivity {
 														//spiegazione di come rivedere il tutorial
 														ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
 														co.buttonLayoutParams = lps;	
-												        ActionItemTarget target = new ActionItemTarget(CreaListaActivity.this, R.id.action_help);
-												        showcaseView = ShowcaseView.insertShowcaseView(target
+//												        ActionItemTarget target = new ActionItemTarget(CreaListaActivity.this, R.id.action_help);
+//												        showcaseView = ShowcaseView.insertShowcaseView(target
+//												        		, CreaListaActivity.this
+//												        		, R.string.showcase_end_title
+//												        		, R.string.showcase_help_general
+//												        		,co);
+												   		showcaseView = ShowcaseView.insertShowcaseView(
+												        		new ViewTarget(R.id.action_help, CreaListaActivity.this)
 												        		, CreaListaActivity.this
 												        		, R.string.showcase_end_title
 												        		, R.string.showcase_help_general
-												        		,co);
+												        		, co);
 												        showcaseView.setScaleMultiplier(0.3f);
 														showcaseView.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 		
