@@ -1,6 +1,8 @@
 package it.cammino.risuscito;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +24,12 @@ public class PreferencesFragment extends Fragment {
 	private int prevOrientation;
 	private SwitchCompat screenSwitch;
 	private SwitchCompat secondaSwitch;
+	private int saveEntries;
 	
 	private static final String SCREEN_ON = "screenOn";
 	private static final String SHOW_SECONDA = "showSecondaEucarestia";
 	private static final String DEFAULT_INDEX = "defaultIndex";
+	private static final String SAVE_LOCATION = "saveLocation";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,9 +125,8 @@ public class PreferencesFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				
-//				blockOrientation();
-				
-				new MaterialDialog.Builder(getActivity())
+				blockOrientation();
+				MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
                 .title(R.string.default_index_title)
                 .items(R.array.pref_default_index_entries)
                 .itemsCallbackSingleChoice(PreferenceManager
@@ -142,13 +146,87 @@ public class PreferencesFragment extends Fragment {
         	            	editor.apply();
         	            }
         	            
-//        	            getActivity().setRequestedOrientation(prevOrientation);
+        	            getActivity().setRequestedOrientation(prevOrientation);
                     }
                 })
                 .positiveText(R.string.single_choice_ok)
-                .positiveColorRes(R.color.theme_primary)
-                .build()
-                .show();
+                .positiveColorRes(R.color.theme_accent)
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		getActivity().setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
+		        });
+                dialog.show();
+                dialog.setCancelable(false);
+			}
+		});
+		
+		View saveLocationView = rootView.findViewById(R.id.save_location_layout);
+		
+		if (Utility.isExternalStorageReadable()) {
+			saveEntries = R.array.save_location_sd_entries;
+        }
+        else {
+        	saveEntries = R.array.save_location_nosd_entries;
+        }
+		
+		saveLocationView.setOnClickListener(new OnClickListener() {
+			
+			@SuppressLint("NewApi")
+			@Override
+			public void onClick(View v) {
+				
+				blockOrientation();
+				MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(R.string.save_location_title)
+                .items(saveEntries)
+                .itemsCallbackSingleChoice(PreferenceManager
+        				.getDefaultSharedPreferences(getActivity())
+        				.getInt(SAVE_LOCATION, 0), new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, String text) {
+                    	SharedPreferences.Editor editor = PreferenceManager
+        	                    .getDefaultSharedPreferences(getActivity())
+        	                    .edit();
+        				
+                    	editor.putInt(SAVE_LOCATION, which);
+        				
+        	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+        	            	editor.commit();
+        	            } else {
+        	            	editor.apply();
+        	            }
+        	            
+        	            getActivity().setRequestedOrientation(prevOrientation);
+                    }
+                })
+                .positiveText(R.string.single_choice_ok)
+                .positiveColorRes(R.color.theme_accent)
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		getActivity().setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
+		        });
+                dialog.show();
+                dialog.setCancelable(false);
 			}
 		});
 		

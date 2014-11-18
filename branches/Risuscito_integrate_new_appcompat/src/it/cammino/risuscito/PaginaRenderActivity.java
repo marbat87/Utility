@@ -131,6 +131,7 @@ public class PaginaRenderActivity extends ActionBarActivity
 	
 	private static final String PREF_FIRST_OPEN = "prima_apertura_new";
 	private static final String PREF_FIRST_OPEN_SCROLL = "prima_apertura_scroll";
+	private static final String SAVE_LOCATION = "saveLocation";
 	
 	private Handler mHandler = new Handler();
 	final Runnable mScrollDown = new Runnable()
@@ -1590,7 +1591,7 @@ public class PaginaRenderActivity extends ActionBarActivity
     	if (dialog.getTag().equals(DOWN_CHOOSE_DIALOG_TAG))  {  
 	    	final DownloadTask downloadTask = new DownloadTask(this);
 	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-			int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
+			int saveLocation = pref.getInt(SAVE_LOCATION, 0);
 			if (saveLocation == 1) {
 				File[] fileArray = ContextCompat.getExternalFilesDirs(this, null);
 				String localFile = fileArray[0].getAbsolutePath()
@@ -1892,9 +1893,14 @@ public class PaginaRenderActivity extends ActionBarActivity
    	
    	private void showHelp() {
    		blockOrientation();
-        ActionItemTarget targetNew = new ActionItemTarget(this, R.id.tonalita);
-        ShowcaseView showCase = ShowcaseView.insertShowcaseView(targetNew
-        		, this
+//        ActionItemTarget targetNew = new ActionItemTarget(this, R.id.tonalita);
+//        ShowcaseView showCase = ShowcaseView.insertShowcaseView(targetNew
+//        		, this
+//        		, R.string.action_tonalita
+//        		, R.string.showcase_tonalita_desc);
+        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+        		new ViewTarget(R.id.tonalita, PaginaRenderActivity.this)
+        		, PaginaRenderActivity.this
         		, R.string.action_tonalita
         		, R.string.showcase_tonalita_desc);
         showCase.setButtonText(getString(R.string.showcase_button_next));
@@ -1906,8 +1912,13 @@ public class PaginaRenderActivity extends ActionBarActivity
 			
 			@Override
 			public void onShowcaseViewHide(ShowcaseView showcaseView) {
-		        ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.tonalita);
-		        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//		        ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.tonalita);
+//		        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//		        		, PaginaRenderActivity.this
+//		        		, "1) " + getString(R.string.action_trasporta)
+//		        		, getString(R.string.showcase_chtab_desc));
+		        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+		        		new ViewTarget(R.id.tonalita, PaginaRenderActivity.this)
 		        		, PaginaRenderActivity.this
 		        		, "1) " + getString(R.string.action_trasporta)
 		        		, getString(R.string.showcase_chtab_desc));
@@ -1920,9 +1931,14 @@ public class PaginaRenderActivity extends ActionBarActivity
 					
 					@Override
 					public void onShowcaseViewHide(ShowcaseView showcaseView) {
-				        ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.tonalita);
+//				        ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.tonalita);
+//				        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+//				        		target
+//				        		, PaginaRenderActivity.this
+//				        		, "2) " + getString(R.string.action_salva_tonalita)
+//				        		, getString(R.string.showcase_savetab_desc));
 				        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
-				        		target
+				        		new ViewTarget(R.id.tonalita, PaginaRenderActivity.this)
 				        		, PaginaRenderActivity.this
 				        		, "2) " + getString(R.string.action_salva_tonalita)
 				        		, getString(R.string.showcase_savetab_desc));
@@ -1935,8 +1951,13 @@ public class PaginaRenderActivity extends ActionBarActivity
 							
 							@Override
 							public void onShowcaseViewHide(ShowcaseView showcaseView) {
-								ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.tonalita);
-						        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//								ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.tonalita);
+//						        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//						        		, PaginaRenderActivity.this
+//						        		, "3) " + getString(R.string.action_reset_tonalita)
+//						        		, getString(R.string.showcase_restab_desc));
+						        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+						        		new ViewTarget(R.id.tonalita, PaginaRenderActivity.this)
 						        		, PaginaRenderActivity.this
 						        		, "3) " + getString(R.string.action_reset_tonalita)
 						        		, getString(R.string.showcase_restab_desc));
@@ -1949,8 +1970,13 @@ public class PaginaRenderActivity extends ActionBarActivity
 									
 									@Override
 									public void onShowcaseViewHide(ShowcaseView showcaseView) {
-										ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
-								        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//										ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
+//								        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//								        		, PaginaRenderActivity.this
+//								        		, R.string.action_barre
+//								        		, R.string.showcase_barre_desc);
+								        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+								        		new ViewTarget(R.id.barre, PaginaRenderActivity.this)
 								        		, PaginaRenderActivity.this
 								        		, R.string.action_barre
 								        		, R.string.showcase_barre_desc);
@@ -1963,8 +1989,13 @@ public class PaginaRenderActivity extends ActionBarActivity
 											
 											@Override
 											public void onShowcaseViewHide(ShowcaseView showcaseView) {
-												ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
-										        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//												ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
+//										        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//										        		, PaginaRenderActivity.this
+//										        		, "1) " + getString(R.string.action_trasporta)
+//										        		, getString(R.string.showcase_chbarre_desc));
+										        ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+										        		new ViewTarget(R.id.barre, PaginaRenderActivity.this)
 										        		, PaginaRenderActivity.this
 										        		, "1) " + getString(R.string.action_trasporta)
 										        		, getString(R.string.showcase_chbarre_desc));
@@ -1977,8 +2008,13 @@ public class PaginaRenderActivity extends ActionBarActivity
 													
 													@Override
 													public void onShowcaseViewHide(ShowcaseView showcaseView) {
-														ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
-												        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//														ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
+//												        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//												        		, PaginaRenderActivity.this
+//												        		, "2) " + getString(R.string.action_salva_tonalita)
+//												        		, getString(R.string.showcase_savebarre_desc));
+														ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+												        		new ViewTarget(R.id.barre, PaginaRenderActivity.this)
 												        		, PaginaRenderActivity.this
 												        		, "2) " + getString(R.string.action_salva_tonalita)
 												        		, getString(R.string.showcase_savebarre_desc));
@@ -1991,12 +2027,17 @@ public class PaginaRenderActivity extends ActionBarActivity
 															
 															@Override
 															public void onShowcaseViewHide(ShowcaseView showcaseView) {
-																ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
-														        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//																ActionItemTarget target = new ActionItemTarget(PaginaRenderActivity.this, R.id.barre);
+//														        ShowcaseView showCase = ShowcaseView.insertShowcaseView(target
+//														        		, PaginaRenderActivity.this
+//														        		, "3) " + getString(R.string.action_reset_barre)
+//														        		, getString(R.string.showcase_resbarre_desc));
+//														        showCase.setButtonText(getString(R.string.showcase_button_next));
+																ShowcaseView showCase = ShowcaseView.insertShowcaseView(
+														        		new ViewTarget(R.id.barre, PaginaRenderActivity.this)
 														        		, PaginaRenderActivity.this
 														        		, "3) " + getString(R.string.action_reset_barre)
 														        		, getString(R.string.showcase_resbarre_desc));
-														        showCase.setButtonText(getString(R.string.showcase_button_next));
 														        showCase.setScaleMultiplier(0.4f);
 														        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 																	
@@ -2295,7 +2336,7 @@ public class PaginaRenderActivity extends ActionBarActivity
 	        // step 2
 			try {
 //		    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
-//				int saveLocation = Integer.parseInt(pref.getString("saveLocation", "0"));
+//				int saveLocation = Integer.parseInt(pref.getString(SAVE_LOCATION, "0"));
 				localPDFPath = "";
 //				if (saveLocation == 1) {
 				if (Utility.isExternalStorageReadable()) {
