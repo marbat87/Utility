@@ -34,6 +34,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
@@ -71,9 +72,8 @@ import android.widget.Toast;
 
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
-import com.espian.showcaseview.targets.ActionItemTarget;
 import com.espian.showcaseview.targets.ViewTarget;
-import com.gc.materialdesign.views.CheckBox;
+import com.gc.materialdesign.views.ButtonIcon;
 import com.gc.materialdesign.views.Slider;
 import com.gc.materialdesign.views.Slider.OnValueChangedListener;
 import com.ipaulpro.afilechooser.FileChooserActivity;
@@ -96,8 +96,10 @@ public class PaginaRenderActivity extends ActionBarActivity
 	private int idCanto;
 	private static MediaPlayer mediaPlayer;
 	private int favoriteFlag;
-	private CheckBox favouriteCheckBox;
-	ImageButton play_button, stop_button, rewind_button, ff_button, save_file, delete_file, play_scroll, stop_scroll;
+//	private ButtonIcon favouriteCheckBox, ;
+//	ButtonIcon play_button, stop_button, rewind_button, ff_button, save_file, delete_file, play_scroll, stop_scroll;
+	private ButtonIcon favouriteCheckBox, play_button, stop_button, rewind_button, ff_button, save_file, delete_file;
+	ImageButton play_scroll, stop_scroll;
 	Slider scroll_speed_bar;
 	TextView speed_text;
 	private ProgressDialog loadingMp3;
@@ -215,12 +217,12 @@ public class PaginaRenderActivity extends ActionBarActivity
 	    db.close();
 	    
         //recupera i pulsanti
-        play_button = (ImageButton) findViewById(R.id.play_song);
-        stop_button = (ImageButton) findViewById(R.id.stop_song);
-        rewind_button = (ImageButton) findViewById(R.id.rewind_song);
-        ff_button = (ImageButton) findViewById(R.id.fast_forward_song);
-        save_file = (ImageButton) findViewById(R.id.save_file);
-        delete_file = (ImageButton) findViewById(R.id.delete_file);
+        play_button = (ButtonIcon) findViewById(R.id.play_song);
+        stop_button = (ButtonIcon) findViewById(R.id.stop_song);
+        rewind_button = (ButtonIcon) findViewById(R.id.rewind_song);
+        ff_button = (ButtonIcon) findViewById(R.id.fast_forward_song);
+        save_file = (ButtonIcon) findViewById(R.id.save_file);
+        delete_file = (ButtonIcon) findViewById(R.id.delete_file);
         play_scroll = (ImageButton) findViewById(R.id.play_scroll);
         stop_scroll = (ImageButton) findViewById(R.id.stop_scroll);
         scroll_speed_bar = (Slider) findViewById(R.id.speed_seekbar);
@@ -1120,14 +1122,40 @@ public class PaginaRenderActivity extends ActionBarActivity
     @Override
     public void onResume() {
     	
-        favouriteCheckBox = (CheckBox) findViewById(R.id.favorite);
+        favouriteCheckBox = (ButtonIcon) findViewById(R.id.favorite);
         checkScreenAwake();
     	favoriteFlag = selectFavouriteFromSource(pagina);
         
-        if (favoriteFlag == 1)
-        	favouriteCheckBox.setChecked(true);
-        else
-        	favouriteCheckBox.setChecked(false);
+        if (favoriteFlag == 1) 
+        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.theme_primary), PorterDuff.Mode.SRC_ATOP);
+        else 
+        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+        
+        favouriteCheckBox.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				favouriteCheckBox.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+				if (favoriteFlag == 0) {
+					favoriteFlag = 1;
+					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.theme_primary), PorterDuff.Mode.SRC_ATOP);
+					Toast toast = Toast.makeText(PaginaRenderActivity.this
+							, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
+					toast.show();
+				}
+				else {
+					favoriteFlag = 0;
+					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+					Toast toast = Toast.makeText(PaginaRenderActivity.this
+							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT);
+					toast.show();
+				}
+				
+				Bundle bundle = PaginaRenderActivity.this.getIntent().getExtras();
+		        String pagina = bundle.getString("pagina");
+				
+				updateFavouriteFlag(favoriteFlag, pagina);
+			}
+		});
         
 //        favouriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
