@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.andraskindler.quickscroll.QuickScroll;
 import com.andraskindler.quickscroll.Scrollable;
 
