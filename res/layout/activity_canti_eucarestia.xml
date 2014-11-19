@@ -416,7 +416,7 @@
                 android:layout_marginRight="24dp"
                 android:background="@color/theme_accent"
                 risuscito:animate="true"
-                risuscito:icon="@drawable/ic_icon_broom" />
+                risuscito:iconFloat="@drawable/ic_icon_broom" />
 	   	
 <!--   	<RelativeLayout -->
 <!--         android:layout_width="fill_parent" -->

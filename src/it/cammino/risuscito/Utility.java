@@ -28,12 +28,12 @@ public class Utility {
         }
     }
 	
-	private static final int[] THEME_COLORS = {R.color.IndigoDark, R.color.IndigoDark,
-												R.color.BlueGreyDark, R.color.BlueGreyDark,
-												R.color.RedThemeDark, R.color.RedThemeDark,
-												R.color.DeepPurpleDark, R.color.DeepPurpleDark,
-												R.color.TealDark, R.color.TealDark,
-												R.color.BrownDark, R.color.BrownDark };
+//	private static final int[] THEME_COLORS = {R.color.IndigoDark, R.color.IndigoDark,
+//												R.color.BlueGreyDark, R.color.BlueGreyDark,
+//												R.color.RedThemeDark, R.color.RedThemeDark,
+//												R.color.DeepPurpleDark, R.color.DeepPurpleDark,
+//												R.color.TealDark, R.color.TealDark,
+//												R.color.BrownDark, R.color.BrownDark };
 	
     //metodo che restituisce la stringa di input senza la pagina all'inizio
     public static String truncatePage(String input) {
