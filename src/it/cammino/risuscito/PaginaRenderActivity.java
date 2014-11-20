@@ -351,15 +351,19 @@ public class PaginaRenderActivity extends ActionBarActivity
     		
     		if (localUrl.equalsIgnoreCase("") &&
     				personalUrl.equalsIgnoreCase("")) {
-    			save_file.setEnabled(true);
+//    			save_file.setEnabled(true);
+    			enableButtonIcon(save_file);
     			save_file.setVisibility(View.VISIBLE);
-    			delete_file.setEnabled(false);
+//    			delete_file.setEnabled(false);
+    			disableButtonIcon(delete_file);
     			delete_file.setVisibility(View.GONE);
     		}
     		else {
-    			save_file.setEnabled(false);
+//    			save_file.setEnabled(false);
+    			disableButtonIcon(save_file);
     			save_file.setVisibility(View.GONE);
-    			delete_file.setEnabled(true);
+//    			delete_file.setEnabled(true);
+    			enableButtonIcon(delete_file);
     			delete_file.setVisibility(View.VISIBLE);
     		}
     		
@@ -388,29 +392,41 @@ public class PaginaRenderActivity extends ActionBarActivity
 	    		}
 	        	    	
 	        	//disabilita il pulsante non utilizzabili in modalità stop
-	            stop_button.setEnabled(false);
-	            rewind_button.setEnabled(false);
-	            ff_button.setEnabled(false);
+//	            stop_button.setEnabled(false);
+//	            rewind_button.setEnabled(false);
+//	            ff_button.setEnabled(false);
+	            disableButtonIcon(stop_button);
+	            disableButtonIcon(rewind_button);
+	            disableButtonIcon(ff_button);
         	}
         	else {
         		switch (mediaPlayerState) {
         		case Started:
             		play_button.setSelected(true);
-            		stop_button.setEnabled(true);
-            		ff_button.setEnabled(true);
-            		rewind_button.setEnabled(true);
+//            		stop_button.setEnabled(true);
+//            		ff_button.setEnabled(true);
+//            		rewind_button.setEnabled(true);
+            		enableButtonIcon(stop_button);
+            		enableButtonIcon(ff_button);
+            		enableButtonIcon(rewind_button);
             		break;
         		case Paused:
         			play_button.setSelected(false);
-        			stop_button.setEnabled(true);
-        			ff_button.setEnabled(false);
-        			rewind_button.setEnabled(false);
+//        			stop_button.setEnabled(true);
+//        			ff_button.setEnabled(false);
+//        			rewind_button.setEnabled(false);
+        			enableButtonIcon(stop_button);
+        			disableButtonIcon(ff_button);
+        			disableButtonIcon(rewind_button);
         			break;
         		default:
         			play_button.setSelected(false);
-        			stop_button.setEnabled(false);
-        			ff_button.setEnabled(false);
-        			rewind_button.setEnabled(false);
+//        			stop_button.setEnabled(false);
+//        			ff_button.setEnabled(false);
+//        			rewind_button.setEnabled(false);
+        			disableButtonIcon(stop_button);
+        			disableButtonIcon(ff_button);
+        			disableButtonIcon(rewind_button);
         			break;
         		}
         	}
@@ -449,17 +465,21 @@ public class PaginaRenderActivity extends ActionBarActivity
     			    			if (personalUrl.equalsIgnoreCase("")) {
 	    			    			localFile = false;
 	    			    			cmdSetDataSource(url);
-	    			    			save_file.setEnabled(true);
+//	    			    			save_file.setEnabled(true);
+	    			    			enableButtonIcon(save_file);
 	    			    			save_file.setVisibility(View.VISIBLE);
-	    			    			delete_file.setEnabled(false);
+//	    			    			delete_file.setEnabled(false);
+	    			    			disableButtonIcon(delete_file);
 	    			    			delete_file.setVisibility(View.GONE);
     			    			}
     			    			else {
         			    			localFile = true;
         			    			cmdSetDataSource(personalUrl);
-        			    			save_file.setEnabled(false);
+//        			    			save_file.setEnabled(false);
+        			    			disableButtonIcon(save_file);
         			    			save_file.setVisibility(View.GONE);
-        			    			delete_file.setEnabled(true);
+//        			    			delete_file.setEnabled(true);
+        			    			enableButtonIcon(delete_file);
         			    			delete_file.setVisibility(View.VISIBLE);
     			    			}
     			    			
@@ -467,9 +487,11 @@ public class PaginaRenderActivity extends ActionBarActivity
     			    		else {
     			    			localFile = true;
     			    			cmdSetDataSource(localUrl);
-    			    			save_file.setEnabled(false);
+//    			    			save_file.setEnabled(false);
+    			    			disableButtonIcon(save_file);
     			    			save_file.setVisibility(View.GONE);
-    			    			delete_file.setEnabled(true);
+//    			    			delete_file.setEnabled(true);
+    			    			enableButtonIcon(delete_file);
     			    			delete_file.setVisibility(View.VISIBLE);
     			    		}
     			    		
@@ -699,9 +721,11 @@ public class PaginaRenderActivity extends ActionBarActivity
     					default:
 		        			localFile = true;
 		        			cmdSetDataSource(personalUrl);
-			    			save_file.setEnabled(false);
+//			    			save_file.setEnabled(false);
+			    			disableButtonIcon(save_file);
 			    			save_file.setVisibility(View.GONE);
-			    			delete_file.setEnabled(true);
+//			    			delete_file.setEnabled(true);
+			    			enableButtonIcon(delete_file);
 			    			delete_file.setVisibility(View.VISIBLE);
     			    		
 			    			if (mediaPlayerState == MP_State.Initialized)
@@ -769,37 +793,51 @@ public class PaginaRenderActivity extends ActionBarActivity
 	    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
 	    		
 	        	//disabilita il pulsante non utilizzabili in modalità stop
-	            stop_button.setEnabled(false);
-	            rewind_button.setEnabled(false);
-	            ff_button.setEnabled(false);
+//	            stop_button.setEnabled(false);
+//	            rewind_button.setEnabled(false);
+//	            ff_button.setEnabled(false);
+	            disableButtonIcon(stop_button);
+	            disableButtonIcon(rewind_button);
+	            disableButtonIcon(ff_button);
             }
         	else {
         		switch (mediaPlayerState) {
         		case Started:
             		play_button.setSelected(true);
-            		stop_button.setEnabled(true);
-            		ff_button.setEnabled(true);
-            		rewind_button.setEnabled(true);
+//            		stop_button.setEnabled(true);
+//            		ff_button.setEnabled(true);
+//            		rewind_button.setEnabled(true);
+            		enableButtonIcon(stop_button);
+            		enableButtonIcon(ff_button);
+            		enableButtonIcon(rewind_button);
             		break;
         		case Paused:
         			play_button.setSelected(false);
-        			stop_button.setEnabled(true);
-        			ff_button.setEnabled(false);
-        			rewind_button.setEnabled(false);
+//        			stop_button.setEnabled(true);
+//        			ff_button.setEnabled(false);
+//        			rewind_button.setEnabled(false);
+        			enableButtonIcon(stop_button);
+        			disableButtonIcon(ff_button);
+        			disableButtonIcon(rewind_button);
         			break;
         		default:
         			play_button.setSelected(false);
-        			stop_button.setEnabled(false);
-        			ff_button.setEnabled(false);
-        			rewind_button.setEnabled(false);
+//        			stop_button.setEnabled(false);
+//        			ff_button.setEnabled(false);
+//        			rewind_button.setEnabled(false);
+        			disableButtonIcon(stop_button);
+        			disableButtonIcon(ff_button);
+        			disableButtonIcon(rewind_button);
         			break;
         		}
         	}
             
             if (!personalUrl.equalsIgnoreCase("")) {
-    			save_file.setEnabled(false);
+//    			save_file.setEnabled(false);
+    			disableButtonIcon(save_file);
     			save_file.setVisibility(View.GONE);
-    			delete_file.setEnabled(true);
+//    			delete_file.setEnabled(true);
+    			enableButtonIcon(delete_file);
     			delete_file.setVisibility(View.VISIBLE);
     	    		
     			//mostra i pulsanti per il lettore musicale
@@ -811,9 +849,11 @@ public class PaginaRenderActivity extends ActionBarActivity
             else {
 	        	// nasconde i pulsanti
             	
-    			save_file.setEnabled(true);
+//    			save_file.setEnabled(true);
+    			enableButtonIcon(save_file);
     			save_file.setVisibility(View.VISIBLE);
-    			delete_file.setEnabled(false);
+//    			delete_file.setEnabled(false);
+    			disableButtonIcon(delete_file);
     			delete_file.setVisibility(View.GONE
     					);
 				Toast toast = Toast.makeText(PaginaRenderActivity.this
@@ -1469,9 +1509,12 @@ public class PaginaRenderActivity extends ActionBarActivity
     		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 	    		mediaPlayer.start();
 	    		play_button.setSelected(true);
-	    		stop_button.setEnabled(true);
-	    		ff_button.setEnabled(true);
-	    		rewind_button.setEnabled(true);
+//	    		stop_button.setEnabled(true);
+//	    		ff_button.setEnabled(true);
+//	    		rewind_button.setEnabled(true);
+	    		enableButtonIcon(stop_button);
+	    		enableButtonIcon(ff_button);
+	    		enableButtonIcon(rewind_button);
 	    		mediaPlayerState = MP_State.Started;
     		}
     		else {
@@ -1494,9 +1537,12 @@ public class PaginaRenderActivity extends ActionBarActivity
     		mediaPlayer.pause();
     		am.abandonAudioFocus(afChangeListener);
 			play_button.setSelected(false);
-			stop_button.setEnabled(true);
-			ff_button.setEnabled(false);
-			rewind_button.setEnabled(false);
+//			stop_button.setEnabled(true);
+//			ff_button.setEnabled(false);
+//			rewind_button.setEnabled(false);
+			enableButtonIcon(stop_button);
+			disableButtonIcon(ff_button);
+			disableButtonIcon(rewind_button);
     		mediaPlayerState = MP_State.Paused;
     	}else{
     		Toast.makeText(PaginaRenderActivity.this, 
@@ -1513,9 +1559,12 @@ public class PaginaRenderActivity extends ActionBarActivity
 			mediaPlayer.reset();
 			am.abandonAudioFocus(afChangeListener);
 			play_button.setSelected(false);
-			stop_button.setEnabled(false);
-			ff_button.setEnabled(false);
-			rewind_button.setEnabled(false);
+//			stop_button.setEnabled(false);
+//			ff_button.setEnabled(false);
+//			rewind_button.setEnabled(false);
+			disableButtonIcon(stop_button);
+			disableButtonIcon(ff_button);
+			disableButtonIcon(rewind_button);
 			mediaPlayerState = MP_State.Stopped;
 			showMediaPlayerState();
 			mediaPlayerState = MP_State.Idle;
@@ -1660,9 +1709,11 @@ public class PaginaRenderActivity extends ActionBarActivity
 //    		if (localUrl.equalsIgnoreCase("")) {
     			localFile = false;
     			cmdSetDataSource(url);
-    			save_file.setEnabled(true);
+//    			save_file.setEnabled(true);
+    			enableButtonIcon(save_file);
     			save_file.setVisibility(View.VISIBLE);
-    			delete_file.setEnabled(false);
+//    			delete_file.setEnabled(false);
+    			disableButtonIcon(delete_file);
     			delete_file.setVisibility(View.GONE);
 //    		}
 //    		else {
@@ -1698,9 +1749,11 @@ public class PaginaRenderActivity extends ActionBarActivity
     		db.execSQL(sql);
     		db.close();
     					
-			save_file.setEnabled(true);
+//			save_file.setEnabled(true);
+			enableButtonIcon(save_file);
 			save_file.setVisibility(View.VISIBLE);
-			delete_file.setEnabled(false);
+//			delete_file.setEnabled(false);
+			disableButtonIcon(delete_file);
 			delete_file.setVisibility(View.GONE);
 
 			if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)) {
@@ -1827,9 +1880,11 @@ public class PaginaRenderActivity extends ActionBarActivity
                     		localFile = true;
                     		personalUrl = path;
                             
-                			save_file.setEnabled(false);
+//                			save_file.setEnabled(false);
+                			disableButtonIcon(save_file);
                 			save_file.setVisibility(View.GONE);
-                			delete_file.setEnabled(true);
+//                			delete_file.setEnabled(true);
+                			enableButtonIcon(delete_file);
                 			delete_file.setVisibility(View.VISIBLE);
                 	    		
                 			//mostra i pulsanti per il lettore musicale
@@ -2333,9 +2388,11 @@ public class PaginaRenderActivity extends ActionBarActivity
 //	    		else {
 	    			localFile = true;
 	    			cmdSetDataSource(localUrl);
-	    			save_file.setEnabled(false);
+//	    			save_file.setEnabled(false);
+	    			disableButtonIcon(save_file);
 	    			save_file.setVisibility(View.GONE);
-	    			delete_file.setEnabled(true);
+//	    			delete_file.setEnabled(true);
+	    			enableButtonIcon(delete_file);
 	    			delete_file.setVisibility(View.VISIBLE);
 //	    		}
             }
@@ -2485,6 +2542,16 @@ public class PaginaRenderActivity extends ActionBarActivity
 				toast.show();
 	        }  
         }
+    }
+    
+    private void enableButtonIcon(ButtonIcon bIcon) {
+    	bIcon.setEnabled(true);
+    	bIcon.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+    }
+    
+    private void disableButtonIcon(ButtonIcon bIcon) {
+    	bIcon.setEnabled(false);
+    	bIcon.getDrawableIcon().setColorFilter(getResources().getColor(R.color.item_disabled), PorterDuff.Mode.SRC_ATOP);
     }
 
 }
