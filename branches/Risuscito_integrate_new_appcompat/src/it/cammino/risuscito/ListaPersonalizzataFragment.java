@@ -111,6 +111,7 @@ public class ListaPersonalizzataFragment extends Fragment {
                 		getActivity().setRequestedOrientation(prevOrientation);
                 	}
                 })
+                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
