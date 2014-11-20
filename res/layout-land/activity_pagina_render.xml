@@ -1,160 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:risuscito="http://schemas.android.com/apk/res-auto"
     android:id="@+id/image_render_layout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:gravity="top" >
-   
-    <RelativeLayout
-      	android:paddingTop="@dimen/activity_min_margin"
-    	android:paddingLeft="@dimen/activity_min_margin"
-    	android:paddingRight="@dimen/activity_min_margin"
-    	android:paddingBottom="@dimen/activity_min_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent" >
-
-    	<CheckBox
-		    android:id="@+id/favorite"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentTop="true"
-		    android:layout_centerHorizontal="true"
-		    android:button="?attr/customStar"
-		    android:soundEffectsEnabled="true" />    
-				
-		<ImageButton
-		    android:id="@+id/rewind_song"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_above="@+id/play_song"
-		    android:background="?attr/customRewind"
-		    android:contentDescription="@string/rewind"
-		    android:soundEffectsEnabled="true" />
-    	
-    	<ImageButton
-		    android:id="@+id/play_song"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_above="@+id/fast_forward_song"
-		    android:layout_alignParentLeft="true"
-		    android:background="?attr/customPlay"
-		    android:contentDescription="@string/play_song"
-		    android:soundEffectsEnabled="true" />
-
-    	<ImageButton
-		    android:id="@+id/fast_forward_song"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_above="@+id/stop_song"
-		    android:background="?attr/customFF"
-		    android:contentDescription="@string/fast_forward"
-		    android:soundEffectsEnabled="true" />
-    	
-		<ImageButton
-		    android:id="@+id/stop_song"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_above="@+id/delete_file"
-		    android:background="?attr/customStop"
-		    android:contentDescription="@string/stop_song"
-		    android:soundEffectsEnabled="true" />
-		
-		<ImageButton
-		    android:id="@+id/delete_file"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentBottom="true"
-		    android:layout_above="@+id/save_file"
-		    android:background="?attr/customDeleteFile"
-		    android:contentDescription="@string/delete"
-		    android:soundEffectsEnabled="true" />
-		
-		<ImageButton
-		    android:id="@+id/save_file"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentBottom="true"
-		    android:background="?attr/customSaveFile"
-		    android:contentDescription="@string/save_file"
-		    android:soundEffectsEnabled="true" />
-		
-<!-- 		<ImageView -->
-<!--             android:id="@+id/no_record_message" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!-- 		    android:layout_alignParentBottom="true" -->
-<!-- 		    android:layout_alignParentLeft="true" -->
-<!--            	android:text="@string/no_record" -->
-<!--            	android:contentDescription="@string/no_record" -->
-<!--            	android:visibility="gone" -->
-<!--            	android:src="@drawable/ic_alerts_and_states_error" /> -->
-
-	</RelativeLayout>
-	
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
     
-	    <WebView android:id="@+id/cantoView"
-    		android:layout_weight="1"
-	    	android:layout_width="fill_parent"
-	    	android:layout_height="0dip"/>
-	    
-	   	<LinearLayout
-		    android:layout_width="fill_parent"
-		    android:layout_gravity="bottom"
-	        android:background="?attr/customBottomBarColor"
-        	android:divider="?attr/dividerVertical"
-        	android:layout_height="@dimen/abc_action_bar_default_height_material"
-		    android:orientation="horizontal" >
-		
-	   	   	<TextView 
-	        	android:id="@+id/speed_text"
-	        	android:layout_height="wrap_content"
-	        	android:layout_width="wrap_content"
-	        	android:textAppearance="@style/myTheme.ActionBar.Text"
-	        	android:layout_gravity="center_vertical"
-	        	android:paddingLeft="@dimen/percent_padding"
-	        	android:minEms="3"/>
-	   	    
-		    <SeekBar
-		        android:id="@+id/speed_seekbar"
-		        android:layout_width="0dip"
-		        android:layout_weight="1"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="center_vertical"
-		        android:max="50"
-		        android:soundEffectsEnabled="true" />
-		
-		    <ImageButton
-		        android:id="@+id/play_scroll"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"	        
-	        	android:contentDescription="@string/play_scroll"
-		        style="@style/MyActionButton"
-		        android:src="?attr/customSlidePlay"
-		        android:soundEffectsEnabled="true" />
-		   
-		   	<ImageButton
-		        android:id="@+id/stop_scroll"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:contentDescription="@string/stop_scroll"
-		        style="@style/MyActionButton"
-		        android:src="?attr/customSlideStop"
-		        android:soundEffectsEnabled="true" />
-		        
-		</LinearLayout>
+    <android.support.v7.widget.Toolbar
+    	android:id="@+id/risuscito_toolbar"
+    	android:layout_height="?attr/actionBarSize"
+    	risuscito:theme="@style/ActionBarThemeOverlay"
+    	risuscito:popupTheme="@style/ActionBarPopupThemeOverlay"
+    	risuscito:titleTextAppearance="@style/ActionBar.TitleText"
+    	android:layout_width="match_parent"
+    	android:background="?attr/colorPrimary" />
+    
+    <LinearLayout
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal"
+    	android:gravity="top" >
+   
+	    <RelativeLayout
+	    	android:paddingTop="@dimen/activity_min_margin"
+	    	android:paddingBottom="@dimen/activity_min_margin"
+	    	android:layout_width="@dimen/abc_action_bar_default_height_material"
+	        android:layout_height="fill_parent" >
 	
-   	</LinearLayout>
+	<!--     	<CheckBox -->
+	<!-- 		    android:id="@+id/favorite" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:layout_alignParentTop="true" -->
+	<!-- 		    android:layout_centerHorizontal="true" -->
+	<!-- 		    android:button="?attr/customStar" -->
+	<!-- 		    android:soundEffectsEnabled="true" />     -->
+	
+	        <com.gc.materialdesign.views.ButtonIcon
+	            android:id="@+id/favorite"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+			    android:layout_alignParentTop="true"
+			    android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/ic_rating_favorite_normal"
+	            android:soundEffectsEnabled="true"  />
+					
+	<!-- 		<ImageButton -->
+	<!-- 		    android:id="@+id/rewind_song" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:layout_above="@+id/play_song" -->
+	<!-- 		    android:background="?attr/customRewind" -->
+	<!-- 		    android:contentDescription="@string/rewind" -->
+	<!-- 		    android:soundEffectsEnabled="true" /> -->
+	    	
+			<com.gc.materialdesign.views.ButtonIcon
+	            android:id="@+id/rewind_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	         	android:layout_above="@+id/play_song"
+	            android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/ic_av_rewind_active"
+	            android:soundEffectsEnabled="true"  />
+			
+	<!--     	<ImageButton -->
+	<!-- 		    android:id="@+id/play_song" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_above="@+id/fast_forward_song" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:background="?attr/customPlay" -->
+	<!-- 		    android:contentDescription="@string/play_song" -->
+	<!-- 		    android:soundEffectsEnabled="true" /> -->
+	    	
+	    	<com.gc.materialdesign.views.ButtonIcon
+	           	android:id="@+id/play_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	       	 	android:layout_above="@+id/fast_forward_song"
+	            android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/play_button_drawable"
+	            android:soundEffectsEnabled="true"  />
+	
+	<!--     	<ImageButton -->
+	<!-- 		    android:id="@+id/fast_forward_song" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:layout_above="@+id/stop_song" -->
+	<!-- 		    android:background="?attr/customFF" -->
+	<!-- 		    android:contentDescription="@string/fast_forward" -->
+	<!-- 		    android:soundEffectsEnabled="true" /> -->
+	    	
+	    	<com.gc.materialdesign.views.ButtonIcon
+	            android:id="@+id/fast_forward_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	         	android:layout_above="@+id/stop_song"
+	            android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/ic_av_fast_forward_active"
+	            android:soundEffectsEnabled="true"  />
+	    	
+	<!-- 		<ImageButton -->
+	<!-- 		    android:id="@+id/stop_song" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:layout_above="@+id/delete_file" -->
+	<!-- 		    android:background="?attr/customStop" -->
+	<!-- 		    android:contentDescription="@string/stop_song" -->
+	<!-- 		    android:soundEffectsEnabled="true" /> -->
+			
+			<com.gc.materialdesign.views.ButtonIcon
+	            android:id="@+id/stop_song"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	         	android:layout_above="@+id/delete_file"
+	            android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/ic_av_stop_active"
+	            android:soundEffectsEnabled="true"  />
+			
+	<!-- 		<ImageButton -->
+	<!-- 		    android:id="@+id/delete_file" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:layout_alignParentBottom="true" -->
+	<!-- 		    android:layout_above="@+id/save_file" -->
+	<!-- 		    android:background="?attr/customDeleteFile" -->
+	<!-- 		    android:contentDescription="@string/delete" -->
+	<!-- 		    android:soundEffectsEnabled="true" /> -->
+			
+			<com.gc.materialdesign.views.ButtonIcon
+	            android:id="@+id/delete_file"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+			    android:layout_alignParentBottom="true"
+			    android:layout_above="@+id/save_file"
+	            android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/ic_content_discard_active"
+	            android:soundEffectsEnabled="true"  />
+			
+	<!-- 		<ImageButton -->
+	<!-- 		    android:id="@+id/save_file" -->
+	<!-- 		    android:layout_width="wrap_content" -->
+	<!-- 		    android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!-- 		    android:layout_alignParentBottom="true" -->
+	<!-- 		    android:background="?attr/customSaveFile" -->
+	<!-- 		    android:contentDescription="@string/save_file" -->
+	<!-- 		    android:soundEffectsEnabled="true" /> -->
+			
+			<com.gc.materialdesign.views.ButtonIcon
+	            android:id="@+id/save_file"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	         	android:layout_alignParentBottom="true"
+	            android:layout_centerHorizontal="true"
+	            android:background="@color/theme_accent"
+	            risuscito:iconFloat="@drawable/ic_av_download_active"
+	            android:soundEffectsEnabled="true"  />
+			
+	<!-- 		<ImageView -->
+	<!--             android:id="@+id/no_record_message" -->
+	<!--             android:layout_width="wrap_content" -->
+	<!--             android:layout_height="wrap_content" -->
+	<!-- 		    android:layout_alignParentBottom="true" -->
+	<!-- 		    android:layout_alignParentLeft="true" -->
+	<!--            	android:text="@string/no_record" -->
+	<!--            	android:contentDescription="@string/no_record" -->
+	<!--            	android:visibility="gone" -->
+	<!--            	android:src="@drawable/ic_alerts_and_states_error" /> -->
+	
+		</RelativeLayout>
+		
+	    <LinearLayout
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent">
+	    
+		    <WebView android:id="@+id/cantoView"
+	    		android:layout_weight="1"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="0dip"/>
+		    
+		   	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_gravity="bottom"
+		        android:background="@color/theme_primary"
+	        	android:divider="?attr/dividerVertical"
+	        	android:layout_height="@dimen/abc_action_bar_default_height_material"
+			    android:orientation="horizontal" >
+			
+<!-- 		   	   	<TextView  -->
+<!-- 		        	android:id="@+id/speed_text" -->
+<!-- 		        	android:layout_height="wrap_content" -->
+<!-- 		        	android:layout_width="wrap_content" -->
+<!-- 		        	android:textAppearance="@style/myTheme.ActionBar.Text" -->
+<!-- 		        	android:layout_gravity="center_vertical" -->
+<!-- 		        	android:paddingLeft="@dimen/percent_padding" -->
+<!-- 		        	android:paddingStart="@dimen/percent_padding" -->
+<!-- 		        	android:minEms="3"/> -->
+		   	    
+	<!-- 		    <SeekBar -->
+	<!-- 		        android:id="@+id/speed_seekbar" -->
+	<!-- 		        android:layout_width="0dip" -->
+	<!-- 		        android:layout_weight="1" -->
+	<!-- 		        android:layout_height="wrap_content" -->
+	<!-- 		        android:layout_gravity="center_vertical" -->
+	<!-- 		        android:max="50" -->
+	<!-- 		        android:soundEffectsEnabled="true" /> -->
+	
+				<com.gc.materialdesign.views.Slider
+	        		android:id="@+id/speed_seekbar"
+	            	android:layout_width="0dip"
+	            	android:layout_weight="1"
+	            	android:layout_height="wrap_content"
+	           		android:layout_gravity="center_vertical"
+	            	android:background="@color/theme_accent"
+	            	risuscito:max="50"
+	            	risuscito:min="0"
+	            	android:soundEffectsEnabled="true"
+	            	risuscito:showNumberIndicator="true"/>
+			
+<!-- 			    <ImageButton -->
+<!-- 			        android:id="@+id/play_scroll" -->
+<!-- 			        android:layout_width="wrap_content" -->
+<!-- 			        android:layout_height="wrap_content"	         -->
+<!-- 		        	android:contentDescription="@string/play_scroll" -->
+<!-- 			        style="@style/MyActionButton" -->
+<!-- 			        android:src="@drawable/ic_action_slideshow" -->
+<!-- 			        android:soundEffectsEnabled="true" /> -->
+			    
+			    <com.gc.materialdesign.views.ButtonIcon
+		            android:id="@+id/play_scroll"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:background="@color/theme_accent"
+		            risuscito:iconFloat="@drawable/ic_action_slideshow"
+		            android:soundEffectsEnabled="true"  />
+			   
+<!-- 			   	<ImageButton -->
+<!-- 			        android:id="@+id/stop_scroll" -->
+<!-- 			        android:layout_width="wrap_content" -->
+<!-- 			        android:layout_height="wrap_content" -->
+<!-- 			        android:contentDescription="@string/stop_scroll" -->
+<!-- 			        style="@style/MyActionButton" -->
+<!-- 			         android:src="@drawable/ic_action_slideshow_stop" -->
+<!-- 			        android:soundEffectsEnabled="true" /> -->
+			   	
+			   	<com.gc.materialdesign.views.ButtonIcon
+            		android:id="@+id/stop_scroll"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+           			android:background="@color/theme_accent"
+            		risuscito:iconFloat="@drawable/ic_action_slideshow_stop"
+            		android:soundEffectsEnabled="true"  />
+			        
+			</LinearLayout>
+		
+	   	</LinearLayout>
+	   	
+	</LinearLayout>
     
 </LinearLayout>

@@ -65,9 +65,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.espian.showcaseview.OnShowcaseEventListener;
@@ -98,10 +96,10 @@ public class PaginaRenderActivity extends ActionBarActivity
 	private int favoriteFlag;
 //	private ButtonIcon favouriteCheckBox, ;
 //	ButtonIcon play_button, stop_button, rewind_button, ff_button, save_file, delete_file, play_scroll, stop_scroll;
-	private ButtonIcon favouriteCheckBox, play_button, stop_button, rewind_button, ff_button, save_file, delete_file;
-	ImageButton play_scroll, stop_scroll;
+	private ButtonIcon favouriteCheckBox, play_button, stop_button, rewind_button, ff_button, save_file, delete_file, play_scroll, stop_scroll;
+//	ImageButton play_scroll, stop_scroll;
 	Slider scroll_speed_bar;
-	TextView speed_text;
+//	TextView speed_text;
 	private ProgressDialog loadingMp3;
 	private PhoneStateListener phoneStateListener;
 	private static OnAudioFocusChangeListener afChangeListener;
@@ -155,7 +153,7 @@ public class PaginaRenderActivity extends ActionBarActivity
 	public static boolean scrollPlaying;
 	private RelativeLayout.LayoutParams lps;
 	
-	private final double MAX_SPEED = 50.0;
+//	private final double MAX_SPEED = 50.0;
 	private final long SCROLL_SLEEP = 700;
 	private final String SAVE_DIALOG_TAG = "1";
 	private final String DELETE_DIALOG_TAG = "2";
@@ -167,7 +165,7 @@ public class PaginaRenderActivity extends ActionBarActivity
 	private ProgressDialog mExportDialog;
 	private String localPDFPath;
 	
-    private static final String FILE_CHOOSER_TAG = "FileChooserExampleActivity";
+//    private static final String FILE_CHOOSER_TAG = "FileChooserExampleActivity";
     private static final int REQUEST_CODE = 6384;
 	
 	@SuppressLint("NewApi")
@@ -223,10 +221,10 @@ public class PaginaRenderActivity extends ActionBarActivity
         ff_button = (ButtonIcon) findViewById(R.id.fast_forward_song);
         save_file = (ButtonIcon) findViewById(R.id.save_file);
         delete_file = (ButtonIcon) findViewById(R.id.delete_file);
-        play_scroll = (ImageButton) findViewById(R.id.play_scroll);
-        stop_scroll = (ImageButton) findViewById(R.id.stop_scroll);
+        play_scroll = (ButtonIcon) findViewById(R.id.play_scroll);
+        stop_scroll = (ButtonIcon) findViewById(R.id.stop_scroll);
         scroll_speed_bar = (Slider) findViewById(R.id.speed_seekbar);
-        speed_text = (TextView) findViewById(R.id.speed_text);
+//        speed_text = (TextView) findViewById(R.id.speed_text);
         
     	am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		afChangeListener = new OnAudioFocusChangeListener() {
@@ -872,9 +870,9 @@ public class PaginaRenderActivity extends ActionBarActivity
 			@Override
 			public void onValueChanged(int value) {
 				speedValue = String.valueOf(value);
-                double tempValue = value / MAX_SPEED;
-                int textValue = (int)(tempValue * 100);
-                speed_text.setText(textValue + "%"); 
+//                double tempValue = value / MAX_SPEED;
+//                int textValue = (int)(tempValue * 100);
+//                speed_text.setText(textValue + "%"); 
 			}
 		});
 //        scroll_speed_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -1269,22 +1267,27 @@ public class PaginaRenderActivity extends ActionBarActivity
 //	        double tempValue = scroll_speed_bar.getProgress() / MAX_SPEED;
 	    	scroll_speed_bar.setValue(savedSpeed);
 	        speedValue = String.valueOf(scroll_speed_bar.getValue());
-	        double tempValue = scroll_speed_bar.getValue() / MAX_SPEED;
-	        int textValue = (int) (tempValue * 100);
-	        speed_text.setText(textValue + "%");
+//	        double tempValue = scroll_speed_bar.getValue() / MAX_SPEED;
+//	        int textValue = (int) (tempValue * 100);
+//	        speed_text.setText(textValue + "%");
 	    }
 	    else {
 //	    	Log.i("ROTAZIONE", "setto " + speedValue);
 	    	scroll_speed_bar.setValue(Integer.valueOf(speedValue));
-	    	double tempValue = scroll_speed_bar.getValue() / MAX_SPEED;
+//	    	double tempValue = scroll_speed_bar.getValue() / MAX_SPEED;
 //	    	scroll_speed_bar.setProgress(Integer.valueOf(speedValue));
 //	        double tempValue = scroll_speed_bar.getProgress() / MAX_SPEED;
-	        int textValue = (int) (tempValue * 100);
-	        speed_text.setText(textValue + "%");
+//	        int textValue = (int) (tempValue * 100);
+//	        speed_text.setText(textValue + "%");
 	    }
 	    
-	    if (scrollPlaying == true)
-	    	play_scroll.performClick();
+	    Log.i(this.getClass().toString(), "scrollPlaying? " + scrollPlaying);
+	    if (scrollPlaying) {
+//	    	play_scroll.performClick();
+			play_scroll.setVisibility(View.GONE);
+			stop_scroll.setVisibility(View.VISIBLE);
+			mScrollDown.run();
+	    }
 	    
 		HashMap<String, String> convMap = CambioAccordi.diffSemiToni(primaNota, notaCambio);
 		if (convMap != null) {
