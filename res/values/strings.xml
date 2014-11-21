@@ -216,5 +216,8 @@
     <string name="snackbar_list_delete">Rimuovere la lista \'</string>
     <string name="aggiungi_rename">RINOMINA</string>
     <string name="save_list_title">Salva lista</string>
+    <string name="download_link_title">Scarica o associa file locale</string>
+    <string name="dialog_delete_mp3_title">Elimina file scaricato</string>
+    <string name="dialog_delete_link_title">Scollega file locale</string>
     
 </resources>
