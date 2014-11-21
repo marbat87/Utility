@@ -219,5 +219,7 @@
     <string name="download_link_title">Scarica o associa file locale</string>
     <string name="dialog_delete_mp3_title">Elimina file scaricato</string>
     <string name="dialog_delete_link_title">Scollega file locale</string>
+    <string name="only_link_title">Associa file locale</string>
+    <string name="dialog_save_tab_title">Salva modifiche</string>
     
 </resources>

@@ -1,8 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.DownloadOrLinkDialogFragment.DownloadOrLinkDialogListener;
-import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -48,7 +45,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -87,8 +83,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PaginaRenderActivity extends ActionBarActivity
-			implements GenericDialogListener, DownloadOrLinkDialogListener {
+public class PaginaRenderActivity extends ActionBarActivity {
     
 	private DatabaseCanti listaCanti;
 	private String pagina;
@@ -156,12 +151,12 @@ public class PaginaRenderActivity extends ActionBarActivity
 	
 //	private final double MAX_SPEED = 50.0;
 	private final long SCROLL_SLEEP = 700;
-	private final String SAVE_DIALOG_TAG = "1";
-	private final String DELETE_DIALOG_TAG = "2";
-	private final String SALVA_ACCORDO_TAG = "3";
-	private final String DOWN_CHOOSE_DIALOG_TAG = "4";
-	private final String DELETE_LINK_TAG = "5";
-	private final String DELETE_ONLY_LINK_TAG = "6";
+//	private final String SAVE_DIALOG_TAG = "1";
+//	private final String DELETE_DIALOG_TAG = "2";
+//	private final String SALVA_ACCORDO_TAG = "3";
+//	private final String DOWN_CHOOSE_DIALOG_TAG = "4";
+//	private final String DELETE_LINK_TAG = "5";
+//	private final String DELETE_ONLY_LINK_TAG = "6";
 	
 	private ProgressDialog mExportDialog;
 	private String localPDFPath;
@@ -921,25 +916,63 @@ public class PaginaRenderActivity extends ActionBarActivity
 				@Override
 				public void onClick(View v) {
 					blockOrientation();
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.only_link));
-					dialog.setListener(PaginaRenderActivity.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.only_link));
+//					dialog.setListener(PaginaRenderActivity.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
+//	                dialog.setCancelable(false);
+					MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+                    .title(R.string.only_link_title)
+                    .content(R.string.only_link)
+                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+                    .callback(new MaterialDialog.FullCallback() {
+                    	@Override
+                    	public void onPositive(MaterialDialog dialog) {
+                    		setRequestedOrientation(prevOrientation);
+                    		startActivityForResult(new Intent(
+                    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+                    	}
 
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
+                    	@Override
+                    	public void onNeutral(MaterialDialog dialog) {}
+
+                    	@Override
+                    	public void onNegative(MaterialDialog dialog) {
+                    		setRequestedOrientation(prevOrientation);
+                    	}
+                    })
+                    .titleColor(getResources().getColor(android.R.color.black))
+                    .build();
+					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+				        @Override
+				        public boolean onKey(DialogInterface arg0, int keyCode,
+				        		KeyEvent event) {
+				        	if (keyCode == KeyEvent.KEYCODE_BACK
+				        			&& event.getAction() == KeyEvent.ACTION_UP) {
+				        		arg0.dismiss();
+				        		setRequestedOrientation(prevOrientation);
+				        		return true;
+				            }
+				            return false;
+				        }
 			        });
-	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
-	                dialog.setCancelable(false);
+                    dialog.show();
+                    dialog.setCancelable(false);
 				}
 			});
 
@@ -947,25 +980,92 @@ public class PaginaRenderActivity extends ActionBarActivity
 				@Override
 				public void onClick(View v) {
 					blockOrientation();
-					GenericDialogFragment dialog = new GenericDialogFragment();
-					dialog.setCustomMessage(getString(R.string.dialog_delete_link));
-					dialog.setListener(PaginaRenderActivity.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//					GenericDialogFragment dialog = new GenericDialogFragment();
+//					dialog.setCustomMessage(getString(R.string.dialog_delete_link));
+//					dialog.setListener(PaginaRenderActivity.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getSupportFragmentManager(), DELETE_ONLY_LINK_TAG);
+//	                dialog.setCancelable(false);
+					MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+                    .title(R.string.dialog_delete_link_title)
+                    .content(R.string.dialog_delete_link)
+                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+                    .callback(new MaterialDialog.FullCallback() {
+                    	@Override
+                    	public void onPositive(MaterialDialog dialog) {
+                    		Toast.makeText(PaginaRenderActivity.this
+                    				, getString(R.string.delink_delete)
+                    				, Toast.LENGTH_SHORT).show();
+                            
+                            if (mediaPlayerState == MP_State.Started
+                            		|| mediaPlayerState == MP_State.Paused)
+                            	cmdStop();
+                            
+                            mediaPlayer = new MediaPlayer();
+                    		mediaPlayerState = MP_State.Idle;
+                    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+                            
+                			localFile = false;
+                			personalUrl = "";
+                    		
+                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
+                    		String sql = "DELETE FROM LOCAL_LINKS" +
+                    				"  WHERE _id =  " + idCanto;
+                    		db.execSQL(sql);
+                    		db.close();
+                    					
+                			enableButtonIcon(save_file);
+                			save_file.setVisibility(View.VISIBLE);
+                			disableButtonIcon(delete_file);
+                			delete_file.setVisibility(View.GONE);
+                			
+                			play_button.setVisibility(View.GONE);
+                        	stop_button.setVisibility(View.GONE);
+                        	rewind_button.setVisibility(View.GONE);
+                        	ff_button.setVisibility(View.GONE);
 
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
+                    		setRequestedOrientation(prevOrientation);
+                    	}
+
+                    	@Override
+                    	public void onNeutral(MaterialDialog dialog) {}
+
+                    	@Override
+                    	public void onNegative(MaterialDialog dialog) {
+                    		setRequestedOrientation(prevOrientation);
+                    	}
+                    })
+                    .titleColor(getResources().getColor(android.R.color.black))
+                    .build();
+					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+				        @Override
+				        public boolean onKey(DialogInterface arg0, int keyCode,
+				        		KeyEvent event) {
+				        	if (keyCode == KeyEvent.KEYCODE_BACK
+				        			&& event.getAction() == KeyEvent.ACTION_UP) {
+				        		arg0.dismiss();
+				        		setRequestedOrientation(prevOrientation);
+				        		return true;
+				            }
+				            return false;
+				        }
 			        });
-	                dialog.show(getSupportFragmentManager(), DELETE_ONLY_LINK_TAG);
-	                dialog.setCancelable(false);
+                    dialog.show();
+                    dialog.setCancelable(false);
 				}
 			});
             
@@ -1166,24 +1266,71 @@ public class PaginaRenderActivity extends ActionBarActivity
 			}
 			else {
 				blockOrientation();
-				GenericDialogFragment dialog = new GenericDialogFragment();
-				dialog.setCustomMessage(getString(R.string.dialog_save_tab));
-				dialog.setListener(PaginaRenderActivity.this);
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				GenericDialogFragment dialog = new GenericDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.dialog_save_tab));
+//				dialog.setListener(PaginaRenderActivity.this);
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//                dialog.show(getSupportFragmentManager(), SALVA_ACCORDO_TAG);
+//                dialog.setCancelable(false);
+				MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+                .title(R.string.dialog_save_tab_title)
+                .content(R.string.dialog_save_tab)
+                .positiveText(R.string.confirm)
+                .negativeText(R.string.dismiss)
+                .callback(new MaterialDialog.FullCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                    	SQLiteDatabase db = listaCanti.getReadableDatabase();
+                		String sql = "UPDATE ELENCO" +
+                				"  SET saved_tab = \'" + notaCambio + "\' " + 
+                				"    , saved_barre = \'" + barreCambio + "\' " + 
+                				"  WHERE _id =  " + idCanto;
+                		db.execSQL(sql);
+                		db.close();
+                		pulisciVars();
+            			finish();
+            			overridePendingTransition(0, R.anim.slide_out_right);
+                    }
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+                    @Override
+                    public void onNeutral(MaterialDialog dialog) {}
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                    	pulisciVars();
+            			finish();
+            			overridePendingTransition(0, R.anim.slide_out_right);
+                    }
+                })
+                .titleColor(getResources().getColor(android.R.color.black))
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-                dialog.show(getSupportFragmentManager(), SALVA_ACCORDO_TAG);
+                dialog.show();
                 dialog.setCancelable(false);
                 break;
 			}
@@ -1316,24 +1463,71 @@ public class PaginaRenderActivity extends ActionBarActivity
         	}
         	else {
         		blockOrientation();
-				GenericDialogFragment dialog = new GenericDialogFragment();
-				dialog.setCustomMessage(getString(R.string.dialog_save_tab));
-				dialog.setListener(PaginaRenderActivity.this);
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				GenericDialogFragment dialog = new GenericDialogFragment();
+//				dialog.setCustomMessage(getString(R.string.dialog_save_tab));
+//				dialog.setListener(PaginaRenderActivity.this);
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//		            @Override
+//		            public boolean onKey(DialogInterface arg0, int keyCode,
+//		                    KeyEvent event) {
+//		                if (keyCode == KeyEvent.KEYCODE_BACK
+//		                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//		                    arg0.dismiss();
+//							setRequestedOrientation(prevOrientation);
+//							return true;
+//		                }
+//		                return false;
+//		            }
+//		        });
+//                dialog.show(getSupportFragmentManager(), SALVA_ACCORDO_TAG);
+//                dialog.setCancelable(false);
+        		MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+                .title(R.string.dialog_save_tab_title)
+                .content(R.string.dialog_save_tab)
+                .positiveText(R.string.confirm)
+                .negativeText(R.string.dismiss)
+                .callback(new MaterialDialog.FullCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                    	SQLiteDatabase db = listaCanti.getReadableDatabase();
+                		String sql = "UPDATE ELENCO" +
+                				"  SET saved_tab = \'" + notaCambio + "\' " + 
+                				"    , saved_barre = \'" + barreCambio + "\' " + 
+                				"  WHERE _id =  " + idCanto;
+                		db.execSQL(sql);
+                		db.close();
+                		pulisciVars();
+            			finish();
+            			overridePendingTransition(0, R.anim.slide_out_right);
+                    }
 
-		            @Override
-		            public boolean onKey(DialogInterface arg0, int keyCode,
-		                    KeyEvent event) {
-		                if (keyCode == KeyEvent.KEYCODE_BACK
-		                		&& event.getAction() == KeyEvent.ACTION_UP) {
-		                    arg0.dismiss();
-							setRequestedOrientation(prevOrientation);
-							return true;
-		                }
-		                return false;
-		            }
+                    @Override
+                    public void onNeutral(MaterialDialog dialog) {}
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                    	pulisciVars();
+            			finish();
+            			overridePendingTransition(0, R.anim.slide_out_right);
+                    }
+                })
+                .titleColor(getResources().getColor(android.R.color.black))
+                .build();
+				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			        @Override
+			        public boolean onKey(DialogInterface arg0, int keyCode,
+			        		KeyEvent event) {
+			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			        		arg0.dismiss();
+			        		setRequestedOrientation(prevOrientation);
+			        		return true;
+			            }
+			            return false;
+			        }
 		        });
-                dialog.show(getSupportFragmentManager(), SALVA_ACCORDO_TAG);
+                dialog.show();
                 dialog.setCancelable(false);
                 return true;
         	}
@@ -1849,154 +2043,154 @@ public class PaginaRenderActivity extends ActionBarActivity
 		}
 	};
 	
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-//    	if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {  	
-    	if (dialog.getTag().equals(DOWN_CHOOSE_DIALOG_TAG))  {  
-	    	final DownloadTask downloadTask = new DownloadTask(this);
-	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-			int saveLocation = pref.getInt(SAVE_LOCATION, 0);
-			if (saveLocation == 1) {
-				File[] fileArray = ContextCompat.getExternalFilesDirs(this, null);
-				String localFile = fileArray[0].getAbsolutePath()
-						+ "/"
-						+ Utility.filterMediaLink(url);
-				downloadTask.execute(url, localFile);
-			}
-			else {
-				String localFile = this.getFilesDir()
-						+ "/"
-						+ Utility.filterMediaLink(url);
-				downloadTask.execute(url, localFile);
-			}
-	    	
-	    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-	    	    @Override
-	    	    public void onCancel(DialogInterface dialog) {
-	                Toast.makeText(PaginaRenderActivity.this, getString(R.string.download_cancelled), Toast.LENGTH_SHORT).show();
-	    	        downloadTask.cancel(true);
-	    	        setRequestedOrientation(prevOrientation);
-	    	    }
-	    	});    	
-    	}
-    	else if (dialog.getTag().equals(DELETE_DIALOG_TAG))  {         
-    		File fileToDelete = new File(localUrl);
-    		fileToDelete.delete();
-    		Toast.makeText(this, getString(R.string.file_delete), Toast.LENGTH_SHORT).show();
-            
-            if (mediaPlayerState == MP_State.Started
-            		|| mediaPlayerState == MP_State.Paused)
-            	cmdStop();
-            
-            mediaPlayer = new MediaPlayer();
-    		mediaPlayerState = MP_State.Idle;
-    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
-            
-//    		localUrl = Utility.retrieveMediaFileLink(getApplicationContext(), url);
-//    		if (localUrl.equalsIgnoreCase("")) {
-    			localFile = false;
-    			cmdSetDataSource(url);
-//    			save_file.setEnabled(true);
-    			enableButtonIcon(save_file);
-    			save_file.setVisibility(View.VISIBLE);
-//    			delete_file.setEnabled(false);
-    			disableButtonIcon(delete_file);
-    			delete_file.setVisibility(View.GONE);
-//    		}
-//    		else {
-//    			localFile = true;
-//    			cmdSetDataSource(localUrl);
-//    			save_file.setEnabled(false);
-//    			save_file.setVisibility(View.GONE);
-//    			delete_file.setEnabled(true);
-//    			delete_file.setVisibility(View.VISIBLE);
-//    		}
-    		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
-    	}
-    	else if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)
-    			|| dialog.getTag().equals(DELETE_LINK_TAG))  {         
-    		Toast.makeText(this, getString(R.string.delink_delete), Toast.LENGTH_SHORT).show();
-            
-            if (mediaPlayerState == MP_State.Started
-            		|| mediaPlayerState == MP_State.Paused)
-            	cmdStop();
-            
-            mediaPlayer = new MediaPlayer();
-    		mediaPlayerState = MP_State.Idle;
-    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
-            
-			localFile = false;
-			personalUrl = "";
-//			cmdSetDataSource(url);
-    		
-    		SQLiteDatabase db = listaCanti.getReadableDatabase();
-    		String sql = "DELETE FROM LOCAL_LINKS" +
-    				"  WHERE _id =  " + idCanto;
-    		db.execSQL(sql);
-    		db.close();
-    					
-//			save_file.setEnabled(true);
-			enableButtonIcon(save_file);
-			save_file.setVisibility(View.VISIBLE);
-//			delete_file.setEnabled(false);
-			disableButtonIcon(delete_file);
-			delete_file.setVisibility(View.GONE);
-
-			if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)) {
-				play_button.setVisibility(View.GONE);
-        		stop_button.setVisibility(View.GONE);
-        		rewind_button.setVisibility(View.GONE);
-        		ff_button.setVisibility(View.GONE);
-			}
-			
-    		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
-    	}
-    	else if (dialog.getTag().equals(SALVA_ACCORDO_TAG))  {  		
-    		SQLiteDatabase db = listaCanti.getReadableDatabase();
-    		String sql = "UPDATE ELENCO" +
-    				"  SET saved_tab = \'" + notaCambio + "\' " + 
-    				"    , saved_barre = \'" + barreCambio + "\' " + 
-    				"  WHERE _id =  " + idCanto;
-    		db.execSQL(sql);
-    		db.close();
-    		pulisciVars();
-			finish();
-			overridePendingTransition(0, R.anim.slide_out_right);
-    	}
-    	else if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {
-    		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
-//    		ThemeManager.startActivity(PaginaRenderActivity.this, new Intent(
-//    				PaginaRenderActivity.this, FileChooserActivity.class), null);
-//    		startActivity(new Intent(
-//    				PaginaRenderActivity.this, FileChooserActivity.class), null);
-    		startActivityForResult(new Intent(
-    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
-    	}
-    }
-    
-    @Override
-    public void onDialogNeutralClick(DialogFragment dialog) {
-		dialog.dismiss();
-		setRequestedOrientation(prevOrientation);
-		startActivityForResult(new Intent(
-				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
-	}
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-    	if (dialog.getTag().equals(SALVA_ACCORDO_TAG)) {
-    		pulisciVars();
-			finish();
-			overridePendingTransition(0, R.anim.slide_out_right);
-    	}
-    	else {
-    		dialog.dismiss();
-    		setRequestedOrientation(prevOrientation);
-    	}
-    }
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+////    	if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {  	
+//    	if (dialog.getTag().equals(DOWN_CHOOSE_DIALOG_TAG))  {  
+//	    	final DownloadTask downloadTask = new DownloadTask(this);
+//	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
+//			int saveLocation = pref.getInt(SAVE_LOCATION, 0);
+//			if (saveLocation == 1) {
+//				File[] fileArray = ContextCompat.getExternalFilesDirs(this, null);
+//				String localFile = fileArray[0].getAbsolutePath()
+//						+ "/"
+//						+ Utility.filterMediaLink(url);
+//				downloadTask.execute(url, localFile);
+//			}
+//			else {
+//				String localFile = this.getFilesDir()
+//						+ "/"
+//						+ Utility.filterMediaLink(url);
+//				downloadTask.execute(url, localFile);
+//			}
+//	    	
+//	    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//	    	    @Override
+//	    	    public void onCancel(DialogInterface dialog) {
+//	                Toast.makeText(PaginaRenderActivity.this, getString(R.string.download_cancelled), Toast.LENGTH_SHORT).show();
+//	    	        downloadTask.cancel(true);
+//	    	        setRequestedOrientation(prevOrientation);
+//	    	    }
+//	    	});    	
+//    	}
+//    	else if (dialog.getTag().equals(DELETE_DIALOG_TAG))  {         
+//    		File fileToDelete = new File(localUrl);
+//    		fileToDelete.delete();
+//    		Toast.makeText(this, getString(R.string.file_delete), Toast.LENGTH_SHORT).show();
+//            
+//            if (mediaPlayerState == MP_State.Started
+//            		|| mediaPlayerState == MP_State.Paused)
+//            	cmdStop();
+//            
+//            mediaPlayer = new MediaPlayer();
+//    		mediaPlayerState = MP_State.Idle;
+//    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+//            
+////    		localUrl = Utility.retrieveMediaFileLink(getApplicationContext(), url);
+////    		if (localUrl.equalsIgnoreCase("")) {
+//    			localFile = false;
+//    			cmdSetDataSource(url);
+////    			save_file.setEnabled(true);
+//    			enableButtonIcon(save_file);
+//    			save_file.setVisibility(View.VISIBLE);
+////    			delete_file.setEnabled(false);
+//    			disableButtonIcon(delete_file);
+//    			delete_file.setVisibility(View.GONE);
+////    		}
+////    		else {
+////    			localFile = true;
+////    			cmdSetDataSource(localUrl);
+////    			save_file.setEnabled(false);
+////    			save_file.setVisibility(View.GONE);
+////    			delete_file.setEnabled(true);
+////    			delete_file.setVisibility(View.VISIBLE);
+////    		}
+//    		dialog.dismiss();
+//    		setRequestedOrientation(prevOrientation);
+//    	}
+//    	else if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)
+//    			|| dialog.getTag().equals(DELETE_LINK_TAG))  {         
+//    		Toast.makeText(this, getString(R.string.delink_delete), Toast.LENGTH_SHORT).show();
+//            
+//            if (mediaPlayerState == MP_State.Started
+//            		|| mediaPlayerState == MP_State.Paused)
+//            	cmdStop();
+//            
+//            mediaPlayer = new MediaPlayer();
+//    		mediaPlayerState = MP_State.Idle;
+//    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+//            
+//			localFile = false;
+//			personalUrl = "";
+////			cmdSetDataSource(url);
+//    		
+//    		SQLiteDatabase db = listaCanti.getReadableDatabase();
+//    		String sql = "DELETE FROM LOCAL_LINKS" +
+//    				"  WHERE _id =  " + idCanto;
+//    		db.execSQL(sql);
+//    		db.close();
+//    					
+////			save_file.setEnabled(true);
+//			enableButtonIcon(save_file);
+//			save_file.setVisibility(View.VISIBLE);
+////			delete_file.setEnabled(false);
+//			disableButtonIcon(delete_file);
+//			delete_file.setVisibility(View.GONE);
+//
+//			if (dialog.getTag().equals(DELETE_ONLY_LINK_TAG)) {
+//				play_button.setVisibility(View.GONE);
+//        		stop_button.setVisibility(View.GONE);
+//        		rewind_button.setVisibility(View.GONE);
+//        		ff_button.setVisibility(View.GONE);
+//			}
+//			
+//    		dialog.dismiss();
+//    		setRequestedOrientation(prevOrientation);
+//    	}
+//    	else if (dialog.getTag().equals(SALVA_ACCORDO_TAG))  {  		
+//    		SQLiteDatabase db = listaCanti.getReadableDatabase();
+//    		String sql = "UPDATE ELENCO" +
+//    				"  SET saved_tab = \'" + notaCambio + "\' " + 
+//    				"    , saved_barre = \'" + barreCambio + "\' " + 
+//    				"  WHERE _id =  " + idCanto;
+//    		db.execSQL(sql);
+//    		db.close();
+//    		pulisciVars();
+//			finish();
+//			overridePendingTransition(0, R.anim.slide_out_right);
+//    	}
+//    	else if (dialog.getTag().equals(SAVE_DIALOG_TAG))  {
+//    		dialog.dismiss();
+//    		setRequestedOrientation(prevOrientation);
+////    		ThemeManager.startActivity(PaginaRenderActivity.this, new Intent(
+////    				PaginaRenderActivity.this, FileChooserActivity.class), null);
+////    		startActivity(new Intent(
+////    				PaginaRenderActivity.this, FileChooserActivity.class), null);
+//    		startActivityForResult(new Intent(
+//    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+//    	}
+//    }
+//    
+//    @Override
+//    public void onDialogNeutralClick(DialogFragment dialog) {
+//		dialog.dismiss();
+//		setRequestedOrientation(prevOrientation);
+//		startActivityForResult(new Intent(
+//				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+//	}
+//
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//    	if (dialog.getTag().equals(SALVA_ACCORDO_TAG)) {
+//    		pulisciVars();
+//			finish();
+//			overridePendingTransition(0, R.anim.slide_out_right);
+//    	}
+//    	else {
+//    		dialog.dismiss();
+//    		setRequestedOrientation(prevOrientation);
+//    	}
+//    }
 
     private void SaveZoom(){
     		defaultZoomLevel = (int) (paginaView.getScale() *100);
