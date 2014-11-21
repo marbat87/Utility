@@ -2368,7 +2368,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
         		, R.string.action_tonalita
         		, R.string.showcase_tonalita_desc);
         showCase.setButtonText(getString(R.string.showcase_button_next));
-        showCase.setScaleMultiplier(0.4f);
+        showCase.setScaleMultiplier(0.3f);
         showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 			
 			@Override
@@ -2387,7 +2387,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 		        		, "1) " + getString(R.string.action_trasporta)
 		        		, getString(R.string.showcase_chtab_desc));
 		        showCase.setButtonText(getString(R.string.showcase_button_next));
-		        showCase.setScaleMultiplier(0.4f);
+		        showCase.setScaleMultiplier(0.3f);
 		        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 					
 					@Override
@@ -2407,7 +2407,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				        		, "2) " + getString(R.string.action_salva_tonalita)
 				        		, getString(R.string.showcase_savetab_desc));
 				        showCase.setButtonText(getString(R.string.showcase_button_next));
-				        showCase.setScaleMultiplier(0.4f);
+				        showCase.setScaleMultiplier(0.3f);
 				        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 							
 							@Override
@@ -2426,7 +2426,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 						        		, "3) " + getString(R.string.action_reset_tonalita)
 						        		, getString(R.string.showcase_restab_desc));
 						        showCase.setButtonText(getString(R.string.showcase_button_next));
-						        showCase.setScaleMultiplier(0.4f);
+						        showCase.setScaleMultiplier(0.3f);
 						        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 									
 									@Override
@@ -2445,7 +2445,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 								        		, R.string.action_barre
 								        		, R.string.showcase_barre_desc);
 								        showCase.setButtonText(getString(R.string.showcase_button_next));
-								        showCase.setScaleMultiplier(0.4f);
+								        showCase.setScaleMultiplier(0.3f);
 								        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 											
 											@Override
@@ -2464,7 +2464,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 										        		, "1) " + getString(R.string.action_trasporta)
 										        		, getString(R.string.showcase_chbarre_desc));
 										        showCase.setButtonText(getString(R.string.showcase_button_next));
-										        showCase.setScaleMultiplier(0.4f);
+										        showCase.setScaleMultiplier(0.3f);
 										        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 													
 													@Override
@@ -2483,7 +2483,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 												        		, "2) " + getString(R.string.action_salva_tonalita)
 												        		, getString(R.string.showcase_savebarre_desc));
 												        showCase.setButtonText(getString(R.string.showcase_button_next));
-												        showCase.setScaleMultiplier(0.4f);
+												        showCase.setScaleMultiplier(0.3f);
 												        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 															
 															@Override
@@ -2502,7 +2502,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 														        		, PaginaRenderActivity.this
 														        		, "3) " + getString(R.string.action_reset_barre)
 														        		, getString(R.string.showcase_resbarre_desc));
-														        showCase.setScaleMultiplier(0.4f);
+														        showCase.setScaleMultiplier(0.3f);
 														        showCase.setOnShowcaseEventListener(new OnShowcaseEventListener() {
 																	
 																	@Override
