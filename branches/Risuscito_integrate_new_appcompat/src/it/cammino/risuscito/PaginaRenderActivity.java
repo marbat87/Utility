@@ -68,6 +68,7 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
@@ -624,23 +625,88 @@ public class PaginaRenderActivity extends ActionBarActivity
 //			        });
 //	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
 //	                dialog.setCancelable(false);
-					DownloadOrLinkDialogFragment dialog = new DownloadOrLinkDialogFragment();
-					dialog.setListener(PaginaRenderActivity.this);
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//					DownloadOrLinkDialogFragment dialog = new DownloadOrLinkDialogFragment();
+//					dialog.setListener(PaginaRenderActivity.this);
+//					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//			            @Override
+//			            public boolean onKey(DialogInterface arg0, int keyCode,
+//			                    KeyEvent event) {
+//			                if (keyCode == KeyEvent.KEYCODE_BACK
+//			                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//			                    arg0.dismiss();
+//								setRequestedOrientation(prevOrientation);
+//								return true;
+//			                }
+//			                return false;
+//			            }
+//			        });
+//	                dialog.show(getSupportFragmentManager(), DOWN_CHOOSE_DIALOG_TAG);
+//	                dialog.setCancelable(false);
+					MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+	                .title(R.string.download_link_title)
+	                .content(R.string.downlink_message)
+	                .positiveText(R.string.downlink_download)
+	                .negativeText(R.string.cancel)
+	                .neutralText(R.string.downlink_choose)
+	                .callback(new MaterialDialog.FullCallback() {
+	                    @Override
+	                    public void onPositive(MaterialDialog dialog) {
+	                    	final DownloadTask downloadTask = new DownloadTask(PaginaRenderActivity.this);
+	            	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
+	            			int saveLocation = pref.getInt(SAVE_LOCATION, 0);
+	            			if (saveLocation == 1) {
+	            				File[] fileArray = ContextCompat.getExternalFilesDirs(PaginaRenderActivity.this, null);
+	            				String localFile = fileArray[0].getAbsolutePath()
+	            						+ "/"
+	            						+ Utility.filterMediaLink(url);
+	            				downloadTask.execute(url, localFile);
+	            			}
+	            			else {
+	            				String localFile = PaginaRenderActivity.this.getFilesDir()
+	            						+ "/"
+	            						+ Utility.filterMediaLink(url);
+	            				downloadTask.execute(url, localFile);
+	            			}
+	            	    	
+	            	    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+	            	    	    @Override
+	            	    	    public void onCancel(DialogInterface dialog) {
+	            	                Toast.makeText(PaginaRenderActivity.this, getString(R.string.download_cancelled), Toast.LENGTH_SHORT).show();
+	            	    	        downloadTask.cancel(true);
+	            	    	        setRequestedOrientation(prevOrientation);
+	            	    	    }
+	            	    	});  
+	                    }
 
-			            @Override
-			            public boolean onKey(DialogInterface arg0, int keyCode,
-			                    KeyEvent event) {
-			                if (keyCode == KeyEvent.KEYCODE_BACK
-			                		&& event.getAction() == KeyEvent.ACTION_UP) {
-			                    arg0.dismiss();
-								setRequestedOrientation(prevOrientation);
-								return true;
-			                }
-			                return false;
-			            }
+	                    @Override
+	                    public void onNeutral(MaterialDialog dialog) {
+	                		setRequestedOrientation(prevOrientation);
+	                		startActivityForResult(new Intent(
+	                				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+	                    }
+
+	                    @Override
+	                    public void onNegative(MaterialDialog dialog) {
+	                    	setRequestedOrientation(prevOrientation);
+	                    }
+	                })
+	                .titleColor(getResources().getColor(android.R.color.black))
+	                .build();
+					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+				        @Override
+				        public boolean onKey(DialogInterface arg0, int keyCode,
+				        		KeyEvent event) {
+				        	if (keyCode == KeyEvent.KEYCODE_BACK
+				        			&& event.getAction() == KeyEvent.ACTION_UP) {
+				        		arg0.dismiss();
+				        		setRequestedOrientation(prevOrientation);
+				        		return true;
+				            }
+				            return false;
+				        }
 			        });
-	                dialog.show(getSupportFragmentManager(), DOWN_CHOOSE_DIALOG_TAG);
+	                dialog.show();
 	                dialog.setCancelable(false);
 				}
 			});
@@ -650,47 +716,165 @@ public class PaginaRenderActivity extends ActionBarActivity
 				public void onClick(View v) {
 					if (personalUrl.equalsIgnoreCase("")) {
 						blockOrientation();
-						GenericDialogFragment dialog = new GenericDialogFragment();
-						dialog.setCustomMessage(getString(R.string.dialog_delete_mp3));
-						dialog.setListener(PaginaRenderActivity.this);
+//						GenericDialogFragment dialog = new GenericDialogFragment();
+//						dialog.setCustomMessage(getString(R.string.dialog_delete_mp3));
+//						dialog.setListener(PaginaRenderActivity.this);
+//						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//	
+//				            @Override
+//				            public boolean onKey(DialogInterface arg0, int keyCode,
+//				                    KeyEvent event) {
+//				                if (keyCode == KeyEvent.KEYCODE_BACK
+//				                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//				                    arg0.dismiss();
+//									setRequestedOrientation(prevOrientation);
+//									return true;
+//				                }
+//				                return false;
+//				            }
+//				        });
+//		                dialog.show(getSupportFragmentManager(), DELETE_DIALOG_TAG);
+//		                dialog.setCancelable(false);
+						MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+	                    .title(R.string.dialog_delete_mp3_title)
+	                    .content(R.string.dialog_delete_mp3)
+	                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+	                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+	                    .callback(new MaterialDialog.FullCallback() {
+	                    	@Override
+	                    	public void onPositive(MaterialDialog dialog) {
+	                    		File fileToDelete = new File(localUrl);
+	                    		fileToDelete.delete();
+	                    		Toast.makeText(PaginaRenderActivity.this
+	                    				, getString(R.string.file_delete)
+	                    				, Toast.LENGTH_SHORT).show();
+	                            
+	                            if (mediaPlayerState == MP_State.Started
+	                            		|| mediaPlayerState == MP_State.Paused)
+	                            	cmdStop();
+	                            
+	                            mediaPlayer = new MediaPlayer();
+	                    		mediaPlayerState = MP_State.Idle;
+	                    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+	                            
+	                    		localFile = false;
+	                    		cmdSetDataSource(url);
+                    			enableButtonIcon(save_file);
+                    			save_file.setVisibility(View.VISIBLE);
+                    			disableButtonIcon(delete_file);
+                    			delete_file.setVisibility(View.GONE);
+	                    		setRequestedOrientation(prevOrientation);
+	                    	}
+
+	                    	@Override
+	                    	public void onNeutral(MaterialDialog dialog) {}
+
+	                    	@Override
+	                    	public void onNegative(MaterialDialog dialog) {
+	                    		setRequestedOrientation(prevOrientation);
+	                    	}
+	                    })
+	                    .titleColor(getResources().getColor(android.R.color.black))
+	                    .build();
 						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-	
-				            @Override
-				            public boolean onKey(DialogInterface arg0, int keyCode,
-				                    KeyEvent event) {
-				                if (keyCode == KeyEvent.KEYCODE_BACK
-				                		&& event.getAction() == KeyEvent.ACTION_UP) {
-				                    arg0.dismiss();
-									setRequestedOrientation(prevOrientation);
-									return true;
-				                }
-				                return false;
-				            }
+					        @Override
+					        public boolean onKey(DialogInterface arg0, int keyCode,
+					        		KeyEvent event) {
+					        	if (keyCode == KeyEvent.KEYCODE_BACK
+					        			&& event.getAction() == KeyEvent.ACTION_UP) {
+					        		arg0.dismiss();
+					        		setRequestedOrientation(prevOrientation);
+					        		return true;
+					            }
+					            return false;
+					        }
 				        });
-		                dialog.show(getSupportFragmentManager(), DELETE_DIALOG_TAG);
-		                dialog.setCancelable(false);
+	                    dialog.show();
+	                    dialog.setCancelable(false);
 					}
 					else {
 						blockOrientation();
-						GenericDialogFragment dialog = new GenericDialogFragment();
-						dialog.setCustomMessage(getString(R.string.dialog_delete_link));
-						dialog.setListener(PaginaRenderActivity.this);
-						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//						GenericDialogFragment dialog = new GenericDialogFragment();
+//						dialog.setCustomMessage(getString(R.string.dialog_delete_link));
+//						dialog.setListener(PaginaRenderActivity.this);
+//						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//
+//				            @Override
+//				            public boolean onKey(DialogInterface arg0, int keyCode,
+//				                    KeyEvent event) {
+//				                if (keyCode == KeyEvent.KEYCODE_BACK
+//				                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//				                    arg0.dismiss();
+//									setRequestedOrientation(prevOrientation);
+//									return true;
+//				                }
+//				                return false;
+//				            }
+//				        });
+//		                dialog.show(getSupportFragmentManager(), DELETE_LINK_TAG);
+//		                dialog.setCancelable(false);
+						MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+	                    .title(R.string.dialog_delete_link_title)
+	                    .content(R.string.dialog_delete_link)
+	                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
+	                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
+	                    .callback(new MaterialDialog.FullCallback() {
+	                    	@Override
+	                    	public void onPositive(MaterialDialog dialog) {
+	                    		Toast.makeText(PaginaRenderActivity.this
+	                    				, getString(R.string.delink_delete)
+	                    				, Toast.LENGTH_SHORT).show();
+	                            
+	                            if (mediaPlayerState == MP_State.Started
+	                            		|| mediaPlayerState == MP_State.Paused)
+	                            	cmdStop();
+	                            
+	                            mediaPlayer = new MediaPlayer();
+	                    		mediaPlayerState = MP_State.Idle;
+	                    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+	                            
+	                			localFile = false;
+	                			personalUrl = "";
+	                    		
+	                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
+	                    		String sql = "DELETE FROM LOCAL_LINKS" +
+	                    				"  WHERE _id =  " + idCanto;
+	                    		db.execSQL(sql);
+	                    		db.close();
+	                    					
+	                			enableButtonIcon(save_file);
+	                			save_file.setVisibility(View.VISIBLE);
+	                			disableButtonIcon(delete_file);
+	                			delete_file.setVisibility(View.GONE);
 
-				            @Override
-				            public boolean onKey(DialogInterface arg0, int keyCode,
-				                    KeyEvent event) {
-				                if (keyCode == KeyEvent.KEYCODE_BACK
-				                		&& event.getAction() == KeyEvent.ACTION_UP) {
-				                    arg0.dismiss();
-									setRequestedOrientation(prevOrientation);
-									return true;
-				                }
-				                return false;
-				            }
+	                    		setRequestedOrientation(prevOrientation);
+	                    	}
+
+	                    	@Override
+	                    	public void onNeutral(MaterialDialog dialog) {}
+
+	                    	@Override
+	                    	public void onNegative(MaterialDialog dialog) {
+	                    		setRequestedOrientation(prevOrientation);
+	                    	}
+	                    })
+	                    .titleColor(getResources().getColor(android.R.color.black))
+	                    .build();
+						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+					        @Override
+					        public boolean onKey(DialogInterface arg0, int keyCode,
+					        		KeyEvent event) {
+					        	if (keyCode == KeyEvent.KEYCODE_BACK
+					        			&& event.getAction() == KeyEvent.ACTION_UP) {
+					        		arg0.dismiss();
+					        		setRequestedOrientation(prevOrientation);
+					        		return true;
+					            }
+					            return false;
+					        }
 				        });
-		                dialog.show(getSupportFragmentManager(), DELETE_LINK_TAG);
-		                dialog.setCancelable(false);
+	                    dialog.show();
+	                    dialog.setCancelable(false);
 					}
 				}
 			});

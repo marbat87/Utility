@@ -133,7 +133,7 @@ public class PreferencesFragment extends Fragment {
         				.getDefaultSharedPreferences(getActivity())
         				.getInt(DEFAULT_INDEX, 0), new MaterialDialog.ListCallback() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, String text) {
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                     	SharedPreferences.Editor editor = PreferenceManager
         	                    .getDefaultSharedPreferences(getActivity())
         	                    .edit();
@@ -194,7 +194,7 @@ public class PreferencesFragment extends Fragment {
         				.getDefaultSharedPreferences(getActivity())
         				.getInt(SAVE_LOCATION, 0), new MaterialDialog.ListCallback() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, String text) {
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                     	SharedPreferences.Editor editor = PreferenceManager
         	                    .getDefaultSharedPreferences(getActivity())
         	                    .edit();

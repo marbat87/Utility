@@ -228,7 +228,9 @@ public class CreaListaActivity extends ActionBarActivity {
 	                public void onNegative(MaterialDialog dialog) {
 		        		setRequestedOrientation(prevOrientation);
 	                }
-	            }).build();
+	            })
+	            .titleColor(getResources().getColor(android.R.color.black))
+	            .build();
 				
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -326,7 +328,9 @@ public class CreaListaActivity extends ActionBarActivity {
 	                public void onNegative(MaterialDialog dialog) {
 		        		setRequestedOrientation(prevOrientation);
 	                }
-	            }).build();
+	            })
+	            .titleColor(getResources().getColor(android.R.color.black))
+	            .build();
 				
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -478,6 +482,7 @@ public class CreaListaActivity extends ActionBarActivity {
                 		overridePendingTransition(0, R.anim.slide_out_bottom);
                     }
                 })
+                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -557,6 +562,7 @@ public class CreaListaActivity extends ActionBarActivity {
                 		overridePendingTransition(0, R.anim.slide_out_bottom);
                     }
                 })
+                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
