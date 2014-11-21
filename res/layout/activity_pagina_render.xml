@@ -38,16 +38,16 @@
 <!-- 	            android:button="?attr/customStar" -->
 <!-- 	            android:soundEffectsEnabled="true" /> -->
 	        
-            <com.gc.materialdesign.views.ButtonIcon
-                android:id="@+id/favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:background="@color/theme_accent"
-                risuscito:iconFloat="@drawable/ic_rating_favorite_normal"
-                android:soundEffectsEnabled="true"  />
+<!--             <com.gc.materialdesign.views.ButtonIcon -->
+<!--                 android:id="@+id/favorite" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_alignParentLeft="true" -->
+<!--                 android:layout_alignParentStart="true" -->
+<!--                 android:layout_centerVertical="true" -->
+<!--                 android:background="@color/theme_accent" -->
+<!--                 risuscito:iconFloat="@drawable/ic_rating_favorite_normal" -->
+<!--                 android:soundEffectsEnabled="true"  /> -->
 	
 			<com.gc.materialdesign.views.ButtonIcon
                 android:id="@+id/rewind_song"
@@ -56,6 +56,8 @@
 	            android:layout_toLeftOf="@+id/play_song"
 	            android:layout_toStartOf="@+id/play_song"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/button_icon_padding"
+                android:layout_marginEnd="@dimen/button_icon_padding"
                 android:background="@color/theme_accent"
                 risuscito:iconFloat="@drawable/ic_av_rewind_active"
                 android:soundEffectsEnabled="true"  />
@@ -79,6 +81,8 @@
            	 	android:layout_toLeftOf="@+id/fast_forward_song"
 	            android:layout_toStartOf="@+id/fast_forward_song"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/button_icon_padding"
+                android:layout_marginEnd="@dimen/button_icon_padding"
                 android:background="@color/theme_accent"
                 risuscito:iconFloat="@drawable/play_button_drawable"
                 android:soundEffectsEnabled="true"  />
@@ -102,6 +106,8 @@
 	            android:layout_toLeftOf="@+id/stop_song"
 	            android:layout_toStartOf="@+id/stop_song"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/button_icon_padding"
+                android:layout_marginEnd="@dimen/button_icon_padding"
                 android:background="@color/theme_accent"
                 risuscito:iconFloat="@drawable/ic_av_fast_forward_active"
                 android:soundEffectsEnabled="true"  />
@@ -125,6 +131,8 @@
 	            android:layout_toLeftOf="@+id/delete_file"
 	            android:layout_toStartOf="@+id/delete_file"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/button_icon_padding"
+                android:layout_marginEnd="@dimen/button_icon_padding"
                 android:background="@color/theme_accent"
                 risuscito:iconFloat="@drawable/ic_av_stop_active"
                 android:soundEffectsEnabled="true"  />
@@ -218,6 +226,15 @@
         android:layout_height="@dimen/abc_action_bar_default_height_material"
 	    android:orientation="horizontal" >
 	
+		<com.gc.materialdesign.views.ButtonIcon
+     		android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/theme_accent"
+            risuscito:iconFloat="@drawable/ic_rating_favorite_normal_light"
+            android:soundEffectsEnabled="true"  />
+	    
 <!-- 	    <TextView  -->
 <!-- 	        android:id="@+id/speed_text" -->
 <!-- 	        android:layout_height="wrap_content" -->

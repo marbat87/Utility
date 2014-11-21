@@ -1,0 +1,5 @@
+<resources>
+    
+    <dimen name="button_icon_padding">-10dip</dimen>
+	
+</resources>
