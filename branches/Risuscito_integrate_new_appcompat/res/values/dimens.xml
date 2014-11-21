@@ -28,5 +28,7 @@
     <dimen name="keyline_1">16dp</dimen>
     
     <dimen name="preference_min_margin">15dip</dimen>
+    
+    <dimen name="button_icon_padding">-5dip</dimen>
 	
 </resources>

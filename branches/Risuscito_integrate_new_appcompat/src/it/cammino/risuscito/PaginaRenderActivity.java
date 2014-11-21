@@ -1543,9 +1543,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
     	favoriteFlag = selectFavouriteFromSource(pagina);
         
         if (favoriteFlag == 1) 
-        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.theme_primary), PorterDuff.Mode.SRC_ATOP);
+        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
         else 
-        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
         
         favouriteCheckBox.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1553,14 +1553,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //				favouriteCheckBox.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 				if (favoriteFlag == 0) {
 					favoriteFlag = 1;
-					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.theme_primary), PorterDuff.Mode.SRC_ATOP);
+					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
 					Toast toast = Toast.makeText(PaginaRenderActivity.this
 							, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
 					toast.show();
 				}
 				else {
 					favoriteFlag = 0;
-					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
 					Toast toast = Toast.makeText(PaginaRenderActivity.this
 							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT);
 					toast.show();
