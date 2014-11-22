@@ -254,7 +254,8 @@ public class Utility {
 //	}
 	
     public static void setupTransparentTints(Activity context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT
+        		|| Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH)
         	return;
         SystemBarTintManager tintManager = new SystemBarTintManager(context);
         tintManager.setStatusBarTintEnabled(true);

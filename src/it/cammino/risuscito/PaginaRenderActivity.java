@@ -174,7 +174,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         setSupportActionBar(toolbar);
         
-        // setta il colore della barra di stato, solo da KITAKT in su
+        // setta il colore della barra di stato, solo su KITKAT
         Utility.setupTransparentTints(PaginaRenderActivity.this);
         
         listaCanti = new DatabaseCanti(this);
