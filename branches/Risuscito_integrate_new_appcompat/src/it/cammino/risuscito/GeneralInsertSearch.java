@@ -46,8 +46,8 @@ public class GeneralInsertSearch extends ActionBarActivity {
 		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		setSupportActionBar(toolbar);
 		
-        // setta il colore della barra di stato, solo da KITAKT in su
-//        Utility.setupTransparentTints(GeneralInsertSearch.this);
+        // setta il colore della barra di stato, solo su KITKAT
+        Utility.setupTransparentTints(GeneralInsertSearch.this);
 		
 		Bundle bundle = GeneralInsertSearch.this.getIntent().getExtras();
 		fromAdd = bundle.getInt("fromAdd");

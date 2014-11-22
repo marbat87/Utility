@@ -6,6 +6,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:focusable="true"
+    android:fitsSystemWindows="true"
 	android:focusableInTouchMode="true" >
 	
 <!--     <LinearLayout -->

@@ -3,6 +3,7 @@ package it.cammino.risuscito;
 import java.util.ArrayList;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MainActivity extends ActionBarActivity {
     
@@ -89,8 +92,13 @@ public class MainActivity extends ActionBarActivity {
         mActionBarToolbar = (Toolbar) findViewById(R.id.risuscito_toolbar);
         setSupportActionBar(mActionBarToolbar);
         
-        // setta il colore della barra di stato, solo da KITAKT in su
-//        Utility.setupTransparentTints(MainActivity.this);
+        // setta il colore della barra di stato, solo su KITKAT
+        Utility.setupTransparentTints(MainActivity.this);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT
+        		|| Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT_WATCH) {
+        	findViewById(R.id.content_layout).setPadding(0, getStatusBarHeight(), 0, 0);
+        	findViewById(R.id.navdrawer).setPadding(0, getStatusBarHeight(), 0, 0);
+        }
         
         setupNavDrawer();
         
@@ -365,6 +373,15 @@ public class MainActivity extends ActionBarActivity {
 			findViewById(R.id.content_frame).setKeepScreenOn(true);
 		else
 			findViewById(R.id.content_frame).setKeepScreenOn(false);
+    }
+    
+    public int getStatusBarHeight() {
+    	  int result = 0;
+    	  int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+    	  if (resourceId > 0) {
+    	    result = getResources().getDimensionPixelSize(resourceId);
+    	  }
+    	  return result;
     }
     
 }
