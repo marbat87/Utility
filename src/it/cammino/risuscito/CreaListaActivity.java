@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
@@ -38,6 +39,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
+import com.gc.materialdesign.views.ButtonFloat;
 import com.mobeta.android.dslv.DragSortListView;
 
 @SuppressLint("NewApi") @SuppressWarnings("deprecation")
@@ -285,7 +287,9 @@ public class CreaListaActivity extends ActionBarActivity {
 //		View addPosizione = (View) findViewById(R.id.addPosizione);
 //		addPosizione.setOnClickListener(new View.OnClickListener() {
 //		floatingActionButton.setOnClickListener(new View.OnClickListener() {
-		findViewById(R.id.button_floating_action).setOnClickListener(new View.OnClickListener() {
+		ButtonFloat fab = (ButtonFloat) findViewById(R.id.fab_crea_lista);
+		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
+		fab.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
@@ -849,7 +853,7 @@ public class CreaListaActivity extends ActionBarActivity {
 //		floatingActionButton.show();
    		ShowcaseView showcaseView = ShowcaseView.insertShowcaseView(
 //        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
-        		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
+        		new ViewTarget(R.id.fab_crea_lista, CreaListaActivity.this)
         		, CreaListaActivity.this
         		, R.string.title_activity_nuova_lista
         		, R.string.showcase_welcome_crea
@@ -868,7 +872,7 @@ public class CreaListaActivity extends ActionBarActivity {
         		co.buttonLayoutParams = lps;
 		   		showcaseView = ShowcaseView.insertShowcaseView(
 //		        		new ViewTarget(R.id.imagePlus, CreaListaActivity.this)
-		        		new ViewTarget(R.id.button_floating_action, CreaListaActivity.this)
+		        		new ViewTarget(R.id.fab_crea_lista, CreaListaActivity.this)
 		        		, CreaListaActivity.this
 		        		, R.string.add_position
 		        		, R.string.showcase_add_pos_desc

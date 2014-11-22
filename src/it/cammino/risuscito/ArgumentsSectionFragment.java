@@ -412,7 +412,7 @@ public class ArgumentsSectionFragment extends Fragment {
 			    						+ getString(R.string.dialog_wonna_replace))
 			                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
 			                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-			                    .callback(new MaterialDialog.FullCallback() {
+			                    .callback(new MaterialDialog.Callback() {
 			                    	@Override
 			                    	public void onPositive(MaterialDialog dialog) {
 			                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
@@ -434,9 +434,6 @@ public class ArgumentsSectionFragment extends Fragment {
 		                    			Toast.makeText(getActivity()
 		                    					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
 			                    	}
-
-			                    	@Override
-			                    	public void onNeutral(MaterialDialog dialog) {}
 
 			                    	@Override
 			                    	public void onNegative(MaterialDialog dialog) {
@@ -580,7 +577,7 @@ public class ArgumentsSectionFragment extends Fragment {
 						+ getString(R.string.dialog_wonna_replace))
                 .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
                 .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                .callback(new MaterialDialog.FullCallback() {
+                .callback(new MaterialDialog.Callback() {
                 	@Override
                 	public void onPositive(MaterialDialog dialog) {
                 		SQLiteDatabase db = listaCanti.getReadableDatabase();
@@ -595,9 +592,6 @@ public class ArgumentsSectionFragment extends Fragment {
             			Toast.makeText(getActivity()
             					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
                 	}
-
-                	@Override
-                	public void onNeutral(MaterialDialog dialog) {}
 
                 	@Override
                 	public void onNegative(MaterialDialog dialog) {
