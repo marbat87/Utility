@@ -138,7 +138,7 @@
 <!--             fab:fab_colorPressed="?attr/customLightColor" /> -->
 
   		<com.gc.materialdesign.views.ButtonFloat
-        	android:id="@+id/button_floating_action"
+        	android:id="@+id/fab_crea_lista"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -146,9 +146,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginRight="24dp"
             android:layout_marginEnd="24dp"
-            android:background="@color/theme_accent"
             risuscito:animate="true"
-            risuscito:iconFloat="@drawable/ic_floating_add" />
+            risuscito:iconFloat="@drawable/ic_add_white_48dp" />
 
 	</RelativeLayout>
 	

@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.widgets.SnackBar;
 
 public class CantiParolaFragment extends Fragment {
@@ -306,8 +307,9 @@ public class CantiParolaFragment extends Fragment {
 			}
 		});
 		
-		rootView.findViewById(R.id.button_floating_action).setOnClickListener(new OnClickListener() {
-			
+		ButtonFloat fab = (ButtonFloat) rootView.findViewById(R.id.fab_parola);
+		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
+		fab.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				blockOrientation();
@@ -335,7 +337,7 @@ public class CantiParolaFragment extends Fragment {
                 .content(R.string.reset_list_question)
                 .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
                 .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                .callback(new MaterialDialog.FullCallback() {
+                .callback(new MaterialDialog.Callback() {
                 	@Override
                 	public void onPositive(MaterialDialog dialog) {
                 		db = listaCanti.getReadableDatabase();
@@ -347,9 +349,6 @@ public class CantiParolaFragment extends Fragment {
                 		mShareActionProvider.setShareIntent(getDefaultIntent());
                 		getActivity().setRequestedOrientation(prevOrientation);
                 	}
-
-                	@Override
-                	public void onNeutral(MaterialDialog dialog) {}
 
                 	@Override
                 	public void onNegative(MaterialDialog dialog) {

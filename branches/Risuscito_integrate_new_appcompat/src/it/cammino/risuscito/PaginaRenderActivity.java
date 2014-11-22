@@ -243,6 +243,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				stop_button.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 				cmdStop();
 			}
 		});
@@ -431,7 +432,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
     			
     			@Override
     			public void onClick(View v) {
-    				
+    				play_button.playSoundEffect(android.view.SoundEffectConstants.CLICK);	
     				//controlla la presenza di una connessione internet
     				if (!Utility.isOnline(PaginaRenderActivity.this) 
     						&& !localFile)  {
@@ -600,6 +601,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
             save_file.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					save_file.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 					blockOrientation();
 //					GenericDialogFragment dialog = new GenericDialogFragment();
 //					dialog.setCustomMessage(getString(R.string.dialog_download_mp3));
@@ -709,6 +711,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
             delete_file.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					delete_file.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 					if (personalUrl.equalsIgnoreCase("")) {
 						blockOrientation();
 //						GenericDialogFragment dialog = new GenericDialogFragment();
@@ -735,7 +738,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	                    .content(R.string.dialog_delete_mp3)
 	                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
 	                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-	                    .callback(new MaterialDialog.FullCallback() {
+	                    .callback(new MaterialDialog.Callback() {
 	                    	@Override
 	                    	public void onPositive(MaterialDialog dialog) {
 	                    		File fileToDelete = new File(localUrl);
@@ -760,9 +763,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
                     			delete_file.setVisibility(View.GONE);
 	                    		setRequestedOrientation(prevOrientation);
 	                    	}
-
-	                    	@Override
-	                    	public void onNeutral(MaterialDialog dialog) {}
 
 	                    	@Override
 	                    	public void onNegative(MaterialDialog dialog) {
@@ -813,7 +813,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	                    .content(R.string.dialog_delete_link)
 	                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
 	                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-	                    .callback(new MaterialDialog.FullCallback() {
+	                    .callback(new MaterialDialog.Callback() {
 	                    	@Override
 	                    	public void onPositive(MaterialDialog dialog) {
 	                    		Toast.makeText(PaginaRenderActivity.this
@@ -844,9 +844,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 
 	                    		setRequestedOrientation(prevOrientation);
 	                    	}
-
-	                    	@Override
-	                    	public void onNeutral(MaterialDialog dialog) {}
 
 	                    	@Override
 	                    	public void onNegative(MaterialDialog dialog) {
@@ -882,7 +879,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
     			
     			@Override
     			public void onClick(View v) {
-    				
+    				play_button.playSoundEffect(android.view.SoundEffectConstants.CLICK);
     				switch (mediaPlayerState) {
     					case Paused:
     						cmdStart();
@@ -915,6 +912,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
             save_file.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					save_file.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 					blockOrientation();
 //					GenericDialogFragment dialog = new GenericDialogFragment();
 //					dialog.setCustomMessage(getString(R.string.only_link));
@@ -940,16 +938,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
                     .content(R.string.only_link)
                     .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
                     .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                    .callback(new MaterialDialog.FullCallback() {
+                    .callback(new MaterialDialog.Callback() {
                     	@Override
                     	public void onPositive(MaterialDialog dialog) {
                     		setRequestedOrientation(prevOrientation);
                     		startActivityForResult(new Intent(
                     				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
                     	}
-
-                    	@Override
-                    	public void onNeutral(MaterialDialog dialog) {}
 
                     	@Override
                     	public void onNegative(MaterialDialog dialog) {
@@ -979,6 +974,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
             delete_file.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					delete_file.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 					blockOrientation();
 //					GenericDialogFragment dialog = new GenericDialogFragment();
 //					dialog.setCustomMessage(getString(R.string.dialog_delete_link));
@@ -1004,7 +1000,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                     .content(R.string.dialog_delete_link)
                     .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
                     .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                    .callback(new MaterialDialog.FullCallback() {
+                    .callback(new MaterialDialog.Callback() {
                     	@Override
                     	public void onPositive(MaterialDialog dialog) {
                     		Toast.makeText(PaginaRenderActivity.this
@@ -1040,9 +1036,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 
                     		setRequestedOrientation(prevOrientation);
                     	}
-
-                    	@Override
-                    	public void onNeutral(MaterialDialog dialog) {}
 
                     	@Override
                     	public void onNegative(MaterialDialog dialog) {
@@ -1178,6 +1171,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				play_scroll.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 				play_scroll.setVisibility(View.GONE);
 				stop_scroll.setVisibility(View.VISIBLE);
 				scrollPlaying = true;
@@ -1189,6 +1183,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				stop_scroll.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 				play_scroll.setVisibility(View.VISIBLE);
 				stop_scroll.setVisibility(View.GONE);
 				scrollPlaying = false;
@@ -1290,7 +1285,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                 .content(R.string.dialog_save_tab)
                 .positiveText(R.string.confirm)
                 .negativeText(R.string.dismiss)
-                .callback(new MaterialDialog.FullCallback() {
+                .callback(new MaterialDialog.Callback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                     	SQLiteDatabase db = listaCanti.getReadableDatabase();
@@ -1304,9 +1299,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
             			finish();
             			overridePendingTransition(0, R.anim.slide_out_right);
                     }
-
-                    @Override
-                    public void onNeutral(MaterialDialog dialog) {}
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
@@ -1487,7 +1479,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                 .content(R.string.dialog_save_tab)
                 .positiveText(R.string.confirm)
                 .negativeText(R.string.dismiss)
-                .callback(new MaterialDialog.FullCallback() {
+                .callback(new MaterialDialog.Callback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                     	SQLiteDatabase db = listaCanti.getReadableDatabase();
@@ -1501,9 +1493,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
             			finish();
             			overridePendingTransition(0, R.anim.slide_out_right);
                     }
-
-                    @Override
-                    public void onNeutral(MaterialDialog dialog) {}
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
@@ -1550,7 +1539,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
         favouriteCheckBox.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				favouriteCheckBox.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+				favouriteCheckBox.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 				if (favoriteFlag == 0) {
 					favoriteFlag = 1;
 					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);

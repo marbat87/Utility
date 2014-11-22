@@ -167,8 +167,9 @@ public class CustomLists extends Fragment  {
                 public void onNegative(MaterialDialog dialog) {
                 	getActivity().setRequestedOrientation(prevOrientation);
                 }
-            }).build();
-			
+            })
+            .titleColor(getResources().getColor(android.R.color.black))
+            .build();
 			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 		        @Override
 		        public boolean onKey(DialogInterface arg0, int keyCode,
