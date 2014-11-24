@@ -16,6 +16,9 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.internal.widget.TintEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -27,6 +30,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
@@ -91,7 +96,8 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         }
 //        Log.i("Changelog", "appVersion: " + thisVersion);
         
-        if (!thisVersion.equals(lastVersion)) {
+//        if (!thisVersion.equals(lastVersion)) {
+        if (true) {
         	blockOrientation();
 	    	ChangelogDialogFragment dialog = new ChangelogDialogFragment();
 	    	dialog.setListener(this);
@@ -125,6 +131,33 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 	        });
 	    	dialog.show(getFragmentManager(), null);
 	    	dialog.setCancelable(false);
+//        	MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+//            .title(R.string.dialog_change_title)
+//            .customView(R.layout.dialog_changelogview)
+//            .positiveText(R.string.dialog_chiudi)
+//            .callback(new MaterialDialog.SimpleCallback() {
+//                @Override
+//                public void onPositive(MaterialDialog dialog) {
+//    	            getActivity().setRequestedOrientation(prevOrientation);
+//                }
+//            })
+//            .titleColor(getResources().getColor(android.R.color.black))
+//            .build();
+//			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//		        @Override
+//		        public boolean onKey(DialogInterface arg0, int keyCode,
+//		        		KeyEvent event) {
+//		        	if (keyCode == KeyEvent.KEYCODE_BACK
+//		        			&& event.getAction() == KeyEvent.ACTION_UP) {
+//		        		arg0.dismiss();
+//		        		getActivity().setRequestedOrientation(prevOrientation);
+//		        		return true;
+//		            }
+//		            return false;
+//		        }
+//	        });
+//	        dialog.show();
+//	        dialog.setCancelable(false);
 	        SharedPreferences.Editor editor = sp.edit();
 	        editor.putString(VERSION_KEY, thisVersion);
 	        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
