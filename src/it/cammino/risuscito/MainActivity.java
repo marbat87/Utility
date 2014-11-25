@@ -18,8 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 public class MainActivity extends ActionBarActivity {
     
 //    private ActionBarDrawerToggle drawerToggle;
@@ -50,7 +48,6 @@ public class MainActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_DONATE = 7;
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_SEPARATOR = -2;
-//    protected static final int NAVDRAWER_ITEM_COVER = -3;
     
     // titles for navdrawer items (indices must correspond to the above)
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
@@ -66,11 +63,11 @@ public class MainActivity extends ActionBarActivity {
 
     // icons for navdrawer items (indices must correspond to above array)
     private static final int[] NAVDRAWER_ICON_RES_ID = new int[] {
-            R.drawable.ic_action_home_dark,  // My Schedule
-            R.drawable.ic_action_search_dark,  // Explore
-            R.drawable.ic_action_view_as_list_dark, // Map
-            R.drawable.ic_action_add_to_queue_dark, // Social
-            R.drawable.ic_action_favorite_dark, // Video Library
+            R.drawable.ic_action_home_dark,
+            R.drawable.ic_action_search_dark,
+            R.drawable.ic_action_view_as_list_dark,
+            R.drawable.ic_action_add_to_queue_dark,
+            R.drawable.ic_action_favorite_dark,
             R.drawable.ic_action_settings_dark,
             R.drawable.ic_action_about_dark,
             R.drawable.ic_action_good_dark
