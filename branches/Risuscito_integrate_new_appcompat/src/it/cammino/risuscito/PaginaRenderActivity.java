@@ -688,7 +688,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	                    	setRequestedOrientation(prevOrientation);
 	                    }
 	                })
-	                .titleColor(getResources().getColor(android.R.color.black))
+//	                .titleColor(getResources().getColor(android.R.color.black))
 	                .build();
 					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 				        @Override
@@ -769,7 +769,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	                    		setRequestedOrientation(prevOrientation);
 	                    	}
 	                    })
-	                    .titleColor(getResources().getColor(android.R.color.black))
+//	                    .titleColor(getResources().getColor(android.R.color.black))
 	                    .build();
 						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 					        @Override
@@ -850,7 +850,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	                    		setRequestedOrientation(prevOrientation);
 	                    	}
 	                    })
-	                    .titleColor(getResources().getColor(android.R.color.black))
+//	                    .titleColor(getResources().getColor(android.R.color.black))
 	                    .build();
 						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 					        @Override
@@ -951,7 +951,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                     		setRequestedOrientation(prevOrientation);
                     	}
                     })
-                    .titleColor(getResources().getColor(android.R.color.black))
+//                    .titleColor(getResources().getColor(android.R.color.black))
                     .build();
 					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 				        @Override
@@ -1042,7 +1042,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                     		setRequestedOrientation(prevOrientation);
                     	}
                     })
-                    .titleColor(getResources().getColor(android.R.color.black))
+//                    .titleColor(getResources().getColor(android.R.color.black))
                     .build();
 					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 				        @Override
@@ -1307,7 +1307,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
             			overridePendingTransition(0, R.anim.slide_out_right);
                     }
                 })
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -1501,7 +1501,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
             			overridePendingTransition(0, R.anim.slide_out_right);
                     }
                 })
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override

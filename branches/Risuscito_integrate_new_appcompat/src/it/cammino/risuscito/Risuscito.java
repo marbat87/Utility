@@ -91,8 +91,8 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         }
 //        Log.i("Changelog", "appVersion: " + thisVersion);
         
-//        if (!thisVersion.equals(lastVersion)) {
-        if (true) {
+        if (!thisVersion.equals(lastVersion)) {
+//        if (true) {
         	blockOrientation();
 	    	ChangelogDialogFragment dialog = new ChangelogDialogFragment();
 	    	dialog.setListener(this);

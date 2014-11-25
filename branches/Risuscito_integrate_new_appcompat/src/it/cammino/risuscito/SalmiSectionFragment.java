@@ -372,7 +372,7 @@ public class SalmiSectionFragment extends Fragment {
 			                    		getActivity().setRequestedOrientation(prevOrientation);
 			                    	}
 			                    })
-			                    .titleColor(getResources().getColor(android.R.color.black))
+//			                    .titleColor(getResources().getColor(android.R.color.black))
 			                    .build();
 								dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 							        @Override
@@ -532,7 +532,7 @@ public class SalmiSectionFragment extends Fragment {
                 		getActivity().setRequestedOrientation(prevOrientation);
                 	}
                 })
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override

@@ -231,7 +231,7 @@ public class CreaListaActivity extends ActionBarActivity {
 		        		setRequestedOrientation(prevOrientation);
 	                }
 	            })
-	            .titleColor(getResources().getColor(android.R.color.black))
+//	            .titleColor(getResources().getColor(android.R.color.black))
 	            .build();
 				
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
@@ -334,7 +334,7 @@ public class CreaListaActivity extends ActionBarActivity {
 		        		setRequestedOrientation(prevOrientation);
 	                }
 	            })
-	            .titleColor(getResources().getColor(android.R.color.black))
+//	            .titleColor(getResources().getColor(android.R.color.black))
 	            .build();
 				
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
@@ -487,7 +487,7 @@ public class CreaListaActivity extends ActionBarActivity {
                 		overridePendingTransition(0, R.anim.slide_out_bottom);
                     }
                 })
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -567,7 +567,7 @@ public class CreaListaActivity extends ActionBarActivity {
                 		overridePendingTransition(0, R.anim.slide_out_bottom);
                     }
                 })
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override

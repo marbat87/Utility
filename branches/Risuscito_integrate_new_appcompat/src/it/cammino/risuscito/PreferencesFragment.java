@@ -151,7 +151,7 @@ public class PreferencesFragment extends Fragment {
                 })
                 .positiveText(R.string.single_choice_ok)
                 .positiveColorRes(R.color.theme_accent)
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -212,7 +212,7 @@ public class PreferencesFragment extends Fragment {
                 })
                 .positiveText(R.string.single_choice_ok)
                 .positiveColorRes(R.color.theme_accent)
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override

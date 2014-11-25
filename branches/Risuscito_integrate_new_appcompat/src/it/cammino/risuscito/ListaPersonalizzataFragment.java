@@ -29,7 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.widgets.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
@@ -113,7 +112,7 @@ public class ListaPersonalizzataFragment extends Fragment {
                 		getActivity().setRequestedOrientation(prevOrientation);
                 	}
                 })
-                .titleColor(getResources().getColor(android.R.color.black))
+//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
