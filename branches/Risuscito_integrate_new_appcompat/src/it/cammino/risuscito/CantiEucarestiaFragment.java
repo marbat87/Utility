@@ -31,8 +31,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.widgets.SnackBar;
+import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ObservableScrollView;
 
 public class CantiEucarestiaFragment extends Fragment {
 	/**
@@ -61,8 +62,9 @@ public class CantiEucarestiaFragment extends Fragment {
 		//crea un istanza dell'oggetto DatabaseCanti
 		listaCanti = new DatabaseCanti(getActivity());
 		
-		ButtonFloat fab = (ButtonFloat) rootView.findViewById(R.id.fab_eucarestia);
-		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
+		FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_eucarestia);
+		fab.attachToScrollView((ObservableScrollView) rootView.findViewById(R.id.eucarestiaScrollView));
+//		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
 		fab.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {

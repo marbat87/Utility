@@ -27,8 +27,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.widgets.SnackBar;
+import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ObservableScrollView;
 
 public class CantiParolaFragment extends Fragment {
 	/**
@@ -307,8 +308,9 @@ public class CantiParolaFragment extends Fragment {
 			}
 		});
 		
-		ButtonFloat fab = (ButtonFloat) rootView.findViewById(R.id.fab_parola);
-		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
+		FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_parola);
+		fab.attachToScrollView((ObservableScrollView) rootView.findViewById(R.id.parolaScrollView));
+//		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
 		fab.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

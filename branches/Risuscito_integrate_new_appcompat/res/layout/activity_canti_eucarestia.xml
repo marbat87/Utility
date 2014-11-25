@@ -7,19 +7,23 @@
 <!--     android:paddingRight="@dimen/activity_min_margin" -->
 <!--     android:orientation="vertical" > -->
     
-<!--     <FrameLayout  -->
-<!--     	android:layout_width="fill_parent" -->
-<!--    		android:layout_height="fill_parent"> -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
+    	xmlns:risuscito="http://schemas.android.com/apk/res-auto"
+    	android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:paddingLeft="@dimen/activity_min_margin"
+    	android:paddingRight="@dimen/activity_min_margin" > 
 
-<RelativeLayout	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-   	xmlns:risuscito="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:paddingLeft="@dimen/activity_min_margin"
-    android:paddingRight="@dimen/activity_min_margin" >
+<!-- <RelativeLayout	xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- 	xmlns:tools="http://schemas.android.com/tools" -->
+<!--    	xmlns:risuscito="http://schemas.android.com/apk/res-auto" -->
+<!--     android:layout_width="match_parent" -->
+<!--     android:layout_height="match_parent"  -->
+<!--     android:paddingLeft="@dimen/activity_min_margin" -->
+<!--     android:paddingRight="@dimen/activity_min_margin" > -->
     
-	<com.gc.materialdesign.views.ScrollView
+	<com.melnykov.fab.ObservableScrollView
 	        android:id="@+id/eucarestiaScrollView"
 	        android:layout_width="fill_parent"
 	    	android:layout_height="fill_parent"
@@ -394,7 +398,7 @@
 		
 			</LinearLayout>
 			   		    
-		</com.gc.materialdesign.views.ScrollView>
+		</com.melnykov.fab.ObservableScrollView>
 		
 <!-- 	   	<com.melnykov.fab.FloatingActionButton -->
 <!--             android:id="@+id/button_floating_action" -->
@@ -406,16 +410,27 @@
 <!--             fab:fab_colorNormal="?attr/customPstsIndicatorColor" -->
 <!--             fab:fab_colorPressed="?attr/customLightColor" /> -->
 		
-<!-- 	</FrameLayout> -->
-		<com.gc.materialdesign.views.ButtonFloat
-                android:id="@+id/fab_eucarestia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="24dp"
-                risuscito:animate="true"
-                risuscito:iconFloat="@drawable/ic_icon_broom" />
+			<com.melnykov.fab.FloatingActionButton
+		        android:id="@+id/fab_eucarestia"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="bottom|end"
+		        android:layout_margin="16dp"
+		        android:src="@drawable/ic_icon_broom"
+		        risuscito:fab_colorNormal="@color/theme_accent"
+		        risuscito:fab_colorPressed="@color/theme_primary_dark"
+		        risuscito:fab_colorRipple="@color/theme_primary_dark"/>
+		
+	</FrameLayout>
+<!-- 		<com.gc.materialdesign.views.ButtonFloat -->
+<!--                 android:id="@+id/fab_eucarestia" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_alignParentRight="true" -->
+<!--                 android:layout_alignParentBottom="true" -->
+<!--                 android:layout_marginRight="24dp" -->
+<!--                 risuscito:animate="true" -->
+<!--                 risuscito:iconFloat="@drawable/ic_icon_broom" /> -->
 	   	
 <!--   	<RelativeLayout -->
 <!--         android:layout_width="fill_parent" -->
@@ -431,6 +446,6 @@
 <!-- 	        android:gravity="center" -->
 <!-- 	        android:text="@string/button_clean_list" />    -->
 	  	
-</RelativeLayout>
+<!-- </RelativeLayout> -->
 	
 <!-- </LinearLayout> -->
