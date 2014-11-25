@@ -26,8 +26,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
@@ -39,7 +39,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
-import com.gc.materialdesign.views.ButtonFloat;
+import com.melnykov.fab.FloatingActionButton;
 import com.mobeta.android.dslv.DragSortListView;
 
 @SuppressLint("NewApi") @SuppressWarnings("deprecation")
@@ -287,8 +287,9 @@ public class CreaListaActivity extends ActionBarActivity {
 //		View addPosizione = (View) findViewById(R.id.addPosizione);
 //		addPosizione.setOnClickListener(new View.OnClickListener() {
 //		floatingActionButton.setOnClickListener(new View.OnClickListener() {
-		ButtonFloat fab = (ButtonFloat) findViewById(R.id.fab_crea_lista);
-		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
+		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_crea_lista);
+		fab.attachToListView(lv);
+//		fab.setBackgroundColor(getResources().getColor(R.color.theme_accent));
 		fab.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

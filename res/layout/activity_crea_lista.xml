@@ -74,17 +74,17 @@
      	android:paddingStart="@dimen/activity_min_margin"
      	android:text="@string/list_elements" />
 
-<!--     <FrameLayout -->
-<!--     	android:paddingLeft="@dimen/activity_min_margin" -->
-<!--     	android:paddingRight="@dimen/activity_min_margin" -->
-<!--     	android:layout_width="fill_parent" -->
-<!--    		android:layout_height="fill_parent"> -->
-
-	<RelativeLayout	
+    <FrameLayout 
     	android:layout_width="match_parent"
-    	android:layout_height="match_parent" 
-    	android:paddingLeft="@dimen/activity_min_margin"
-    	android:paddingRight="@dimen/activity_min_margin" >
+        android:layout_height="match_parent" 
+        android:paddingLeft="@dimen/activity_min_margin"
+    	android:paddingRight="@dimen/activity_min_margin" > 
+
+<!-- 	<RelativeLayout	 -->
+<!--     	android:layout_width="match_parent" -->
+<!--     	android:layout_height="match_parent"  -->
+<!--     	android:paddingLeft="@dimen/activity_min_margin" -->
+<!--     	android:paddingRight="@dimen/activity_min_margin" > -->
  		
         <TextView
         	android:id="@+id/noElementsAdded"
@@ -127,20 +127,31 @@
 <!--             fab:fab_colorNormal="?attr/customPstsIndicatorColor" -->
 <!--             fab:fab_colorPressed="?attr/customLightColor" /> -->
 	   	
-  		<com.gc.materialdesign.views.ButtonFloat
-        	android:id="@+id/fab_crea_lista"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="24dp"
-            android:layout_marginEnd="24dp"
-            risuscito:animate="true"
-            risuscito:iconFloat="@drawable/ic_add_white_48dp" />
+	   	<com.melnykov.fab.FloatingActionButton
+			android:id="@+id/fab_crea_lista"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|end"
+		 	android:layout_margin="16dp"
+			android:src="@drawable/ic_add_white_24dp"
+			risuscito:fab_colorNormal="@color/theme_accent"
+			risuscito:fab_colorPressed="@color/theme_primary_dark"
+			risuscito:fab_colorRipple="@color/theme_primary_dark"/>
+	   	
+<!--   		<com.gc.materialdesign.views.ButtonFloat -->
+<!--         	android:id="@+id/fab_crea_lista" -->
+<!--         	android:layout_width="wrap_content" -->
+<!--         	android:layout_height="wrap_content" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:layout_alignParentEnd="true" -->
+<!--             android:layout_alignParentBottom="true" -->
+<!--             android:layout_marginRight="24dp" -->
+<!--             android:layout_marginEnd="24dp" -->
+<!--             risuscito:animate="true" -->
+<!--             risuscito:iconFloat="@drawable/ic_add_white_48dp" /> -->
 
-  	</RelativeLayout>
-<!-- 	</FrameLayout> -->
+<!--   	</RelativeLayout> -->
+	</FrameLayout>
 	
 <!--   	<RelativeLayout -->
 <!--         android:layout_width="fill_parent" -->
