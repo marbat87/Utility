@@ -281,7 +281,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/theme_accent"
-            risuscito:iconFloat="@drawable/ic_action_slideshow"
+            risuscito:iconFloat="@drawable/ic_play_circle_outline_white_48dp"
             android:soundEffectsEnabled="true"  />
 	    
 <!-- 	   	<ImageButton -->
@@ -298,7 +298,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/theme_accent"
-            risuscito:iconFloat="@drawable/ic_action_slideshow_stop"
+            risuscito:iconFloat="@drawable/ic_pause_circle_outline_white_48dp"
             android:soundEffectsEnabled="true"  />
 	        
 	</LinearLayout>
