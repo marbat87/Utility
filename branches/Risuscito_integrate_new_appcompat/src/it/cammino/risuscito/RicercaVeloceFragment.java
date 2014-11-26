@@ -1,6 +1,5 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.GenericDialogFragment.GenericDialogListener;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -12,7 +11,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.internal.widget.TintEditText;
 import android.text.Editable;
@@ -39,8 +37,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.ButtonRectangle;
 
-public class RicercaVeloceFragment extends Fragment implements
-		GenericDialogListener {
+public class RicercaVeloceFragment extends Fragment {
 
 	private DatabaseCanti listaCanti;
 	private String[] titoli;
@@ -60,8 +57,10 @@ public class RicercaVeloceFragment extends Fragment implements
 	private final int ID_FITTIZIO = 99999999;
 	private final int ID_BASE = 100;
 
-	private final String LISTA_PERSONALIZZATA_TAG = "1";
-	private final String LISTA_PREDEFINITA_TAG = "2";
+	private LUtils mLUtils;
+	
+//	private final String LISTA_PERSONALIZZATA_TAG = "1";
+//	private final String LISTA_PREDEFINITA_TAG = "2";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -160,7 +159,7 @@ public class RicercaVeloceFragment extends Fragment implements
 
 							// lancia l'activity che visualizza il canto
 							// passando il parametro creato
-							startSubActivity(bundle);
+							startSubActivity(bundle, view);
 
 						}
 					});
@@ -241,6 +240,8 @@ public class RicercaVeloceFragment extends Fragment implements
 
 		setHasOptionsMenu(true);
 
+		mLUtils = LUtils.getInstance(getActivity());
+		
 		return rootView;
 	}
 
@@ -627,58 +628,59 @@ public class RicercaVeloceFragment extends Fragment implements
 		}
 	}
 
-	@Override
-	public void onDialogPositiveClick(DialogFragment dialog) {
-		SQLiteDatabase db = listaCanti.getReadableDatabase();
-		String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);
+//	@Override
+//	public void onDialogPositiveClick(DialogFragment dialog) {
+//		SQLiteDatabase db = listaCanti.getReadableDatabase();
+//		String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);
+//
+//		if (dialog.getTag().equals(LISTA_PREDEFINITA_TAG)) {
+//			String sql = "UPDATE CUST_LISTS "
+//					+ "SET id_canto = (SELECT _id  FROM ELENCO"
+//					+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
+//					+ "WHERE _id = " + idListaDaAgg + "  AND position = "
+//					+ posizioneDaAgg;
+//			db.execSQL(sql);
+//
+//		} else if (dialog.getTag().equals(LISTA_PERSONALIZZATA_TAG)) {
+//			String query = "SELECT color, pagina" + "		FROM ELENCO"
+//					+ "		WHERE titolo = '" + cantoCliccatoNoApex + "'";
+//			Cursor cursor = db.rawQuery(query, null);
+//
+//			cursor.moveToFirst();
+//
+//			listePers[idListaClick].addCanto(
+//					Utility.intToString(cursor.getInt(1), 3)
+//							+ cursor.getString(0) + titoloDaAgg,
+//					idPosizioneClick);
+//
+//			ContentValues values = new ContentValues();
+//			values.put("lista", ListaPersonalizzata
+//					.serializeObject(listePers[idListaClick]));
+//			db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick],
+//					null);
+//		}
+//		db.close();
+//		dialog.dismiss();
+//		getActivity().setRequestedOrientation(prevOrientation);
+//
+//		Toast.makeText(getActivity(), getString(R.string.list_added),
+//				Toast.LENGTH_SHORT).show();
+//	}
+//
+//	@Override
+//	public void onDialogNegativeClick(DialogFragment dialog) {
+//		dialog.dismiss();
+//		getActivity().setRequestedOrientation(prevOrientation);
+//	}
 
-		if (dialog.getTag().equals(LISTA_PREDEFINITA_TAG)) {
-			String sql = "UPDATE CUST_LISTS "
-					+ "SET id_canto = (SELECT _id  FROM ELENCO"
-					+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
-					+ "WHERE _id = " + idListaDaAgg + "  AND position = "
-					+ posizioneDaAgg;
-			db.execSQL(sql);
-
-		} else if (dialog.getTag().equals(LISTA_PERSONALIZZATA_TAG)) {
-			String query = "SELECT color, pagina" + "		FROM ELENCO"
-					+ "		WHERE titolo = '" + cantoCliccatoNoApex + "'";
-			Cursor cursor = db.rawQuery(query, null);
-
-			cursor.moveToFirst();
-
-			listePers[idListaClick].addCanto(
-					Utility.intToString(cursor.getInt(1), 3)
-							+ cursor.getString(0) + titoloDaAgg,
-					idPosizioneClick);
-
-			ContentValues values = new ContentValues();
-			values.put("lista", ListaPersonalizzata
-					.serializeObject(listePers[idListaClick]));
-			db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick],
-					null);
-		}
-		db.close();
-		dialog.dismiss();
-		getActivity().setRequestedOrientation(prevOrientation);
-
-		Toast.makeText(getActivity(), getString(R.string.list_added),
-				Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onDialogNegativeClick(DialogFragment dialog) {
-		dialog.dismiss();
-		getActivity().setRequestedOrientation(prevOrientation);
-	}
-
-	private void startSubActivity(Bundle bundle) {
+	private void startSubActivity(Bundle bundle, View view) {
 		Intent intent = new Intent(getActivity().getApplicationContext(),
 				PaginaRenderActivity.class);
 		intent.putExtras(bundle);
-		startActivity(intent);
-		getActivity().overridePendingTransition(R.anim.slide_in_right,
-				R.anim.hold_on);
+//		startActivity(intent);
+//		getActivity().overridePendingTransition(R.anim.slide_in_right,
+//				R.anim.hold_on);
+		mLUtils.startActivityWithTransition(intent, view, "CLICKED");
 	}
 
 	private class SongRowAdapter extends ArrayAdapter<String> {

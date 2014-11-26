@@ -46,6 +46,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneStateListener;
@@ -164,6 +165,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //    private static final String FILE_CHOOSER_TAG = "FileChooserExampleActivity";
     private static final int REQUEST_CODE = 6384;
 	
+    private LUtils mLUtils;
+    
 	@SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -1131,13 +1134,23 @@ public class PaginaRenderActivity extends ActionBarActivity {
     			disableButtonIcon(delete_file);
     			delete_file.setVisibility(View.GONE
     					);
-				Toast toast = Toast.makeText(PaginaRenderActivity.this
-						, getString(R.string.no_record), Toast.LENGTH_SHORT);
-				toast.show();
+//				Toast toast = Toast.makeText(PaginaRenderActivity.this
+//						, getString(R.string.no_record), Toast.LENGTH_SHORT);
+//				toast.show();
 	        	play_button.setVisibility(View.GONE);
 	        	stop_button.setVisibility(View.GONE);
 	        	rewind_button.setVisibility(View.GONE);
 	        	ff_button.setVisibility(View.GONE);
+	            
+	        	final Runnable mMyRunnable = new Runnable() {
+	            	@Override
+	            	public void run() {
+	    				Toast.makeText(PaginaRenderActivity.this
+	    						, getString(R.string.no_record), Toast.LENGTH_SHORT).show();
+	                }
+	            };
+	            Handler myHandler = new Handler();
+	            myHandler.postDelayed(mMyRunnable, 1000);
             }
 
         }
@@ -1237,6 +1250,10 @@ public class PaginaRenderActivity extends ActionBarActivity {
         		showScrollHelp(); 
         	}
         }
+        
+        mLUtils = LUtils.getInstance(PaginaRenderActivity.this);
+        ViewCompat.setTransitionName(findViewById(R.id.pagina_render_view), "CLICKED");
+        
     }
     
 	@Override
@@ -1256,7 +1273,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
       	   	  && barreCambio.equals(barreSalvato))) {
         		pulisciVars();
 				finish();
-		    	overridePendingTransition(0, R.anim.slide_out_right);
+//		    	overridePendingTransition(0, R.anim.slide_out_right);
+				mLUtils.closeActivityWithTransition();
 	            return true;
 			}
 			else {
@@ -1297,14 +1315,16 @@ public class PaginaRenderActivity extends ActionBarActivity {
                 		db.close();
                 		pulisciVars();
             			finish();
-            			overridePendingTransition(0, R.anim.slide_out_right);
+//            			overridePendingTransition(0, R.anim.slide_out_right);
+            			mLUtils.closeActivityWithTransition();
                     }
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
                     	pulisciVars();
             			finish();
-            			overridePendingTransition(0, R.anim.slide_out_right);
+//            			overridePendingTransition(0, R.anim.slide_out_right);
+            			mLUtils.closeActivityWithTransition();
                     }
                 })
 //                .titleColor(getResources().getColor(android.R.color.black))
@@ -1450,7 +1470,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
         	  && barreCambio.equals(barreSalvato))) {
         		pulisciVars();
 				finish();
-				overridePendingTransition(0, R.anim.slide_out_right);
+//				overridePendingTransition(0, R.anim.slide_out_right);
+				mLUtils.closeActivityWithTransition();
 	            return true;
         	}
         	else {
@@ -1491,14 +1512,16 @@ public class PaginaRenderActivity extends ActionBarActivity {
                 		db.close();
                 		pulisciVars();
             			finish();
-            			overridePendingTransition(0, R.anim.slide_out_right);
+//            			overridePendingTransition(0, R.anim.slide_out_right);
+            			mLUtils.closeActivityWithTransition();
                     }
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
                     	pulisciVars();
             			finish();
-            			overridePendingTransition(0, R.anim.slide_out_right);
+//            			overridePendingTransition(0, R.anim.slide_out_right);
+            			mLUtils.closeActivityWithTransition();
                     }
                 })
 //                .titleColor(getResources().getColor(android.R.color.black))
@@ -1648,7 +1671,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //	        speed_text.setText(textValue + "%");
 	    }
 	    
-	    Log.i(this.getClass().toString(), "scrollPlaying? " + scrollPlaying);
+//	    Log.i(this.getClass().toString(), "scrollPlaying? " + scrollPlaying);
 	    if (scrollPlaying) {
 //	    	play_scroll.performClick();
 			play_scroll.setVisibility(View.GONE);
@@ -2642,7 +2665,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                 HttpURLConnection connection = null;
                 try {
                     URL url = new URL(sUrl[0]);
-                    Log.i(PaginaRenderActivity.this.getClass().toString(), "URL[0]:" + sUrl[0]);
+//                    Log.i(PaginaRenderActivity.this.getClass().toString(), "URL[0]:" + sUrl[0]);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.connect();
 
@@ -2659,7 +2682,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                     // download the file
                     input = connection.getInputStream();
                     output = new FileOutputStream(sUrl[1]);
-                    Log.i(PaginaRenderActivity.this.getClass().toString(), "URL[1]:" + sUrl[1]);
+//                    Log.i(PaginaRenderActivity.this.getClass().toString(), "URL[1]:" + sUrl[1]);
 
                     byte data[] = new byte[4096];
                     long total = 0;
