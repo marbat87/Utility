@@ -51,6 +51,8 @@ public class SalmiSectionFragment extends Fragment {
 	private final int ID_FITTIZIO = 99999999;
 	private final int ID_BASE = 100;
 	
+	private LUtils mLUtils;
+	
 //	private final String LISTA_PERSONALIZZATA_TAG = "1";
 //	private final String LISTA_PREDEFINITA_TAG = "2";
 	
@@ -129,7 +131,7 @@ public class SalmiSectionFragment extends Fragment {
 			    bundle.putInt("idCanto", idCanto);
 			    			    
 			    // lancia l'activity che visualizza il canto passando il parametro creato
-			    startSubActivity(bundle);
+			    startSubActivity(bundle, view);
 			          			      
 			}
 
@@ -161,6 +163,8 @@ public class SalmiSectionFragment extends Fragment {
 		
 		registerForContextMenu(lv);
 		
+		mLUtils = LUtils.getInstance(getActivity());
+		
 		return rootView;
 	}
 		   
@@ -171,11 +175,12 @@ public class SalmiSectionFragment extends Fragment {
 		super.onDestroy();
 	}
 	
-    private void startSubActivity(Bundle bundle) {
+    private void startSubActivity(Bundle bundle, View view) {
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
-    	startActivity(intent);
-    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
+//    	startActivity(intent);
+//    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
+    	mLUtils.startActivityWithTransition(intent, view, "CLICKED");
    	}
     
     private class SongRowAdapter extends ArrayAdapter<String> implements Scrollable {

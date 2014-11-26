@@ -50,6 +50,8 @@ public class ListaPersonalizzataFragment extends Fragment {
 	private int cantoIndex;
 	private int prevOrientation;
 	
+	private LUtils mLUtils;
+	
 //	private final String RESET_LIST_TAG = "1";
 //	private final String RIMUOVI_CANTO_TAG = "2";
 	
@@ -133,6 +135,8 @@ public class ListaPersonalizzataFragment extends Fragment {
 		});
 		
 		setHasOptionsMenu(true);	
+		
+		mLUtils = LUtils.getInstance(getActivity());
 		
 		return rootView;
 	}
@@ -220,8 +224,9 @@ public class ListaPersonalizzataFragment extends Fragment {
 	    
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
-    	startActivity(intent);
-    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
+//    	startActivity(intent);
+//    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
+    	mLUtils.startActivityWithTransition(intent, v, "CLICKED");
     }
     
     private void updateLista() {

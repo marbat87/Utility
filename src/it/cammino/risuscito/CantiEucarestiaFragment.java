@@ -50,6 +50,8 @@ public class CantiEucarestiaFragment extends Fragment {
 	private String[] titoliCanti;
 	private int prevOrientation;
 	
+	private LUtils mLUtils;
+	
 //	private final String RIMUOVI_CANTO_TAG = "1";
 //	private final String RESETTA_LISTA_TAG = "2";
 
@@ -135,6 +137,8 @@ public class CantiEucarestiaFragment extends Fragment {
 		
 		setHasOptionsMenu(true);
 		
+		mLUtils = LUtils.getInstance(getActivity());
+		
 		return rootView;
 	}
 		   
@@ -210,8 +214,9 @@ public class CantiEucarestiaFragment extends Fragment {
 	    
     	Intent intent = new Intent(getActivity(), PaginaRenderActivity.class);
     	intent.putExtras(bundle);
-    	startActivity(intent);
-    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
+//    	startActivity(intent);
+//    	getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.hold_on);
+    	mLUtils.startActivityWithTransition(intent, v, "CLICKED");
     }
     
     private void updateLista() {
