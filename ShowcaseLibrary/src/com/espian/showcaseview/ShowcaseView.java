@@ -174,7 +174,10 @@ public class ShowcaseView extends RelativeLayout
                 lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 int margin = ((Number) (metricScale * 12)).intValue();
-                lps.setMargins(margin, margin, margin, margin);
+                int marginBottom = ((Number) (metricScale * 12)).intValue(); 
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                	marginBottom = ((Number) (metricScale * (getNavigationBarHeight()/2))).intValue();
+                lps.setMargins(margin, margin, margin, marginBottom);
             }
             mEndButton.setLayoutParams(lps);
             mEndButton.setText(
@@ -187,6 +190,14 @@ public class ShowcaseView extends RelativeLayout
 
     }
 
+    public int getNavigationBarHeight() {
+        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return getResources().getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+    
     /**
      * @deprecated Use setShowcase() with the target ShowcaseView.NONE
      */
