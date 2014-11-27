@@ -853,11 +853,17 @@ public class CreaListaActivity extends ActionBarActivity {
 	 	lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 	 	lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		int margin = ((Number) (getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
+		int marginLeft = ((Number) (getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
 		int marginBottom = ((Number) (getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        	marginBottom = ((Number) (getApplicationContext().getResources().getDisplayMetrics()
-        			.density * (getNavigationBarHeight()/2))).intValue();
-		lps.setMargins(margin, margin, margin, marginBottom);
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+				marginBottom = ((Number) (getApplicationContext().getResources().getDisplayMetrics()
+        			.density * 62)).intValue();
+			else
+				marginLeft = ((Number) (getApplicationContext().getResources().getDisplayMetrics()
+        			.density * 62)).intValue();
+		}
+		lps.setMargins(marginLeft, margin, margin, marginBottom);
 		
 		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
 		co.buttonLayoutParams = lps;
