@@ -11,11 +11,10 @@ import java.util.regex.Pattern;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -49,6 +48,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.gc.materialdesign.widgets.Dialog;
 
 public class RicercaAvanzataFragment extends Fragment {
 
@@ -59,7 +59,8 @@ public class RicercaAvanzataFragment extends Fragment {
 	private static String[][] aTexts;
 	ListView lv;
 	private int prevOrientation;
-	private ProgressDialog mProgressDialog;
+//	private ProgressDialog mProgressDialog;
+	private MaterialDialog mDialog;
 	private static Map<Character, Character> MAP_NORM;
 	
 	private String titoloDaAgg;
@@ -160,15 +161,27 @@ public class RicercaAvanzataFragment extends Fragment {
 		ricercaButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mProgressDialog == null) {
-					mProgressDialog = new ProgressDialog(getActivity());
-					mProgressDialog.setMessage(getString(R.string.search_running));
-					mProgressDialog.setIndeterminate(true);
-					mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-					mProgressDialog.setCancelable(true);
-					mProgressDialog.setCanceledOnTouchOutside(false);
-				}
-				mProgressDialog.show();
+//				if (mProgressDialog == null) {
+//					mProgressDialog = new ProgressDialog(getActivity());
+//					mProgressDialog.setMessage(getString(R.string.search_running));
+//					mProgressDialog.setIndeterminate(true);
+//					mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//					mProgressDialog.setCancelable(true);
+//					mProgressDialog.setCanceledOnTouchOutside(false);
+//				}
+//				mProgressDialog.show();
+//				mDialog = new MaterialDialog.Builder(getActivity())
+//	            .customView(R.layout.dialog_loadindeterminate)
+//	            .build();
+//				((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
+//				mDialog.show();
+//				mDialog.setOnDismissListener(new OnDismissListener() {
+//	    			@Override
+//	    			public void onDismiss(DialogInterface arg0) {
+//	    				getActivity().setRequestedOrientation(prevOrientation);
+//	    			}
+//	    		});
+//				mDialog.setCancelable(false);
 				final SearchTask downloadTask = new SearchTask();
 				downloadTask.execute(searchPar.getText().toString());
 			}
@@ -744,21 +757,36 @@ public class RicercaAvanzataFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            prevOrientation = getActivity().getRequestedOrientation();
-            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            } else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            } else {
-            	getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-            }
+            blockOrientation();
+            mDialog = new MaterialDialog.Builder(getActivity())
+            .customView(R.layout.dialog_loadindeterminate)
+            .build();
+			((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
+			mDialog.show();
+			mDialog.setOnDismissListener(new OnDismissListener() {
+    			@Override
+    			public void onDismiss(DialogInterface arg0) {
+    				getActivity().setRequestedOrientation(prevOrientation);
+    			}
+    		});
+			mDialog.setCancelable(false);
+//            prevOrientation = getActivity().getRequestedOrientation();
+//            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//            } else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//            } else {
+//            	getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+//            }
         }
 
         @Override
         protected void onPostExecute(String result) {
-        	getActivity().setRequestedOrientation(prevOrientation);
-        	if (mProgressDialog.isShowing())
-        		mProgressDialog.dismiss();
+//        	if (mProgressDialog.isShowing())
+//        		mProgressDialog.dismiss();
+        	if (mDialog.isShowing())
+        		mDialog.dismiss();
+//        	getActivity().setRequestedOrientation(prevOrientation);
         	
     		// crea un list adapter per l'oggetto di tipo ListView
     		lv.setAdapter(new SongRowAdapter());
