@@ -63,6 +63,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -97,7 +98,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //	ImageButton play_scroll, stop_scroll;
 	Slider scroll_speed_bar;
 //	TextView speed_text;
-	private ProgressDialog loadingMp3;
+//	private ProgressDialog loadingMp3;
+	private MaterialDialog mp3Dialog, exportDialog;
 	private PhoneStateListener phoneStateListener;
 	private static OnAudioFocusChangeListener afChangeListener;
 	private static AudioManager am;
@@ -159,7 +161,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //	private final String DELETE_LINK_TAG = "5";
 //	private final String DELETE_ONLY_LINK_TAG = "6";
 	
-	private ProgressDialog mExportDialog;
+//	private ProgressDialog mExportDialog;
 	private String localPDFPath;
 	
 //    private static final String FILE_CHOOSER_TAG = "FileChooserExampleActivity";
@@ -1853,15 +1855,26 @@ public class PaginaRenderActivity extends ActionBarActivity {
     
     private void cmdPrepare(){
     	blockOrientation();
-        loadingMp3 = new ProgressDialog(PaginaRenderActivity.this);
-        loadingMp3.setMessage(getString(R.string.wait));
-        loadingMp3.setOnDismissListener(new OnDismissListener() {
+//        loadingMp3 = new ProgressDialog(PaginaRenderActivity.this);
+//        loadingMp3.setMessage(getString(R.string.wait));
+//        loadingMp3.setOnDismissListener(new OnDismissListener() {
+//			@Override
+//			public void onDismiss(DialogInterface arg0) {
+//				setRequestedOrientation(prevOrientation);
+//			}
+//		});
+//    	loadingMp3.show();
+    	mp3Dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+        .customView(R.layout.dialog_loadindeterminate)
+        .build();
+    	((TextView) mp3Dialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.wait);
+    	mp3Dialog.show();
+    	mp3Dialog.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
 				setRequestedOrientation(prevOrientation);
 			}
 		});
-    	loadingMp3.show();
     	mediaPlayer.setOnPreparedListener(mediaPlayerOnPreparedListener);
     	mediaPlayer.setOnCompletionListener(mediaPlayerOnCompletedListener);
     	
@@ -2018,8 +2031,10 @@ public class PaginaRenderActivity extends ActionBarActivity {
 		@Override
 		public boolean onError(MediaPlayer mp, int what, int extra) {			
 			try {
-				if (loadingMp3.isShowing())
-					loadingMp3.dismiss();
+//				if (loadingMp3.isShowing())
+//					loadingMp3.dismiss();
+				if (mp3Dialog.isShowing())
+					mp3Dialog.dismiss();
 			}
 			catch (IllegalArgumentException e) {}
 			mediaPlayerState = MP_State.Error;
@@ -2034,8 +2049,10 @@ public class PaginaRenderActivity extends ActionBarActivity {
 		@Override
 		public void onPrepared(MediaPlayer mp) {
 			try {
-				if (loadingMp3.isShowing())
-					loadingMp3.dismiss();
+//				if (loadingMp3.isShowing())
+//					loadingMp3.dismiss();
+				if (mp3Dialog.isShowing())
+					mp3Dialog.dismiss();
 			}
 			catch (IllegalArgumentException e) {}			
 			mediaPlayerState = MP_State.Prepared;
@@ -2910,21 +2927,35 @@ public class PaginaRenderActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-			if (mExportDialog == null) {
-				mExportDialog = new ProgressDialog(PaginaRenderActivity.this);
-				mExportDialog.setMessage(getString(R.string.export_running));
-				mExportDialog.setIndeterminate(true);
-				mExportDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				mExportDialog.setCancelable(true);
-				mExportDialog.setCanceledOnTouchOutside(false);
-			}
-			mExportDialog.show();
+//			if (mExportDialog == null) {
+//				mExportDialog = new ProgressDialog(PaginaRenderActivity.this);
+//				mExportDialog.setMessage(getString(R.string.export_running));
+//				mExportDialog.setIndeterminate(true);
+//				mExportDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				mExportDialog.setCancelable(true);
+//				mExportDialog.setCanceledOnTouchOutside(false);
+//			}
+//			mExportDialog.show();
+            blockOrientation();
+            exportDialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+            .customView(R.layout.dialog_loadindeterminate)
+            .build();
+        	((TextView) exportDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.export_running);
+        	exportDialog.show();
+        	exportDialog.setOnDismissListener(new OnDismissListener() {
+    			@Override
+    			public void onDismiss(DialogInterface arg0) {
+    				setRequestedOrientation(prevOrientation);
+    			}
+    		});
         }
 
         @Override
         protected void onPostExecute(String result) {
-        	if (mExportDialog.isShowing())
-        		mExportDialog.dismiss();
+//        	if (mExportDialog.isShowing())
+//        		mExportDialog.dismiss();
+        	if (exportDialog.isShowing())
+        		exportDialog.dismiss();
 //        	File file = new File(ContextCompat.getExternalFilesDirs(getApplicationContext(), null)[0].getAbsolutePath() + "/output.pdf");
         	File file = new File(localPDFPath);
 	        Intent target = new Intent(Intent.ACTION_VIEW);
