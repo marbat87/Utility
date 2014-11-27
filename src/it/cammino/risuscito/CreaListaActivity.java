@@ -828,6 +828,14 @@ public class CreaListaActivity extends ActionBarActivity {
         }
     }
     
+    public int getNavigationBarHeight() {
+        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return getResources().getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+    
    	private void showHelp() {
    		if (nomiElementi.size() == 0) {
    			findViewById(R.id.noElementsAdded).setVisibility(View.GONE);
@@ -844,8 +852,12 @@ public class CreaListaActivity extends ActionBarActivity {
 	 			ViewGroup.LayoutParams.WRAP_CONTENT);
 	 	lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 	 	lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-		int margin = ((Number) ( getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
-		lps.setMargins(margin, margin, margin, margin);
+		int margin = ((Number) (getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
+		int marginBottom = ((Number) (getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        	marginBottom = ((Number) (getApplicationContext().getResources().getDisplayMetrics()
+        			.density * (getNavigationBarHeight()/2))).intValue();
+		lps.setMargins(margin, margin, margin, marginBottom);
 		
 		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
 		co.buttonLayoutParams = lps;
