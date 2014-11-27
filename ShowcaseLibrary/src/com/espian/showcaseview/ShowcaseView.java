@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -174,10 +175,15 @@ public class ShowcaseView extends RelativeLayout
                 lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 int margin = ((Number) (metricScale * 12)).intValue();
-                int marginBottom = ((Number) (metricScale * 12)).intValue(); 
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                	marginBottom = ((Number) (metricScale * (getNavigationBarHeight()/2))).intValue();
-                lps.setMargins(margin, margin, margin, marginBottom);
+                int marginBottom = ((Number) (metricScale * 12)).intValue();
+                int marginRight = ((Number) (metricScale * 12)).intValue();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                	if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                		marginBottom = ((Number) (metricScale * 62)).intValue();
+                	else
+                		marginRight = ((Number) (metricScale * 62)).intValue();
+                }
+                lps.setMargins(margin, margin, marginRight, marginBottom);
             }
             mEndButton.setLayoutParams(lps);
             mEndButton.setText(
