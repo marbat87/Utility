@@ -2573,7 +2573,11 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	 	lps.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 	 	lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		int marginTop = ((Number) ( getApplicationContext().getResources().getDisplayMetrics().density * 40)).intValue();
-		int marginRight = ((Number) ( getApplicationContext().getResources().getDisplayMetrics().density * 15)).intValue();
+		int marginRight = ((Number) ( getApplicationContext().getResources().getDisplayMetrics().density * 12)).intValue();
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP 
+				&& getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			marginRight = ((Number) ( getApplicationContext().getResources().getDisplayMetrics().density * 62)).intValue();
+		}
 		lps.setMargins(marginTop, marginTop, marginRight, marginTop);
 		
 		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
