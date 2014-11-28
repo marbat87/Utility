@@ -222,6 +222,18 @@ public class RicercaAvanzataFragment extends Fragment {
 		
 		mLUtils = LUtils.getInstance(getActivity());
 		
+		mDialog = new MaterialDialog.Builder(getActivity())
+        .customView(R.layout.dialog_loadindeterminate)
+        .build();
+		((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
+		mDialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface arg0) {
+				getActivity().setRequestedOrientation(prevOrientation);
+			}
+		});
+		mDialog.setCancelable(false);
+		
 		return rootView;
 	}
 
@@ -758,18 +770,7 @@ public class RicercaAvanzataFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             blockOrientation();
-            mDialog = new MaterialDialog.Builder(getActivity())
-            .customView(R.layout.dialog_loadindeterminate)
-            .build();
-			((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
 			mDialog.show();
-			mDialog.setOnDismissListener(new OnDismissListener() {
-    			@Override
-    			public void onDismiss(DialogInterface arg0) {
-    				getActivity().setRequestedOrientation(prevOrientation);
-    			}
-    		});
-			mDialog.setCancelable(false);
 //            prevOrientation = getActivity().getRequestedOrientation();
 //            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 //            	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
