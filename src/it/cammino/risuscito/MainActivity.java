@@ -155,7 +155,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         if (mActionBarToolbar != null) {
-            mActionBarToolbar.setNavigationIcon(R.drawable.ic_drawer);
+            mActionBarToolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
             mActionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
