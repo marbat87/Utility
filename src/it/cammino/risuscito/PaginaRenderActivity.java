@@ -441,9 +441,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
     				//controlla la presenza di una connessione internet
     				if (!Utility.isOnline(PaginaRenderActivity.this) 
     						&& !localFile)  {
-    					Toast toast = Toast.makeText(PaginaRenderActivity.this
-    							, getString(R.string.no_connection), Toast.LENGTH_SHORT);
-    					toast.show();
+    					Toast.makeText(PaginaRenderActivity.this
+    							, getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
+//    					toast.show();
     					return;
     				}
     				
@@ -1253,6 +1253,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
         	}
         }
         
+        initializeLoadingDialogs();
+    	
         mLUtils = LUtils.getInstance(PaginaRenderActivity.this);
         ViewCompat.setTransitionName(findViewById(R.id.pagina_render_view), "CLICKED");
         
@@ -1363,14 +1365,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	    				"  WHERE _id =  " + idCanto;
 	    		db.execSQL(sql);
 	    		db.close();
-				Toast toast = Toast.makeText(PaginaRenderActivity.this
-						, getString(R.string.tab_saved), Toast.LENGTH_SHORT);
-				toast.show();
+				Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.tab_saved), Toast.LENGTH_SHORT).show();
+//				toast.show();
 			}
 			else {
-				Toast toast = Toast.makeText(PaginaRenderActivity.this
-						, getString(R.string.tab_not_saved), Toast.LENGTH_SHORT);
-				toast.show();
+				Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.tab_not_saved), Toast.LENGTH_SHORT).show();
+//				toast.show();
 			}
 			return true;
 		case R.id.action_reset_tab:
@@ -1398,14 +1400,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	    				"  WHERE _id =  " + idCanto;
 	    		db.execSQL(sql);
 	    		db.close();
-				Toast toast = Toast.makeText(PaginaRenderActivity.this
-						, getString(R.string.barre_saved), Toast.LENGTH_SHORT);
-				toast.show();
+				Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.barre_saved), Toast.LENGTH_SHORT).show();
+//				toast.show();
 			}
 			else {
-				Toast toast = Toast.makeText(PaginaRenderActivity.this
-						, getString(R.string.barre_not_saved), Toast.LENGTH_SHORT);
-				toast.show();
+				Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.barre_not_saved), Toast.LENGTH_SHORT).show();
+//				toast.show();
 			}
 			return true;
 		case R.id.action_reset_barre:
@@ -1568,16 +1570,16 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				if (favoriteFlag == 0) {
 					favoriteFlag = 1;
 					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
-					Toast toast = Toast.makeText(PaginaRenderActivity.this
-							, getString(R.string.favorite_added), Toast.LENGTH_SHORT);
-					toast.show();
+					Toast.makeText(PaginaRenderActivity.this
+							, getString(R.string.favorite_added), Toast.LENGTH_SHORT).show();
+//					toast.show();
 				}
 				else {
 					favoriteFlag = 0;
 					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
-					Toast toast = Toast.makeText(PaginaRenderActivity.this
-							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT);
-					toast.show();
+					Toast.makeText(PaginaRenderActivity.this
+							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT).show();
+//					toast.show();
 				}
 				
 				Bundle bundle = PaginaRenderActivity.this.getIntent().getExtras();
@@ -1864,17 +1866,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //			}
 //		});
 //    	loadingMp3.show();
-    	mp3Dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-        .customView(R.layout.dialog_loadindeterminate)
-        .build();
-    	((TextView) mp3Dialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.wait);
     	mp3Dialog.show();
-    	mp3Dialog.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface arg0) {
-				setRequestedOrientation(prevOrientation);
-			}
-		});
     	mediaPlayer.setOnPreparedListener(mediaPlayerOnPreparedListener);
     	mediaPlayer.setOnCompletionListener(mediaPlayerOnCompletedListener);
     	
@@ -2020,9 +2012,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
     		state = "Unknown!";
     	}
     	
-		Toast toast = Toast.makeText(PaginaRenderActivity.this
-				, "Stato del lettore: " + state, Toast.LENGTH_SHORT);
-		toast.show();
+		Toast.makeText(PaginaRenderActivity.this
+				, "Stato del lettore: " + state, Toast.LENGTH_SHORT).show();
+//		toast.show();
     }
     
     OnErrorListener mediaPlayerOnErrorListener
@@ -2843,9 +2835,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
 					localPDFPath = fileArray[0].getAbsolutePath();
 				}
 				else {
-					Toast toast = Toast.makeText(PaginaRenderActivity.this
-							, getString(R.string.no_memory_writable), Toast.LENGTH_SHORT);
-					toast.show();
+					Toast.makeText(PaginaRenderActivity.this
+							, getString(R.string.no_memory_writable), Toast.LENGTH_SHORT).show();
+//					toast.show();
 					this.cancel(true);
 //					localPDFPath = PaginaRenderActivity.this.getCacheDir().toString();
 				}
@@ -2937,17 +2929,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //			}
 //			mExportDialog.show();
             blockOrientation();
-            exportDialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-            .customView(R.layout.dialog_loadindeterminate)
-            .build();
-        	((TextView) exportDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.export_running);
         	exportDialog.show();
-        	exportDialog.setOnDismissListener(new OnDismissListener() {
-    			@Override
-    			public void onDismiss(DialogInterface arg0) {
-    				setRequestedOrientation(prevOrientation);
-    			}
-    		});
         }
 
         @Override
@@ -2965,9 +2947,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	        try {
 	            startActivity(intent);
 	        } catch (ActivityNotFoundException e) {
-				Toast toast = Toast.makeText(PaginaRenderActivity.this
-						, getString(R.string.no_pdf_reader), Toast.LENGTH_SHORT);
-				toast.show();
+				Toast.makeText(PaginaRenderActivity.this
+						, getString(R.string.no_pdf_reader), Toast.LENGTH_SHORT).show();
+//				toast.show();
 	        }  
         }
     }
@@ -2980,6 +2962,31 @@ public class PaginaRenderActivity extends ActionBarActivity {
     private void disableButtonIcon(ButtonIcon bIcon) {
     	bIcon.setEnabled(false);
     	bIcon.getDrawableIcon().setColorFilter(getResources().getColor(R.color.item_disabled), PorterDuff.Mode.SRC_ATOP);
+    }
+    
+    private void initializeLoadingDialogs() {
+        mp3Dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+        .customView(R.layout.dialog_loadindeterminate)
+        .build();
+    	((TextView) mp3Dialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.wait);
+    	mp3Dialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface arg0) {
+				setRequestedOrientation(prevOrientation);
+			}
+		});
+        
+    	exportDialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+        .customView(R.layout.dialog_loadindeterminate)
+        .build();
+    	((TextView) exportDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.export_running);
+    	exportDialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface arg0) {
+				setRequestedOrientation(prevOrientation);
+			}
+		});
+    	
     }
 
 }

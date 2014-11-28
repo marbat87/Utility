@@ -175,6 +175,18 @@ public class InsertAvanzataFragment extends Fragment {
 		
 		setHasOptionsMenu(true);
 		
+		mDialog = new MaterialDialog.Builder(getActivity())
+        .customView(R.layout.dialog_loadindeterminate)
+        .build();
+		((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
+		mDialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface arg0) {
+				getActivity().setRequestedOrientation(prevOrientation);
+			}
+		});
+		mDialog.setCancelable(false);
+		
 		return rootView;
 	}
 
@@ -299,18 +311,7 @@ public class InsertAvanzataFragment extends Fragment {
         @Override
         protected void onPreExecute() {
         	blockOrientation();
-        	mDialog = new MaterialDialog.Builder(getActivity())
-            .customView(R.layout.dialog_loadindeterminate)
-            .build();
-			((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
 			mDialog.show();
-			mDialog.setOnDismissListener(new OnDismissListener() {
-    			@Override
-    			public void onDismiss(DialogInterface arg0) {
-    				getActivity().setRequestedOrientation(prevOrientation);
-    			}
-    		});
-			mDialog.setCancelable(false);
 //            super.onPreExecute();
 //            prevOrientation = getActivity().getRequestedOrientation();
 //            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
