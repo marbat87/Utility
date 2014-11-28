@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
@@ -71,6 +70,7 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.gc.materialdesign.views.ButtonIcon;
+import com.gc.materialdesign.views.ProgressBarDetermininate;
 import com.gc.materialdesign.views.Slider;
 import com.gc.materialdesign.views.Slider.OnValueChangedListener;
 import com.ipaulpro.afilechooser.FileChooserActivity;
@@ -99,7 +99,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	Slider scroll_speed_bar;
 //	TextView speed_text;
 //	private ProgressDialog loadingMp3;
-	private MaterialDialog mp3Dialog, exportDialog;
+	private MaterialDialog mp3Dialog, exportDialog, mProgressDialog;
 	private PhoneStateListener phoneStateListener;
 	private static OnAudioFocusChangeListener afChangeListener;
 	private static AudioManager am;
@@ -119,7 +119,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	    
 	static MP_State mediaPlayerState;
 	
-	private ProgressDialog mProgressDialog;
+//	private ProgressDialog mProgressDialog;
 	private boolean localFile;
 	private String localUrl;
 	
@@ -1255,8 +1255,28 @@ public class PaginaRenderActivity extends ActionBarActivity {
         
         initializeLoadingDialogs();
     	
+        mProgressDialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
+        .customView(R.layout.dialog_load_determinate)
+        .title(R.string.download_running)
+        .positiveText(R.string.cancel)
+        .callback(new MaterialDialog.SimpleCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                    	mProgressDialog.cancel();
+                    }
+                })
+        .build();
+		mProgressDialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface arg0) {
+				setRequestedOrientation(prevOrientation);
+			}
+		});
+		mProgressDialog.setCancelable(false);
+        
         mLUtils = LUtils.getInstance(PaginaRenderActivity.this);
         ViewCompat.setTransitionName(findViewById(R.id.pagina_render_view), "CLICKED");
+        
         
     }
     
@@ -1331,7 +1351,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
             			mLUtils.closeActivityWithTransition();
                     }
                 })
-//                .titleColor(getResources().getColor(android.R.color.black))
                 .build();
 				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
@@ -2745,14 +2764,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (mProgressDialog == null) {
-	            mProgressDialog = new ProgressDialog(PaginaRenderActivity.this);
-	            mProgressDialog.setMessage(getString(R.string.download_running));
-	            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-	            mProgressDialog.setCancelable(true);
-	            mProgressDialog.setCanceledOnTouchOutside(false);
-            }
-            mProgressDialog.setIndeterminate(true);
+//            if (mProgressDialog == null) {
+//	            mProgressDialog = new ProgressDialog(PaginaRenderActivity.this);
+//	            mProgressDialog.setMessage(getString(R.string.download_running));
+//	            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//	            mProgressDialog.setCancelable(true);
+//	            mProgressDialog.setCanceledOnTouchOutside(false);
+//            }
+//            mProgressDialog.setIndeterminate(true);
             mProgressDialog.show();
         }
 
@@ -2760,16 +2779,20 @@ public class PaginaRenderActivity extends ActionBarActivity {
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
             // if we get here, length is known, now set indeterminate to false
-            mProgressDialog.setIndeterminate(false);
-            mProgressDialog.setMax(100);
-            mProgressDialog.setProgress(progress[0]);
+            ((ProgressBarDetermininate) mProgressDialog.getCustomView().findViewById(R.id.progressDeterminate)).setProgress(progress[0]);
+            if (progress[0] != 0)
+            	((TextView) mProgressDialog.getCustomView().findViewById(R.id.percent_text))
+            	.setText(progress[0].toString() + " %");
+//            mProgressDialog.setIndeterminate(false);
+//            mProgressDialog.setMax(100);
+//            mProgressDialog.setProgress(progress[0]);
         }
 
         @Override
         protected void onPostExecute(String result) {
         	if (mProgressDialog.isShowing())
         		mProgressDialog.dismiss();
-        	setRequestedOrientation(prevOrientation);
+//        	setRequestedOrientation(prevOrientation);
             if (result != null)
                 Toast.makeText(context,"Errore nel download: "+result, Toast.LENGTH_LONG).show();
             else {
