@@ -22,7 +22,6 @@ public class GeneralIndex extends Fragment {
 	SlidingTabLayout mSlidingTabLayout = null;
 	private int defaultIndex;
 	
-	private static final String DEFAULT_INDEX = "defaultIndex";
 	private static final String PAGE_VIEWED = "pageViewed";
   	
 	@Override
@@ -48,7 +47,7 @@ public class GeneralIndex extends Fragment {
         
 	    if (savedInstanceState == null) {
 	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-			defaultIndex = pref.getInt(DEFAULT_INDEX, 0);
+			defaultIndex = pref.getInt(Utility.DEFAULT_INDEX, 0);
 			mViewPager.setCurrentItem(defaultIndex);
 //			mViewPager.postDelayed(new Runnable() {
 //	

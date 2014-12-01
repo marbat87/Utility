@@ -18,6 +18,13 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class Utility {
 	
+	//Costanti per le impostazioni
+	public static final String SCREEN_ON = "sempre_acceso";
+	public static final String SHOW_SECONDA = "mostra_seconda_lettura";
+	public static final String SAVE_LOCATION = "memoria_salvataggio_scelta";
+	public static final String DEFAULT_INDEX = "indice_predefinito"; 
+	
+	
     @SuppressLint("NewApi")
 	public static void setAccessibilityIgnore(View view) {
         view.setClickable(false);

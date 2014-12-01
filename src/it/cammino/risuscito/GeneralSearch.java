@@ -89,7 +89,7 @@ public class GeneralSearch extends Fragment {
 //    //controlla se l'app deve mantenere lo schermo acceso
 //    public void checkScreenAwake() {
 //    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		boolean screenOn = pref.getBoolean("screenOn", false);
+//		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 //		if (screenOn)
 //			mViewPager.setKeepScreenOn(true);
 //		else

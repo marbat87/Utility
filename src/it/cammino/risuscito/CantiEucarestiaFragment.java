@@ -287,7 +287,7 @@ public class CantiEucarestiaFragment extends Fragment {
 		}
 		
 		SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-		boolean showSeconda = pref.getBoolean("showSecondaEucarestia", false);
+		boolean showSeconda = pref.getBoolean(Utility.SHOW_SECONDA, false);
 		
 		if (showSeconda) {
 			
@@ -664,7 +664,7 @@ public class CantiEucarestiaFragment extends Fragment {
     	
     	//deve essere messa anche la seconda lettura? legge le impostazioni
 		SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(getActivity());
-		boolean showSeconda = pref.getBoolean("showSecondaEucarestia", false);
+		boolean showSeconda = pref.getBoolean(Utility.SHOW_SECONDA, false);
     	
 		if (showSeconda) {
     	//canto alla seconda lettura

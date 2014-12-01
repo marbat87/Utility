@@ -26,10 +26,10 @@ public class PreferencesFragment extends Fragment {
 	private SwitchCompat secondaSwitch;
 	private int saveEntries;
 	
-	private static final String SCREEN_ON = "screenOn";
-	private static final String SHOW_SECONDA = "showSecondaEucarestia";
-	private static final String DEFAULT_INDEX = "defaultIndex";
-	private static final String SAVE_LOCATION = "saveLocation";
+//	private static final String SCREEN_ON = "screenOn";
+//	private static final String SHOW_SECONDA = "showSecondaEucarestia";
+//	private static final String DEFAULT_INDEX = "defaultIndex";
+//	private static final String SAVE_LOCATION = "saveLocation";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,12 +53,12 @@ public class PreferencesFragment extends Fragment {
 				
 				if (screenSwitch.isChecked()) {
 					screenSwitch.setChecked(false);
-		            editor.putBoolean(SCREEN_ON, false);
+		            editor.putBoolean(Utility.SCREEN_ON, false);
 
 				}
 				else {
 					screenSwitch.setChecked(true);
-					editor.putBoolean(SCREEN_ON, true);
+					editor.putBoolean(Utility.SCREEN_ON, true);
 				}
 				
 	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
@@ -74,7 +74,7 @@ public class PreferencesFragment extends Fragment {
 		// controllo l'attuale impostazione di always on
 		if (PreferenceManager
 				.getDefaultSharedPreferences(getActivity())
-				.getBoolean(SCREEN_ON, false))
+				.getBoolean(Utility.SCREEN_ON, false))
 			screenSwitch.setChecked(true);
 		else
 			screenSwitch.setChecked(false);
@@ -94,12 +94,12 @@ public class PreferencesFragment extends Fragment {
 				
 				if (secondaSwitch.isChecked()) {
 					secondaSwitch.setChecked(false);
-		            editor.putBoolean(SHOW_SECONDA, false);
+		            editor.putBoolean(Utility.SHOW_SECONDA, false);
 
 				}
 				else {
 					secondaSwitch.setChecked(true);
-					editor.putBoolean(SHOW_SECONDA, true);
+					editor.putBoolean(Utility.SHOW_SECONDA, true);
 				}
 				
 	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
@@ -113,7 +113,7 @@ public class PreferencesFragment extends Fragment {
 		// controllo l'attuale impostazione della visualizzazione seconda lettura
 		if (PreferenceManager
 				.getDefaultSharedPreferences(getActivity())
-				.getBoolean(SHOW_SECONDA, false))
+				.getBoolean(Utility.SHOW_SECONDA, false))
 			secondaSwitch.setChecked(true);
 		else
 			secondaSwitch.setChecked(false);
@@ -131,14 +131,14 @@ public class PreferencesFragment extends Fragment {
                 .items(R.array.pref_default_index_entries)
                 .itemsCallbackSingleChoice(PreferenceManager
         				.getDefaultSharedPreferences(getActivity())
-        				.getInt(DEFAULT_INDEX, 0), new MaterialDialog.ListCallback() {
+        				.getInt(Utility.DEFAULT_INDEX, 0), new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                     	SharedPreferences.Editor editor = PreferenceManager
         	                    .getDefaultSharedPreferences(getActivity())
         	                    .edit();
         				
-                    	editor.putInt(DEFAULT_INDEX, which);
+                    	editor.putInt(Utility.DEFAULT_INDEX, which);
         				
         	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
         	            	editor.commit();
@@ -192,14 +192,14 @@ public class PreferencesFragment extends Fragment {
                 .items(saveEntries)
                 .itemsCallbackSingleChoice(PreferenceManager
         				.getDefaultSharedPreferences(getActivity())
-        				.getInt(SAVE_LOCATION, 0), new MaterialDialog.ListCallback() {
+        				.getInt(Utility.SAVE_LOCATION, 0), new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                     	SharedPreferences.Editor editor = PreferenceManager
         	                    .getDefaultSharedPreferences(getActivity())
         	                    .edit();
         				
-                    	editor.putInt(SAVE_LOCATION, which);
+                    	editor.putInt(Utility.SAVE_LOCATION, which);
         				
         	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
         	            	editor.commit();
