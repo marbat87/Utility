@@ -365,7 +365,7 @@ public class MainActivity extends ActionBarActivity {
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-			boolean screenOn = pref.getBoolean("screenOn", false);
+			boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
 			findViewById(R.id.content_frame).setKeepScreenOn(true);
 		else

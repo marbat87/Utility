@@ -721,7 +721,7 @@ public class CreaListaActivity extends ActionBarActivity {
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-		boolean screenOn = pref.getBoolean("screenOn", false);
+		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
 			lv.setKeepScreenOn(true);
 		else

@@ -130,7 +130,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	
 	private static final String PREF_FIRST_OPEN = "prima_apertura_new";
 	private static final String PREF_FIRST_OPEN_SCROLL = "prima_apertura_scroll";
-	private static final String SAVE_LOCATION = "saveLocation";
 	
 	private Handler mHandler = new Handler();
 	final Runnable mScrollDown = new Runnable()
@@ -656,7 +655,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	                    public void onPositive(MaterialDialog dialog) {
 	                    	final DownloadTask downloadTask = new DownloadTask(PaginaRenderActivity.this);
 	            	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
-	            			int saveLocation = pref.getInt(SAVE_LOCATION, 0);
+	            			int saveLocation = pref.getInt(Utility.SAVE_LOCATION, 0);
 	            			if (saveLocation == 1) {
 	            				File[] fileArray = ContextCompat.getExternalFilesDirs(PaginaRenderActivity.this, null);
 	            				String localFile = fileArray[0].getAbsolutePath()
@@ -1762,7 +1761,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-		boolean screenOn = pref.getBoolean("screenOn", false);
+		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
 			favouriteCheckBox.setKeepScreenOn(true);
 		else
