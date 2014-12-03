@@ -46,7 +46,7 @@
 <!-- 			    android:layout_alignParentTop="true" -->
 <!-- 			    android:layout_centerHorizontal="true" -->
 <!-- 	            android:background="@color/theme_accent" -->
-<!-- 	            risuscito:iconFloat="@drawable/ic_rating_favorite_normal" -->
+<!-- 	            risuscito:iconDrawable="@drawable/ic_rating_favorite_normal" -->
 <!-- 	            android:soundEffectsEnabled="true"  /> -->
 					
 	<!-- 		<ImageButton -->
@@ -67,7 +67,7 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
-	            risuscito:iconFloat="@drawable/ic_av_rewind_active"
+	            risuscito:iconDrawable="@drawable/ic_av_rewind_active"
 	            android:soundEffectsEnabled="true"  />
 			
 	<!--     	<ImageButton -->
@@ -88,7 +88,7 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
-	            risuscito:iconFloat="@drawable/play_button_drawable"
+	            risuscito:iconDrawable="@drawable/play_button_drawable"
 	            android:soundEffectsEnabled="true"  />
 	
 	<!--     	<ImageButton -->
@@ -109,7 +109,7 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
-	            risuscito:iconFloat="@drawable/ic_av_fast_forward_active"
+	            risuscito:iconDrawable="@drawable/ic_av_fast_forward_active"
 	            android:soundEffectsEnabled="true"  />
 	    	
 	<!-- 		<ImageButton -->
@@ -130,7 +130,7 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
-	            risuscito:iconFloat="@drawable/ic_av_stop_active"
+	            risuscito:iconDrawable="@drawable/ic_av_stop_active"
 	            android:soundEffectsEnabled="true"  />
 			
 	<!-- 		<ImageButton -->
@@ -152,7 +152,7 @@
 			    android:layout_above="@+id/save_file"
 	            android:layout_centerHorizontal="true"
 	            android:background="@color/theme_accent"
-	            risuscito:iconFloat="@drawable/ic_delete_black_48dp"
+	            risuscito:iconDrawable="@drawable/ic_delete_black_48dp"
 	            android:soundEffectsEnabled="true"  />
 			
 	<!-- 		<ImageButton -->
@@ -172,7 +172,7 @@
 	         	android:layout_alignParentBottom="true"
 	            android:layout_centerHorizontal="true"
 	            android:background="@color/theme_accent"
-	            risuscito:iconFloat="@drawable/ic_av_download_active"
+	            risuscito:iconDrawable="@drawable/ic_av_download_active"
 	            android:soundEffectsEnabled="true"  />
 			
 	<!-- 		<ImageView -->
@@ -212,7 +212,7 @@
 	            	android:layout_height="wrap_content"
 			    	android:layout_gravity="center_vertical"
 	            	android:background="@color/theme_accent"
-	            	risuscito:iconFloat="@drawable/ic_rating_favorite_normal_light"
+	            	risuscito:iconDrawable="@drawable/ic_rating_favorite_normal_light"
 	            	android:soundEffectsEnabled="true"  />
 		   	    
 <!-- 		   	   	<TextView  -->
@@ -261,7 +261,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_gravity="center_vertical"
 		            android:background="@color/theme_accent"
-		            risuscito:iconFloat="@drawable/ic_play_circle_outline_white_48dp"
+		            risuscito:iconDrawable="@drawable/ic_play_circle_outline_white_48dp"
 		            android:soundEffectsEnabled="true"  />
 			   
 <!-- 			   	<ImageButton -->
@@ -279,7 +279,7 @@
             		android:layout_height="wrap_content"
             		android:layout_gravity="center_vertical"
            			android:background="@color/theme_accent"
-            		risuscito:iconFloat="@drawable/ic_pause_circle_outline_white_48dp"
+            		risuscito:iconDrawable="@drawable/ic_pause_circle_outline_white_48dp"
             		android:soundEffectsEnabled="true"  />
 			        
 			</LinearLayout>
