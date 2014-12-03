@@ -19,9 +19,4 @@
 #   public *;
 #}
 -ignorewarnings 
--dontskipnonpubliclibraryclassmembers
--keep class !android.support.v7.internal.view.menu.**,android.support.** {*;}
--keep public class * extends android.support.v7.widget.ShareActionProvider 
--keepclassmembers class * extends android.support.v7.widget.ShareActionProvider{
- public <init>(android.content.Context);
-}
+-keep class !android.support.v7.internal.view.menu.**,** {*;}
