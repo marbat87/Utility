@@ -70,7 +70,7 @@ import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.gc.materialdesign.views.ButtonIcon;
-import com.gc.materialdesign.views.ProgressBarDetermininate;
+import com.gc.materialdesign.views.ProgressBarIndeterminateDeterminate;
 import com.gc.materialdesign.views.Slider;
 import com.gc.materialdesign.views.Slider.OnValueChangedListener;
 import com.ipaulpro.afilechooser.FileChooserActivity;
@@ -1577,9 +1577,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
     	favoriteFlag = selectFavouriteFromSource(pagina);
         
         if (favoriteFlag == 1) 
-        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
+        	favouriteCheckBox.getIconDrawable().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
         else 
-        	favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        	favouriteCheckBox.getIconDrawable().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
         
         favouriteCheckBox.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1587,14 +1587,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				favouriteCheckBox.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 				if (favoriteFlag == 0) {
 					favoriteFlag = 1;
-					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
+					favouriteCheckBox.getIconDrawable().setColorFilter(getResources().getColor(R.color.favorite_accent), PorterDuff.Mode.SRC_ATOP);
 					Toast.makeText(PaginaRenderActivity.this
 							, getString(R.string.favorite_added), Toast.LENGTH_SHORT).show();
 //					toast.show();
 				}
 				else {
 					favoriteFlag = 0;
-					favouriteCheckBox.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+					favouriteCheckBox.getIconDrawable().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
 					Toast.makeText(PaginaRenderActivity.this
 							, getString(R.string.favorite_removed), Toast.LENGTH_SHORT).show();
 //					toast.show();
@@ -2778,7 +2778,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
             // if we get here, length is known, now set indeterminate to false
-            ((ProgressBarDetermininate) mProgressDialog.getCustomView().findViewById(R.id.progressDeterminate)).setProgress(progress[0]);
+            ((ProgressBarIndeterminateDeterminate) mProgressDialog.getCustomView().findViewById(R.id.progressDeterminate)).setProgress(progress[0]);
             if (progress[0] != 0)
             	((TextView) mProgressDialog.getCustomView().findViewById(R.id.percent_text))
             	.setText(progress[0].toString() + " %");
@@ -2978,12 +2978,12 @@ public class PaginaRenderActivity extends ActionBarActivity {
     
     private void enableButtonIcon(ButtonIcon bIcon) {
     	bIcon.setEnabled(true);
-    	bIcon.getDrawableIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
+    	bIcon.getIconDrawable().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_ATOP);
     }
     
     private void disableButtonIcon(ButtonIcon bIcon) {
     	bIcon.setEnabled(false);
-    	bIcon.getDrawableIcon().setColorFilter(getResources().getColor(R.color.item_disabled), PorterDuff.Mode.SRC_ATOP);
+    	bIcon.getIconDrawable().setColorFilter(getResources().getColor(R.color.item_disabled), PorterDuff.Mode.SRC_ATOP);
     }
     
     private void initializeLoadingDialogs() {
