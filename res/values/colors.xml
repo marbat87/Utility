@@ -34,7 +34,7 @@
  	<color name="teal_accent">#a7ffeb</color>
  	<color name="secondary_section_selected">@android:color/transparent</color>
  	<color name="unselectedTabTextColor">#99FFFFFF</color>
- 	<color name="btn_disabled_text">#848484</color>
+ 	<color name="btn_disabled_text">#42000000</color>
  	
  	<color name="navdrawer_background">#ffffffff</color>
     <color name="navdrawer_text_color">@color/body_text_1</color>

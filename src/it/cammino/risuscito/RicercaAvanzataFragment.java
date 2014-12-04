@@ -95,6 +95,7 @@ public class RicercaAvanzataFragment extends Fragment {
 //		rootView.findViewById(R.id.button_search).setEnabled(false);
 		ricercaButton = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
 		ricercaButton.setEnabled(false);
+		ricercaButton.setTextColor(getResources().getColor(R.color.btn_disabled_text));
 		
 		try {
 //        	InputStream in = getActivity().getAssets().open("fileout.xml");
@@ -121,10 +122,12 @@ public class RicercaAvanzataFragment extends Fragment {
 				//abilita il pulsante solo se la stringa ha più di 3 caratteri, senza contare gli spazi
 				if (s.toString().trim().length() >= 3) {
 					ricercaButton.setEnabled(true);
+					ricercaButton.setTextColor(getResources().getColor(android.R.color.white));
 //					rootView.findViewById(R.id.search_ripple).setEnabled(true);
 				}
 				else {
 					ricercaButton.setEnabled(false);
+					ricercaButton.setTextColor(getResources().getColor(R.color.btn_disabled_text));
 //					rootView.findViewById(R.id.search_ripple).setEnabled(false); 
 				}
 			}
