@@ -29,8 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.alertdialogpro.AlertDialogPro;
 import com.gc.materialdesign.widgets.SnackBar;
 
 public class CustomLists extends Fragment  {
@@ -44,9 +43,9 @@ public class CustomLists extends Fragment  {
 	private ViewPager mViewPager;
 	SlidingTabLayout mSlidingTabLayout = null;
 	
+	private AlertDialogPro dialog;
     private TintEditText titleInput;
-    private View positiveAction;
-  	
+    
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -131,46 +130,13 @@ public class CustomLists extends Fragment  {
 //	        });
 //			dialog.show(getChildFragmentManager(), null);
 //			dialog.setCancelable(false);
-			MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-            .title(R.string.lista_add_desc)
-            .customView(R.layout.dialog_customview)
-            .positiveText(R.string.dialog_chiudi)
-            .negativeText(R.string.cancel)
-            .callback(new MaterialDialog.Callback() {
-                @Override
-                public void onPositive(MaterialDialog dialog) {
-//                	if (titleInput.getText() == null 
-//                			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
-//                		Toast toast = Toast.makeText(getActivity()
-//            				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
-//                		toast.show();
-//                		getActivity().setRequestedOrientation(prevOrientation);
-//                	}
-//                	else {
-////                		dialog.dismiss();
-//                		getActivity().setRequestedOrientation(prevOrientation);
-//                		Bundle bundle = new Bundle();
-//                		bundle.putString("titolo", titleInput.getText().toString());
-//                		bundle.putBoolean("modifica", false);
-//                		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
-//                		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
-//                	}
-                	getActivity().setRequestedOrientation(prevOrientation);
-            		Bundle bundle = new Bundle();
-            		bundle.putString("titolo", titleInput.getText().toString());
-            		bundle.putBoolean("modifica", false);
-            		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
-            		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
-                }
-
-                @Override
-                public void onNegative(MaterialDialog dialog) {
-                	getActivity().setRequestedOrientation(prevOrientation);
-                }
-            })
-//            .titleColor(getResources().getColor(android.R.color.black))
-            .build();
-			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+	        AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
+        	dialog = builder.setTitle(R.string.lista_add_desc)
+        			.setView(getActivity().getLayoutInflater().inflate(R.layout.dialog_customview, null))
+                    .setPositiveButton(R.string.dialog_chiudi, new ButtonClickedListener(Utility.ADD_LIST_OK))
+                    .setNegativeButton(R.string.cancel, new ButtonClickedListener(Utility.DISMISS))
+                    .show();
+        	dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 		        @Override
 		        public boolean onKey(DialogInterface arg0, int keyCode,
 		        		KeyEvent event) {
@@ -183,26 +149,21 @@ public class CustomLists extends Fragment  {
 		            return false;
 		        }
 	        });
-			
-			positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
-			titleInput = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
-			titleInput.addTextChangedListener(new TextWatcher() {
+        	dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
+        	titleInput = (TintEditText)dialog.findViewById(R.id.list_title);
+        	titleInput.addTextChangedListener(new TextWatcher() {
 		        @Override
-		        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-		        }
+		        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 		
 		        @Override
 		        public void onTextChanged(CharSequence s, int start, int before, int count) {
-		            positiveAction.setEnabled(s.toString().trim().length() > 0);
+		        	dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.toString().trim().length() > 0);
 		        }
 		
 		        @Override
-		        public void afterTextChanged(Editable s) {
-		        }
+		        public void afterTextChanged(Editable s) {}
 		    });
-	        dialog.show();
-	        dialog.setCancelable(false);
-	        positiveAction.setEnabled(false); // disabled by default
+        	dialog.setCancelable(false);
 			return true;
 		case R.id.action_edit_list:
 			Bundle bundle = new Bundle();
@@ -457,6 +418,34 @@ public class CustomLists extends Fragment  {
 	        return PagerAdapter.POSITION_NONE;
 	    }
 	}
+	
+    private class ButtonClickedListener implements DialogInterface.OnClickListener {
+        private int clickedCode;
+
+        public ButtonClickedListener(int code) {
+        	clickedCode = code;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (clickedCode) {
+			case Utility.DISMISS:
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			case Utility.ADD_LIST_OK:
+				getActivity().setRequestedOrientation(prevOrientation);
+        		Bundle bundle = new Bundle();
+        		bundle.putString("titolo", titleInput.getText().toString());
+        		bundle.putBoolean("modifica", false);
+        		startActivity(new Intent(getActivity(), CreaListaActivity.class).putExtras(bundle));
+        		getActivity().overridePendingTransition(R.anim.slide_in_bottom, R.anim.hold_on);
+				break;
+			default:
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			}
+        }
+    }
 	
 //	//chiamato quando si conferma di voler creare una lista
 //    @Override
