@@ -65,7 +65,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.alertdialogpro.AlertDialogPro;
+import com.alertdialogpro.ProgressDialogPro;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
@@ -99,7 +100,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
 	Slider scroll_speed_bar;
 //	TextView speed_text;
 //	private ProgressDialog loadingMp3;
-	private MaterialDialog mp3Dialog, exportDialog, mProgressDialog;
+	private ProgressDialogPro mp3Dialog, exportDialog;
+	private AlertDialogPro mProgressDialog;
 	private PhoneStateListener phoneStateListener;
 	private static OnAudioFocusChangeListener afChangeListener;
 	private static AudioManager am;
@@ -644,57 +646,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //			        });
 //	                dialog.show(getSupportFragmentManager(), DOWN_CHOOSE_DIALOG_TAG);
 //	                dialog.setCancelable(false);
-					MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-	                .title(R.string.download_link_title)
-	                .content(R.string.downlink_message)
-	                .positiveText(R.string.downlink_download)
-	                .negativeText(R.string.cancel)
-	                .neutralText(R.string.downlink_choose)
-	                .callback(new MaterialDialog.FullCallback() {
-	                    @Override
-	                    public void onPositive(MaterialDialog dialog) {
-	                    	final DownloadTask downloadTask = new DownloadTask(PaginaRenderActivity.this);
-	            	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
-	            			int saveLocation = pref.getInt(Utility.SAVE_LOCATION, 0);
-	            			if (saveLocation == 1) {
-	            				File[] fileArray = ContextCompat.getExternalFilesDirs(PaginaRenderActivity.this, null);
-	            				String localFile = fileArray[0].getAbsolutePath()
-	            						+ "/"
-	            						+ Utility.filterMediaLink(url);
-	            				downloadTask.execute(url, localFile);
-	            			}
-	            			else {
-	            				String localFile = PaginaRenderActivity.this.getFilesDir()
-	            						+ "/"
-	            						+ Utility.filterMediaLink(url);
-	            				downloadTask.execute(url, localFile);
-	            			}
-	            	    	
-	            	    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-	            	    	    @Override
-	            	    	    public void onCancel(DialogInterface dialog) {
-	            	                Toast.makeText(PaginaRenderActivity.this, getString(R.string.download_cancelled), Toast.LENGTH_SHORT).show();
-	            	    	        downloadTask.cancel(true);
-	            	    	        setRequestedOrientation(prevOrientation);
-	            	    	    }
-	            	    	});  
-	                    }
-
-	                    @Override
-	                    public void onNeutral(MaterialDialog dialog) {
-	                		setRequestedOrientation(prevOrientation);
-	                		startActivityForResult(new Intent(
-	                				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
-	                    }
-
-	                    @Override
-	                    public void onNegative(MaterialDialog dialog) {
-	                    	setRequestedOrientation(prevOrientation);
-	                    }
-	                })
-//	                .titleColor(getResources().getColor(android.R.color.black))
-	                .build();
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+	                AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+	                AlertDialogPro dialog = builder.setTitle(R.string.download_link_title)
+		        			.setMessage(R.string.downlink_message)
+		                    .setPositiveButton(R.string.downlink_download, new ButtonClickedListener(Utility.DOWNLOAD_OK))
+		                    .setNegativeButton(R.string.downlink_choose, new ButtonClickedListener(Utility.DOWNLOAD_LINK))
+		                    .setNeutralButton(R.string.cancel, new ButtonClickedListener(Utility.DISMISS))
+		                    .show();
+	                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 				        @Override
 				        public boolean onKey(DialogInterface arg0, int keyCode,
 				        		KeyEvent event) {
@@ -707,7 +666,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				            return false;
 				        }
 			        });
-	                dialog.show();
 	                dialog.setCancelable(false);
 				}
 			});
@@ -737,45 +695,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //				        });
 //		                dialog.show(getSupportFragmentManager(), DELETE_DIALOG_TAG);
 //		                dialog.setCancelable(false);
-						MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-	                    .title(R.string.dialog_delete_mp3_title)
-	                    .content(R.string.dialog_delete_mp3)
-	                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
-	                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-	                    .callback(new MaterialDialog.Callback() {
-	                    	@Override
-	                    	public void onPositive(MaterialDialog dialog) {
-	                    		File fileToDelete = new File(localUrl);
-	                    		fileToDelete.delete();
-	                    		Toast.makeText(PaginaRenderActivity.this
-	                    				, getString(R.string.file_delete)
-	                    				, Toast.LENGTH_SHORT).show();
-	                            
-	                            if (mediaPlayerState == MP_State.Started
-	                            		|| mediaPlayerState == MP_State.Paused)
-	                            	cmdStop();
-	                            
-	                            mediaPlayer = new MediaPlayer();
-	                    		mediaPlayerState = MP_State.Idle;
-	                    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
-	                            
-	                    		localFile = false;
-	                    		cmdSetDataSource(url);
-                    			enableButtonIcon(save_file);
-                    			save_file.setVisibility(View.VISIBLE);
-                    			disableButtonIcon(delete_file);
-                    			delete_file.setVisibility(View.GONE);
-	                    		setRequestedOrientation(prevOrientation);
-	                    	}
-
-	                    	@Override
-	                    	public void onNegative(MaterialDialog dialog) {
-	                    		setRequestedOrientation(prevOrientation);
-	                    	}
-	                    })
-//	                    .titleColor(getResources().getColor(android.R.color.black))
-	                    .build();
-						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+	                    AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+		                AlertDialogPro dialog = builder.setTitle(R.string.dialog_delete_mp3_title)
+			        			.setMessage(R.string.dialog_delete_mp3)
+			                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.DELETE_MP3_OK))
+			                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS))
+			                    .show();
+		                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 					        @Override
 					        public boolean onKey(DialogInterface arg0, int keyCode,
 					        		KeyEvent event) {
@@ -788,8 +714,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 					            return false;
 					        }
 				        });
-	                    dialog.show();
-	                    dialog.setCancelable(false);
+		                dialog.setCancelable(false);
 					}
 					else {
 						blockOrientation();
@@ -812,51 +737,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //				        });
 //		                dialog.show(getSupportFragmentManager(), DELETE_LINK_TAG);
 //		                dialog.setCancelable(false);
-						MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-	                    .title(R.string.dialog_delete_link_title)
-	                    .content(R.string.dialog_delete_link)
-	                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
-	                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-	                    .callback(new MaterialDialog.Callback() {
-	                    	@Override
-	                    	public void onPositive(MaterialDialog dialog) {
-	                    		Toast.makeText(PaginaRenderActivity.this
-	                    				, getString(R.string.delink_delete)
-	                    				, Toast.LENGTH_SHORT).show();
-	                            
-	                            if (mediaPlayerState == MP_State.Started
-	                            		|| mediaPlayerState == MP_State.Paused)
-	                            	cmdStop();
-	                            
-	                            mediaPlayer = new MediaPlayer();
-	                    		mediaPlayerState = MP_State.Idle;
-	                    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
-	                            
-	                			localFile = false;
-	                			personalUrl = "";
-	                    		
-	                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
-	                    		String sql = "DELETE FROM LOCAL_LINKS" +
-	                    				"  WHERE _id =  " + idCanto;
-	                    		db.execSQL(sql);
-	                    		db.close();
-	                    					
-	                			enableButtonIcon(save_file);
-	                			save_file.setVisibility(View.VISIBLE);
-	                			disableButtonIcon(delete_file);
-	                			delete_file.setVisibility(View.GONE);
-
-	                    		setRequestedOrientation(prevOrientation);
-	                    	}
-
-	                    	@Override
-	                    	public void onNegative(MaterialDialog dialog) {
-	                    		setRequestedOrientation(prevOrientation);
-	                    	}
-	                    })
-//	                    .titleColor(getResources().getColor(android.R.color.black))
-	                    .build();
-						dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+	                    AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+		                AlertDialogPro dialog = builder.setTitle(R.string.dialog_delete_link_title)
+			        			.setMessage(R.string.dialog_delete_link)
+			                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.DELETE_LINK_OK))
+			                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS))
+			                    .show();
+		                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 					        @Override
 					        public boolean onKey(DialogInterface arg0, int keyCode,
 					        		KeyEvent event) {
@@ -869,8 +756,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 					            return false;
 					        }
 				        });
-	                    dialog.show();
-	                    dialog.setCancelable(false);
+		                dialog.setCancelable(false);
 					}
 				}
 			});
@@ -937,27 +823,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //			        });
 //	                dialog.show(getSupportFragmentManager(), SAVE_DIALOG_TAG);
 //	                dialog.setCancelable(false);
-					MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-                    .title(R.string.only_link_title)
-                    .content(R.string.only_link)
-                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
-                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                    .callback(new MaterialDialog.Callback() {
-                    	@Override
-                    	public void onPositive(MaterialDialog dialog) {
-                    		setRequestedOrientation(prevOrientation);
-                    		startActivityForResult(new Intent(
-                    				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
-                    	}
-
-                    	@Override
-                    	public void onNegative(MaterialDialog dialog) {
-                    		setRequestedOrientation(prevOrientation);
-                    	}
-                    })
-//                    .titleColor(getResources().getColor(android.R.color.black))
-                    .build();
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                    AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+	                AlertDialogPro dialog = builder.setTitle(R.string.only_link_title)
+		        			.setMessage(R.string.only_link)
+		                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.DOWNLOAD_LINK))
+		                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS))
+		                    .show();
+	                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 				        @Override
 				        public boolean onKey(DialogInterface arg0, int keyCode,
 				        		KeyEvent event) {
@@ -970,8 +842,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				            return false;
 				        }
 			        });
-                    dialog.show();
-                    dialog.setCancelable(false);
+	                dialog.setCancelable(false);
 				}
 			});
 
@@ -999,56 +870,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //			        });
 //	                dialog.show(getSupportFragmentManager(), DELETE_ONLY_LINK_TAG);
 //	                dialog.setCancelable(false);
-					MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-                    .title(R.string.dialog_delete_link_title)
-                    .content(R.string.dialog_delete_link)
-                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
-                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                    .callback(new MaterialDialog.Callback() {
-                    	@Override
-                    	public void onPositive(MaterialDialog dialog) {
-                    		Toast.makeText(PaginaRenderActivity.this
-                    				, getString(R.string.delink_delete)
-                    				, Toast.LENGTH_SHORT).show();
-                            
-                            if (mediaPlayerState == MP_State.Started
-                            		|| mediaPlayerState == MP_State.Paused)
-                            	cmdStop();
-                            
-                            mediaPlayer = new MediaPlayer();
-                    		mediaPlayerState = MP_State.Idle;
-                    		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
-                            
-                			localFile = false;
-                			personalUrl = "";
-                    		
-                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
-                    		String sql = "DELETE FROM LOCAL_LINKS" +
-                    				"  WHERE _id =  " + idCanto;
-                    		db.execSQL(sql);
-                    		db.close();
-                    					
-                			enableButtonIcon(save_file);
-                			save_file.setVisibility(View.VISIBLE);
-                			disableButtonIcon(delete_file);
-                			delete_file.setVisibility(View.GONE);
-                			
-                			play_button.setVisibility(View.GONE);
-                        	stop_button.setVisibility(View.GONE);
-                        	rewind_button.setVisibility(View.GONE);
-                        	ff_button.setVisibility(View.GONE);
-
-                    		setRequestedOrientation(prevOrientation);
-                    	}
-
-                    	@Override
-                    	public void onNegative(MaterialDialog dialog) {
-                    		setRequestedOrientation(prevOrientation);
-                    	}
-                    })
-//                    .titleColor(getResources().getColor(android.R.color.black))
-                    .build();
-					dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                    AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+	                AlertDialogPro dialog = builder.setTitle(R.string.dialog_delete_link_title)
+		        			.setMessage(R.string.dialog_delete_link)
+		                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.DELETE_ONLY_LINK_OK))
+		                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS))
+		                    .show();
+	                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 				        @Override
 				        public boolean onKey(DialogInterface arg0, int keyCode,
 				        		KeyEvent event) {
@@ -1061,8 +889,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				            return false;
 				        }
 			        });
-                    dialog.show();
-                    dialog.setCancelable(false);
+	                dialog.setCancelable(false);
 				}
 			});
             
@@ -1253,26 +1080,31 @@ public class PaginaRenderActivity extends ActionBarActivity {
         }
         
         initializeLoadingDialogs();
-    	
-        mProgressDialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-        .customView(R.layout.dialog_load_determinate)
-        .title(R.string.download_running)
-        .positiveText(R.string.cancel)
-        .callback(new MaterialDialog.SimpleCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                    	mProgressDialog.cancel();
-                    }
-                })
-        .build();
+        
+		AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+		mProgressDialog = builder.setTitle(R.string.download_running)
+    			.setView(getLayoutInflater().inflate(R.layout.dialog_load_determinate, null))
+                .setPositiveButton(R.string.cancel, new ButtonClickedListener(Utility.DOWNLOAD_CANCEL)).create();
+		mProgressDialog.setOnKeyListener(new Dialog.OnKeyListener() {
+	        @Override
+	        public boolean onKey(DialogInterface arg0, int keyCode,
+	        		KeyEvent event) {
+	        	if (keyCode == KeyEvent.KEYCODE_BACK
+	        			&& event.getAction() == KeyEvent.ACTION_UP) {
+	        		arg0.cancel();
+	        		return true;
+	            }
+	            return false;
+	        }
+        });
 		mProgressDialog.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
-				setRequestedOrientation(prevOrientation);
+			setRequestedOrientation(prevOrientation);
 			}
 		});
 		mProgressDialog.setCancelable(false);
-        
+		
         mLUtils = LUtils.getInstance(PaginaRenderActivity.this);
         ViewCompat.setTransitionName(findViewById(R.id.pagina_render_view), "CLICKED");
         
@@ -1321,37 +1153,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //		        });
 //                dialog.show(getSupportFragmentManager(), SALVA_ACCORDO_TAG);
 //                dialog.setCancelable(false);
-				MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-                .title(R.string.dialog_save_tab_title)
-                .content(R.string.dialog_save_tab)
-                .positiveText(R.string.confirm)
-                .negativeText(R.string.dismiss)
-                .callback(new MaterialDialog.Callback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                    	SQLiteDatabase db = listaCanti.getReadableDatabase();
-                		String sql = "UPDATE ELENCO" +
-                				"  SET saved_tab = \'" + notaCambio + "\' " + 
-                				"    , saved_barre = \'" + barreCambio + "\' " + 
-                				"  WHERE _id =  " + idCanto;
-                		db.execSQL(sql);
-                		db.close();
-                		pulisciVars();
-            			finish();
-//            			overridePendingTransition(0, R.anim.slide_out_right);
-            			mLUtils.closeActivityWithTransition();
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                    	pulisciVars();
-            			finish();
-//            			overridePendingTransition(0, R.anim.slide_out_right);
-            			mLUtils.closeActivityWithTransition();
-                    }
-                })
-                .build();
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+                AlertDialogPro dialog = builder.setTitle(R.string.dialog_save_tab_title)
+	        			.setMessage(R.string.dialog_save_tab)
+	                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.SAVE_TAB_OK))
+	                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS_EXIT))
+	                    .show();
+                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
 			        public boolean onKey(DialogInterface arg0, int keyCode,
 			        		KeyEvent event) {
@@ -1364,7 +1172,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			            return false;
 			        }
 		        });
-                dialog.show();
                 dialog.setCancelable(false);
                 break;
 			}
@@ -1517,38 +1324,13 @@ public class PaginaRenderActivity extends ActionBarActivity {
 //		        });
 //                dialog.show(getSupportFragmentManager(), SALVA_ACCORDO_TAG);
 //                dialog.setCancelable(false);
-        		MaterialDialog dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-                .title(R.string.dialog_save_tab_title)
-                .content(R.string.dialog_save_tab)
-                .positiveText(R.string.confirm)
-                .negativeText(R.string.dismiss)
-                .callback(new MaterialDialog.Callback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                    	SQLiteDatabase db = listaCanti.getReadableDatabase();
-                		String sql = "UPDATE ELENCO" +
-                				"  SET saved_tab = \'" + notaCambio + "\' " + 
-                				"    , saved_barre = \'" + barreCambio + "\' " + 
-                				"  WHERE _id =  " + idCanto;
-                		db.execSQL(sql);
-                		db.close();
-                		pulisciVars();
-            			finish();
-//            			overridePendingTransition(0, R.anim.slide_out_right);
-            			mLUtils.closeActivityWithTransition();
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                    	pulisciVars();
-            			finish();
-//            			overridePendingTransition(0, R.anim.slide_out_right);
-            			mLUtils.closeActivityWithTransition();
-                    }
-                })
-//                .titleColor(getResources().getColor(android.R.color.black))
-                .build();
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                AlertDialogPro.Builder builder = new AlertDialogPro.Builder(PaginaRenderActivity.this);
+                AlertDialogPro dialog = builder.setTitle(R.string.dialog_save_tab_title)
+	        			.setMessage(R.string.dialog_save_tab)
+	                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.SAVE_TAB_OK))
+	                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS_EXIT))
+	                    .show();
+                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
 			        public boolean onKey(DialogInterface arg0, int keyCode,
 			        		KeyEvent event) {
@@ -1561,7 +1343,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			            return false;
 			        }
 		        });
-                dialog.show();
                 dialog.setCancelable(false);
                 return true;
         	}
@@ -2081,6 +1862,165 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			mediaPlayerState = MP_State.Idle;
 		}
 	};
+	
+    private class ButtonClickedListener implements DialogInterface.OnClickListener {
+        private int clickedCode;
+
+        public ButtonClickedListener(int code) {
+        	clickedCode = code;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (clickedCode) {
+			case Utility.DISMISS:
+				setRequestedOrientation(prevOrientation);
+				break;
+			case Utility.DISMISS_EXIT:
+				pulisciVars();
+    			finish();
+    			mLUtils.closeActivityWithTransition();
+				break;
+			case Utility.DOWNLOAD_CANCEL:
+				mProgressDialog.cancel();
+				break;
+			case Utility.DOWNLOAD_OK:
+				final DownloadTask downloadTask = new DownloadTask(PaginaRenderActivity.this);
+    	    	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(PaginaRenderActivity.this);
+    			int saveLocation = pref.getInt(Utility.SAVE_LOCATION, 0);
+    			if (saveLocation == 1) {
+    				File[] fileArray = ContextCompat.getExternalFilesDirs(PaginaRenderActivity.this, null);
+    				String localFile = fileArray[0].getAbsolutePath()
+    						+ "/"
+    						+ Utility.filterMediaLink(url);
+    				downloadTask.execute(url, localFile);
+    			}
+    			else {
+    				String localFile = PaginaRenderActivity.this.getFilesDir()
+    						+ "/"
+    						+ Utility.filterMediaLink(url);
+    				downloadTask.execute(url, localFile);
+    			}
+    	    	
+    	    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+    	    	    @Override
+    	    	    public void onCancel(DialogInterface dialog) {
+    	                Toast.makeText(PaginaRenderActivity.this, getString(R.string.download_cancelled), Toast.LENGTH_SHORT).show();
+    	    	        downloadTask.cancel(true);
+    	    	        setRequestedOrientation(prevOrientation);
+    	    	    }
+    	    	});
+				break;
+			case Utility.DOWNLOAD_LINK:
+				setRequestedOrientation(prevOrientation);
+        		startActivityForResult(new Intent(
+        				PaginaRenderActivity.this, FileChooserActivity.class), REQUEST_CODE);
+        		break;
+			case Utility.DELETE_MP3_OK:
+				File fileToDelete = new File(localUrl);
+        		fileToDelete.delete();
+        		Toast.makeText(PaginaRenderActivity.this
+        				, getString(R.string.file_delete)
+        				, Toast.LENGTH_SHORT).show();
+                
+                if (mediaPlayerState == MP_State.Started
+                		|| mediaPlayerState == MP_State.Paused)
+                	cmdStop();
+                
+                mediaPlayer = new MediaPlayer();
+        		mediaPlayerState = MP_State.Idle;
+        		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+                
+        		localFile = false;
+        		cmdSetDataSource(url);
+    			enableButtonIcon(save_file);
+    			save_file.setVisibility(View.VISIBLE);
+    			disableButtonIcon(delete_file);
+    			delete_file.setVisibility(View.GONE);
+        		setRequestedOrientation(prevOrientation);
+        		break;
+			case Utility.DELETE_LINK_OK:
+				Toast.makeText(PaginaRenderActivity.this
+        				, getString(R.string.delink_delete)
+        				, Toast.LENGTH_SHORT).show();
+                
+                if (mediaPlayerState == MP_State.Started
+                		|| mediaPlayerState == MP_State.Paused)
+                	cmdStop();
+                
+                mediaPlayer = new MediaPlayer();
+        		mediaPlayerState = MP_State.Idle;
+        		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+                
+    			localFile = false;
+    			personalUrl = "";
+        		
+        		SQLiteDatabase db = listaCanti.getReadableDatabase();
+        		String sql = "DELETE FROM LOCAL_LINKS" +
+        				"  WHERE _id =  " + idCanto;
+        		db.execSQL(sql);
+        		db.close();
+        					
+    			enableButtonIcon(save_file);
+    			save_file.setVisibility(View.VISIBLE);
+    			disableButtonIcon(delete_file);
+    			delete_file.setVisibility(View.GONE);
+
+        		setRequestedOrientation(prevOrientation);
+        		break;
+			case Utility.DELETE_ONLY_LINK_OK:
+				Toast.makeText(PaginaRenderActivity.this
+        				, getString(R.string.delink_delete)
+        				, Toast.LENGTH_SHORT).show();
+                
+                if (mediaPlayerState == MP_State.Started
+                		|| mediaPlayerState == MP_State.Paused)
+                	cmdStop();
+                
+                mediaPlayer = new MediaPlayer();
+        		mediaPlayerState = MP_State.Idle;
+        		mediaPlayer.setOnErrorListener(mediaPlayerOnErrorListener);
+                
+    			localFile = false;
+    			personalUrl = "";
+        		
+        		db = listaCanti.getReadableDatabase();
+        		sql = "DELETE FROM LOCAL_LINKS" +
+        				"  WHERE _id =  " + idCanto;
+        		db.execSQL(sql);
+        		db.close();
+        					
+    			enableButtonIcon(save_file);
+    			save_file.setVisibility(View.VISIBLE);
+    			disableButtonIcon(delete_file);
+    			delete_file.setVisibility(View.GONE);
+    			
+    			play_button.setVisibility(View.GONE);
+            	stop_button.setVisibility(View.GONE);
+            	rewind_button.setVisibility(View.GONE);
+            	ff_button.setVisibility(View.GONE);
+
+        		setRequestedOrientation(prevOrientation);
+        		break;
+			case Utility.SAVE_TAB_OK:
+				db = listaCanti.getReadableDatabase();
+        		sql = "UPDATE ELENCO" +
+        				"  SET saved_tab = \'" + notaCambio + "\' " + 
+        				"    , saved_barre = \'" + barreCambio + "\' " + 
+        				"  WHERE _id =  " + idCanto;
+        		db.execSQL(sql);
+        		db.close();
+        		pulisciVars();
+    			finish();
+//    			overridePendingTransition(0, R.anim.slide_out_right);
+    			mLUtils.closeActivityWithTransition();
+    			break;
+			default:
+				setRequestedOrientation(prevOrientation);
+				break;
+			}
+        }
+    }
 	
 //    @Override
 //    public void onDialogPositiveClick(DialogFragment dialog) {
@@ -2763,14 +2703,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            if (mProgressDialog == null) {
-//	            mProgressDialog = new ProgressDialog(PaginaRenderActivity.this);
-//	            mProgressDialog.setMessage(getString(R.string.download_running));
-//	            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//	            mProgressDialog.setCancelable(true);
-//	            mProgressDialog.setCanceledOnTouchOutside(false);
-//            }
-//            mProgressDialog.setIndeterminate(true);
             mProgressDialog.show();
         }
 
@@ -2778,20 +2710,16 @@ public class PaginaRenderActivity extends ActionBarActivity {
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
             // if we get here, length is known, now set indeterminate to false
-            ((ProgressBarIndeterminateDeterminate) mProgressDialog.getCustomView().findViewById(R.id.progressDeterminate)).setProgress(progress[0]);
+            ((ProgressBarIndeterminateDeterminate) mProgressDialog.findViewById(R.id.progressDeterminate)).setProgress(progress[0]);
             if (progress[0] != 0)
-            	((TextView) mProgressDialog.getCustomView().findViewById(R.id.percent_text))
+            	((TextView) mProgressDialog.findViewById(R.id.percent_text))
             	.setText(progress[0].toString() + " %");
-//            mProgressDialog.setIndeterminate(false);
-//            mProgressDialog.setMax(100);
-//            mProgressDialog.setProgress(progress[0]);
         }
 
         @Override
         protected void onPostExecute(String result) {
         	if (mProgressDialog.isShowing())
         		mProgressDialog.dismiss();
-//        	setRequestedOrientation(prevOrientation);
             if (result != null)
                 Toast.makeText(context,"Errore nel download: "+result, Toast.LENGTH_LONG).show();
             else {
@@ -2987,10 +2915,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
     }
     
     private void initializeLoadingDialogs() {
-        mp3Dialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-        .customView(R.layout.dialog_loadindeterminate)
-        .build();
-    	((TextView) mp3Dialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.wait);
+    	mp3Dialog = new ProgressDialogPro(PaginaRenderActivity.this);
+    	mp3Dialog.setMessage(getResources().getString(R.string.wait));
     	mp3Dialog.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
@@ -2998,10 +2924,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			}
 		});
         
-    	exportDialog = new MaterialDialog.Builder(PaginaRenderActivity.this)
-        .customView(R.layout.dialog_loadindeterminate)
-        .build();
-    	((TextView) exportDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.export_running);
+    	exportDialog = new ProgressDialogPro(PaginaRenderActivity.this);
+    	exportDialog.setMessage(getResources().getString(R.string.export_running));
     	exportDialog.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {

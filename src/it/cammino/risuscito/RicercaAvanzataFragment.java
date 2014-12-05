@@ -13,8 +13,8 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -47,6 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.alertdialogpro.AlertDialogPro;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.gc.materialdesign.widgets.Dialog;
 
@@ -371,58 +372,28 @@ public class RicercaAvanzataFragment extends Fragment {
 //			    		        });
 //			    	            dialog.show(getChildFragmentManager(), LISTA_PERSONALIZZATA_TAG);	    
 //			    	            dialog.setCancelable(false);
-			    		    	MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-			                    .title(R.string.dialog_replace_title)
-			                    .content(getString(R.string.dialog_present_yet) + " " 
-			    						+ listePers[idListaClick].getCantoPosizione(idPosizioneClick)
-			    						.substring(10)
-			    						+ getString(R.string.dialog_wonna_replace))
-			                    .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
-			                    .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-			                    .callback(new MaterialDialog.Callback() {
-			                    	@Override
-			                    	public void onPositive(MaterialDialog dialog) {
-			                    		SQLiteDatabase db = listaCanti.getReadableDatabase();
-			                        	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
-			                	    	String query = "SELECT color, pagina" +
-			                    				"		FROM ELENCO" +
-			                    				"		WHERE titolo = '" + cantoCliccatoNoApex + "'";
-			                    		Cursor cursor = db.rawQuery(query, null);
-			                			
-			                    		cursor.moveToFirst();
-			                    							    		
-			                    		listePers[idListaClick].addCanto(Utility.intToString(
-			                    				cursor.getInt(1), 3) + cursor.getString(0) + titoloDaAgg, idPosizioneClick);
-			                						    				
-			                	    	ContentValues  values = new  ContentValues( );
-			                	    	values.put("lista" , ListaPersonalizzata.serializeObject(listePers[idListaClick]));
-			                	    	db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick], null );
-			                	    	getActivity().setRequestedOrientation(prevOrientation);
-		                    			Toast.makeText(getActivity()
-		                    					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
-			                    	}
-
-			                    	@Override
-			                    	public void onNegative(MaterialDialog dialog) {
-			                    		getActivity().setRequestedOrientation(prevOrientation);
-			                    	}
-			                    })
-//			                    .titleColor(getResources().getColor(android.R.color.black))
-			                    .build();
-								dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-							        @Override
-							        public boolean onKey(DialogInterface arg0, int keyCode,
-							        		KeyEvent event) {
-							        	if (keyCode == KeyEvent.KEYCODE_BACK
-							        			&& event.getAction() == KeyEvent.ACTION_UP) {
-							        		arg0.dismiss();
-							        		getActivity().setRequestedOrientation(prevOrientation);
-							        		return true;
-							            }
-							            return false;
-							        }
-						        });
-			                    dialog.show();
+			                    AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
+			                    AlertDialogPro dialog = builder.setTitle(R.string.dialog_replace_title)
+			    	        			.setMessage(getString(R.string.dialog_present_yet) + " " 
+					    						+ listePers[idListaClick].getCantoPosizione(idPosizioneClick)
+					    						.substring(10)
+					    						+ getString(R.string.dialog_wonna_replace))
+			    	                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.AVANZATA_LISTAPERS_OK))
+			    	                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS))
+			    	                    .show();
+			                    dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			    			        @Override
+			    			        public boolean onKey(DialogInterface arg0, int keyCode,
+			    			        		KeyEvent event) {
+			    			        	if (keyCode == KeyEvent.KEYCODE_BACK
+			    			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+			    			        		arg0.dismiss();
+			    			        		getActivity().setRequestedOrientation(prevOrientation);
+			    			        		return true;
+			    			            }
+			    			            return false;
+			    			        }
+			    		        });
 			                    dialog.setCancelable(false);
 		    		    	}
 		    		    }	    		
@@ -539,36 +510,14 @@ public class RicercaAvanzataFragment extends Fragment {
 //		        });
 //	            dialog.show(getChildFragmentManager(), LISTA_PREDEFINITA_TAG);
 //	            dialog.setCancelable(false);
-	            MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title(R.string.dialog_replace_title)
-                .content(getString(R.string.dialog_present_yet) + " " + titoloPresente
-						+ getString(R.string.dialog_wonna_replace))
-                .positiveText(R.string.confirm)  // the default is 'Accept', this line could be left out
-                .negativeText(R.string.dismiss)  // leaving this line out will remove the negative button
-                .callback(new MaterialDialog.Callback() {
-                	@Override
-                	public void onPositive(MaterialDialog dialog) {
-                		SQLiteDatabase db = listaCanti.getReadableDatabase();
-                    	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
-            	    	String sql = "UPDATE CUST_LISTS "
-            	    			+ "SET id_canto = (SELECT _id  FROM ELENCO"
-            	    			+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
-            	    			+ "WHERE _id = " + idListaDaAgg 
-            	    			+ "  AND position = " + posizioneDaAgg;	    	
-            	    	db.execSQL(sql);
-            	    	getActivity().setRequestedOrientation(prevOrientation);
-            			Toast.makeText(getActivity()
-            					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
-                	}
-
-                	@Override
-                	public void onNegative(MaterialDialog dialog) {
-                		getActivity().setRequestedOrientation(prevOrientation);
-                	}
-                })
-//                .titleColor(getResources().getColor(android.R.color.black))
-                .build();
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
+                AlertDialogPro dialog = builder.setTitle(R.string.dialog_replace_title)
+	        			.setMessage(getString(R.string.dialog_present_yet) + " " + titoloPresente
+	    						+ getString(R.string.dialog_wonna_replace))
+	                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.AVANZATA_LISTAPRED_OK))
+	                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.DISMISS))
+	                    .show();
+                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
 			        public boolean onKey(DialogInterface arg0, int keyCode,
 			        		KeyEvent event) {
@@ -581,7 +530,6 @@ public class RicercaAvanzataFragment extends Fragment {
 			            return false;
 			        }
 		        });
-                dialog.show();
                 dialog.setCancelable(false);
 			}
     		return;
@@ -613,6 +561,59 @@ public class RicercaAvanzataFragment extends Fragment {
         }
     }
 	
+	private class ButtonClickedListener implements DialogInterface.OnClickListener {
+        private int clickedCode;
+
+        public ButtonClickedListener(int code) {
+        	clickedCode = code;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (clickedCode) {
+			case Utility.DISMISS:
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			case Utility.AVANZATA_LISTAPERS_OK:
+				SQLiteDatabase db = listaCanti.getReadableDatabase();
+            	String cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
+    	    	String query = "SELECT color, pagina" +
+        				"		FROM ELENCO" +
+        				"		WHERE titolo = '" + cantoCliccatoNoApex + "'";
+        		Cursor cursor = db.rawQuery(query, null);
+    			
+        		cursor.moveToFirst();
+        							    		
+        		listePers[idListaClick].addCanto(Utility.intToString(
+        				cursor.getInt(1), 3) + cursor.getString(0) + titoloDaAgg, idPosizioneClick);
+    						    				
+    	    	ContentValues  values = new  ContentValues( );
+    	    	values.put("lista" , ListaPersonalizzata.serializeObject(listePers[idListaClick]));
+    	    	db.update("LISTE_PERS", values, "_id = " + idListe[idListaClick], null );
+    	    	getActivity().setRequestedOrientation(prevOrientation);
+    			Toast.makeText(getActivity()
+    					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
+				break;
+			case Utility.AVANZATA_LISTAPRED_OK:
+				db = listaCanti.getReadableDatabase();
+            	cantoCliccatoNoApex = Utility.duplicaApostrofi(titoloDaAgg);	
+    	    	String sql = "UPDATE CUST_LISTS "
+    	    			+ "SET id_canto = (SELECT _id  FROM ELENCO"
+    	    			+ " WHERE titolo = \'" + cantoCliccatoNoApex + "\')"
+    	    			+ "WHERE _id = " + idListaDaAgg 
+    	    			+ "  AND position = " + posizioneDaAgg;	    	
+    	    	db.execSQL(sql);
+    	    	getActivity().setRequestedOrientation(prevOrientation);
+    			Toast.makeText(getActivity()
+    					, getString(R.string.list_added), Toast.LENGTH_SHORT).show();
+    			break;
+			default:
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			}
+        }
+    }
+    
 //    @Override
 //    public void onDialogPositiveClick(DialogFragment dialog) {
 //    	SQLiteDatabase db = listaCanti.getReadableDatabase();

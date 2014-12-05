@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.alertdialogpro.AlertDialogPro;
 
 public class PreferencesFragment extends Fragment {
 	
@@ -25,6 +25,8 @@ public class PreferencesFragment extends Fragment {
 	private SwitchCompat screenSwitch;
 	private SwitchCompat secondaSwitch;
 	private int saveEntries;
+	
+	private int checkedItem;
 	
 //	private static final String SCREEN_ON = "screenOn";
 //	private static final String SHOW_SECONDA = "showSecondaEucarestia";
@@ -124,36 +126,23 @@ public class PreferencesFragment extends Fragment {
 			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
-				
 				blockOrientation();
-				MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title(R.string.default_index_title)
-                .items(R.array.pref_default_index_entries)
-                .itemsCallbackSingleChoice(PreferenceManager
-        				.getDefaultSharedPreferences(getActivity())
-        				.getInt(Utility.DEFAULT_INDEX, 0), new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                    	SharedPreferences.Editor editor = PreferenceManager
-        	                    .getDefaultSharedPreferences(getActivity())
-        	                    .edit();
-        				
-                    	editor.putInt(Utility.DEFAULT_INDEX, which);
-        				
-        	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
-        	            	editor.commit();
-        	            } else {
-        	            	editor.apply();
-        	            }
-        	            
-        	            getActivity().setRequestedOrientation(prevOrientation);
-                    }
-                })
-                .positiveText(R.string.single_choice_ok)
-                .positiveColorRes(R.color.theme_accent)
-//                .titleColor(getResources().getColor(android.R.color.black))
-                .build();
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
+                AlertDialogPro dialog = builder.setTitle(R.string.default_index_title)
+                        .setSingleChoiceItems(getResources().getStringArray(R.array.pref_default_index_entries),
+                        		PreferenceManager
+                				.getDefaultSharedPreferences(getActivity())
+                				.getInt(Utility.DEFAULT_INDEX, 0),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    	checkedItem = which;
+                                    }
+                                })
+                        .setNegativeButton(R.string.cancel, new ButtonClickedListener(Utility.DISMISS))
+                        .setPositiveButton(R.string.single_choice_ok, new ButtonClickedListener(Utility.PREFERENCE_DEFINDEX_OK))
+                        .show();
+                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
 			        public boolean onKey(DialogInterface arg0, int keyCode,
 			        		KeyEvent event) {
@@ -166,7 +155,6 @@ public class PreferencesFragment extends Fragment {
 			            return false;
 			        }
 		        });
-                dialog.show();
                 dialog.setCancelable(false);
 			}
 		});
@@ -185,36 +173,23 @@ public class PreferencesFragment extends Fragment {
 			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
-				
 				blockOrientation();
-				MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title(R.string.save_location_title)
-                .items(saveEntries)
-                .itemsCallbackSingleChoice(PreferenceManager
-        				.getDefaultSharedPreferences(getActivity())
-        				.getInt(Utility.SAVE_LOCATION, 0), new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                    	SharedPreferences.Editor editor = PreferenceManager
-        	                    .getDefaultSharedPreferences(getActivity())
-        	                    .edit();
-        				
-                    	editor.putInt(Utility.SAVE_LOCATION, which);
-        				
-        	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
-        	            	editor.commit();
-        	            } else {
-        	            	editor.apply();
-        	            }
-        	            
-        	            getActivity().setRequestedOrientation(prevOrientation);
-                    }
-                })
-                .positiveText(R.string.single_choice_ok)
-                .positiveColorRes(R.color.theme_accent)
-//                .titleColor(getResources().getColor(android.R.color.black))
-                .build();
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+                AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
+                AlertDialogPro dialog = builder.setTitle(R.string.save_location_title)
+                        .setSingleChoiceItems(getResources().getStringArray(saveEntries),
+                        		PreferenceManager
+                				.getDefaultSharedPreferences(getActivity())
+                				.getInt(Utility.SAVE_LOCATION, 0),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    	checkedItem = which;
+                                    }
+                                })
+                        .setNegativeButton(R.string.cancel, new ButtonClickedListener(Utility.DISMISS))
+                        .setPositiveButton(R.string.single_choice_ok, new ButtonClickedListener(Utility.PREFERENCE_SAVELOC_OK))
+                        .show();
+                dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
 			        public boolean onKey(DialogInterface arg0, int keyCode,
 			        		KeyEvent event) {
@@ -227,7 +202,6 @@ public class PreferencesFragment extends Fragment {
 			            return false;
 			        }
 		        });
-                dialog.show();
                 dialog.setCancelable(false);
 			}
 		});
@@ -235,6 +209,51 @@ public class PreferencesFragment extends Fragment {
 		return rootView;
 	}
 
+	@SuppressLint("NewApi")
+	private class ButtonClickedListener implements DialogInterface.OnClickListener {
+        private int clickedCode;
+
+        public ButtonClickedListener(int code) {
+        	clickedCode = code;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (clickedCode) {
+			case Utility.DISMISS:
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			case Utility.PREFERENCE_DEFINDEX_OK:
+				SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(getActivity())
+                .edit();
+				editor.putInt(Utility.DEFAULT_INDEX, checkedItem);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+					editor.commit();
+				} else {
+					editor.apply();
+				}
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			case Utility.PREFERENCE_SAVELOC_OK:
+				editor = PreferenceManager
+                .getDefaultSharedPreferences(getActivity())
+                .edit();
+				editor.putInt(Utility.SAVE_LOCATION, checkedItem);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+					editor.commit();
+				} else {
+					editor.apply();
+				}
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			default:
+				getActivity().setRequestedOrientation(prevOrientation);
+				break;
+			}
+        }
+    }
+	
     public void blockOrientation() {
         prevOrientation = getActivity().getRequestedOrientation();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
