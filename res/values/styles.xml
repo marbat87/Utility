@@ -30,6 +30,16 @@
         <item name="android:maxLines">2</item>
     </style>
     
+    <style name="AppTheme.FlavoredMaterialLight" parent="Theme.AlertDialogPro.Material.Light">
+        <item name="adpButtonBarNegativeButtonStyle">@style/AdpNormalButtonStyle</item>
+        <item name="adpButtonBarNeutralButtonStyle">@style/AdpNormalButtonStyle</item>
+        <item name="adpButtonBarPositiveButtonStyle">@style/AdpNormalButtonStyle</item>
+    </style>
+    
+    <style name="AdpNormalButtonStyle" parent="Widget.AlertDialogPro.Material.Light.Button">
+        <item name="android:textColor">@color/theme_accent</item>
+    </style>
+    
     <!--
    	<style name="RisuscitoThemeLight" parent="@style/Holo.Theme.Light">
    	    <item name="android:windowContentOverlay">@null</item>
