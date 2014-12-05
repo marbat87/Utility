@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dslv="http://schemas.android.com/apk/res/it.cammino.risuscito"
+    xmlns:risuscito="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:fitsSystemWindows="true"
+	android:focusableInTouchMode="true" >
+
+	<android.support.v7.widget.Toolbar
+    	android:id="@+id/risuscito_toolbar"
+    	android:layout_height="?attr/actionBarSize"
+    	risuscito:theme="@style/ActionBarThemeOverlay"
+    	risuscito:popupTheme="@style/ActionBarPopupThemeOverlay"
+    	risuscito:titleTextAppearance="@style/ActionBar.TitleText"
+    	android:layout_width="match_parent"
+    	android:background="?attr/colorPrimary" />
+    
+   	<LinearLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:background="?attr/colorPrimary"
+    	android:orientation="vertical">
+    
+ 		<TextView
+ 		    android:id="@+id/textTitleDescription"
+    		android:layout_width="wrap_content"
+          	android:layout_height="wrap_content"
+          	android:textColor="?attr/colorAccent"
+          	android:paddingLeft="@dimen/action_bar_text_field_margin"
+          	android:paddingStart="@dimen/action_bar_text_field_margin"
+          	android:text="@string/list_title" /> 
+          	
+<!--  		<EditText -->
+<!--         	android:id="@+id/textfieldTitle" -->
+<!--         	android:layout_width="fill_parent" -->
+<!--         	android:layout_height="wrap_content" -->
+<!--         	android:scrollHorizontally="true" -->
+<!--         	android:singleLine="true" -->
+<!--         	android:maxLines="1" -->
+<!--         	android:layout_marginLeft="@dimen/activity_min_margin" -->
+<!--         	android:layout_marginRight="@dimen/activity_min_margin" -->
+<!--         	android:layout_marginBottom="@dimen/activity_min_margin" -->
+<!--         	android:background="@drawable/theme_indigo_accent_edit_text_holo_dark" -->
+<!--         	android:textColor="@android:color/white" -->
+<!--         	android:textSize="30sp" -->
+<!--         	android:textCursorDrawable="@null" -->
+<!--         	android:hint="@string/list_title_modif" /> -->
+ 		
+ 		<android.support.v7.internal.widget.TintEditText
+        	android:id="@+id/textfieldTitle"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:scrollHorizontally="true"
+        	android:singleLine="true"
+        	android:maxLines="1"
+        	android:layout_marginLeft="@dimen/activity_min_margin"
+        	android:layout_marginRight="@dimen/activity_min_margin"
+        	android:layout_marginBottom="@dimen/activity_min_margin"
+        	android:textSize="30sp"
+        	android:textColor="@android:color/white"
+        	android:textCursorDrawable="@null"
+        	android:hint="@string/list_title_modif" />
+ 		
+    </LinearLayout>
+	
+	<TextView
+		android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:paddingTop="@dimen/activity_min_margin"
+     	android:paddingLeft="@dimen/activity_min_margin"
+     	android:paddingStart="@dimen/activity_min_margin"
+     	android:text="@string/list_elements" />
+
+    <FrameLayout 
+    	android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:paddingLeft="@dimen/activity_min_margin"
+    	android:paddingRight="@dimen/activity_min_margin" > 
+
+<!-- 	<RelativeLayout	 -->
+<!--     	android:layout_width="match_parent" -->
+<!--     	android:layout_height="match_parent"  -->
+<!--     	android:paddingLeft="@dimen/activity_min_margin" -->
+<!--     	android:paddingRight="@dimen/activity_min_margin" > -->
+ 		
+        <TextView
+        	android:id="@+id/noElementsAdded"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/no_elements_added" />
+ 		
+		<com.mobeta.android.dslv.DragSortListView
+		    android:id="@android:id/list"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:divider="@android:color/darker_gray"
+		    android:paddingTop="0dp"
+		    android:paddingBottom="0dp"
+		    android:dividerHeight="1dp"
+		    dslv:drag_enabled="true"
+		    dslv:collapsed_height="2dp"
+		    dslv:drag_scroll_start="0.33"
+		    dslv:max_drag_scroll_speed="0.5"
+		    dslv:float_alpha="0.6"
+		    dslv:slide_shuffle_speed="0.3"
+		    dslv:track_drag_sort="false"
+		    dslv:use_default_controller="true"
+		    dslv:drag_handle_id="@id/drag_handle"
+		    dslv:sort_enabled="true"
+		    dslv:remove_enabled="true"
+		    dslv:drag_start_mode="onMove"
+		    dslv:remove_mode="flingRemove"
+		    dslv:float_background_color="@color/neutral_color_for_group" />
+    
+<!-- 	</LinearLayout> -->
+
+<!-- 	   	<com.melnykov.fab.FloatingActionButton -->
+<!--             android:id="@+id/button_floating_action" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_gravity="bottom|right" -->
+<!--             android:layout_margin="5dp" -->
+<!--             android:src="@drawable/ic_floating_add" -->
+<!--             fab:fab_colorNormal="?attr/customPstsIndicatorColor" -->
+<!--             fab:fab_colorPressed="?attr/customLightColor" /> -->
+	   	
+	   	<com.melnykov.fab.FloatingActionButton
+			android:id="@+id/fab_crea_lista"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|end"
+		 	android:layout_margin="16dp"
+			android:src="@drawable/ic_add_white_24dp"
+			risuscito:fab_colorNormal="@color/theme_accent"
+			risuscito:fab_colorPressed="@color/theme_primary"
+			risuscito:fab_colorRipple="@color/theme_primary_dark"/>
+	   	
+<!--   		<com.gc.materialdesign.views.ButtonFloat -->
+<!--         	android:id="@+id/fab_crea_lista" -->
+<!--         	android:layout_width="wrap_content" -->
+<!--         	android:layout_height="wrap_content" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:layout_alignParentEnd="true" -->
+<!--             android:layout_alignParentBottom="true" -->
+<!--             android:layout_marginRight="24dp" -->
+<!--             android:layout_marginEnd="24dp" -->
+<!--             risuscito:animate="true" -->
+<!--             risuscito:iconFloat="@drawable/ic_add_white_48dp" /> -->
+
+<!--   	</RelativeLayout> -->
+	</FrameLayout>
+	
+<!--   	<RelativeLayout -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center_vertical" -->
+<!--         android:gravity="right|bottom" -->
+<!--         android:orientation="horizontal" > -->
+    
+<!--   		<Button -->
+<!-- 	        android:id="@+id/button_save_exit" -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:gravity="center" -->
+<!-- 	        android:text="@string/list_save_exit" /> -->
+
+<!-- 	</RelativeLayout> -->
+    	
+</LinearLayout>

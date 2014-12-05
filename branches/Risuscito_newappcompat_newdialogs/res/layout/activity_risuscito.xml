@@ -1,0 +1,50 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="@dimen/activity_min_margin"
+    android:paddingLeft="@dimen/activity_min_margin"
+    android:paddingRight="@dimen/activity_min_margin"
+    android:paddingBottom="@dimen/activity_min_margin"
+    android:orientation="vertical"
+    android:gravity="center" >
+    
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/copertina"
+            android:src="@drawable/copertina_border" />
+        
+<!--         <LinearLayout  -->
+<!--     		android:layout_width="fill_parent" -->
+<!--     		android:layout_height="0dip" -->
+<!--     		android:layout_weight="0.2" -->
+<!-- 			android:orientation="vertical" -->
+<!--      		android:gravity="center_vertical"> -->
+     		
+<!-- 	        <Button -->
+<!-- 	            android:id="@+id/titleSearch" -->
+<!-- 	            android:layout_width="fill_parent" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_gravity="center_horizontal" -->
+<!-- 	            android:text="@string/search_name_text" /> -->
+	        
+<!-- 		    <Button -->
+<!-- 		    	android:id="@+id/generalIndex" -->
+<!-- 		        android:layout_width="fill_parent" -->
+<!-- 		        android:layout_height="wrap_content" -->
+<!-- 		        android:layout_gravity="center_horizontal" -->
+<!-- 		        android:text="@string/title_activity_general_index" /> -->
+	
+<!-- 	        <Button -->
+<!-- 	            android:id="@+id/predefinedLists" -->
+<!-- 	            android:layout_width="fill_parent" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_gravity="center_horizontal" -->
+<!-- 	            android:text="@string/title_activity_custom_lists" /> -->
+        
+<!--         </LinearLayout> -->
+
+</LinearLayout>
