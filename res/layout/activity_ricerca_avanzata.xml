@@ -56,14 +56,14 @@
                 android:background="@color/theme_primary"
                 android:text="@string/button_pulisci" />
 		   	
-		   	<com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/search_ripple"
-                android:layout_width="88dip"
-                android:layout_height="48dp"
-                android:layout_marginRight="@dimen/min_button_margin"
-                android:layout_marginEnd="@dimen/min_button_margin"
-                android:background="@color/theme_primary"
-                android:text="@string/button_search" />
+<!-- 		   	<com.gc.materialdesign.views.ButtonRectangle -->
+<!--                 android:id="@+id/search_ripple" -->
+<!--                 android:layout_width="88dip" -->
+<!--                 android:layout_height="48dp" -->
+<!--                 android:layout_marginRight="@dimen/min_button_margin" -->
+<!--                 android:layout_marginEnd="@dimen/min_button_margin" -->
+<!--                 android:background="@color/theme_primary" -->
+<!--                 android:text="@string/button_search" /> -->
 		   	
     </LinearLayout>
     
@@ -75,6 +75,15 @@
 	        android:gravity="center"
 	        android:text="@string/search_no_results"
 	        android:visibility="gone" />
+    
+    <com.alertdialogpro.material.ProgressBarCompat
+            android:id="@id/adp_progress"
+            style="@style/ProgressBarCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="10000"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"/>
     
     <ListView 
         android:id="@+id/matchedList"
