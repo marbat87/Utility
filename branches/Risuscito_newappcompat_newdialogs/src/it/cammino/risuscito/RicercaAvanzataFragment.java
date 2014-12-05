@@ -94,9 +94,9 @@ public class RicercaAvanzataFragment extends Fragment {
 		lv = (ListView) rootView.findViewById(R.id.matchedList);
 		searchPar.setText("");
 //		rootView.findViewById(R.id.button_search).setEnabled(false);
-		ricercaButton = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
-		ricercaButton.setEnabled(false);
-		ricercaButton.setTextColor(getResources().getColor(R.color.btn_disabled_text));
+//		ricercaButton = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
+//		ricercaButton.setEnabled(false);
+//		ricercaButton.setTextColor(getResources().getColor(R.color.btn_disabled_text));
 		
 		try {
 //        	InputStream in = getActivity().getAssets().open("fileout.xml");
@@ -162,34 +162,34 @@ public class RicercaAvanzataFragment extends Fragment {
 //	    ButtonRectangle ricerca = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
 //		ricerca.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
 //		Button ricerca = (Button) rootView.findViewById(R.id.button_search);
-		ricercaButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-//				if (mProgressDialog == null) {
-//					mProgressDialog = new ProgressDialog(getActivity());
-//					mProgressDialog.setMessage(getString(R.string.search_running));
-//					mProgressDialog.setIndeterminate(true);
-//					mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//					mProgressDialog.setCancelable(true);
-//					mProgressDialog.setCanceledOnTouchOutside(false);
-//				}
-//				mProgressDialog.show();
-//				mDialog = new MaterialDialog.Builder(getActivity())
-//	            .customView(R.layout.dialog_loadindeterminate)
-//	            .build();
-//				((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
-//				mDialog.show();
-//				mDialog.setOnDismissListener(new OnDismissListener() {
-//	    			@Override
-//	    			public void onDismiss(DialogInterface arg0) {
-//	    				getActivity().setRequestedOrientation(prevOrientation);
-//	    			}
-//	    		});
-//				mDialog.setCancelable(false);
-				final SearchTask downloadTask = new SearchTask();
-				downloadTask.execute(searchPar.getText().toString());
-			}
-		});
+//		ricercaButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+////				if (mProgressDialog == null) {
+////					mProgressDialog = new ProgressDialog(getActivity());
+////					mProgressDialog.setMessage(getString(R.string.search_running));
+////					mProgressDialog.setIndeterminate(true);
+////					mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+////					mProgressDialog.setCancelable(true);
+////					mProgressDialog.setCanceledOnTouchOutside(false);
+////				}
+////				mProgressDialog.show();
+////				mDialog = new MaterialDialog.Builder(getActivity())
+////	            .customView(R.layout.dialog_loadindeterminate)
+////	            .build();
+////				((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
+////				mDialog.show();
+////				mDialog.setOnDismissListener(new OnDismissListener() {
+////	    			@Override
+////	    			public void onDismiss(DialogInterface arg0) {
+////	    				getActivity().setRequestedOrientation(prevOrientation);
+////	    			}
+////	    		});
+////				mDialog.setCancelable(false);
+//				final SearchTask searchTask = new SearchTask();
+//				searchTask.execute(searchPar.getText().toString());
+//			}
+//		});
 		
 		ButtonRectangle pulisci = (ButtonRectangle) rootView.findViewById(R.id.pulisci_ripple);
 //		pulisci.setTypeface(FontLoader.ROBOTO_MEDIUM.getTypeface(getActivity()));
