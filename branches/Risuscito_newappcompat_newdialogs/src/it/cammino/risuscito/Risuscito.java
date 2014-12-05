@@ -1,6 +1,6 @@
 package it.cammino.risuscito;
 
-import it.cammino.risuscito.ChangelogDialogFragment.ChangelogDialogListener;
+import it.gmariotti.changelibs.library.view.ChangeLogListView;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Display;
@@ -26,14 +25,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
+import com.alertdialogpro.AlertDialogPro;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 
-@SuppressLint("NewApi")
-@SuppressWarnings("deprecation")
-public class Risuscito extends Fragment implements ChangelogDialogListener {
+public class Risuscito extends Fragment {
 
 	private static final String VERSION_KEY = "PREFS_VERSION_KEY";
 	private static final String NO_VERSION = "";
@@ -43,6 +40,8 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 	private int screenWidth;
 	private int screenHeight;
 		
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -94,65 +93,57 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
         if (!thisVersion.equals(lastVersion)) {
 //        if (true) {
         	blockOrientation();
-	    	ChangelogDialogFragment dialog = new ChangelogDialogFragment();
-	    	dialog.setListener(this);
-			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-	            @Override
-	            public boolean onKey(DialogInterface arg0, int keyCode,
-	                    KeyEvent event) {
-	                if (keyCode == KeyEvent.KEYCODE_BACK
-	                		&& event.getAction() == KeyEvent.ACTION_UP) {
-	                    arg0.dismiss();
-						getActivity().setRequestedOrientation(prevOrientation);
-				        if(PreferenceManager
-				                .getDefaultSharedPreferences(getActivity())
-				                .getBoolean(FIRST_OPEN_MENU, true)) { 
-				            SharedPreferences.Editor editor = PreferenceManager
-				                    .getDefaultSharedPreferences(getActivity())
-				                    .edit();
-				            editor.putBoolean(FIRST_OPEN_MENU, false);
-				            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
-				            	editor.commit();
-				            } else {
-				            	editor.apply();
-				            }
-				        	showHelp();
-				        }
-						return true;
-	                }
-	                return false;
-	            }
-	        });
-	    	dialog.show(getFragmentManager(), null);
-	    	dialog.setCancelable(false);
-//        	MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-//            .title(R.string.dialog_change_title)
-//            .customView(R.layout.dialog_changelogview)
-//            .positiveText(R.string.dialog_chiudi)
-//            .callback(new MaterialDialog.SimpleCallback() {
-//                @Override
-//                public void onPositive(MaterialDialog dialog) {
-//    	            getActivity().setRequestedOrientation(prevOrientation);
-//                }
-//            })
-//            .titleColor(getResources().getColor(android.R.color.black))
-//            .build();
+//	    	ChangelogDialogFragment dialog = new ChangelogDialogFragment();
+//	    	dialog.setListener(this);
 //			dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-//		        @Override
-//		        public boolean onKey(DialogInterface arg0, int keyCode,
-//		        		KeyEvent event) {
-//		        	if (keyCode == KeyEvent.KEYCODE_BACK
-//		        			&& event.getAction() == KeyEvent.ACTION_UP) {
-//		        		arg0.dismiss();
-//		        		getActivity().setRequestedOrientation(prevOrientation);
-//		        		return true;
-//		            }
-//		            return false;
-//		        }
+//
+//	            @Override
+//	            public boolean onKey(DialogInterface arg0, int keyCode,
+//	                    KeyEvent event) {
+//	                if (keyCode == KeyEvent.KEYCODE_BACK
+//	                		&& event.getAction() == KeyEvent.ACTION_UP) {
+//	                    arg0.dismiss();
+//						getActivity().setRequestedOrientation(prevOrientation);
+//				        if(PreferenceManager
+//				                .getDefaultSharedPreferences(getActivity())
+//				                .getBoolean(FIRST_OPEN_MENU, true)) { 
+//				            SharedPreferences.Editor editor = PreferenceManager
+//				                    .getDefaultSharedPreferences(getActivity())
+//				                    .edit();
+//				            editor.putBoolean(FIRST_OPEN_MENU, false);
+//				            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+//				            	editor.commit();
+//				            } else {
+//				            	editor.apply();
+//				            }
+//				        	showHelp();
+//				        }
+//						return true;
+//	                }
+//	                return false;
+//	            }
 //	        });
-//	        dialog.show();
-//	        dialog.setCancelable(false);
+//	    	dialog.show(getFragmentManager(), null);
+//	    	dialog.setCancelable(false);
+        	AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
+        	AlertDialogPro dialog = builder.setTitle(getResources().getString(R.string.dialog_change_title))
+        			.setView(new ChangeLogListView(getActivity()))
+                    .setPositiveButton(getResources().getString(R.string.dialog_chiudi), new ButtonClickedListener())
+                    .show();
+        	dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+		        @Override
+		        public boolean onKey(DialogInterface arg0, int keyCode,
+		        		KeyEvent event) {
+		        	if (keyCode == KeyEvent.KEYCODE_BACK
+		        			&& event.getAction() == KeyEvent.ACTION_UP) {
+		        		arg0.dismiss();
+		        		getActivity().setRequestedOrientation(prevOrientation);
+		        		return true;
+		            }
+		            return false;
+		        }
+	        });
+        	dialog.setCancelable(false);
 	        SharedPreferences.Editor editor = sp.edit();
 	        editor.putString(VERSION_KEY, thisVersion);
 	        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
@@ -210,23 +201,30 @@ public class Risuscito extends Fragment implements ChangelogDialogListener {
 		return false;
 	}
     
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-    	dialog.dismiss();
-    	getActivity().setRequestedOrientation(prevOrientation);
-        if(PreferenceManager
-                .getDefaultSharedPreferences(getActivity())
-                .getBoolean(FIRST_OPEN_MENU, true)) { 
-            SharedPreferences.Editor editor = PreferenceManager
-                    .getDefaultSharedPreferences(getActivity())
-                    .edit();
-            editor.putBoolean(FIRST_OPEN_MENU, false);
-            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
-            	editor.commit();
-            } else {
-            	editor.apply();
-            }
-        	showHelp();
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+//    	dialog.dismiss();
+//    	getActivity().setRequestedOrientation(prevOrientation);
+//        if(PreferenceManager
+//                .getDefaultSharedPreferences(getActivity())
+//                .getBoolean(FIRST_OPEN_MENU, true)) { 
+//            SharedPreferences.Editor editor = PreferenceManager
+//                    .getDefaultSharedPreferences(getActivity())
+//                    .edit();
+//            editor.putBoolean(FIRST_OPEN_MENU, false);
+//            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+//            	editor.commit();
+//            } else {
+//            	editor.apply();
+//            }
+//        	showHelp();
+//        }
+//    }
+    
+    private class ButtonClickedListener implements DialogInterface.OnClickListener {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+        	getActivity().setRequestedOrientation(prevOrientation);
         }
     }
     

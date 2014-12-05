@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.alertdialogpro.AlertDialogPro;
 import com.espian.showcaseview.OnShowcaseEventListener;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
@@ -203,38 +204,86 @@ public class CreaListaActivity extends ActionBarActivity {
 //		        });
 //		        dialog.show(getSupportFragmentManager(), RINOMINA_POSIZIONE_TAG);
 //		        dialog.setCancelable(false);
-				MaterialDialog dialog = new MaterialDialog.Builder(CreaListaActivity.this)
-	            .title(R.string.posizione_rename)
-	            .customView(R.layout.dialog_customview)
-	            .positiveText(R.string.aggiungi_rename)
-	            .negativeText(R.string.aggiungi_dismiss)
-	            .callback(new MaterialDialog.Callback() {
-	                @Override
-	                public void onPositive(MaterialDialog dialog) {
-	                	nomiElementi.set(positionToRename, titleInputRename.getText().toString());
-        	            adapter.notifyDataSetChanged();
-//	        	    	if (titleInput.getText() == null
-//	        	    			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
-//	        	    		Toast toast = Toast.makeText(getApplicationContext()
-//	        	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
-//	        	    		toast.show();
-//	        	    	}
-//	        	    	else {
-//	        	    		nomiElementi.set(positionToRename, titleInput.getText().toString());
-//	        	            adapter.notifyDataSetChanged();
-//	        	    	}
-        	            setRequestedOrientation(prevOrientation);
-	                }
-
-	                @Override
-	                public void onNegative(MaterialDialog dialog) {
-		        		setRequestedOrientation(prevOrientation);
-	                }
-	            })
-//	            .titleColor(getResources().getColor(android.R.color.black))
-	            .build();
-				
-				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//				MaterialDialog dialog = new MaterialDialog.Builder(CreaListaActivity.this)
+//	            .title(R.string.posizione_rename)
+//	            .customView(R.layout.dialog_customview)
+//	            .positiveText(R.string.aggiungi_rename)
+//	            .negativeText(R.string.aggiungi_dismiss)
+//	            .callback(new MaterialDialog.Callback() {
+//	                @Override
+//	                public void onPositive(MaterialDialog dialog) {
+//	                	nomiElementi.set(positionToRename, titleInputRename.getText().toString());
+//        	            adapter.notifyDataSetChanged();
+////	        	    	if (titleInput.getText() == null
+////	        	    			|| titleInput.getText().toString().trim().equalsIgnoreCase("")) {
+////	        	    		Toast toast = Toast.makeText(getApplicationContext()
+////	        	    				, getString(R.string.titolo_pos_vuoto), Toast.LENGTH_SHORT);
+////	        	    		toast.show();
+////	        	    	}
+////	        	    	else {
+////	        	    		nomiElementi.set(positionToRename, titleInput.getText().toString());
+////	        	            adapter.notifyDataSetChanged();
+////	        	    	}
+//        	            setRequestedOrientation(prevOrientation);
+//	                }
+//
+//	                @Override
+//	                public void onNegative(MaterialDialog dialog) {
+//		        		setRequestedOrientation(prevOrientation);
+//	                }
+//	            })
+////	            .titleColor(getResources().getColor(android.R.color.black))
+//	            .build();
+//				
+//				dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//			        @Override
+//			        public boolean onKey(DialogInterface arg0, int keyCode,
+//			        		KeyEvent event) {
+//			        	if (keyCode == KeyEvent.KEYCODE_BACK
+//			        			&& event.getAction() == KeyEvent.ACTION_UP) {
+//			        		arg0.dismiss();
+//			        		setRequestedOrientation(prevOrientation);
+//			        		return true;
+//			            }
+//			            return false;
+//			        }
+//		        });
+//				
+//				positiveActionRename = dialog.getActionButton(DialogAction.POSITIVE);
+//				titleInputRename = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
+//				titleInputRename.setText(nomiElementi.get(positionToRename));
+//				titleInputRename.selectAll();
+//				titleInputRename.addTextChangedListener(new TextWatcher() {
+//			        @Override
+//			        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//			        }
+//			
+//			        @Override
+//			        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//			        	positiveActionRename.setEnabled(s.toString().trim().length() > 0);
+//			        }
+//			
+//			        @Override
+//			        public void afterTextChanged(Editable s) {
+//			        }
+//			    });
+//				titleInputRename.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//				    @Override
+//				    public void onFocusChange(View v, boolean hasFocus) {
+//				        if (hasFocus) {
+//				            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+//				        }
+//				    }
+//				});
+//		        dialog.show();
+//		        dialog.setCancelable(false);
+		        AlertDialogPro.Builder builder = new AlertDialogPro.Builder(CreaListaActivity.this);
+	        	AlertDialogPro dialog = builder.setTitle(getResources().getString(R.string.dialog_change_title))
+	        			.setView(R.layout.dialog_customview)
+	                    .setPositiveButton(getResources().getString(R.string.aggiungi_rename), new ButtonClickedListener())
+	                    .setNegativeButton(getResources().getString(R.string.aggiungi_dismiss), new ButtonClickedListener())
+	                    .show();
+	        	dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			        @Override
 			        public boolean onKey(DialogInterface arg0, int keyCode,
 			        		KeyEvent event) {
@@ -247,35 +296,7 @@ public class CreaListaActivity extends ActionBarActivity {
 			            return false;
 			        }
 		        });
-				
-				positiveActionRename = dialog.getActionButton(DialogAction.POSITIVE);
-				titleInputRename = (TintEditText) dialog.getCustomView().findViewById(R.id.list_title);
-				titleInputRename.setText(nomiElementi.get(positionToRename));
-				titleInputRename.selectAll();
-				titleInputRename.addTextChangedListener(new TextWatcher() {
-			        @Override
-			        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			        }
-			
-			        @Override
-			        public void onTextChanged(CharSequence s, int start, int before, int count) {
-			        	positiveActionRename.setEnabled(s.toString().trim().length() > 0);
-			        }
-			
-			        @Override
-			        public void afterTextChanged(Editable s) {
-			        }
-			    });
-//				titleInputRename.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//				    @Override
-//				    public void onFocusChange(View v, boolean hasFocus) {
-//				        if (hasFocus) {
-//				            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//				        }
-//				    }
-//				});
-		        dialog.show();
-		        dialog.setCancelable(false);
+	        	dialog.setCancelable(false);
 //		        titleInputRename.requestFocus();
 		        return true;
 			}

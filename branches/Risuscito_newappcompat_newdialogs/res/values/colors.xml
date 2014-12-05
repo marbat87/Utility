@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
  
-    <color name="tabHoloLight">#CDCDCD</color>
-    <color name="tabHoloDark">#202122</color>
-    <color name="dividerHoloLight">#B8B8B8</color>
-    <color name="dividerHoloDark">#414243</color>
+    <color name="cyan_primary">#00BCD4</color>
+    <color name="cyan_dark">#0097A7</color>
+    <color name="cyan_accent">#EEFF41</color>
  	<color name="Indigo">#3f51b5</color>
  	<color name="BlueGrey">#607d8b</color>
  	<color name="RedTheme">#e51c23</color>
@@ -32,8 +31,6 @@
  	<color name="indigo_accent">#8c9eff</color>
  	<color name="red_accent">#ff7997</color>
  	<color name="teal_accent">#a7ffeb</color>
- 	<color name="secondary_section_selected">@android:color/transparent</color>
- 	<color name="unselectedTabTextColor">#99FFFFFF</color>
  	<color name="btn_disabled_text">#42000000</color>
  	
  	<color name="navdrawer_background">#ffffffff</color>
@@ -50,9 +47,9 @@
     <color name="body_text_1_inverse">#deffffff</color>
     <color name="body_text_2_inverse">#8affffff</color>
     
-    <color name="theme_primary">@color/Indigo</color>
-    <color name="theme_accent">@color/indigo_accent</color>
-    <color name="theme_primary_dark">@color/IndigoDark</color>
+    <color name="theme_primary">@color/cyan_primary</color>
+    <color name="theme_accent">@color/cyan_accent</color>
+    <color name="theme_primary_dark">@color/cyan_dark</color>
     <color name="item_disabled">#808080</color>
     <color name="snackbar_black">#323232</color>
     <color name="favorite_accent">#F48FB1</color>
