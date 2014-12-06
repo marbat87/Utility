@@ -216,7 +216,8 @@ public class CustomLists extends Fragment  {
 							mSlidingTabLayout.setViewPager(mViewPager);
 						}
 					});
-			snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+//			snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+			snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
 			snackbar.show();
 			return true;
 		}

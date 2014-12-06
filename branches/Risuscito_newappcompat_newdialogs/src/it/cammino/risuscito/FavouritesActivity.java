@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gc.materialdesign.views.ButtonFlat;
 import com.gc.materialdesign.widgets.SnackBar;
 
 public class FavouritesActivity extends Fragment {
@@ -170,7 +171,8 @@ public class FavouritesActivity extends Fragment {
 								updateFavouritesList();
 							}
 						});
-				snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+//				snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+				snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
 				snackbar.show();
 				return true;
 			}

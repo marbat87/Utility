@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -22,6 +21,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.internal.widget.TintEditText;
@@ -46,8 +46,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.alertdialogpro.AlertDialogPro;
+import com.alertdialogpro.material.ProgressBarCompat;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.gc.materialdesign.widgets.Dialog;
 
@@ -59,9 +59,10 @@ public class RicercaAvanzataFragment extends Fragment {
 	private View rootView;
 	private static String[][] aTexts;
 	ListView lv;
+	private ProgressBarCompat progress;
 	private int prevOrientation;
 //	private ProgressDialog mProgressDialog;
-	private MaterialDialog mDialog;
+//	private MaterialDialog mDialog;
 	private static Map<Character, Character> MAP_NORM;
 	
 	private String titoloDaAgg;
@@ -77,10 +78,12 @@ public class RicercaAvanzataFragment extends Fragment {
 		
 	private LUtils mLUtils;
 	
+	private SearchTask searchTask ;
+	
 //	private final String LISTA_PERSONALIZZATA_TAG = "1";
 //	private final String LISTA_PREDEFINITA_TAG = "2";
 	
-	ButtonRectangle ricercaButton;
+//	ButtonRectangle ricercaButton;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +95,7 @@ public class RicercaAvanzataFragment extends Fragment {
 		listaCanti = new DatabaseCanti(getActivity());
 				
 		lv = (ListView) rootView.findViewById(R.id.matchedList);
+		progress = (ProgressBarCompat) rootView.findViewById(R.id.search_progress);
 		searchPar.setText("");
 //		rootView.findViewById(R.id.button_search).setEnabled(false);
 //		ricercaButton = (ButtonRectangle) rootView.findViewById(R.id.search_ripple);
@@ -122,15 +126,19 @@ public class RicercaAvanzataFragment extends Fragment {
 				
 				//abilita il pulsante solo se la stringa ha più di 3 caratteri, senza contare gli spazi
 				if (s.toString().trim().length() >= 3) {
-					ricercaButton.setEnabled(true);
-					ricercaButton.setTextColor(getResources().getColor(android.R.color.white));
+//					ricercaButton.setEnabled(true);
+//					ricercaButton.setTextColor(getResources().getColor(android.R.color.white));
 //					rootView.findViewById(R.id.search_ripple).setEnabled(true);
+					if (searchTask != null && searchTask.getStatus() == Status.RUNNING)
+						searchTask.cancel(true);
+					searchTask = new SearchTask();
+					searchTask.execute(searchPar.getText().toString());
 				}
-				else {
-					ricercaButton.setEnabled(false);
-					ricercaButton.setTextColor(getResources().getColor(R.color.btn_disabled_text));
-//					rootView.findViewById(R.id.search_ripple).setEnabled(false); 
-				}
+//				else {
+////					ricercaButton.setEnabled(false);
+////					ricercaButton.setTextColor(getResources().getColor(R.color.btn_disabled_text));
+////					rootView.findViewById(R.id.search_ripple).setEnabled(false); 
+//				}
 			}
 			
 			@Override
@@ -200,6 +208,7 @@ public class RicercaAvanzataFragment extends Fragment {
 				searchPar.setText("");
 				rootView.findViewById(R.id.search_no_results).setVisibility(View.GONE);
 				lv.setVisibility(View.GONE);
+				progress.setVisibility(View.GONE);
 			}
 		});
 		
@@ -226,17 +235,17 @@ public class RicercaAvanzataFragment extends Fragment {
 		
 		mLUtils = LUtils.getInstance(getActivity());
 		
-		mDialog = new MaterialDialog.Builder(getActivity())
-        .customView(R.layout.dialog_loadindeterminate)
-        .build();
-		((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
-		mDialog.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface arg0) {
-				getActivity().setRequestedOrientation(prevOrientation);
-			}
-		});
-		mDialog.setCancelable(false);
+//		mDialog = new MaterialDialog.Builder(getActivity())
+//        .customView(R.layout.dialog_loadindeterminate)
+//        .build();
+//		((TextView) mDialog.getCustomView().findViewById(R.id.circularText)).setText(R.string.search_running);
+//		mDialog.setOnDismissListener(new OnDismissListener() {
+//			@Override
+//			public void onDismiss(DialogInterface arg0) {
+//				getActivity().setRequestedOrientation(prevOrientation);
+//			}
+//		});
+//		mDialog.setCancelable(false);
 		
 		return rootView;
 	}
@@ -773,8 +782,11 @@ public class RicercaAvanzataFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            blockOrientation();
-			mDialog.show();
+            rootView.findViewById(R.id.search_no_results).setVisibility(View.GONE);
+            lv.setVisibility(View.GONE);
+            progress.setVisibility(View.VISIBLE);
+//            blockOrientation();
+//			mDialog.show();
 //            prevOrientation = getActivity().getRequestedOrientation();
 //            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 //            	getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -789,8 +801,9 @@ public class RicercaAvanzataFragment extends Fragment {
         protected void onPostExecute(String result) {
 //        	if (mProgressDialog.isShowing())
 //        		mProgressDialog.dismiss();
-        	if (mDialog.isShowing())
-        		mDialog.dismiss();
+//        	if (mDialog.isShowing())
+//        		mDialog.dismiss();
+        	
 //        	getActivity().setRequestedOrientation(prevOrientation);
         	
     		// crea un list adapter per l'oggetto di tipo ListView
@@ -832,7 +845,9 @@ public class RicercaAvanzataFragment extends Fragment {
 	    			
     			}
     		});
-        	
+            
+    		progress.setVisibility(View.GONE);
+    		
     		if (titoli.length == 0) {
     			rootView.findViewById(R.id.search_no_results).setVisibility(View.VISIBLE);
     			lv.setVisibility(View.GONE);
