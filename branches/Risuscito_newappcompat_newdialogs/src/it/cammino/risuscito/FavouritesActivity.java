@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,8 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.gc.materialdesign.views.ButtonFlat;
-import com.gc.materialdesign.widgets.SnackBar;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.listeners.ActionClickListener;
+
+
 
 public class FavouritesActivity extends Fragment {
 
@@ -28,6 +29,8 @@ public class FavouritesActivity extends Fragment {
   	private SongRowAdapter listAdapter;
   	private ListView lv;
   	private View rootView;
+  	
+  	Snackbar snackbar;
   	
   	private LUtils mLUtils;
 	  	
@@ -154,26 +157,46 @@ public class FavouritesActivity extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 		        cantoDaCanc = ((TextView) view.findViewById(R.id.text_title)).getText().toString();
 				cantoDaCanc = Utility.duplicaApostrofi(cantoDaCanc);
-				SnackBar snackbar = 
-				new SnackBar(getActivity(),
-						getString(R.string.favorite_remove),
-						getString(R.string.snackbar_remove),
-						new OnClickListener() {
-
-							@Override
-							public void onClick(View v) {
-								SQLiteDatabase db = listaCanti.getReadableDatabase();
+//				SnackBar snackbar = 
+//				new SnackBar(getActivity(),
+//						getString(R.string.favorite_remove),
+//						getString(R.string.snackbar_remove),
+//						new OnClickListener() {
+//
+//							@Override
+//							public void onClick(View v) {
+//								SQLiteDatabase db = listaCanti.getReadableDatabase();
+//								String sql = "UPDATE ELENCO" +
+//										"  SET favourite = 0" + 
+//										"  WHERE titolo =  '" + cantoDaCanc + "'";
+//								db.execSQL(sql);
+//								db.close();
+//								updateFavouritesList();
+//							}
+//						});
+////				snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+//				snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
+//				snackbar.show();
+				if (snackbar != null) {
+					snackbar.dismiss();
+		        }
+				snackbar = Snackbar.with(getActivity())
+                        .text(getString(R.string.favorite_remove))
+                        .actionLabel(getString(R.string.snackbar_remove))
+                        .actionListener(new ActionClickListener() {
+                            @Override
+                            public void onActionClicked() {
+                            	SQLiteDatabase db = listaCanti.getReadableDatabase();
 								String sql = "UPDATE ELENCO" +
 										"  SET favourite = 0" + 
 										"  WHERE titolo =  '" + cantoDaCanc + "'";
 								db.execSQL(sql);
 								db.close();
 								updateFavouritesList();
-							}
-						});
-//				snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
-				snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
-				snackbar.show();
+                            }
+                        })
+                        .actionColor(getResources().getColor(R.color.theme_accent));
+				snackbar.show(getActivity());
 				return true;
 			}
 		});	

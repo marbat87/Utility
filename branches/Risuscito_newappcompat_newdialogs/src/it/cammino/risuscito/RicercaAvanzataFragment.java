@@ -261,6 +261,8 @@ public class RicercaAvanzataFragment extends Fragment {
     
 	@Override
 	public void onDestroy() {
+		if (searchTask != null && searchTask.getStatus() == Status.RUNNING)
+			searchTask.cancel(true);
 		if (listaCanti != null)
 			listaCanti.close();
 		super.onDestroy();

@@ -138,6 +138,20 @@ public class Risuscito extends Fragment {
 		        			&& event.getAction() == KeyEvent.ACTION_UP) {
 		        		arg0.dismiss();
 		        		getActivity().setRequestedOrientation(prevOrientation);
+		        		if(PreferenceManager
+				                .getDefaultSharedPreferences(getActivity())
+				                .getBoolean(FIRST_OPEN_MENU, true)) { 
+				            SharedPreferences.Editor editor = PreferenceManager
+				                    .getDefaultSharedPreferences(getActivity())
+				                    .edit();
+				            editor.putBoolean(FIRST_OPEN_MENU, false);
+				            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+				            	editor.commit();
+				            } else {
+				            	editor.apply();
+				            }
+				        	showHelp();
+				        }
 		        		return true;
 		            }
 		            return false;
@@ -221,10 +235,25 @@ public class Risuscito extends Fragment {
 //        }
 //    }
     
+    @SuppressLint("NewApi")
     private class ButtonClickedListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
         	getActivity().setRequestedOrientation(prevOrientation);
+        	if(PreferenceManager
+	                .getDefaultSharedPreferences(getActivity())
+	                .getBoolean(FIRST_OPEN_MENU, true)) { 
+	            SharedPreferences.Editor editor = PreferenceManager
+	                    .getDefaultSharedPreferences(getActivity())
+	                    .edit();
+	            editor.putBoolean(FIRST_OPEN_MENU, false);
+	            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+	            	editor.commit();
+	            } else {
+	            	editor.apply();
+	            }
+	        	showHelp();
+	        }
         }
     }
     
