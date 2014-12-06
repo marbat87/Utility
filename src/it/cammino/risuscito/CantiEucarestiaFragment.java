@@ -888,7 +888,8 @@ public class CantiEucarestiaFragment extends Fragment {
 				mShareActionProvider.setShareIntent(getDefaultIntent());
 			}
 		});
-    	snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+//    	snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+    	snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
     	snackbar.show();
     }
     
