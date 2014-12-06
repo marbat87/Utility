@@ -26,11 +26,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.alertdialogpro.AlertDialogPro;
-import com.gc.materialdesign.widgets.SnackBar;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.listeners.ActionClickListener;
 
 public class CustomLists extends Fragment  {
 
@@ -45,6 +45,8 @@ public class CustomLists extends Fragment  {
 	
 	private AlertDialogPro dialog;
     private TintEditText titleInput;
+    
+    Snackbar snackbar;
     
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -194,15 +196,41 @@ public class CustomLists extends Fragment  {
 //	        });
 //			dialogR.show(getChildFragmentManager(), null);
 //			dialogR.setCancelable(false);
-			SnackBar snackbar = 
-			    	new SnackBar(getActivity(),
-			    			getString(R.string.snackbar_list_delete) + titoliListe[listaDaCanc] + "'?",
-			    			getString(R.string.snackbar_remove),
-						new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							SQLiteDatabase db = listaCanti.getReadableDatabase();
+//			SnackBar snackbar = 
+//			    	new SnackBar(getActivity(),
+//			    			getString(R.string.snackbar_list_delete) + titoliListe[listaDaCanc] + "'?",
+//			    			getString(R.string.snackbar_remove),
+//						new OnClickListener() {
+//
+//						@Override
+//						public void onClick(View v) {
+//							SQLiteDatabase db = listaCanti.getReadableDatabase();
+//					    	
+////					    	Log.i("INDICE DA CANC", listaDaCanc+" ");
+//					    	
+//						    String sql = "DELETE FROM LISTE_PERS"
+//						      		+ " WHERE _id = " + idListe[listaDaCanc];
+//						    db.execSQL(sql);
+//							db.close();
+//							
+//							updateLista();
+//							mSectionsPagerAdapter.notifyDataSetChanged();
+//							mSlidingTabLayout.setViewPager(mViewPager);
+//						}
+//					});
+////			snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+//			snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
+//			snackbar.show();
+			if (snackbar != null) {
+				snackbar.dismiss();
+	        }
+			snackbar = Snackbar.with(getActivity())
+	                .text(getString(R.string.snackbar_list_delete) + titoliListe[listaDaCanc] + "'?")
+	                .actionLabel(getString(R.string.snackbar_remove))
+	                .actionListener(new ActionClickListener() {
+	                    @Override
+	                    public void onActionClicked() {
+	                    	SQLiteDatabase db = listaCanti.getReadableDatabase();
 					    	
 //					    	Log.i("INDICE DA CANC", listaDaCanc+" ");
 					    	
@@ -214,11 +242,10 @@ public class CustomLists extends Fragment  {
 							updateLista();
 							mSectionsPagerAdapter.notifyDataSetChanged();
 							mSlidingTabLayout.setViewPager(mViewPager);
-						}
-					});
-//			snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
-			snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
-			snackbar.show();
+	                    }
+	                })
+	                .actionColor(getResources().getColor(R.color.theme_accent));
+			snackbar.show(getActivity());
 			return true;
 		}
 		return false;

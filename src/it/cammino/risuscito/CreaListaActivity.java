@@ -399,7 +399,7 @@ public class CreaListaActivity extends ActionBarActivity {
 //		        dialog3.show(getSupportFragmentManager(), SALVA_LISTA_TAG);
 //		        dialog3.setCancelable(false);
                 AlertDialogPro.Builder builder = new AlertDialogPro.Builder(CreaListaActivity.this);
-                AlertDialogPro dialog = builder.setTitle(R.string.posizione_add_desc)
+                AlertDialogPro dialog = builder.setTitle(R.string.save_list_title)
 	        			.setMessage(R.string.save_list_question)
 	                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.SAVE_LIST_OK))
 	                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.SAVE_LIST_KO))
@@ -455,7 +455,7 @@ public class CreaListaActivity extends ActionBarActivity {
 //		        dialog.show(getSupportFragmentManager(), SALVA_LISTA_TAG);
 //		        dialog.setCancelable(false);
 				AlertDialogPro.Builder builder = new AlertDialogPro.Builder(CreaListaActivity.this);
-                AlertDialogPro dialog = builder.setTitle(R.string.posizione_add_desc)
+                AlertDialogPro dialog = builder.setTitle(R.string.save_list_title)
 	        			.setMessage(R.string.save_list_question)
 	                    .setPositiveButton(R.string.confirm, new ButtonClickedListener(Utility.SAVE_LIST_OK))
 	                    .setNegativeButton(R.string.dismiss, new ButtonClickedListener(Utility.SAVE_LIST_KO))

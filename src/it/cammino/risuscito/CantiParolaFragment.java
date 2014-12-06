@@ -27,9 +27,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alertdialogpro.AlertDialogPro;
-import com.gc.materialdesign.widgets.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.listeners.ActionClickListener;
 
 public class CantiParolaFragment extends Fragment {
 	/**
@@ -46,6 +47,8 @@ public class CantiParolaFragment extends Fragment {
 	private int prevOrientation;
 	
 	private LUtils mLUtils;
+	
+	Snackbar snackbar;
 	
 //	private final String RIMUOVI_CANTO_TAG = "1";
 //	private final String RESETTA_LISTA_TAG = "2";
@@ -94,7 +97,7 @@ public class CantiParolaFragment extends Fragment {
 //				dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
 //		        dialog.setCancelable(false);
 				snackBarRimuoviCanto();
-				return false;
+				return true;
 			}
 		});
 		
@@ -144,7 +147,7 @@ public class CantiParolaFragment extends Fragment {
 //                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
 //                dialog.setCancelable(false);
 				snackBarRimuoviCanto();
-				return false;
+				return true;
 			}
 		});
 		
@@ -194,7 +197,7 @@ public class CantiParolaFragment extends Fragment {
 //                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
 //                dialog.setCancelable(false);
 				snackBarRimuoviCanto();
-				return false;
+				return true;
 			}
 		});
 		
@@ -244,7 +247,7 @@ public class CantiParolaFragment extends Fragment {
 //                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
 //                dialog.setCancelable(false);
 				snackBarRimuoviCanto();
-				return false;
+				return true;
 			}
 		});
 		
@@ -294,7 +297,7 @@ public class CantiParolaFragment extends Fragment {
 //                dialog.show(getChildFragmentManager(), RIMUOVI_CANTO_TAG);
 //                dialog.setCancelable(false);
 				snackBarRimuoviCanto();
-				return false;
+				return true;
 			}
 		});
 		
@@ -723,29 +726,52 @@ public class CantiParolaFragment extends Fragment {
     }
     
     public void snackBarRimuoviCanto() {
-    	SnackBar snackbar = 
-    	new SnackBar(getActivity(),
-    			getString(R.string.list_remove),
-    			getString(R.string.snackbar_remove),
-			new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				db = listaCanti.getReadableDatabase();
-				String sql = "DELETE FROM CUST_LISTS" +
-			      		"  WHERE _id =  1 " +
-		  				"    AND position = " + posizioneDaCanc +
-		  				"	 AND id_canto = (SELECT _id FROM ELENCO" +
-		  				"					WHERE titolo = '" + titoloDaCanc + "')"; 
-				db.execSQL(sql);
-				db.close();
-				updateLista();
-				mShareActionProvider.setShareIntent(getDefaultIntent());
-			}
-		});
-//    	snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
-    	snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
-    	snackbar.show();
+//    	SnackBar snackbar = 
+//    	new SnackBar(getActivity(),
+//    			getString(R.string.list_remove),
+//    			getString(R.string.snackbar_remove),
+//			new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				db = listaCanti.getReadableDatabase();
+//				String sql = "DELETE FROM CUST_LISTS" +
+//			      		"  WHERE _id =  1 " +
+//		  				"    AND position = " + posizioneDaCanc +
+//		  				"	 AND id_canto = (SELECT _id FROM ELENCO" +
+//		  				"					WHERE titolo = '" + titoloDaCanc + "')"; 
+//				db.execSQL(sql);
+//				db.close();
+//				updateLista();
+//				mShareActionProvider.setShareIntent(getDefaultIntent());
+//			}
+//		});
+////    	snackbar.setColorButton(getResources().getColor(R.color.theme_accent));
+//    	snackbar.setColorButton(getResources().getColor(android.R.color.transparent));
+//    	snackbar.show();
+    	if (snackbar != null) {
+			snackbar.dismiss();
+        }
+		snackbar = Snackbar.with(getActivity())
+                .text(getString(R.string.list_remove))
+                .actionLabel(getString(R.string.snackbar_remove))
+                .actionListener(new ActionClickListener() {
+                    @Override
+                    public void onActionClicked() {
+                    	db = listaCanti.getReadableDatabase();
+        				String sql = "DELETE FROM CUST_LISTS" +
+        			      		"  WHERE _id =  1 " +
+        		  				"    AND position = " + posizioneDaCanc +
+        		  				"	 AND id_canto = (SELECT _id FROM ELENCO" +
+        		  				"					WHERE titolo = '" + titoloDaCanc + "')"; 
+        				db.execSQL(sql);
+        				db.close();
+        				updateLista();
+        				mShareActionProvider.setShareIntent(getDefaultIntent());
+                    }
+                })
+                .actionColor(getResources().getColor(R.color.theme_accent));
+		snackbar.show(getActivity());
     }
     
 }
