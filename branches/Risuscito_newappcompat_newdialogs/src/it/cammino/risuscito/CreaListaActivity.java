@@ -26,6 +26,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -353,7 +354,7 @@ public class CreaListaActivity extends ActionBarActivity {
        	
         findViewById(R.id.textTitleDescription).requestFocus();
         
-		checkScreenAwake();
+//		checkScreenAwake();
 	}
 	
 	@Override
@@ -614,9 +615,9 @@ public class CreaListaActivity extends ActionBarActivity {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
-			lv.setKeepScreenOn(true);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		else
-			lv.setKeepScreenOn(false);
+			getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
     
     private class ButtonClickedListener implements DialogInterface.OnClickListener {

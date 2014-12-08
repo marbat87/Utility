@@ -58,6 +58,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -1108,7 +1109,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
         mLUtils = LUtils.getInstance(PaginaRenderActivity.this);
         ViewCompat.setTransitionName(findViewById(R.id.pagina_render_view), "CLICKED");
         
-        
     }
     
 	@Override
@@ -1352,9 +1352,10 @@ public class PaginaRenderActivity extends ActionBarActivity {
     
     @Override
     public void onResume() {
+    	super.onResume();
     	
         favouriteCheckBox = (ButtonIcon) findViewById(R.id.favorite);
-        checkScreenAwake();
+        
     	favoriteFlag = selectFavouriteFromSource(pagina);
         
         if (favoriteFlag == 1) 
@@ -1387,6 +1388,8 @@ public class PaginaRenderActivity extends ActionBarActivity {
 				updateFavouriteFlag(favoriteFlag, pagina);
 			}
 		});
+        
+        checkScreenAwake();
         
 //        favouriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
@@ -1500,7 +1503,6 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			paginaView.setInitialScale(defaultZoomLevel);
 		paginaView.setWebViewClient(new MyWebViewClient());
         
-        super.onResume();
     }
     
 	@Override
@@ -1512,6 +1514,14 @@ public class PaginaRenderActivity extends ActionBarActivity {
 			listaCanti.close();
 		super.onDestroy();
 	}
+	
+//	@Override
+//	public void onPause() {
+//		super.onPause();
+//		Log.i(getClass().toString(), "PAUSE");
+//		if (wakelock != null && wakelock.isHeld())
+//			wakelock.release();
+//	}
     
 	public void pulisciVars() {
 		SaveZoom();
@@ -1544,9 +1554,9 @@ public class PaginaRenderActivity extends ActionBarActivity {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
-			favouriteCheckBox.setKeepScreenOn(true);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		else
-			favouriteCheckBox.setKeepScreenOn(false);
+			getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
     
     //recupera il flag preferito per la pagina
@@ -2620,15 +2630,15 @@ public class PaginaRenderActivity extends ActionBarActivity {
             this.context = context;
         }
 
-        @SuppressWarnings("resource")
+        @SuppressLint("Wakelock")
 		@Override
         protected String doInBackground(String... sUrl) {
             // take CPU lock to prevent CPU from going off if the user 
             // presses the power button during download
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+            PowerManager.WakeLock wakelock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                  getClass().getName());
-            wl.acquire();
+            wakelock.acquire();
 
             try {
                 InputStream input = null;
@@ -2695,7 +2705,7 @@ public class PaginaRenderActivity extends ActionBarActivity {
                         connection.disconnect();
                 }
             } finally {
-                wl.release();
+            	wakelock.release();
             }
             return null;
         }
