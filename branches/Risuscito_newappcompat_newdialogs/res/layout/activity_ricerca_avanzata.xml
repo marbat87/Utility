@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    xmlns:risuscito="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingLeft="@dimen/activity_min_margin"
@@ -54,6 +54,7 @@
                 android:layout_marginRight="@dimen/min_button_margin"
                 android:layout_marginEnd="@dimen/min_button_margin"
                 android:background="@color/theme_primary"
+                risuscito:clickAfterRipple="false"
                 android:text="@string/button_pulisci" />
 		   	
 <!-- 		   	<com.gc.materialdesign.views.ButtonRectangle -->

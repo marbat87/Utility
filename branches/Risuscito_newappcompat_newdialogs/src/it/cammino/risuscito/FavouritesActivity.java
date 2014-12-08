@@ -185,7 +185,7 @@ public class FavouritesActivity extends Fragment {
                         .actionLabel(getString(R.string.snackbar_remove))
                         .actionListener(new ActionClickListener() {
                             @Override
-                            public void onActionClicked() {
+                            public void onActionClicked(Snackbar snackbar) {
                             	SQLiteDatabase db = listaCanti.getReadableDatabase();
 								String sql = "UPDATE ELENCO" +
 										"  SET favourite = 0" + 

@@ -12,7 +12,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 	//la versione 20 è la prima con salvataggio tonalità e barrè
 	//la versione 21 è la prima con il salvataggio velocità di scorrimento
 //	private static final int DB_VERSION = 24;
-	private static final int DB_VERSION = 29;
+	private static final int DB_VERSION = 30;
 
 	private final String GIALLO = "#EBD0A5";
 	private final String BIANCO = "#FCFCFC";
@@ -1669,6 +1669,12 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		sql = "INSERT INTO ELENCO ";
 		sql += "VALUES (232, 145, 'Ave, o Maria, colomba incorrotta', 'ave_maria_colomba', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/aveomariacolomba.mp3', "
+				+ "0, 0, 0, NULL, NULL, 2)";
+		db.execSQL(sql);
+		
+		sql = "INSERT INTO ELENCO ";
+		sql += "VALUES (233, 146, 'Il Messia leone per vincere', 'messia_leone_vincere', 0, '"
+				+ BIANCO + "', 'http://www.resuscicanti.com/Il%20Messia%20Italiano.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 		// FINE CANTI
