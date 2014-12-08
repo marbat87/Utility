@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.cammino.risuscito"
     android:installLocation="auto"
-    android:versionCode="50"
-    android:versionName="3.0.0_BETA4" >
+    android:versionCode="51"
+    android:versionName="3.0.0_BETA5" >
 
     <uses-sdk
         android:minSdkVersion="8"

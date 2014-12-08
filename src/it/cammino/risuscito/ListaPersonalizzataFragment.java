@@ -440,7 +440,7 @@ public class ListaPersonalizzataFragment extends Fragment {
                 .actionLabel(getString(R.string.snackbar_remove))
                 .actionListener(new ActionClickListener() {
                     @Override
-                    public void onActionClicked() {
+                    public void onActionClicked(Snackbar snackbar) {
                     	db = listaCanti.getReadableDatabase();
         		    	ContentValues  values = new  ContentValues( );
         				listaPersonalizzata.removeCanto(posizioneDaCanc);

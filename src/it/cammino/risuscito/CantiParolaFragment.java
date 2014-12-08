@@ -757,7 +757,7 @@ public class CantiParolaFragment extends Fragment {
                 .actionLabel(getString(R.string.snackbar_remove))
                 .actionListener(new ActionClickListener() {
                     @Override
-                    public void onActionClicked() {
+                    public void onActionClicked(Snackbar snackbar) {
                     	db = listaCanti.getReadableDatabase();
         				String sql = "DELETE FROM CUST_LISTS" +
         			      		"  WHERE _id =  1 " +

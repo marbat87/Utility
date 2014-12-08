@@ -229,7 +229,7 @@ public class CustomLists extends Fragment  {
 	                .actionLabel(getString(R.string.snackbar_remove))
 	                .actionListener(new ActionClickListener() {
 	                    @Override
-	                    public void onActionClicked() {
+	                    public void onActionClicked(Snackbar snackbar) {
 	                    	SQLiteDatabase db = listaCanti.getReadableDatabase();
 					    	
 //					    	Log.i("INDICE DA CANC", listaDaCanc+" ");
