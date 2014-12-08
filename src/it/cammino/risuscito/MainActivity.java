@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -365,11 +366,11 @@ public class MainActivity extends ActionBarActivity {
     //controlla se l'app deve mantenere lo schermo acceso
     public void checkScreenAwake() {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
-			boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
+		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
-			findViewById(R.id.content_frame).setKeepScreenOn(true);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		else
-			findViewById(R.id.content_frame).setKeepScreenOn(false);
+			getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
     
     public int getStatusBarHeight() {

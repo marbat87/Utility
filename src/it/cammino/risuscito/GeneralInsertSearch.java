@@ -15,22 +15,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 public class GeneralInsertSearch extends ActionBarActivity {
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
-	private ViewPager mViewPager;
-	SlidingTabLayout mSlidingTabLayout = null;
+//	private ViewPager mViewPager;
+//	SlidingTabLayout mSlidingTabLayout = null;
 	
 	private int fromAdd;
 	private int idLista;
 	private int listPosition;
 	
-//	/**
-//	 * The {@link ViewPager} that will host the section contents.
-//	 */
-//	ViewPager mViewPager;
-  	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 //		Utility.updateTheme(GeneralInsertSearch.this);
@@ -67,10 +63,10 @@ public class GeneralInsertSearch extends ActionBarActivity {
 //        mViewPager.setAdapter(mSectionsPagerAdapter);
         
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-	    mViewPager = (ViewPager) findViewById(R.id.view_pager);
+		ViewPager mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         
-        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        SlidingTabLayout mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
         
         Resources res = getResources();
@@ -78,7 +74,7 @@ public class GeneralInsertSearch extends ActionBarActivity {
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
         
-		checkScreenAwake();
+//		checkScreenAwake();
 
 	}
 
@@ -113,9 +109,9 @@ public class GeneralInsertSearch extends ActionBarActivity {
     	SharedPreferences pref =  PreferenceManager.getDefaultSharedPreferences(this);
 		boolean screenOn = pref.getBoolean(Utility.SCREEN_ON, false);
 		if (screenOn)
-			mViewPager.setKeepScreenOn(true);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		else
-			mViewPager.setKeepScreenOn(false);
+			getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
     
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
