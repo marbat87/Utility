@@ -54,6 +54,7 @@
                 android:layout_gravity="end"
                 risuscito:clickAfterRipple="false"
                 android:background="@color/theme_primary"
+                android:soundEffectsEnabled="true"
                 android:text="@string/button_pulisci" />
 	    
 <!-- 		<FrameLayout -->

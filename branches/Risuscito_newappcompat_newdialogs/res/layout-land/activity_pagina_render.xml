@@ -67,6 +67,8 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
+	            risuscito:clickAfterRipple="false"
+                risuscito:iconSize="28dip"
 	            risuscito:iconDrawable="@drawable/ic_av_rewind_active"
 	            android:soundEffectsEnabled="true"  />
 			
@@ -88,6 +90,8 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
+	            risuscito:clickAfterRipple="false"
+                risuscito:iconSize="28dip"
 	            risuscito:iconDrawable="@drawable/play_button_drawable"
 	            android:soundEffectsEnabled="true"  />
 	
@@ -109,6 +113,8 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
+	            risuscito:clickAfterRipple="false"
+                risuscito:iconSize="28dip"
 	            risuscito:iconDrawable="@drawable/ic_av_fast_forward_active"
 	            android:soundEffectsEnabled="true"  />
 	    	
@@ -130,6 +136,8 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginBottom="@dimen/button_icon_padding"
 	            android:background="@color/theme_accent"
+	            risuscito:clickAfterRipple="false"
+                risuscito:iconSize="28dip"
 	            risuscito:iconDrawable="@drawable/ic_av_stop_active"
 	            android:soundEffectsEnabled="true"  />
 			
@@ -152,6 +160,8 @@
 			    android:layout_above="@+id/save_file"
 	            android:layout_centerHorizontal="true"
 	            android:background="@color/theme_accent"
+	            risuscito:clickAfterRipple="false"
+                risuscito:iconSize="28dip"
 	            risuscito:iconDrawable="@drawable/ic_delete_black_48dp"
 	            android:soundEffectsEnabled="true"  />
 			
@@ -172,6 +182,8 @@
 	         	android:layout_alignParentBottom="true"
 	            android:layout_centerHorizontal="true"
 	            android:background="@color/theme_accent"
+	            risuscito:clickAfterRipple="false"
+                risuscito:iconSize="28dip"
 	            risuscito:iconDrawable="@drawable/ic_av_download_active"
 	            android:soundEffectsEnabled="true"  />
 			
@@ -212,6 +224,8 @@
 	            	android:layout_height="wrap_content"
 			    	android:layout_gravity="center_vertical"
 	            	android:background="@color/theme_accent"
+	            	risuscito:clickAfterRipple="false"
+                	risuscito:iconSize="28dip"
 	            	risuscito:iconDrawable="@drawable/ic_rating_favorite_normal_light"
 	            	android:soundEffectsEnabled="true"  />
 		   	    
@@ -261,6 +275,8 @@
 		            android:layout_height="wrap_content"
 		            android:layout_gravity="center_vertical"
 		            android:background="@color/theme_accent"
+		            risuscito:clickAfterRipple="false"
+                	risuscito:iconSize="28dip"
 		            risuscito:iconDrawable="@drawable/ic_play_circle_outline_white_48dp"
 		            android:soundEffectsEnabled="true"  />
 			   
@@ -279,6 +295,8 @@
             		android:layout_height="wrap_content"
             		android:layout_gravity="center_vertical"
            			android:background="@color/theme_accent"
+           			risuscito:clickAfterRipple="false"
+                	risuscito:iconSize="28dip"
             		risuscito:iconDrawable="@drawable/ic_pause_circle_outline_white_48dp"
             		android:soundEffectsEnabled="true"  />
 			        
