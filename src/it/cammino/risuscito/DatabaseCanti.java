@@ -1,4 +1,4 @@
-package it.cammino.risuscito;
+ï»¿package it.cammino.risuscito;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseCanti extends SQLiteOpenHelper {
 
 	private static final String DB_NAME = "DBCanti";	
-	//la versione 20 è la prima con salvataggio tonalità e barrè
-	//la versione 21 è la prima con il salvataggio velocità di scorrimento
+	//la versione 20 Ã¨ la prima con salvataggio tonalitÃ  e barrÃ¨
+	//la versione 21 Ã¨ la prima con il salvataggio velocitÃ  di scorrimento
 //	private static final int DB_VERSION = 24;
 	private static final int DB_VERSION = 30;
 
@@ -113,7 +113,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (5, 5, 'Santo è Santo (Tempo di Quaresima)', 'santo_e_santo_quaresima', 0, '"
+		sql += "VALUES (5, 5, 'Santo Ã¨ Santo (Tempo di Quaresima)', 'santo_e_santo_quaresima', 0, '"
 				+ GIALLO + "', 'http://www.resuscicanti.com/24Santodiquaresima%202,41.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -125,7 +125,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (7, 6, 'Santo è il Signor - Santo delle baracche (Tempo di avvento)', 'santo_baracche', 0, '"
+		sql += "VALUES (7, 6, 'Santo Ã¨ il Signor - Santo delle baracche (Tempo di avvento)', 'santo_baracche', 0, '"
 				+ GIALLO + "', 'http://www.resuscicanti.com/22Santotempodiavvento%202,49.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -315,19 +315,19 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (35, 31, 'Risuscitò', 'risuscito', 0, '" + BIANCO
+		sql += "VALUES (35, 31, 'RisuscitÃ²', 'risuscito', 0, '" + BIANCO
 				+ "', 'http://www.resuscicanti.com/risuscito.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (36, 32, 'Verso te, o città Santa', 'verso_te_o_citta_santa', 0, '"
+		sql += "VALUES (36, 32, 'Verso te, o cittÃ  Santa', 'verso_te_o_citta_santa', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/Verso%20te%20o%20citta%20santa.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";	
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (37, 32, 'La marcia è dura', 'marcia_e_dura', 0, '"
+		sql += "VALUES (37, 32, 'La marcia Ã¨ dura', 'marcia_e_dura', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/La%20marcia%20e%20duraf.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -340,14 +340,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (39, 34, 'Canto di Giosuè (Gs. 24,3-18)', 'canto_di_giosue', 0, '"
+		sql += "VALUES (39, 34, 'Canto di GiosuÃ¨ (Gs. 24,3-18)', 'canto_di_giosue', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/cantodigiosue.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (40, 34, 'Benedici anima mia, Jahvè - Salmo 102(103)', 'benedici_anima_mia_jahve', 0, '"
+		sql += "VALUES (40, 34, 'Benedici anima mia, JahvÃ¨ - Salmo 102(103)', 'benedici_anima_mia_jahve', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/benedicianimamiajahve.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -360,7 +360,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (42, 35, 'Jahvè Tu sei il mio Dio (Is. 25,1-8)', 'jahve_tu_sei_mio_dio', 0, '"
+		sql += "VALUES (42, 35, 'JahvÃ¨ Tu sei il mio Dio (Is. 25,1-8)', 'jahve_tu_sei_mio_dio', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Jahve%20tu%20sei%20il%20mio%20Dio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -383,7 +383,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (45, 37, 'Guardate come è bello - Salmo 132(133)', 'guardate_come_e_bello', 0, '"
+		sql += "VALUES (45, 37, 'Guardate come Ã¨ bello - Salmo 132(133)', 'guardate_come_e_bello', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Guardate%20come%20%C3%A8%20bello%20stare%20con%20i%20fratellif.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -391,7 +391,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (46, 37, 'Come è bello, come dà gioia - Salmo 132(133)', 'come_bello_come_da_gioia', 0, '"
+		sql += "VALUES (46, 37, 'Come Ã¨ bello, come dÃ  gioia - Salmo 132(133)', 'come_bello_come_da_gioia', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/comeebellocomedagioia.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -399,7 +399,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (47, 38, 'Guardate com''è bello, gustate quant''è - Salmo 132(133)', 'guardate_come_e_bello_gustate', 0, '"
+		sql += "VALUES (47, 38, 'Guardate com''Ã¨ bello, gustate quant''Ã¨ - Salmo 132(133)', 'guardate_come_e_bello_gustate', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Guardatecomebell.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -407,7 +407,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (48, 39, 'Grazie a Jahvè - Salmo 135(136)', 'grazie_a_jahve', 0, '"
+		sql += "VALUES (48, 39, 'Grazie a JahvÃ¨ - Salmo 135(136)', 'grazie_a_jahve', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Grazie%20a%20Jahv%C3%A8.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";				
@@ -442,7 +442,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (53, 44, 'Il Signore è mia luce e mia salvezza - Salmo 26(27)', 'signore_e_mia_luce', 0, '"
+		sql += "VALUES (53, 44, 'Il Signore Ã¨ mia luce e mia salvezza - Salmo 26(27)', 'signore_e_mia_luce', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/ilsignoremialuceemiasalvezza.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -456,20 +456,20 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (55, 45, 'Già viene il Regno (Ap. 19,6-9)', 'gia_viene_il_regno', 0, '"
+		sql += "VALUES (55, 45, 'GiÃ  viene il Regno (Ap. 19,6-9)', 'gia_viene_il_regno', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/giavieneilregno.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (56, 45, 'Abbà Padre (Rom. 8,15-17)', 'abba_padre', 0, '"
+		sql += "VALUES (56, 45, 'AbbÃ  Padre (Rom. 8,15-17)', 'abba_padre', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/abbapadre.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (57, 46, 'Chi ci separerà (Rom. 8,33-39)', 'chi_ci_separera', 0, '"
+		sql += "VALUES (57, 46, 'Chi ci separerÃ  (Rom. 8,33-39)', 'chi_ci_separera', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/chiciseparera.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -481,7 +481,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (59, 48, 'Innalzerò la coppa di salvezza - Salmo 114-115(116)', 'innalzero_la_coppa_di_salvezza', 0, '"
+		sql += "VALUES (59, 48, 'InnalzerÃ² la coppa di salvezza - Salmo 114-115(116)', 'innalzero_la_coppa_di_salvezza', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/innalzerolacoppadisalvezza.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -502,7 +502,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (62, 51, 'O morte, dov''è la tua vittoria? (1 Cor. 15)', 'o_morte_dove_la_tua_vittoria', 0, '"
+		sql += "VALUES (62, 51, 'O morte, dov''Ã¨ la tua vittoria? (1 Cor. 15)', 'o_morte_dove_la_tua_vittoria', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/O%20morte,%20dov%C2%B4e%20la%20tua%20vittoria.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -541,7 +541,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (68, 56, 'Cantico di Mosè (Es. 15,1-18)', 'cantico_di_mose', 0, '"
+		sql += "VALUES (68, 56, 'Cantico di MosÃ¨ (Es. 15,1-18)', 'cantico_di_mose', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/canticodimose.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -555,7 +555,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (70, 58, 'Quando Israele uscì dall''Egitto - Salmo 113A(114)', 'quando_israele_usci_egitto', 0, '"
+		sql += "VALUES (70, 58, 'Quando Israele uscÃ¬ dall''Egitto - Salmo 113A(114)', 'quando_israele_usci_egitto', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/quandoisdraeleuscidall''Egitto.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -569,7 +569,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (72, 60, 'Il Signore è il mio pastore - Salmo 22(23)', 'signore_mio_pastore', 0, '"
+		sql += "VALUES (72, 60, 'Il Signore Ã¨ il mio pastore - Salmo 22(23)', 'signore_mio_pastore', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Il%20Signore%20%C3%A8%20il%20mio%20pastore%20%20%20Kiko.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -583,7 +583,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (74, 62, 'Pietà di me o Dio - Salmo 50(51)', 'pieta_di_me_o_dio', 0, '"
+		sql += "VALUES (74, 62, 'PietÃ  di me o Dio - Salmo 50(51)', 'pieta_di_me_o_dio', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/pietadime%20o%20dio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -597,7 +597,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (76, 64, 'Cristo Gesù è il Signore! - Inno della Kenosis (Fil. 2,1-11)', 'inno_della_kenosis', 0, '"
+		sql += "VALUES (76, 64, 'Cristo GesÃ¹ Ã¨ il Signore! - Inno della Kenosis (Fil. 2,1-11)', 'inno_della_kenosis', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/cristogesueilsignore.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -650,7 +650,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (84, 70, 'Dajenù', 'dajenu', 0, '" + BIANCO
+		sql += "VALUES (84, 70, 'DajenÃ¹', 'dajenu', 0, '" + BIANCO
 				+ "', 'http://www.resuscicanti.com/Dajen%C3%B9.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -670,7 +670,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (87, 72, 'Inno di Avvento ''Chiara una voce dissipa l''oscurità''', 'inno_avvento', 0, '"
+		sql += "VALUES (87, 72, 'Inno di Avvento ''Chiara una voce dissipa l''oscuritÃ ''', 'inno_avvento', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/innodiavvento.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -678,14 +678,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (88, 73, 'Urì, urì, urà', 'uri_uri_ura', 0, '" + BIANCO
+		sql += "VALUES (88, 73, 'UrÃ¬, urÃ¬, urÃ ', 'uri_uri_ura', 0, '" + BIANCO
 				+ "', 'http://www.resuscicanti.com/uriuriura.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "";
 		sql += "INSERT INTO ELENCO ";
-		sql += "VALUES (89, 73, 'Già viene il mio Dio', 'gia_viene_il_mio_dio', 0, '" + BIANCO
+		sql += "VALUES (89, 73, 'GiÃ  viene il mio Dio', 'gia_viene_il_mio_dio', 0, '" + BIANCO
 				+ "', 'http://www.resuscicanti.com/giavieneilmiodio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -732,7 +732,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (96, 79, 'Perchè le genti congiurano? - Salmo 2', 'perche_genti_congiurano', 0, '"
+		sql += "VALUES (96, 79, 'PerchÃ¨ le genti congiurano? - Salmo 2', 'perche_genti_congiurano', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/perchelegenticongiurano.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -760,7 +760,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (100, 82, 'Al risveglio mi sazierò del tuo volto, Signor - Salmo 16(17)'," +
+		sql += "VALUES (100, 82, 'Al risveglio mi sazierÃ² del tuo volto, Signor - Salmo 16(17)'," +
 				" 'al_risveglio_mi_saziero', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/alrisvegliomisaziero%20deltuovoltosignor.mp3', "
@@ -775,13 +775,13 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (102, 84, 'Non morirò - Salmo 117(118)', 'non_moriro', 0, '"
+		sql += "VALUES (102, 84, 'Non morirÃ² - Salmo 117(118)', 'non_moriro', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/nonmoriro.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";		
 		db.execSQL(sql);
 
 //		sql = "INSERT INTO ELENCO ";
-//		sql += "VALUES (103, 85, 'Non morirò - Salmo 117(118) - II parte', 'non_moriro_II', 0, '"
+//		sql += "VALUES (103, 85, 'Non morirÃ² - Salmo 117(118) - II parte', 'non_moriro_II', 0, '"
 //				+ BIANCO + "', 'http://www.resuscicanti.com/nonmoriro.mp3', "
 //				+ "0, 0, 0, NULL, NULL)";
 //		db.execSQL(sql);
@@ -848,7 +848,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (113, 92, 'C''è un tempo per ogni cosa (Qo. 3,1-5)', 'tempo_ogni_cosa', 0, '"
+		sql += "VALUES (113, 92, 'C''Ã¨ un tempo per ogni cosa (Qo. 3,1-5)', 'tempo_ogni_cosa', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Ceuntempoperognicosa2.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -876,7 +876,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (116, 95, 'Viene il Signore vestito di maestà', 'viene_il_signore_vestito_di_maesta', 0, '"
+		sql += "VALUES (116, 95, 'Viene il Signore vestito di maestÃ ', 'viene_il_signore_vestito_di_maesta', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/vieneilsignorevestitodimaesta.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -970,7 +970,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (130, 108, 'Lamenti del Signore (Venerdì Santo - Adorazione della croce)', 'lamenti_del_signore', 0, '"
+		sql += "VALUES (130, 108, 'Lamenti del Signore (VenerdÃ¬ Santo - Adorazione della croce)', 'lamenti_del_signore', 0, '"
 				+ BIANCO + "', 'http://www.resuscicanti.com/popolomio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -1011,7 +1011,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (136, 113, 'Benedirò il Signore in ogni tempo (1986) - Salmo 33(34)', " +
+		sql += "VALUES (136, 113, 'BenedirÃ² il Signore in ogni tempo (1986) - Salmo 33(34)', " +
 				"'benediro_il_signore_in_ogni_tempo', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/benediroilsignoreinognitempo.mp3', "
@@ -1040,14 +1040,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (141, 117, 'Tu sei il più bello - Salmo 44(45)', 'tu_sei_il_piu_bello', 0, '"
+		sql += "VALUES (141, 117, 'Tu sei il piÃ¹ bello - Salmo 44(45)', 'tu_sei_il_piu_bello', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/tuseiilpiubello.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (142, 118, 'Felicità per l''uomo (1990) - Salmo 127(128)', 'felicita_per_l_uomo', 0, '"
+		sql += "VALUES (142, 118, 'FelicitÃ  per l''uomo (1990) - Salmo 127(128)', 'felicita_per_l_uomo', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/felicitaperluomo.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1060,14 +1060,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (144, 120, 'Andiamo, già pastori', 'andiamo_gia_pastori', 0, '"
+		sql += "VALUES (144, 120, 'Andiamo, giÃ  pastori', 'andiamo_gia_pastori', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/andiamogiapastori.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (145, 121, 'Maria di Jasna Gòra (Inno alla Madonna di Czestochowa)', 'maria_di_jasna_gora', 0, '"
+		sql += "VALUES (145, 121, 'Maria di Jasna GÃ²ra (Inno alla Madonna di Czestochowa)', 'maria_di_jasna_gora', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/mariadiyasnagora.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1157,7 +1157,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (157, 133, 'Shlom lech Mariàm', 'shlom_lech_mariam', 0, '" + BIANCO
+		sql += "VALUES (157, 133, 'Shlom lech MariÃ m', 'shlom_lech_mariam', 0, '" + BIANCO
 				+ "', 'http://www.resuscicanti.com/Shlom%20lech%20Mariam.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -1185,7 +1185,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (161, 137, 'Lo stolto pensa che non c''è Dio - Salmo 13(14)', 'stolto_pensa_che_non_ce_dio', 0, '"
+		sql += "VALUES (161, 137, 'Lo stolto pensa che non c''Ã¨ Dio - Salmo 13(14)', 'stolto_pensa_che_non_ce_dio', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Lo%20stolto%20pensa%20che%20non%20c%C2%B4e%20Dio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1199,14 +1199,14 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (163, 139, 'Non è qui (Mt. 28,1-7)', 'non_e_qui_e_risorto', 0, '"
+		sql += "VALUES (163, 139, 'Non Ã¨ qui (Mt. 28,1-7)', 'non_e_qui_e_risorto', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/Non%20%C3%A8%20qu%C3%AC%20%C3%A8%20risorto%20A.P..mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (164, 140, 'Vi prenderò dalle genti (Ez. 36,24-28)', 'vi_prendero_dalle_genti', 0, '"
+		sql += "VALUES (164, 140, 'Vi prenderÃ² dalle genti (Ez. 36,24-28)', 'vi_prendero_dalle_genti', 0, '"
 				+ BIANCO
 				+ "', 'http://www.resuscicanti.com/viprenderodallegenti.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1245,7 +1245,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (170, 202, 'Così parla l''amen (Apoc. 3,14-22)', 'cosi_parla_amen', 0, '"
+		sql += "VALUES (170, 202, 'CosÃ¬ parla l''amen (Apoc. 3,14-22)', 'cosi_parla_amen', 0, '"
 				+ VERDE
 				+ "', 'http://www.resuscicanti.com/Cosi%20parla%20l%C2%B4amen.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1298,7 +1298,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (178, 210, 'Lo Spirito del Signore è sopra di me (Lc. 4,18-19) (Is. 61,1-3)', 'spirito_del_signore_sopra_di_me', 0, '"
+		sql += "VALUES (178, 210, 'Lo Spirito del Signore Ã¨ sopra di me (Lc. 4,18-19) (Is. 61,1-3)', 'spirito_del_signore_sopra_di_me', 0, '"
 				+ VERDE
 				+ "', 'http://www.resuscicanti.com/lospiritodelsignore.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1333,26 +1333,26 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (183, 214, 'Eli, Eli, lammà sabactani? - Salmo 21(22)', 'eli_eli_lamma_sabactani', 0, '"
+		sql += "VALUES (183, 214, 'Eli, Eli, lammÃ  sabactani? - Salmo 21(22)', 'eli_eli_lamma_sabactani', 0, '"
 				+ VERDE + "', 'http://www.resuscicanti.com/elielilammasabactani.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 //		sql = "INSERT INTO ELENCO ";
-//		sql += "VALUES (184, 215, 'Eli, Eli, lammà sabactani? - parte II - Salmo 21(22)', 'eli_eli_lamma_sabactani_II', 0, '"
+//		sql += "VALUES (184, 215, 'Eli, Eli, lammÃ  sabactani? - parte II - Salmo 21(22)', 'eli_eli_lamma_sabactani_II', 0, '"
 //				+ VERDE + "', 'http://www.resuscicanti.com/elielilammasabactani.mp3', "
 //				+ "0, 0, 0, NULL, NULL, 2)";
 //		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (185, 216, 'Nessuno può servire due padroni (Mt. 6,24-33)', 'nessuno_puo_servire_due_padroni', 0, '"
+		sql += "VALUES (185, 216, 'Nessuno puÃ² servire due padroni (Mt. 6,24-33)', 'nessuno_puo_servire_due_padroni', 0, '"
 				+ VERDE
 				+ "', 'http://www.resuscicanti.com/nessunopuoservireduepadroni.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (186, 217, 'Signore, il mio cuore non ha più pretese - Salmo 130(131)', 'signore_mio_cuore_pretese', 0, '"
+		sql += "VALUES (186, 217, 'Signore, il mio cuore non ha piÃ¹ pretese - Salmo 130(131)', 'signore_mio_cuore_pretese', 0, '"
 				+ VERDE
 				+ "', 'http://www.resuscicanti.com/signoreilmiocuorenonhapiupretese.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1366,7 +1366,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (188, 218, 'Shemà Israel (Dt. 6,4-9)', 'shema_israel', 0, '"
+		sql += "VALUES (188, 218, 'ShemÃ  Israel (Dt. 6,4-9)', 'shema_israel', 0, '"
 				+ VERDE + "', 'http://www.resuscicanti.com/shemaisrael.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -1393,7 +1393,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (192, 222, 'Akedà', 'akeda', 0, '" + VERDE
+		sql += "VALUES (192, 222, 'AkedÃ ', 'akeda', 0, '" + VERDE
 				+ "', 'http://www.resuscicanti.com/Akeda.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -1406,7 +1406,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (194, 262, 'Inno alla carità (1 Cor. 13,1-13)', 'inno_alla_carita', 0, '"
+		sql += "VALUES (194, 262, 'Inno alla caritÃ  (1 Cor. 13,1-13)', 'inno_alla_carita', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/innoallacarita.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1427,7 +1427,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (197, 265, 'Gesù percorreva tutte le città (cfr. Mt. 9,35 ss; 10)', 'gesu_percorreva', 0, '"
+		sql += "VALUES (197, 265, 'GesÃ¹ percorreva tutte le cittÃ  (cfr. Mt. 9,35 ss; 10)', 'gesu_percorreva', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/gesupercorrevatuttelecitta.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1448,7 +1448,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (200, 268, 'La mia diletta è per me (Ct. 1,13 ss)', 'mia_diletta_e_per_me', 0, '"
+		sql += "VALUES (200, 268, 'La mia diletta Ã¨ per me (Ct. 1,13 ss)', 'mia_diletta_e_per_me', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/lamiadilettaeperme.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1482,7 +1482,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (205, 273, 'Non c''è in lui bellezza: IV canto del servo di Jahvè (Is. 53,2 ss)', 'non_ce_in_lui_bellezza', 0, '"
+		sql += "VALUES (205, 273, 'Non c''Ã¨ in lui bellezza: IV canto del servo di JahvÃ¨ (Is. 53,2 ss)', 'non_ce_in_lui_bellezza', 0, '"
 				+ GRIGIO
 				+ "', 'http://www.resuscicanti.com/davantialuisicopreilvolto.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1496,7 +1496,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (207, 275, 'Chi è colei (Ct. 8,5-7)', 'chi_e_colei', 0, '"
+		sql += "VALUES (207, 275, 'Chi Ã¨ colei (Ct. 8,5-7)', 'chi_e_colei', 0, '"
 				+ AZZURRO + "', 'http://www.resuscicanti.com/chiecolei.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -1509,7 +1509,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (209, 277, 'La colomba volò (Ode XXIV di Salomone)', 'colomba_volo', 0, '"
+		sql += "VALUES (209, 277, 'La colomba volÃ² (Ode XXIV di Salomone)', 'colomba_volo', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/La%20colomba%20volo.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1523,7 +1523,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (211, 279, 'O Gesù, amore mio', 'o_gesu_amore_mio', 0, '" + AZZURRO
+		sql += "VALUES (211, 279, 'O GesÃ¹, amore mio', 'o_gesu_amore_mio', 0, '" + AZZURRO
 				+ "', 'http://www.resuscicanti.com/ogesuamoremio.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
@@ -1618,7 +1618,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (225, 294, 'Questo è il mio comandamento (Gv. 15,12.13.16.18; 17,21)', 'questo_e_io_mio_comandamento', 0, '"
+		sql += "VALUES (225, 294, 'Questo Ã¨ il mio comandamento (Gv. 15,12.13.16.18; 17,21)', 'questo_e_io_mio_comandamento', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/questoeilmiocomandamento.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -1646,21 +1646,21 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (229, 296, 'Una gran señal (Ap. 12)', 'una_gran_senal', 0, '"
+		sql += "VALUES (229, 296, 'Una gran seÃ±al (Ap. 12)', 'una_gran_senal', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/una%20gran%20senal%20italiano.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (230, 297, 'Resurrexit (Dialogo di Nostro Signore Gesù Cristo con Marta) (Gv 11,25-27)', 'resurrexit', 0, '"
+		sql += "VALUES (230, 297, 'Resurrexit (Dialogo di Nostro Signore GesÃ¹ Cristo con Marta) (Gv 11,25-27)', 'resurrexit', 0, '"
 				+ AZZURRO
 				+ "', 'http://www.resuscicanti.com/resurrexit%202013.14%20.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO ELENCO ";
-		sql += "VALUES (231, 298, 'Ecco il mio servo: I canto del servo di Jahvè (Is 42,1-4)', 'ecco_il_mio_servo', 0, '"
+		sql += "VALUES (231, 298, 'Ecco il mio servo: I canto del servo di JahvÃ¨ (Is 42,1-4)', 'ecco_il_mio_servo', 0, '"
 				+ GRIGIO
 				+ "', 'http://www.resuscicanti.com/ecco%20il%20mio%20servo.mp3', "
 				+ "0, 0, 0, NULL, NULL, 2)";
@@ -2723,7 +2723,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (40, '102', 'Salmo 102(103) - Benedici anima mia, Jahvè')";
+		sql += "VALUES (40, '102', 'Salmo 102(103) - Benedici anima mia, JahvÃ¨')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2735,19 +2735,19 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (45, '132', 'Salmo 132(133) - Guardate come è bello')";
+		sql += "VALUES (45, '132', 'Salmo 132(133) - Guardate come Ã¨ bello')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (46, '132', 'Salmo 132(133) - Come è bello, come dà gioia')";
+		sql += "VALUES (46, '132', 'Salmo 132(133) - Come Ã¨ bello, come dÃ  gioia')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (47, '132', 'Salmo 132(133) - Guardate com''è bello, gustate quant''è')";
+		sql += "VALUES (47, '132', 'Salmo 132(133) - Guardate com''Ã¨ bello, gustate quant''Ã¨')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (48, '135', 'Salmo 135(136) - Grazie a Jahvè')";
+		sql += "VALUES (48, '135', 'Salmo 135(136) - Grazie a JahvÃ¨')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2759,11 +2759,11 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (53, '026', 'Salmo 26(27) - Il Signore è mia luce e mia salvezza')";
+		sql += "VALUES (53, '026', 'Salmo 26(27) - Il Signore Ã¨ mia luce e mia salvezza')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (59, '114-115', 'Salmo 114-115(116) - Innalzerò la coppa di salvezza')";
+		sql += "VALUES (59, '114-115', 'Salmo 114-115(116) - InnalzerÃ² la coppa di salvezza')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2775,7 +2775,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (70, '113A', 'Salmo 113A(114) - Quando Israele uscì dall''Egitto')";
+		sql += "VALUES (70, '113A', 'Salmo 113A(114) - Quando Israele uscÃ¬ dall''Egitto')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2783,7 +2783,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (72, '022', 'Salmo 22(23) - Il Signore è il mio pastore')";
+		sql += "VALUES (72, '022', 'Salmo 22(23) - Il Signore Ã¨ il mio pastore')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2791,7 +2791,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (74, '050', 'Salmo 50(51) - Pietà di me o Dio')";
+		sql += "VALUES (74, '050', 'Salmo 50(51) - PietÃ  di me o Dio')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2831,7 +2831,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (96, '002', 'Salmo 2 - Perchè le genti congiurano?')";
+		sql += "VALUES (96, '002', 'Salmo 2 - PerchÃ¨ le genti congiurano?')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2843,11 +2843,11 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (100, '016', 'Salmo 16(17) - Al risveglio mi sazierò del tuo volto, Signor')";
+		sql += "VALUES (100, '016', 'Salmo 16(17) - Al risveglio mi sazierÃ² del tuo volto, Signor')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (102, '117', 'Salmo 117(118) - Non morirò')";
+		sql += "VALUES (102, '117', 'Salmo 117(118) - Non morirÃ²')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2899,7 +2899,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (136, '033', 'Salmo 33(34) - Benedirò il Signore in ogni tempo (1986)')";
+		sql += "VALUES (136, '033', 'Salmo 33(34) - BenedirÃ² il Signore in ogni tempo (1986)')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2911,11 +2911,11 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (141, '044', 'Salmo 44(45) - Tu sei il più bello')";
+		sql += "VALUES (141, '044', 'Salmo 44(45) - Tu sei il piÃ¹ bello')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (142, '127', 'Salmo 127(128) - Felicità per l''uomo (1990)')";
+		sql += "VALUES (142, '127', 'Salmo 127(128) - FelicitÃ  per l''uomo (1990)')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2963,7 +2963,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (161, '013', 'Salmo 13(14) - Lo stolto pensa che non c''è Dio')";
+		sql += "VALUES (161, '013', 'Salmo 13(14) - Lo stolto pensa che non c''Ã¨ Dio')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -2975,11 +2975,11 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (183, '021', 'Salmo 21(22) - Eli, Eli, lammà sabactani?')";
+		sql += "VALUES (183, '021', 'Salmo 21(22) - Eli, Eli, lammÃ  sabactani?')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
-		sql += "VALUES (186, '130', 'Salmo 130(131) - Signore, il mio cuore non ha più pretese')";
+		sql += "VALUES (186, '130', 'Salmo 130(131) - Signore, il mio cuore non ha piÃ¹ pretese')";
 		db.execSQL(sql);
 		
 		sql = "INSERT INTO SALMI_MUSICA ";
@@ -3052,7 +3052,7 @@ public class DatabaseCanti extends SQLiteOpenHelper {
 			cursor.close();
 		}
 		
-		//dalla versionee 25 è stata introdotta la tabella di link locali. Va fatto il backup
+		//dalla versionee 25 Ã¨ stata introdotta la tabella di link locali. Va fatto il backup
 		BackupLocalLink[] backupLink = new BackupLocalLink[300];
 		if(oldVersion >= 25) {
 			String sql = "SELECT _id, local_path FROM LOCAL_LINKS";
