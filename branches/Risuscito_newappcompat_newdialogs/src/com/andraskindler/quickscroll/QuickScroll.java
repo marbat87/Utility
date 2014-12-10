@@ -316,7 +316,8 @@ public class QuickScroll extends View {
      * @param bordercolor     the background color of the border surrounding the TextView
      * @param textcolor       the color of the text
      */
-    public void setPopupColor(final int backgroundcolor, final int bordercolor, final int borderwidthDPI, final int textcolor, float cornerradiusDPI) {
+    @SuppressLint("NewApi")
+	public void setPopupColor(final int backgroundcolor, final int bordercolor, final int borderwidthDPI, final int textcolor, float cornerradiusDPI) {
 
         final GradientDrawable popupbackground = new GradientDrawable();
         popupbackground.setCornerRadius(cornerradiusDPI * getResources().getDisplayMetrics().density);
@@ -386,7 +387,8 @@ public class QuickScroll extends View {
      * @param activebase   - base color of the active handlebar
      * @param activestroke - stroke of the active handlebar
      */
-    public void setHandlebarColor(final int inactive, final int activebase, final int activestroke) {
+    @SuppressLint("NewApi")
+	public void setHandlebarColor(final int inactive, final int activebase, final int activestroke) {
         if (type == TYPE_INDICATOR_WITH_HANDLE || type == TYPE_POPUP_WITH_HANDLE) {
             final float density = getResources().getDisplayMetrics().density;
             final GradientDrawable bg_inactive = new GradientDrawable();
