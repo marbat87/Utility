@@ -139,6 +139,9 @@ public class SalmiSectionFragment extends Fragment {
 		
 		final QuickScroll quickscroll = (QuickScroll) rootView.findViewById(R.id.quickscroll);
 		quickscroll.init(QuickScroll.TYPE_INDICATOR_WITH_HANDLE, lv, adapter, QuickScroll.STYLE_HOLO);
+		quickscroll.setHandlebarColor(getResources().getColor(R.color.theme_accent)
+				, getResources().getColor(R.color.theme_accent)
+				, getResources().getColor(R.color.theme_accent_semi_tr));
 		quickscroll.setFixedSize(8);
 		quickscroll.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		

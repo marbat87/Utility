@@ -9,6 +9,7 @@
  	<color name="RedTheme">#e51c23</color>
  	<color name="DeepPurple">#673ab7</color>
  	<color name="Teal">#009688</color>
+ 	<color name="teal_semi_transparent">#80009688</color>
  	<color name ="Brown">#795548</color>
  	<color name="theme_bluegrey_color">#90a4ae</color>
  	<color name="theme_brown_color">#a1887f</color>
@@ -49,6 +50,7 @@
     
     <color name="theme_primary">@color/BlueGrey</color>
     <color name="theme_accent">@color/Teal</color>
+    <color name="theme_accent_semi_tr">@color/teal_semi_transparent</color>
     <color name="theme_primary_dark">@color/BlueGreyDark</color>
     <color name="item_disabled">#808080</color>
     <color name="snackbar_black">#323232</color>
