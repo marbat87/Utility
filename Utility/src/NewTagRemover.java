@@ -48,12 +48,12 @@ public class NewTagRemover {
 	            while (line != null) {
 //	            	System.out.println(line);
 	            	if (line.contains("000000") 
-	            	 && !line.contains("FF0000")
+	            	 && !line.contains("A13F3C")
 	            	 && !line.contains("BGCOLOR")) {
 	            		line = line.replaceAll("<H4>", "");
 	            		line = line.replaceAll("</H4>", "");
 	            		line = line.replaceAll("<FONT COLOR=\"#000000\">", "");
-	            		line = line.replaceAll("<FONT COLOR=\"#FF0000\">", "");
+	            		line = line.replaceAll("<FONT COLOR=\"#A13F3C\">", "");
 	            		line = line.replaceAll("</FONT>", "");
 	            		line = line.replaceAll("<H5>", "");
 	            		line = line.replaceAll("<H3>", "");
@@ -80,12 +80,12 @@ public class NewTagRemover {
 	            		lines.add(line);
 	            	}
 	            	
-	            	if (line.contains("FF0000")
+	            	if (line.contains("A13F3C")
 	            	 && line.contains("<H2>")) {
 	            		line = line.replaceAll("<H4>", "");
 	            		line = line.replaceAll("</H4>", "");
 	            		line = line.replaceAll("<FONT COLOR=\"#000000\">", "");
-	            		line = line.replaceAll("<FONT COLOR=\"#FF0000\">", "");
+	            		line = line.replaceAll("<FONT COLOR=\"#A13F3C\">", "");
 	            		line = line.replaceAll("</FONT>", "");
 	            		line = line.replaceAll("<H5>", "");
 	            		line = line.replaceAll("<H3>", "");
