@@ -98,7 +98,6 @@ public class SongsRenamer {
 				System.out.println("tag: " + eElement.getAttribute("name"));
 				System.out.println("contenuto: " + eElement.getTextContent());
 
-
 				String newName = eElement.getAttribute("name").replace("_source", "_uk") + ".htm";
 
 				BufferedReader reader = null;
@@ -138,11 +137,28 @@ public class SongsRenamer {
 
 						writer.close();
 						reader.close();
-						bw.write("<string name=\""
+						String temp = "<string name=\""
 								+ eElement.getAttribute("name")
 								+ "\">"
 								+ newName.replace(".htm", "")
-								+ "</string>");
+								+ "</string>";
+						bw.write(temp);
+						System.out.println(temp);
+						bw.newLine();
+
+					}
+					catch (IOException e) {
+						e.printStackTrace();
+						return;
+					}
+				}
+				else {
+					try {
+						String temp = "<string name=\""
+								+ eElement.getAttribute("name")
+								+ "\">no_canto</string>";
+						bw.write(temp);
+						System.out.println(temp);
 						bw.newLine();
 
 					}
