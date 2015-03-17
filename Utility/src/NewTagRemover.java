@@ -20,8 +20,8 @@ public class NewTagRemover {
 		try {
 		    writer = new BufferedWriter(new OutputStreamWriter(
 //		        new FileOutputStream("C:/Java/android/workspace/Utility/fileout.xml"), "utf-8"));
-		    	new FileOutputStream("C:/android/workspace/Utility/fileout_new.xml"), "utf-8"));
-//		    new FileOutputStream("C:/android/workspace/Utility/fileout_uk.xml"), "utf-8"));
+//		    	new FileOutputStream("C:/android/workspace/Utility/fileout_new.xml"), "utf-8"));
+		    new FileOutputStream("C:/android/workspace/Utility/fileout_uk.xml"), "utf-8"));
 		    writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		    writer.newLine();
 		    writer.write("<canti>");
@@ -32,8 +32,8 @@ public class NewTagRemover {
 		
 //		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
 //		final File folder = new File("C:/android/workspace/Utility/new_files");
-		final File folder = new File("C:/android/workspace/Utility/new_songs");
-//		final File folder = new File("C:/android/workspace/Utility/songs_uk_new");
+//		final File folder = new File("C:/android/workspace/Utility/new_songs");
+		final File folder = new File("C:/android/workspace/Utility/songs_uk_new");
 		for (final File input : folder.listFiles()) {
 		
 			String sFileName = input.getName().trim().replaceAll(".htm", "");
@@ -65,6 +65,8 @@ public class NewTagRemover {
 	            		line = line.replaceAll("</H2>", "");
 	            		line = line.replaceAll("<I>", "");
 	            		line = line.replaceAll("</I>", "");
+	            		line = line.replaceAll("<i>", "");
+	            		line = line.replaceAll("</i>", "");
 	            		line = line.replaceAll("<u>", "");
 	            		line = line.replaceAll("</u>", "");
 	            		line = line.replaceAll("<B>", "");
@@ -104,6 +106,8 @@ public class NewTagRemover {
 	            		line = line.replaceAll("<B>", "");
 	            		line = line.replaceAll("</B>", "");
 	            		line = line.replaceAll("<br>", "");
+	            		line = line.replaceAll("<i>", "");
+	            		line = line.replaceAll("</i>", "");
 	            		System.out.println(line);
 	            		line = line.replaceAll("[^\\p{L}\\p{Z}\\p{Digit}]"," ");
 //	            		line = line.replaceAll("[^\\p{L}\\p{Z}]","");
