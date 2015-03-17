@@ -12,7 +12,7 @@ public class BatchModifier {
 
 	public static void main(String[] args) {
 			
-		final File folder = new File("C:/android/workspace/Utility/new_songs");
+		final File folder = new File("C:/android/workspace/Utility/songs_uk_new");
 //		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
 //		final File folder = new File("C:/Java/workspace/Utility/files");
 		System.out.println("INIZIO!");
