@@ -32,7 +32,8 @@ public class NewTagRemover {
 		
 //		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
 //		final File folder = new File("C:/android/workspace/Utility/new_files");
-		final File folder = new File("C:/android/workspace/Utility/new_songs");
+//		final File folder = new File("C:/android/workspace/Utility/new_songs");
+		final File folder = new File("C:/android/workspace/Utility/songs_extended");
 //		final File folder = new File("C:/android/workspace/Utility/songs_uk_new");
 		for (final File input : folder.listFiles()) {
 		
