@@ -22,7 +22,7 @@ public class NewTagRemover {
 //		        new FileOutputStream("C:/Java/android/workspace/Utility/fileout.xml"), "utf-8"));
 //		    	new FileOutputStream("C:/android/workspace/Utility/fileout_new.xml"), "utf-8"));
 		    new FileOutputStream("C:/Users/marcello.battain/workspace/Utility/fileout_en.xml"), "utf-8"));
-//		    new FileOutputStream("C:/android/workspace/Utility/fileout_uk.xml"), "utf-8"));
+//		    new FileOutputStream("C:/Users/marcello.battain/workspace/Utility/fileout_uk.xml"), "utf-8"));
 		    writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		    writer.newLine();
 		    writer.write("<canti>");
@@ -36,7 +36,7 @@ public class NewTagRemover {
 //		final File folder = new File("C:/android/workspace/Utility/new_songs");
 //		final File folder = new File("C:/android/workspace/Utility/songs_extended");
 		final File folder = new File("C:/Users/marcello.battain/workspace/Utility/songs_en");
-//		final File folder = new File("C:/android/workspace/Utility/songs_uk_new");
+//		final File folder = new File("C:/Users/marcello.battain/workspace/Utility/songs_uk_new");
 		for (final File input : folder.listFiles()) {
 		
 			String sFileName = input.getName().trim().replaceAll(".htm", "");
@@ -137,7 +137,7 @@ public class NewTagRemover {
 	            
 				System.out.println(textLine);
 				writer.write("<canto>");
-				writer.write("<titolo type=\"text\">" + sFileName + "</titolo>");
+				writer.write("<titolo type=\"text\">" + sFileName + "_source</titolo>");
 				writer.write("<testo type=\"text\">" + textLine.trim() + "</testo>");
 				writer.write("</canto>");
 				writer.newLine();
