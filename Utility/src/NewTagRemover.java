@@ -21,8 +21,8 @@ public class NewTagRemover {
 		    writer = new BufferedWriter(new OutputStreamWriter(
 //		        new FileOutputStream("C:/Java/android/workspace/Utility/fileout.xml"), "utf-8"));
 //		    	new FileOutputStream("C:/android/workspace/Utility/fileout_new.xml"), "utf-8"));
-//		    new FileOutputStream("C:/Users/marcello.battain/git/Utility/Utility/fileout_en.xml"), "utf-8"));
-		    new FileOutputStream("C:/Users/marcello.battain/git/Utility/Utility/fileout_uk.xml"), "utf-8"));
+		    new FileOutputStream("C:/Users/marcello.battain/git/Utility/Utility/fileout_en.xml"), "utf-8"));
+//		    new FileOutputStream("C:/Users/marcello.battain/git/Utility/Utility/fileout_uk.xml"), "utf-8"));
 		    writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		    writer.newLine();
 		    writer.write("<canti>");
@@ -35,8 +35,8 @@ public class NewTagRemover {
 //		final File folder = new File("C:/android/workspace/Utility/new_files");
 //		final File folder = new File("C:/android/workspace/Utility/new_songs");
 //		final File folder = new File("C:/android/workspace/Utility/songs_extended");
-//		final File folder = new File("C:/Users/marcello.battain/git/Utility/Utility/songs_en");
-		final File folder = new File("C:/Users/marcello.battain/git/Utility/Utility/songs_uk_new");
+		final File folder = new File("C:/Users/marcello.battain/git/Utility/Utility/songs_en");
+//		final File folder = new File("C:/Users/marcello.battain/git/Utility/Utility/songs_uk_new");
 		for (final File input : folder.listFiles()) {
 		
 			String sFileName = input.getName().trim().replaceAll(".htm", "");
