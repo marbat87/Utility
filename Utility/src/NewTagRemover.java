@@ -22,9 +22,9 @@ public class NewTagRemover {
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(
 					//		        new FileOutputStream("C:/Java/android/workspace/Utility/fileout.xml"), "utf-8"));
-					new FileOutputStream("C:/Users/marba/git/Utility/Utility/fileout_en.xml"), "utf-8"));
+//					new FileOutputStream("C:/Users/marba/git/Utility/Utility/fileout_en.xml"), "utf-8"));
 //							    	new FileOutputStream("C:/Users/marba/git/Utility/Utility/fileout_new.xml"), "utf-8"));
-//					new FileOutputStream("C:/Users/marcello.battain/git/Utility/Utility/fileout_en_PH.xml"), "utf-8"));
+					new FileOutputStream("C:/Users/marba/git/Utility/Utility/fileout_en_PH.xml"), "utf-8"));
 //					    new FileOutputStream("C:/Users/marba/git/Utility/Utility/fileout_uk.xml"), "utf-8"));
 			writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 			writer.newLine();
@@ -39,8 +39,8 @@ public class NewTagRemover {
 		//		final File folder = new File("C:/android/workspace/Utility/new_songs");
 		//		final File folder = new File("C:/Users/marcello.battain/git/Utility/Utility/songs_extended");
 //		final File folder = new File("C:/Users/marba/git/Utility/Utility/canti_it_2020");
-		final File folder = new File("C:/Users/marba/git/Utility/Utility/songs_en");
-//		final File folder = new File("C:/Users/marcello.battain/git/Utility/Utility/songs_en_PH");
+//		final File folder = new File("C:/Users/marba/git/Utility/Utility/songs_en");
+		final File folder = new File("C:/Users/marba/git/Utility/Utility/songs_en_PH");
 //				final File folder = new File("C:/Users/marba/git/Utility/Utility/songs_uk_new");
 		for (final File input : folder.listFiles()) {
 
@@ -208,15 +208,15 @@ public class NewTagRemover {
 			new AbstractMap.SimpleEntry<String, String>("</H4>", ""),
 			new AbstractMap.SimpleEntry<String, String>("</FONT>", ""),
 			new AbstractMap.SimpleEntry<String, String>(">C\\+A\\.", ""),
-			new AbstractMap.SimpleEntry<String, String>(">C\\.A\\.", ""),
+//			new AbstractMap.SimpleEntry<String, String>(">C\\.A\\.", ""),
 			new AbstractMap.SimpleEntry<String, String>(">K\\+C\\.", ""),
 			new AbstractMap.SimpleEntry<String, String>(">C\\.", ""),
 			new AbstractMap.SimpleEntry<String, String>(">A\\.", ""),
 			new AbstractMap.SimpleEntry<String, String>(">K\\.", ""),
-			new AbstractMap.SimpleEntry<String, String>("<FONT COLOR=\\\"#000000\\\">", ""),
-			new AbstractMap.SimpleEntry<String, String>("<FONT COLOR=\\\"#A13F3C\\\">", ""),
 			new AbstractMap.SimpleEntry<String, String>("<FONT COLOR=\\\"#000000\\\"", ""),
 			new AbstractMap.SimpleEntry<String, String>("<FONT COLOR=\\\"#A13F3C\\\"", ""),
+			new AbstractMap.SimpleEntry<String, String>("<FONT COLOR=\\\"#000000\\\">", ""),
+			new AbstractMap.SimpleEntry<String, String>("<FONT COLOR=\\\"#A13F3C\\\">", ""),
 			new AbstractMap.SimpleEntry<String, String>("<H5>", ""),
 			new AbstractMap.SimpleEntry<String, String>("<H3>", ""),
 			new AbstractMap.SimpleEntry<String, String>("<H2>", ""),
