@@ -19,9 +19,9 @@ public class NewTagRemover {
 //                    new FileOutputStream("C:/Users/m.battain/StudioProjects/Utility/Utility/fileout_en.xml"), StandardCharsets.UTF_8));
 //					new FileOutputStream("C:/Users/m.battain/StudioProjects/Utility/Utility/fileout_pl.xml"), StandardCharsets.UTF_8));
 //            new FileOutputStream("C:/Users/m.battain/StudioProjects/Utility/Utility/fileout_tr.xml"), StandardCharsets.UTF_8));
-//							    	new FileOutputStream("C:/Users/marba/git/Utility/Utility/fileout_new.xml"), "utf-8"));
+							    	new FileOutputStream("C:/Users/m.battain/IdeaProjects/Utility/Utility/fileout_new.xml"), StandardCharsets.UTF_8));
 //					new FileOutputStream("C:/Users/m.battain/StudioProjects/Utility/Utility/fileout_en_PH.xml"), StandardCharsets.UTF_8));
-					    new FileOutputStream("C:/Users/m.battain/StudioProjects/Utility/Utility/fileout_uk.xml"), StandardCharsets.UTF_8));
+//					    new FileOutputStream("C:/Users/m.battain/StudioProjects/Utility/Utility/fileout_uk.xml"), StandardCharsets.UTF_8));
             writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             writer.newLine();
             writer.write("<canti>");
@@ -33,13 +33,13 @@ public class NewTagRemover {
         //		final File folder = new File("C:/Java/android/workspace/Utility/new_files");
         //		final File folder = new File("C:/android/workspace/Utility/new_files");
         //		final File folder = new File("C:/android/workspace/Utility/new_songs");
-//        final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_extended");
+        final File folder = new File("C:/Users/m.battain/IdeaProjects/Utility/Utility/songs_extended");
 //		final File folder = new File("C:/Users/marba/git/Utility/Utility/canti_it_2020");
 //		final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_en");
 //		final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_en_PH");
 //        final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_pl");
 //        final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_tr");
-				final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_uk_new");
+//				final File folder = new File("C:/Users/m.battain/StudioProjects/Utility/Utility/songs_uk_new");
         for (final File input : Objects.requireNonNull(folder.listFiles())) {
 
             //			String sFileName = input.getName().trim().replaceAll(".htm", "");
@@ -209,9 +209,9 @@ public class NewTagRemover {
             new AbstractMap.SimpleEntry<>("<H4>", ""),
             new AbstractMap.SimpleEntry<>("</H4>", ""),
             new AbstractMap.SimpleEntry<>("</FONT>", ""),
-            new AbstractMap.SimpleEntry<>(">C\\+A.", ""),
-            new AbstractMap.SimpleEntry<>(">C\\.A.", ""),
-            new AbstractMap.SimpleEntry<>(">K\\+C\\.", ""),
+//            new AbstractMap.SimpleEntry<>(">C\\+A.", ""),
+//            new AbstractMap.SimpleEntry<>(">C\\.A.", ""),
+//            new AbstractMap.SimpleEntry<>(">K\\+C\\.", ""),
             new AbstractMap.SimpleEntry<>(">C\\.", ""),
             new AbstractMap.SimpleEntry<>(">P\\.", ""),
             new AbstractMap.SimpleEntry<>(">A\\.", ""),
